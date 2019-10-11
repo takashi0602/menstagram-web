@@ -16,7 +16,21 @@ $ yarn install
 $ yarn start
 ```
 
-フォルダ構成
+## コマンド一覧
+
+```bash
+$ yarn start       // React立ち上げ
+
+$ yarn build       // ビルド
+
+$ yarn test        // テスト
+
+$ yarn lint        // eslint
+```
+
+
+## フォルダ構成
+
 ```text
 /src
     /actions       // アクション
