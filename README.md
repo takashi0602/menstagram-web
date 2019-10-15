@@ -45,5 +45,6 @@ $ yarn lint        // eslint
     /store         // storeの生成
     /tests         // テスト
     routes.js      // ルーティング
+    history.js     // history
     index.js       // アプリの起点
 ```
