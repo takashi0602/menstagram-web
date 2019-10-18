@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const Top = () => {
+export const Login = () => {
   return (
     <div>
       <h1>Menstagram</h1>
-      <p>トップ</p>
+      <p>ログイン</p>
     </div>
   );
 };
