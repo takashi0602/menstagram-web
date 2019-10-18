@@ -4,9 +4,9 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from './history';
 import { store } from './store/index';
-import Top from './containers/top/index';
+import { Top } from './containers/top/index';
 
-function Routes() {
+export const Routes = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
@@ -16,6 +16,4 @@ function Routes() {
       </ConnectedRouter>
     </Provider>
   );
-}
-
-export default Routes;
+};

@@ -1,11 +1,9 @@
 import React from 'react';
 
-function Top() {
+export const Top = () => {
   return (
     <div>
       <h1>Menstagram</h1>
     </div>
   );
-}
-
-export default Top;
+};
