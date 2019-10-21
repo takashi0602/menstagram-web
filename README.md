@@ -30,7 +30,7 @@ src
 ├ actions       // アクション
 ├ assets
 │ ├ images      // 画像
-│ └ scss        // scssファイル
+│ └ scss        // scssファイル(FLOCSS)
 ├ components    // コンポーネント
 ├ containers    // stateを受け取る層
 ├ middleware    // ミドルウェア
