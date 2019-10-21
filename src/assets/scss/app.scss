@@ -1,3 +1,10 @@
+// bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// Foundation
 @import "foundation/base";
 @import "foundation/mixin";
+
+// Object
+// Component
 @import "object/component/container";
