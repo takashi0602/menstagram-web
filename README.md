@@ -10,7 +10,6 @@ menstagram-webはMenstagramのフロントエンド開発のためのリポジ�
 $ git clone https://github.com/uyupun/menstagram-web.git
 $ cd menstagram-web
 $ yarn install
-$ yarn start
 ```
 
 ### コマンド一覧
