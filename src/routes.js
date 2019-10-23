@@ -12,11 +12,13 @@ export const Routes = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <Switch>
-          <Route exact path={'/'} component={ Top } />
-          <Route exact path={'/register'} component={ Register } />
-          <Route exact path={'/login'} component={ Login } />
-        </Switch>
+        <div className='c-container'>
+          <Switch>
+            <Route exact path={'/'} component={ Top } />
+            <Route exact path={'/register'} component={ Register } />
+            <Route exact path={'/login'} component={ Login } />
+          </Switch>
+        </div>
       </ConnectedRouter>
     </Provider>
   );
