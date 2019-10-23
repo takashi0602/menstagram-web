@@ -42,16 +42,17 @@ src
 ```
 
 ### FLOCSS
-https://github.com/hiloki/flocss
 
-scssディレクトリ以下の構造はFLOCSSで記述する.
+scssディレクトリ以下はFLOCSSでの設計思想を取り入れている.
 
 ```text
 scss
 ├ foundation    // ブラウザのデフォルトスタイルの初期化
-├ layout        // ページを構成するコンテナーブロックのスタイルの定義
+├ layout        // ページを構成するコンテナーブロックのスタイル
 └ object        // プロジェクトにおける繰り返されるビジュアルパターンを3つのレイヤーで定義
-　 ├ component   // 再利用できる小さな単位のモジュールを定義
-　 ├ project     // いくつかのcomponentと、それに該当しない要素によって構成されるコンテンツを定義
-　 └ utility     // わずかなスタイルの調整を定義
+　 ├ component  // 再利用できる小さな単位のモジュール
+　 ├ project    // いくつかのcomponentと, それに該当しない要素によって構成されるコンテンツ
+　 └ utility    // 僅かなスタイルの調整
 ```
+
+詳細: https://github.com/hiloki/flocss
