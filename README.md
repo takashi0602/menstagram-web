@@ -4,7 +4,7 @@
 
 menstagram-webはMenstagramのフロントエンド開発のためのリポジトリです。
 
-## 環境構築
+### 環境構築
 
 ```bash
 $ git clone https://github.com/uyupun/menstagram-web.git
@@ -13,7 +13,7 @@ $ yarn install
 $ yarn start
 ```
 
-## コマンド一覧
+### コマンド一覧
 
 ```bash
 $ yarn start       // 起動
@@ -23,7 +23,7 @@ $ yarn lint        // コード修正
 ```
 
 
-## ディレクトリ構造
+### ディレクトリ構造
 
 ```text
 src
