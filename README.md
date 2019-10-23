@@ -40,3 +40,18 @@ src
 ├ history.js    // history
 └ index.js      // アプリの起点
 ```
+
+### FLOCSS
+https://github.com/hiloki/flocss
+
+scssディレクトリ以下の構造はFLOCSSで記述する.
+
+```text
+scss
+├ foundation    // ブラウザのデフォルトスタイルの初期化
+├ layout        // ページを構成するコンテナーブロックのスタイルの定義
+└ object        // プロジェクトにおける繰り返されるビジュアルパターンを3つのレイヤーで定義
+　 ├ component   // 再利用できる小さな単位のモジュールを定義
+　 ├ project     // いくつかのcomponentと、それに該当しない要素によって構成されるコンテンツを定義
+　 └ utility     // わずかなスタイルの調整を定義
+```
