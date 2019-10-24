@@ -43,7 +43,9 @@ src
 
 ### FLOCSS
 
-scssディレクトリ以下はFLOCSSでの設計思想を取り入れている.
+scssディレクトリ以下では, FLOCSSの設計思想を取り入れている.
+
+##### ディレクトリ構造
 
 ```text
 scss
@@ -55,8 +57,9 @@ scss
 　 └ utility    // 僅かなスタイルの調整
 ```
 
-ディレクトリごとのプレフィックスは以下の通りである.  
-また, クラス名は `.x-block__element--modifier` とし, block / element / modifier は先頭小文字のキャメルケースを利用する.
+##### プレフィックス
+
+クラス名は `.x-block__element--modifier` とし, block / element / modifier は先頭小文字のキャメルケースを利用する.  
 
 ```text
 scss
