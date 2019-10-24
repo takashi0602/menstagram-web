@@ -43,7 +43,9 @@ src
 
 ### FLOCSS
 
-scssディレクトリ以下はFLOCSSでの設計思想を取り入れている.
+scssディレクトリ以下では, FLOCSSの設計思想を取り入れている.
+
+##### ディレクトリ構造
 
 ```text
 scss
@@ -53,6 +55,20 @@ scss
 　 ├ component  // 再利用できる小さな単位のモジュール
 　 ├ project    // いくつかのcomponentと, それに該当しない要素によって構成されるコンテンツ
 　 └ utility    // 僅かなスタイルの調整
+```
+
+##### プレフィックス
+
+クラス名は `.x-block__element--modifier` とし, block / element / modifier は先頭小文字のキャメルケースを利用する.  
+
+```text
+scss
+├ foundation    // タグに対してスタイルを当てる
+├ layout        // .l-*
+└ object
+　 ├ component  // .c-*
+　 ├ project    // .p-*
+　 └ utility    // .u-*
 ```
 
 詳細: https://github.com/hiloki/flocss
