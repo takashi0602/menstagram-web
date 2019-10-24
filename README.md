@@ -55,4 +55,17 @@ scss
 　 └ utility    // 僅かなスタイルの調整
 ```
 
+ディレクトリごとのプレフィックスは以下の通りである.  
+また, クラス名は `.x-block__element--modifier` とし, block / element / modifier は先頭小文字のキャメルケースを利用する.
+
+```text
+scss
+├ foundation    // タグに対してスタイルを当てる
+├ layout        // .l-*
+└ object
+　 ├ component  // .c-*
+　 ├ project    // .p-*
+　 └ utility    // .u-*
+```
+
 詳細: https://github.com/hiloki/flocss
