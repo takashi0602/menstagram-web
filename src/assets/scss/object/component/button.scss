@@ -1,0 +1,11 @@
+.c-button {
+  &__white {
+    background-color: white;
+    border: 1px solid $main-lightgray;
+    color: $main-gray;
+  }
+  &__orange {
+    background-color: $main-orange;
+    color: white;
+  }
+}
