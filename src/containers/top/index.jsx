@@ -1,17 +1,23 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+import titleSvg from "../../assets/images/title.svg";
 
 export const Top = () => {
   return (
-    <div>
-      <h1>Menstagram</h1>
-      <p>トップ</p>
-      <h1>SUSURU FOREVER,</h1>
-      <h1>SUSURU ANYWHERE.</h1>
-      <p>Menstagramは世界中のラーメンコミュニティを支える特化型SNSです。</p>
-      
-      
-      <p>アカウントを作成しますか？<a src href="screen/e11796ba-5a84-4055-8428-9e7cc6702eab/-register"><br></br>登録する</a></p>
-      <p>アカウントをお持ちですか？<a src href="screen/71dd1a93-a9ef-46c5-809b-20f962b736be/-login"><br></br>ログインする</a></p>
+    <div className="c-container__padding">
+      <div className="text-center pt-5 mb-3">
+        <img src={titleSvg} alt="Menstagram" className="mb-5"/>
+        <h3>SUSURU FOREVER,<br />SUSURU ANYWHERE.</h3>
+      </div>
+      <p className="mb-5">Menstagramは世界中のラーメンコミュニティを支える特化型SNSです。</p>
+      <div className="mb-3">
+        <p className="mb-0">アカウントを作成しますか？</p>
+        <Link to="/register">登録する</Link>
+      </div>
+      <div>
+        <p className="mb-0">アカウントをお持ちですか？</p>
+        <Link to="/login">ログインする</Link>
+      </div>
     </div>
   );
 };
