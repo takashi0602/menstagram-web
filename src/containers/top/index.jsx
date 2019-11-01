@@ -16,7 +16,7 @@ export class Top extends Component {
         </div>
         <p className="mb-5">Menstagramは世界中のラーメンコミュニティを支える特化型SNSです。</p>
         <div className="mb-3">
-          <p className="mb-0">アカウントを作成しますか？</p>
+          <p className="mb-0">アカウントをお持ちでないですか？</p>
           <Link to="/register">登録する</Link>
         </div>
         <div>
