@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import titleSvg from "../../assets/images/title.svg";
 import { Form } from "../../components/form";
+import { register } from '../../actions/auth'
 
-export class Register extends Component {
+class RegisterContainer extends Component {
   constructor(prop) {
     super(prop);
   }
@@ -14,7 +16,7 @@ export class Register extends Component {
         <div className="text-center pt-5 mb-5">
           <img src={titleSvg} alt="Menstagram" />
         </div>
-        <Form formName="register" />
+        <Form formName="register" post={(payload) => this.props.post(payload)} />
         <div className="mb-3">
           <p className="mb-0">アカウントをお持ちですか？</p>
           <Link to="/login">ログインする</Link>
@@ -24,3 +26,18 @@ export class Register extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return state;
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    post(payload) {
+      console.log(payload);
+      dispatch(register(payload));
+    }
+  }
+}
+
+export const Register = connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
