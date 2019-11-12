@@ -21,7 +21,4 @@ export class Timeline extends Component {
       
     );
   }
-}        
-
-       
-      
+}
