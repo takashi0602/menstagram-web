@@ -1,14 +1,14 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { requestRegister } from '../api/auth';
-import { REGISTER, successRegister, failRegister } from '../actions/auth'
+import { REGISTER, failRegister, successRegister } from '../actions/auth'
 
 function* register(payload) {
-  try {
-    const response = yield call(requestRegister, payload);
-    yield put(successRegister, response);
-  } catch (e) {
-    yield put(failRegister);
+  const { response, error } = yield call(requestRegister, payload);
+  if (response) {
+    yield put(successRegister(response.data.access_token))
+  } else {
+    yield put(failRegister());
   }
 }
 
-export const authSaga = [takeLatest(REGISTER, register)];
+export const authSaga = [takeEvery(REGISTER, register)];

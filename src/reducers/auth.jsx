@@ -6,17 +6,17 @@ const initialState = {
 export default function register(state = initialState, action) {
   switch (action.type) {
     case 'REGISTER':
-      state.accessToken = null;
-      state.status = null;
       return state;
     case 'SUCCESS_REGISTER':
-      state.accessToken = action.accessToken;
-      state.status = action.status;
-      return state;
+      return {
+        accessToken: action.accessToken,
+        status: action.status
+      };
     case 'FAIL_REGISTER':
-      state.accessToken = action.accessToken;
-      state.status = action.status;
-      return state;
+      return {
+        accessToken: action.accessToken,
+        status: action.status
+      };
     default:
       return initialState;
   }

@@ -11,11 +11,10 @@ export const register = (payload) => {
   }
 };
 
-export const successRegister = (response) => {
-  console.log(response);
+export const successRegister = (accessToken) => {
   return {
     type: SUCCESS_REGISTER,
-    accessToken: response,
+    accessToken: accessToken,
     status: 'success'
   }
 };

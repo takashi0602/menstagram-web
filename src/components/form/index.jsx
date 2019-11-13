@@ -69,7 +69,7 @@ export class Form extends Component {
           <div className="mb-4">
             <input type="text" className="c-form mb-3" placeholder="ユーザーネーム" value={this.state.userName} onChange={(e) => changeForm('userName', e)} />
             <input type="text" className="c-form mb-3" placeholder="ユーザーID" value={this.state.userId} onChange={(e) => changeForm('userId', e)} />
-            <input type="text" className="c-form mb-3" placeholder="メールアドレス" value={this.state.email} onChange={(e) => changeForm('email', e)} />
+            <input type="email" className="c-form mb-3" placeholder="メールアドレス" value={this.state.email} onChange={(e) => changeForm('email', e)} />
             <Relative>
               <input type={checkInputType()} className="c-form" placeholder="パスワード" value={this.state.password} onChange={(e) => changeForm('password', e)} />
               <Absolute onClick={showPassword}>

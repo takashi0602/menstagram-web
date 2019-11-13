@@ -16,7 +16,7 @@ class RegisterContainer extends Component {
         <div className="text-center pt-5 mb-5">
           <img src={titleSvg} alt="Menstagram" />
         </div>
-        <Form formName="register" post={(payload) => this.props.post(payload)} />
+        <Form formName="register" post={(payload) => this.props.post(payload)} status={this.props.status} />
         <div className="mb-3">
           <p className="mb-0">アカウントをお持ちですか？</p>
           <Link to="/login">ログインする</Link>
@@ -28,13 +28,14 @@ class RegisterContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  return state;
+  return {
+    status: state.register.status
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     post(payload) {
-      console.log(payload);
       dispatch(register(payload));
     }
   }
