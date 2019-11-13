@@ -5,7 +5,7 @@ import titleSvg from "../../assets/images/title.svg";
 import { Form } from "../../components/form";
 import { register } from '../../actions/auth'
 
-class RegisterContainer extends Component {
+export class Register extends Component {
   constructor(prop) {
     super(prop);
   }
@@ -41,4 +41,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export const Register = connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
+Register = connect(mapStateToProps, mapDispatchToProps)(Register);
