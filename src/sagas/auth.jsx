@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { requestRegister } from '../api/auth';
-import { REGISTER, failRegister, successRegister } from '../actions/auth'
+import { REGISTER, failRegister, successRegister } from '../actions/auth/register'
 
 function* register(payload) {
   const { response, error } = yield call(requestRegister, payload);

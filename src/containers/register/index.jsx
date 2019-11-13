@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import titleSvg from "../../assets/images/title.svg";
 import { Form } from "../../components/form";
-import { register } from '../../actions/auth'
+import { register } from '../../actions/auth/register'
 
 export class Register extends Component {
   constructor(prop) {
