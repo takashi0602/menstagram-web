@@ -63,6 +63,14 @@ export class Form extends Component {
       this.props.post(payload);
     };
 
+    const postLogin = () => {
+      const payload = {
+        user_id: this.state.userId,
+        password: this.state.password
+      };
+      this.props.post(payload);
+    };
+
     return this.props.formName === 'register' ?
       (
         <div>
@@ -85,16 +93,16 @@ export class Form extends Component {
       : (
         <div>
           <div className="mb-4">
-            <input type="text" className="c-form mb-3" placeholder="ユーザーID" />
+            <input type="text" className="c-form mb-3" placeholder="ユーザーID" value={this.state.userId} onChange={(e) => changeForm('userId', e)} />
             <Relative>
-              <input type={checkInputType()} className="c-form" placeholder="パスワード" />
+              <input type={checkInputType()} className="c-form" placeholder="パスワード" value={this.state.password} onChange={(e) => changeForm('password', e)} />
               <Absolute onClick={showPassword}>
                 <FontAwesomeIcon icon={this.state.iconName} style={Eye} />
               </Absolute>
             </Relative>
           </div>
           <div className="mb-5">
-            <button className="c-button__orange w-100">ログイン</button>
+            <button className="c-button__orange w-100" onClick={postLogin}>ログイン</button>
           </div>
         </div>
       )
