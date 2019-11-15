@@ -31,3 +31,19 @@ export const requestLogin = (request) => {
     error => ({ error })
   );
 };
+
+export const requestLogout = (accessToken) => {
+  return axios({
+    method: 'POST',
+    url: `${baseUrl}/v1/auth/logout`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer: ${accessToken}`
+    },
+    data: {}
+  }).then(
+    response => ({ response })
+  ).catch(
+    error => ({ error })
+  );
+};

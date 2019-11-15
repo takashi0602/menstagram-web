@@ -29,6 +29,18 @@ export function auth(state = initialState, action) {
         accessToken: action.accessToken,
         status: action.status
       };
+    case 'LOGOUT':
+      return state;
+    case 'SUCCESS_LOGOUT':
+      return {
+        accessToken: action.accessToken,
+        status: action.status
+      };
+    case 'FAIL_LOGOUT':
+      return {
+        accessToken: action.accessToken,
+        status: action.status
+      };
     default:
       return state;
   }

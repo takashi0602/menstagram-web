@@ -2,10 +2,10 @@ export const LOGOUT = 'LOGOUT';
 export const SUCCESS_LOGOUT = 'SUCCESS_LOGOUT';
 export const FAIL_LOGOUT = 'FAIL_LOGOUT';
 
-export const logout = () => {
+export const logout = (payload) => {
   return {
     type: LOGOUT,
-    accessToken: null,
+    accessToken: payload,
     status: null
   }
 };
@@ -18,10 +18,10 @@ export const successLogout = () => {
   }
 };
 
-export const failLogout = () => {
+export const failLogout = (accessToken) => {
   return {
     type: FAIL_LOGOUT,
-    accessToken: null,
+    accessToken: accessToken,
     status: 'error'
   }
 };

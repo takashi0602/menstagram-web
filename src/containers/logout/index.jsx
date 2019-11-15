@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {auth} from "../../middleware/auth";
+import { auth } from "../../middleware/auth";
+import { logout } from "../../actions/auth/logout";
 
 export class Logout extends Component {
   constructor(props) {
@@ -8,7 +9,9 @@ export class Logout extends Component {
   }
 
   render() {
-    const logout = () => {};
+    const logout = () => {
+      this.props.post(this.props.accessToken);
+    };
 
     return (
       <div className="c-container__padding">
@@ -27,5 +30,13 @@ function mapStateToProps(state) {
   };
 }
 
-Logout = connect(mapStateToProps)(Logout);
+function mapDispatchToProps(dispatch) {
+  return {
+    post(payload) {
+      dispatch(logout(payload));
+    }
+  }
+}
+
+Logout = connect(mapStateToProps, mapDispatchToProps)(Logout);
 
