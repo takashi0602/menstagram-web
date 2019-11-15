@@ -30,6 +30,6 @@ export function auth(state = initialState, action) {
         status: action.status
       };
     default:
-      return initialState;
+      return state;
   }
 }
