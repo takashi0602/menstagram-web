@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { history } from "../history";
 import { requestRegister, requestLogin } from '../api/auth';
 import { REGISTER, successRegister, failRegister } from '../actions/auth/register'
 import { LOGIN, successLogin, failLogin } from '../actions/auth/login'
@@ -6,7 +7,7 @@ import { LOGIN, successLogin, failLogin } from '../actions/auth/login'
 function* register(payload) {
   const { response, error } = yield call(requestRegister, payload);
   if (response) {
-    yield put(successRegister(response.data.access_token))
+    yield put(successRegister(response.data.access_token));
   } else {
     yield put(failRegister());
   }
@@ -15,7 +16,7 @@ function* register(payload) {
 function* login(payload) {
   const { response, error } = yield call(requestLogin, payload);
   if (response) {
-    yield put(successLogin(response.data.access_token))
+    yield put(successLogin(response.data.access_token));
   } else {
     yield put(failLogin());
   }

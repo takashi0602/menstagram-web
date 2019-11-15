@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import titleSvg from "../../assets/images/title.svg";
 import { Form } from "../../components/form";
 import { register } from '../../actions/auth/register'
+import { noAuth } from "../../middleware/auth";
 
 export class Register extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
   }
 
   render() {
     return (
       <div className="c-container__padding">
+        {noAuth(this.props.accessToken)}
         <div className="text-center pt-5 mb-5">
           <img src={titleSvg} alt="Menstagram" />
         </div>
