@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import titleSvg from "../../assets/images/title.svg";
 import { SubTitle } from "./styled";
 import { noAuth } from "../../middleware/auth";
-import {register} from "../../actions/auth/register";
-import connect from "react-redux/es/connect/connect";
+import { connect } from 'react-redux';
 
 export class Top extends Component {
   constructor(props) {
@@ -24,7 +23,7 @@ export class Top extends Component {
         </div>
         <p className="mb-5">Menstagramは世界中のラーメンコミュニティを支える特化型SNSです。</p>
         <div className="mb-3">
-          <p className="mb-0">アカウントを作成しますか？</p>
+          <p className="mb-0">アカウントをお持ちでないですか？</p>
           <Link to="/register">登録する</Link>
         </div>
         <div>
