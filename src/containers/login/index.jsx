@@ -29,7 +29,8 @@ export class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    status: state.login.status
+    accessToken: state.auth.accessToken,
+    status: state.auth.status
   };
 }
 

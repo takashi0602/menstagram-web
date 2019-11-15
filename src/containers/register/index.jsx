@@ -29,7 +29,8 @@ export class Register extends Component {
 
 function mapStateToProps(state) {
   return {
-    status: state.register.status
+    accessToken: state.auth.accessToken,
+    status: state.auth.status
   };
 }
 

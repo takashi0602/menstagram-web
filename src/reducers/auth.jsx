@@ -3,7 +3,7 @@ const initialState = {
   status: null
 };
 
-export function register(state = initialState, action) {
+export function auth(state = initialState, action) {
   switch (action.type) {
     case 'REGISTER':
       return state;
@@ -17,13 +17,6 @@ export function register(state = initialState, action) {
         accessToken: action.accessToken,
         status: action.status
       };
-    default:
-      return initialState;
-  }
-}
-
-export function login(state = initialState, action) {
-  switch (action.type) {
     case 'LOGIN':
       return state;
     case 'SUCCESS_LOGIN':
