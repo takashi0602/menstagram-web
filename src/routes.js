@@ -7,6 +7,7 @@ import { store } from './store/index';
 import { Top } from './containers/top';
 import { Register } from "./containers/register";
 import { Login } from "./containers/login";
+import { Notification } from "./containers/notification";
 
 export const Routes = () => {
   return (
@@ -17,6 +18,7 @@ export const Routes = () => {
             <Route exact path={'/'} component={ Top } />
             <Route exact path={'/register'} component={ Register } />
             <Route exact path={'/login'} component={ Login } />
+            <Route exact path={'/notification'} component={ Notification }/>
           </Switch>
         </div>
       </ConnectedRouter>
