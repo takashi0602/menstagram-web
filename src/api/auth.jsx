@@ -9,7 +9,7 @@ export const requestRegister = (request) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    data: JSON.stringify(request.payload)
+    data: request.payload
   }).then(
     response => ({ response })
   ).catch(
@@ -24,7 +24,7 @@ export const requestLogin = (request) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    data: JSON.stringify(request.payload)
+    data: request.payload
   }).then(
     response => ({ response })
   ).catch(
