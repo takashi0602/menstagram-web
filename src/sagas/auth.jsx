@@ -27,7 +27,6 @@ function* login(payload) {
 }
 
 function* logout(payload) {
-  console.log(payload.accessToken, 'サガ');
   const { response } = yield call(requestLogout, payload.accessToken);
   if (response) {
     yield put(successLogout());

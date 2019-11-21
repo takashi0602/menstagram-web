@@ -5,10 +5,6 @@ import { auth } from '../../middleware/auth';
 import { logout } from '../../actions/auth/logout';
 
 export class LogoutContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const logout = () => {
       this.props.post(this.props.accessToken);

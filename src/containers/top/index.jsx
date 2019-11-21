@@ -7,10 +7,6 @@ import { noAuth } from '../../middleware/auth';
 import { connect } from 'react-redux';
 
 export class TopContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="c-container__padding">

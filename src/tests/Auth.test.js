@@ -5,13 +5,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import { store } from '../store';
 import { history } from '../history';
 import { act } from 'react-dom/test-utils';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { shallow } from 'enzyme';
 import { Register } from '../containers/register';
 import { Login } from '../containers/Login';
 import { Logout } from '../containers/Logout';
-import { Form } from '../components/form';
 import { requestRegister, requestLogin, requestLogout } from '../api/auth';
 
 let container, accessToken;
@@ -36,8 +32,6 @@ const loginData = {
   }
 };
 
-Enzyme.configure({ adapter: new Adapter() });
-
 beforeEach(() => {
   container = document.createElement('div');
   document.body.appendChild(container);
@@ -61,22 +55,6 @@ it('can render register, request register api', () => {
       container
     );
   });
-
-  const post = payload => {
-    expect(payload.user_id).toEqual(random);
-    expect(payload.screen_name).toEqual(random);
-    expect(payload.email).toEqual(`${random}@gmail.com`);
-    expect(payload.password).toEqual(random);
-  };
-
-  const wrapper = shallow(
-    <Form formName="register" post={payload => post(payload)} status={null} />
-  );
-  wrapper.setState({ userId: random });
-  wrapper.setState({ userName: random });
-  wrapper.setState({ email: `${random}@gmail.com` });
-  wrapper.setState({ password: random });
-  wrapper.find('button').simulate('click');
 
   return requestRegister(registerData).then(res => {
     accessToken = res.response.data.access_token;
@@ -112,18 +90,6 @@ it('can render login, request login api', () => {
       container
     );
   });
-
-  const post = payload => {
-    expect(payload.user_id).toEqual(random);
-    expect(payload.password).toEqual(random);
-  };
-
-  const wrapper = shallow(
-    <Form formName="login" post={payload => post(payload)} status={null} />
-  );
-  wrapper.setState({ userId: random });
-  wrapper.setState({ password: random });
-  wrapper.find('button').simulate('click');
 
   return requestLogin(loginData).then(res =>
     expect(res.response.statusText).toEqual('OK')
