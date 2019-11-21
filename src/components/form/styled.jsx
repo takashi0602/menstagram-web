@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Relative = styled.div`position: relative`;
+export const Relative = styled.div`
+  position: relative;
+`;
 
 export const Absolute = styled.div`
   position: absolute;
@@ -18,5 +20,5 @@ export const Eye = {
   color: '#666666',
   cursor: 'pointer',
   padding: '5px',
-  borderRadius: '5px',
+  borderRadius: '5px'
 };

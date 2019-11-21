@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
-import titleSvg from "../../assets/images/title.svg";
-import {Form} from "../../components/form";
-import { connect } from 'react-redux'
-import { login } from '../../actions/auth/login'
-import {noAuth} from "../../middleware/auth";
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import titleSvg from '../../assets/images/title.svg';
+import { Form } from '../../components/form';
+import { connect } from 'react-redux';
+import { login } from '../../actions/auth/login';
+import { noAuth } from '../../middleware/auth';
 
-export class Login extends Component {
+export class LoginContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -18,7 +19,11 @@ export class Login extends Component {
         <div className="text-center pt-5 mb-5">
           <img src={titleSvg} alt="Menstagram" />
         </div>
-        <Form formName="login" post={(payload) => this.props.post(payload)} status={this.props.status} />
+        <Form
+          formName="login"
+          post={payload => this.props.post(payload)}
+          status={this.props.status}
+        />
         <div className="mb-3">
           <p className="mb-0">アカウントをお持ちでないですか？</p>
           <Link to="/register">登録する</Link>
@@ -41,7 +46,16 @@ function mapDispatchToProps(dispatch) {
     post(payload) {
       dispatch(login(payload));
     }
-  }
+  };
 }
 
-Login = connect(mapStateToProps, mapDispatchToProps)(Login);
+export const Login = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginContainer);
+
+LoginContainer.propTypes = {
+  accessToken: PropTypes.string,
+  status: PropTypes.string,
+  post: PropTypes.func
+};

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { auth } from "../../middleware/auth";
-import { logout } from "../../actions/auth/logout";
+import { auth } from '../../middleware/auth';
+import { logout } from '../../actions/auth/logout';
 
-export class Logout extends Component {
+export class LogoutContainer extends Component {
   constructor(props) {
     super(props);
   }
@@ -17,7 +18,9 @@ export class Logout extends Component {
       <div className="c-container__padding">
         {auth(this.props.accessToken)}
         <h1>ログアウト</h1>
-        <button type="button" className="c-button__white" onClick={logout}>ログアウト</button>
+        <button type="button" className="c-button__white" onClick={logout}>
+          ログアウト
+        </button>
       </div>
     );
   }
@@ -35,8 +38,16 @@ function mapDispatchToProps(dispatch) {
     post(payload) {
       dispatch(logout(payload));
     }
-  }
+  };
 }
 
-Logout = connect(mapStateToProps, mapDispatchToProps)(Logout);
+export const Logout = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LogoutContainer);
 
+LogoutContainer.propTypes = {
+  accessToken: PropTypes.string,
+  status: PropTypes.string,
+  post: PropTypes.func
+};

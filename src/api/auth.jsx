@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
-export const requestRegister = (request) => {
+export const requestRegister = request => {
   return axios({
     method: 'POST',
     url: `${baseUrl}/v1/auth/register`,
@@ -10,14 +10,12 @@ export const requestRegister = (request) => {
       'Content-Type': 'application/json'
     },
     data: request.payload
-  }).then(
-    response => ({ response })
-  ).catch(
-    error => ({ error })
-  );
+  })
+    .then(response => ({ response }))
+    .catch(error => ({ error }));
 };
 
-export const requestLogin = (request) => {
+export const requestLogin = request => {
   return axios({
     method: 'POST',
     url: `${baseUrl}/v1/auth/login`,
@@ -25,25 +23,21 @@ export const requestLogin = (request) => {
       'Content-Type': 'application/json'
     },
     data: request.payload
-  }).then(
-    response => ({ response })
-  ).catch(
-    error => ({ error })
-  );
+  })
+    .then(response => ({ response }))
+    .catch(error => ({ error }));
 };
 
-export const requestLogout = (accessToken) => {
+export const requestLogout = accessToken => {
   return axios({
     method: 'POST',
     url: `${baseUrl}/v1/auth/logout`,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`
     },
     data: {}
-  }).then(
-    response => ({ response })
-  ).catch(
-    error => ({ error })
-  );
+  })
+    .then(response => ({ response }))
+    .catch(error => ({ error }));
 };

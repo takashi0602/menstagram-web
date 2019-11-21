@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { act } from 'react-dom/test-utils';
-import { Top } from '../containers/top'
-import { store } from "../store";
+import { Top } from '../containers/top';
+import { store } from '../store';
 import { history } from '../history';
 
 let container;
