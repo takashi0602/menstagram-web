@@ -56,6 +56,13 @@ it('can render register, request register api', () => {
     );
   });
 
+  const button = container.querySelector('button');
+  act(() => {
+    button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+  });
+  const errorMsg = container.querySelectorAll('.text-danger');
+  expect(errorMsg.length).toEqual(4);
+
   return requestRegister(registerData).then(res => {
     accessToken = res.response.data.access_token;
     expect(res.response.statusText).toEqual('OK');
@@ -90,6 +97,13 @@ it('can render login, request login api', () => {
       container
     );
   });
+
+  const button = container.querySelector('button');
+  act(() => {
+    button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+  });
+  const errorMsg = container.querySelectorAll('.text-danger');
+  expect(errorMsg.length).toEqual(2);
 
   return requestLogin(loginData).then(res =>
     expect(res.response.statusText).toEqual('OK')
