@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faEllipsisH,
+  faHeart
+} from '@fortawesome/free-solid-svg-icons';
+import { BackButton, UserName, Menu, Like } from './styled';
 
 export class PostDetail extends Component {
   render() {
@@ -63,26 +68,32 @@ export class PostDetail extends Component {
     const created = new Date(data.created_at);
     return (
       <div>
-        <header className="py-3 border-bottom">
+        <header className="py-3 px-3 border-bottom d-flex justify-content-between">
           <Link className="text-left" to={parent_route}>
-            <FontAwesomeIcon icon={['fas', 'angle-left']} />
+            <FontAwesomeIcon icon={faChevronLeft} style={BackButton} />
           </Link>
-          <h1 className="h5 text-center">投稿</h1>
+          <h1 className="h5 mb-0 text-center">投稿</h1>
+          <span></span>
         </header>
-        <div className="py-3 px-4 border-bottom">
-          <img
-            src={data.user.avatar}
-            alt="user-icon"
-            height="38px"
-            width="38px"
-            className="rounded-circle border"
-          />
-          <Link to={'/user/' + data.user.id} className="ml-3 h5 text-dark">
-            {data.user.screen_name}
+        <div className="py-3 px-4 border-bottom d-flex justify-content-between">
+          <Link
+            to={'/user/' + data.user.id}
+            className="text-dark"
+            style={UserName}
+          >
+            <img
+              src={data.user.avatar}
+              alt="user-icon"
+              height="38px"
+              width="38px"
+              className="rounded-circle border"
+            />
+            <span className="ml-3 h5">{data.user.screen_name}</span>
           </Link>
           <FontAwesomeIcon
             className="text-right"
-            icon={['fas', 'ellipsis-h']}
+            icon={faEllipsisH}
+            style={Menu}
           />
         </div>
 
@@ -145,17 +156,18 @@ export class PostDetail extends Component {
 
           <p>{data.text}</p>
           <span className="mr-1">
-            <FontAwesomeIcon icon="heart" />
+            <FontAwesomeIcon icon={faHeart} style={Like} />
             {data.liked}
           </span>
           {likers.map((user, idx) => {
             return (
               <Link key={idx} to={'/user/' + user.id}>
                 <img
+                  alt="avatar"
                   src={user.user.avatar}
                   height="23px"
                   width="23px"
-                  className="rounded-circle border"
+                  className="rounded-circle border mr-1"
                 />
               </Link>
             );
