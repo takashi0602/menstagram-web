@@ -8,7 +8,6 @@ import { store, persistor } from './store/index';
 import { Top } from './containers/top';
 import { Register } from './containers/register';
 import { Login } from './containers/login';
-import { Post } from './containers/post/index';
 import { PostDetail } from './containers/post/_id';
 import { Logout } from './containers/logout';
 
@@ -23,7 +22,6 @@ export const Routes = () => {
               <Route exact path={'/register'} component={Register} />
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/logout'} component={Logout} />
-              <Route exact path={'/post'} component={Post} />
               <Route exact path="/post/:id" component={PostDetail} />
             </Switch>
           </div>

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Post } from '../../components/post';
+import { Post } from '../../components/post/show';
 
 export class PostDetail extends Component {
   render() {
-    const parentRoute = '/post';
+    const parentRoute = '/';
     const BackButton = {
       fontSize: '20px',
       color: '#666666'
