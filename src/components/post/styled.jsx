@@ -1,7 +1,8 @@
-export const BackButton = {
-  fontSize: '20px',
-  color: '#666666'
-};
+import styled from 'styled-components';
+
+export const Relative = styled.div`
+  position: relative;
+`;
 export const UserName = {
   textDecoration: 'none'
 };
