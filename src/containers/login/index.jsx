@@ -6,6 +6,7 @@ import { Form } from '../../components/form';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth/login';
 import { noAuth } from '../../middleware/auth';
+import { Loading } from '../../components/loading';
 
 export class LoginContainer extends Component {
   constructor(props) {
@@ -75,42 +76,45 @@ export class LoginContainer extends Component {
     };
 
     return (
-      <div className="c-container__padding">
+      <div>
         {noAuth(this.props.accessToken)}
-        <div className="text-center pt-5 mb-5">
-          <img src={titleSvg} alt="Menstagram" />
+        {this.props.loading && <Loading />}
+        <div className="c-container__padding">
+          <div className="text-center pt-5 mb-5">
+            <img src={titleSvg} alt="Menstagram" />
+          </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              className="c-form mb-3"
+              placeholder="ユーザーID"
+              value={this.state.userId}
+              onChange={e => changeForm('userId', e)}
+            />
+            {this.state.errorUserId && (
+              <p className="text-danger">
+                16文字以下の英数字で入力してください。
+              </p>
+            )}
+            <Form
+              password={this.state.password}
+              changeForm={(stateName, e) => changeForm(stateName, e)}
+            />
+            {this.state.errorPassword && (
+              <p className="text-danger">8文字以上で入力してください。</p>
+            )}
+          </div>
+          <div className="mb-5">
+            <button className="c-button__orange w-100" onClick={login}>
+              ログイン
+            </button>
+          </div>
+          <div className="mb-3">
+            <p className="mb-0">アカウントをお持ちでないですか？</p>
+            <Link to="/register">登録する</Link>
+          </div>
+          <Link to="/">トップへ戻る</Link>
         </div>
-        <div className="mb-4">
-          <input
-            type="text"
-            className="c-form mb-3"
-            placeholder="ユーザーID"
-            value={this.state.userId}
-            onChange={e => changeForm('userId', e)}
-          />
-          {this.state.errorUserId && (
-            <p className="text-danger">
-              16文字以下の英数字で入力してください。
-            </p>
-          )}
-          <Form
-            password={this.state.password}
-            changeForm={(stateName, e) => changeForm(stateName, e)}
-          />
-          {this.state.errorPassword && (
-            <p className="text-danger">8文字以上で入力してください。</p>
-          )}
-        </div>
-        <div className="mb-5">
-          <button className="c-button__orange w-100" onClick={login}>
-            ログイン
-          </button>
-        </div>
-        <div className="mb-3">
-          <p className="mb-0">アカウントをお持ちでないですか？</p>
-          <Link to="/register">登録する</Link>
-        </div>
-        <Link to="/">トップへ戻る</Link>
       </div>
     );
   }
@@ -119,7 +123,8 @@ export class LoginContainer extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.auth.status
+    status: state.auth.status,
+    loading: state.loading.loading
   };
 }
 
@@ -139,5 +144,6 @@ export const Login = connect(
 LoginContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.string,
-  post: PropTypes.func
+  post: PropTypes.func,
+  loading: PropTypes.bool
 };
