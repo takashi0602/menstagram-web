@@ -26,6 +26,7 @@ $ yarn lint        // コード修正
 ```text
 src
 ├ actions       // アクション
+├ api           // API
 ├ assets
 │ ├ images      // 画像
 │ └ scss        // scssファイル(FLOCSS)
