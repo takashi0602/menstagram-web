@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { logout } from '../../actions/auth/logout';
+import { Loading } from '../../components/loading';
 
 export class LogoutContainer extends Component {
   render() {
@@ -11,12 +12,15 @@ export class LogoutContainer extends Component {
     };
 
     return (
-      <div className="c-container__padding">
+      <div>
         {auth(this.props.accessToken)}
-        <h1>ログアウト</h1>
-        <button type="button" className="c-button__white" onClick={logout}>
-          ログアウト
-        </button>
+        {this.props.loading && <Loading />}
+        <div className="c-container__padding">
+          <h1>ログアウト</h1>
+          <button type="button" className="c-button__white" onClick={logout}>
+            ログアウト
+          </button>
+        </div>
       </div>
     );
   }
@@ -25,7 +29,8 @@ export class LogoutContainer extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.auth.status
+    status: state.auth.status,
+    loading: state.loading.loading
   };
 }
 
@@ -45,5 +50,6 @@ export const Logout = connect(
 LogoutContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.string,
-  post: PropTypes.func
+  post: PropTypes.func,
+  loading: PropTypes.bool
 };
