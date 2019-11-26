@@ -11,9 +11,9 @@ export class Notification extends Component {
           <div className="position-relative py-3 border-bottom mb-3">
            <div className="text-center mb-4">通知</div>
            <div className="d-flex justify-content-around">
-            <buttom type="buttom">いいね</buttom>
-            <buttom type="buttom">フォロー</buttom>
-            <buttom type="buttom">運営</buttom>
+            <button type="button">いいね</button>
+            <button type="button">フォロー</button>
+            <button type="button">運営</button>
            </div>
           </div>
       </div>
