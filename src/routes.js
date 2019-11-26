@@ -9,6 +9,7 @@ import { Top } from './containers/top';
 import { Register } from './containers/register';
 import { Login } from './containers/login';
 import { Logout } from './containers/logout';
+import { Post } from './containers/post';
 
 export const Routes = () => {
   return (
@@ -21,6 +22,7 @@ export const Routes = () => {
               <Route exact path={'/register'} component={Register} />
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/logout'} component={Logout} />
+              <Route exact path={'/post'} component={Post} />
             </Switch>
           </div>
         </ConnectedRouter>
