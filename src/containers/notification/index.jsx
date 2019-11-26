@@ -7,8 +7,12 @@ export class Notification extends Component {
     if(flag === true)
     return (
       <div className="container px-0">
-      <h1 className="text-center">通知</h1>
-      <h1 className="border-bottom">メニュー</h1>
+      <div className="text-center mb-4">通知</div>
+      <div className="d-flex justify-content-around border-bottom">
+        <Link to="/like" className  ="text-dark">いいね</Link>
+        <Link to="/follow" className="text-black-50">フォロー</Link>
+        <Link to="/management" className="text-black-50">運営</Link>
+      </div>
           <div className="row">
             <Link to="/login" className="col-10 row">
               <img className="col-4" alt="icon" />
