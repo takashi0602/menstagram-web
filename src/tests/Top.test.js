@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { act } from 'react-dom/test-utils';
-import { Top } from '../containers/top'
+import { Top } from '../containers/top';
+import { store } from '../store';
+import { history } from '../history';
 
 let container;
 
@@ -18,6 +21,13 @@ afterEach(() => {
 
 it('can render top', () => {
   act(() => {
-    ReactDOM.render(<BrowserRouter><Top /></BrowserRouter>, container);
+    ReactDOM.render(
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Top />
+        </ConnectedRouter>
+      </Provider>,
+      container
+    );
   });
 });
