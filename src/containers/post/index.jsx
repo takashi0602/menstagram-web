@@ -31,6 +31,7 @@ export class PostConatiner extends Component {
     this.setState({ files: files });
   };
 
+  // TODO: 再レンダリングの際に画像も再レンダリングされる現象を解消
   changeText = e => {
     this.setState({ errorText: false });
     this.setState({ text: e.target.value });
