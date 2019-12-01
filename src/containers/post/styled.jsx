@@ -37,5 +37,5 @@ export const TimesIcon = {
   width: '35px',
   height: '35px',
   color: '#666666',
-  cursor: 'pointer',
+  cursor: 'pointer'
 };

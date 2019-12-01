@@ -5,8 +5,8 @@ import { PostButton, PostLabel, RenderImage, Times, TimesIcon } from './styled';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
-import { post } from "../../actions/post";
-import { Loading } from "../../components/loading";
+import { post } from '../../actions/post';
+import { Loading } from '../../components/loading';
 
 export class PostConatiner extends Component {
   constructor(props) {
@@ -19,7 +19,6 @@ export class PostConatiner extends Component {
       errorFileFormat: false
     };
   }
-  // TODO: FormData使用
   uploadImages = e => {
     this.setState({ errorFile: false });
     this.setState({ errorFileFormat: false });
@@ -32,7 +31,7 @@ export class PostConatiner extends Component {
     this.setState({ files: files });
   };
 
-  changeText = (e) => {
+  changeText = e => {
     this.setState({ errorText: false });
     this.setState({ text: e.target.value });
     if (e.target.value.length > 256) {
@@ -42,7 +41,11 @@ export class PostConatiner extends Component {
 
   readerImages = () => {
     const files = this.state.files;
-    return <ul className="d-flex flex-wrap justify-content-between p-0">{this.mapImages(files)}</ul>;
+    return (
+      <ul className="d-flex flex-wrap justify-content-between p-0">
+        {this.mapImages(files)}
+      </ul>
+    );
   };
 
   mapImages = files => {
@@ -53,7 +56,9 @@ export class PostConatiner extends Component {
       return (
         <li key={index} className="list-unstyled w-50 mb-2">
           <div className="position-relative px-2">
-            <RenderImage style={{backgroundImage: `url('${createObjectURL(file)}')`}} />
+            <RenderImage
+              style={{ backgroundImage: `url('${createObjectURL(file)}')` }}
+            />
             <Times onClick={() => this.deleteFile(index)}>
               <FontAwesomeIcon icon={faTimesCircle} style={TimesIcon} />
             </Times>
@@ -71,16 +76,16 @@ export class PostConatiner extends Component {
 
   sendImages = () => {
     if (this.validation()) return;
-    let images = {};
+    const formData = new FormData();
     const files = this.state.files;
     files.map((file, index) => {
-      return images[`image${index + 1}`] = file;
+      return formData.append(`image${index + 1}`, file);
     });
     const payload = {
-      images,
+      formData,
       text: this.state.text
     };
-    this.props.post(payload, this.props.accessToken);
+    this.props.postImages(payload, this.props.accessToken);
   };
 
   validation = () => {
@@ -115,7 +120,7 @@ export class PostConatiner extends Component {
             rows="4"
             placeholder="文章を記入してください"
             onChange={e => {
-              this.changeText(e)
+              this.changeText(e);
             }}
           />
           {this.state.errorText && (
@@ -155,13 +160,14 @@ export class PostConatiner extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.post.status
+    status: state.post.status,
+    loading: state.loading.loading
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    post(payload, accessToken) {
+    postImages(payload, accessToken) {
       dispatch(post(payload, accessToken));
     }
   };
@@ -175,5 +181,6 @@ export const Post = connect(
 PostConatiner.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.string,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  postImages: PropTypes.func
 };
