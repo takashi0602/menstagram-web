@@ -7,7 +7,7 @@ import { history } from '../history';
 import { act } from 'react-dom/test-utils';
 import { Post } from '../containers/post';
 import { requestRegister } from '../api/auth';
-import { requestPostImages } from "../api/post";
+import { requestPostImages } from '../api/post';
 import titleSvg from '../assets/images/title.svg';
 
 let container, accessToken;
@@ -31,7 +31,7 @@ formData.append('image1', titleSvg);
 const postImages = {
   payload: {
     formData,
-    text: "テスト"
+    text: 'テスト'
   }
 };
 
