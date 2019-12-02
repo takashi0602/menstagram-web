@@ -10,6 +10,7 @@ import { Register } from './containers/register';
 import { Login } from './containers/login';
 import { Logout } from './containers/logout';
 import { Post } from './containers/post';
+import { Timeline } from './containers/timeline';
 
 export const Routes = () => {
   return (
@@ -23,6 +24,7 @@ export const Routes = () => {
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/logout'} component={Logout} />
               <Route exact path={'/post'} component={Post} />
+              <Route exact path={'/timeline'} component={Timeline} />
             </Switch>
           </div>
         </ConnectedRouter>
