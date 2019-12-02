@@ -7,9 +7,9 @@ function* post(action) {
   yield put(loading());
   const { error } = yield call(requestPostImages, action);
   if (error) {
-    yield put(failPost());
+    yield put(failPost(error.status));
   } else {
-    yield put(successPost());
+    yield put(successPost(200));
   }
   yield put(notLoading());
 }

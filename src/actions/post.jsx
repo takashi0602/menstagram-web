@@ -11,16 +11,16 @@ export const post = (payload, accessToken) => {
   };
 };
 
-export const successPost = () => {
+export const successPost = (status) => {
   return {
     type: SUCCESS_POST,
-    status: 'success'
+    status: status
   };
 };
 
-export const failPost = () => {
+export const failPost = (status) => {
   return {
     type: FAIL_POST,
-    status: 'error'
+    status: status
   };
 };
