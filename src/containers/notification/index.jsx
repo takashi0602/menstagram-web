@@ -21,12 +21,28 @@ export class Notification extends Component {
         like: {
             created_at: "2019/11/29 22:56:15"
         }
+      },
+      {
+        id: 1,
+        src_user: {
+            user_id: "menstagram",
+            screen_name: "メンスタグラム非公式",
+            avater: "https://placehold.jp/150x150.png?text=icon"
+        },
+        post: {
+            id: 1,
+            image: "https://placehold.jp/150x150.png?text=image"
+        },
+        like: {
+            created_at: "2019/11/29 22:56:15"
+        }
       }
+      
     ]
 
 //通知がある時
 
-    if(notices != null)
+    if(notices)
     return (
       <div className=" px-0">
         <div className="text-center mb-5 mt-4" style={tital_size}>通知</div>
@@ -52,7 +68,7 @@ export class Notification extends Component {
                     width="55px"
                   />
                   <a className="d-inline-block pl-3 text-body" style={notice_size}>
-                    {notice.src_user.screen_name}がいいねしました
+                    {notice.src_user.screen_name}さんがいいねしました
                     <td></td>
                     <a class="text-muted"style={like_size}>{notice.like.created_at.substr( 0, 10 )}</a>
                   </a>

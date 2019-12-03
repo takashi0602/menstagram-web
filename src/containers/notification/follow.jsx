@@ -95,8 +95,8 @@ export class Follow extends Component {
       <div className=" px-0">
         <div className="text-center mb-5 mt-4" style={tital_size}>通知</div>
         <div className="d-flex justify-content-around border-bottom">
-          <Link to="/notification" className  ="text-dark mb-2" style={menu_size,under}>いいね</Link>
-          <Link to="/notification/follow" className="text-black-50" style={menu_size,under}>フォロー</Link>
+          <Link to="/notification" className  ="text-black-50 mb-2" style={menu_size,under}>いいね</Link>
+          <Link to="/notification/follow" className="text-dark" style={menu_size,under}>フォロー</Link>
           <Link to="/notification/management" className="text-black-50" style={menu_size,under}>運営</Link>
         </div>
         <div className="text-center mb-5 mt-4 p-1">通知はありません。</div>
