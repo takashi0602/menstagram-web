@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { logout } from '../../actions/auth/logout';
 import { Loading } from '../../components/loading';
+import { Error } from "../../components/error";
 
 export class LogoutContainer extends Component {
   logout = () => {
@@ -17,6 +18,7 @@ export class LogoutContainer extends Component {
         {this.props.loading && <Loading />}
         <div className="c-container__padding">
           <h1>ログアウト</h1>
+          {this.props.status && <Error status={this.props.status} />}
           <button
             type="button"
             className="c-button__white"
@@ -33,7 +35,7 @@ export class LogoutContainer extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.auth.status,
+    status: state.error.status,
     loading: state.loading.loading
   };
 }
@@ -53,7 +55,7 @@ export const Logout = connect(
 
 LogoutContainer.propTypes = {
   accessToken: PropTypes.string,
-  status: PropTypes.string,
+  status: PropTypes.number,
   post: PropTypes.func,
   loading: PropTypes.bool
 };

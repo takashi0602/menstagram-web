@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { login } from '../../actions/auth/login';
 import { noAuth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
+import { Error } from "../../components/error";
 
 export class LoginContainer extends Component {
   constructor(props) {
@@ -83,6 +84,7 @@ export class LoginContainer extends Component {
           <div className="text-center pt-5 mb-5">
             <img src={titleSvg} alt="Menstagram" />
           </div>
+          {this.props.status && <Error status={this.props.status} />}
           <div className="mb-4">
             <input
               type="text"
@@ -123,7 +125,7 @@ export class LoginContainer extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.auth.status,
+    status: state.error.status,
     loading: state.loading.loading
   };
 }
@@ -143,7 +145,7 @@ export const Login = connect(
 
 LoginContainer.propTypes = {
   accessToken: PropTypes.string,
-  status: PropTypes.string,
+  status: PropTypes.number,
   post: PropTypes.func,
   loading: PropTypes.bool
 };
