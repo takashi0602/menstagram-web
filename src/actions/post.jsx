@@ -7,20 +7,17 @@ export const post = (payload, accessToken) => {
     type: POST,
     accessToken: accessToken,
     payload: payload,
-    status: null
   };
 };
 
-export const successPost = (status) => {
+export const successPost = () => {
   return {
     type: SUCCESS_POST,
-    status: status
   };
 };
 
-export const failPost = (status) => {
+export const failPost = () => {
   return {
     type: FAIL_POST,
-    status: status
   };
 };

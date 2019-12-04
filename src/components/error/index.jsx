@@ -13,7 +13,7 @@ export class Error extends Component {
       case 401:
         persistor.purge();
         this.props.delete();
-        return <Redirect to={'/login'} />;
+        return;
       default:
         return <p className="text-danger">エラーが発生しました。</p>
     }

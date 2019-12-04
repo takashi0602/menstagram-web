@@ -8,6 +8,7 @@ import { auth } from '../../middleware/auth';
 import { post } from '../../actions/post';
 import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
+import { Error } from "../../components/error";
 
 export class PostConatiner extends Component {
   constructor(props) {
@@ -118,6 +119,7 @@ export class PostConatiner extends Component {
           </PostButton>
         </div>
         <div className="c-container__padding">
+          {this.props.status && <Error status={this.props.status} />}
           <textarea
             className="form-control mb-3"
             rows="4"
@@ -163,7 +165,7 @@ export class PostConatiner extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.post.status,
+    status: state.error.status,
     loading: state.loading.loading
   };
 }
