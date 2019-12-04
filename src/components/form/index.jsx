@@ -12,27 +12,27 @@ export class Form extends Component {
     };
   }
 
+  showPassword = () => {
+    this.state.iconName === faEye
+      ? this.setState({ iconName: faEyeSlash })
+      : this.setState({ iconName: faEye });
+  };
+
+  checkInputType = () => {
+    return this.state.iconName === faEye ? 'password' : 'text';
+  };
+
   render() {
-    const showPassword = () => {
-      this.state.iconName === faEye
-        ? this.setState({ iconName: faEyeSlash })
-        : this.setState({ iconName: faEye });
-    };
-
-    const checkInputType = () => {
-      return this.state.iconName === faEye ? 'password' : 'text';
-    };
-
     return (
       <Relative>
         <input
-          type={checkInputType()}
+          type={this.checkInputType()}
           className="c-form"
           placeholder="パスワード"
           value={this.props.password}
           onChange={e => this.props.changeForm('password', e)}
         />
-        <Absolute onClick={showPassword}>
+        <Absolute onClick={this.showPassword}>
           <FontAwesomeIcon icon={this.state.iconName} style={Eye} />
         </Absolute>
       </Relative>
