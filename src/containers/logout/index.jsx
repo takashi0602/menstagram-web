@@ -6,18 +6,22 @@ import { logout } from '../../actions/auth/logout';
 import { Loading } from '../../components/loading';
 
 export class LogoutContainer extends Component {
-  render() {
-    const logout = () => {
-      this.props.post(this.props.accessToken);
-    };
+  logout = () => {
+    this.props.post(this.props.accessToken);
+  };
 
+  render() {
     return (
       <div>
         {auth(this.props.accessToken)}
         {this.props.loading && <Loading />}
         <div className="c-container__padding">
           <h1>ログアウト</h1>
-          <button type="button" className="c-button__white" onClick={logout}>
+          <button
+            type="button"
+            className="c-button__white"
+            onClick={this.logout}
+          >
             ログアウト
           </button>
         </div>
