@@ -4,7 +4,7 @@ export const NOT_ERROR = 'NOT_ERROR';
 export const error = error => {
   return {
     type: ERROR,
-    status: error.status
+    status: error ? error.status : 500
   };
 };
 

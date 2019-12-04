@@ -26,7 +26,7 @@ function* register(payload) {
 function* login(payload) {
   yield put(loading());
   yield put(errorHandle.notError());
-  const { response } = yield call(requestLogin, payload);
+  const { response, error } = yield call(requestLogin, payload);
   if (response) {
     yield put(successLogin(response.data.access_token));
   } else {
@@ -39,7 +39,7 @@ function* login(payload) {
 function* logout(payload) {
   yield put(loading());
   yield put(errorHandle.notError());
-  const { response } = yield call(requestLogout, payload.accessToken);
+  const { response, error } = yield call(requestLogout, payload.accessToken);
   if (response) {
     yield put(successLogout());
   } else {
