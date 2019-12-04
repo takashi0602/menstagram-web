@@ -8,7 +8,7 @@ import {
 import { LOGIN, successLogin, failLogin } from '../actions/auth/login';
 import { LOGOUT, successLogout, failLogout } from '../actions/auth/logout';
 import { loading, notLoading } from '../actions/loading';
-import * as errorHandle from "../actions/error";
+import * as errorHandle from '../actions/error';
 
 function* register(payload) {
   yield put(loading());

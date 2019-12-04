@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { logout } from '../../actions/auth/logout';
 import { Loading } from '../../components/loading';
-import { Error } from "../../components/error";
+import { Error } from '../../components/error';
 
 export class LogoutContainer extends Component {
   logout = () => {

@@ -1,5 +1,5 @@
 const initialState = {
-  accessToken: null,
+  accessToken: null
 };
 
 export function auth(state = initialState, action) {
@@ -8,31 +8,31 @@ export function auth(state = initialState, action) {
       return state;
     case 'SUCCESS_REGISTER':
       return {
-        accessToken: action.accessToken,
+        accessToken: action.accessToken
       };
     case 'FAIL_REGISTER':
       return {
-        accessToken: action.accessToken,
+        accessToken: action.accessToken
       };
     case 'LOGIN':
       return state;
     case 'SUCCESS_LOGIN':
       return {
-        accessToken: action.accessToken,
+        accessToken: action.accessToken
       };
     case 'FAIL_LOGIN':
       return {
-        accessToken: action.accessToken,
+        accessToken: action.accessToken
       };
     case 'LOGOUT':
       return state;
     case 'SUCCESS_LOGOUT':
       return {
-        accessToken: action.accessToken,
+        accessToken: action.accessToken
       };
     case 'FAIL_LOGOUT':
       return {
-        accessToken: action.accessToken,
+        accessToken: action.accessToken
       };
     default:
       return state;
