@@ -1,9 +1,17 @@
-export function post(state = {}, action) {
+const initialState = {
+  success: false
+};
+
+export function post(state = initialState, action) {
   switch (action.type) {
     case 'SUCCESS_POST':
-      return state;
+      return {
+        success: action.success
+      };
     case 'FAIL_POST':
-      return state;
+      return {
+        success: action.success
+      };
     default:
       return state;
   }

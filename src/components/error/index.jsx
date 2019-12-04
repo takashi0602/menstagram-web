@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { failLogin } from '../../actions/auth/login'
+import { failLogin } from '../../actions/auth/login';
 import { persistor } from '../../store/index';
 
-export class Error extends Component {
-  handle = (status) => {
+export class ComponentError extends Component {
+  handle = status => {
     switch (status) {
       case 400:
         return <p className="text-danger">入力データに誤りがあります。</p>;
@@ -15,16 +14,12 @@ export class Error extends Component {
         this.props.delete();
         return;
       default:
-        return <p className="text-danger">エラーが発生しました。</p>
+        return <p className="text-danger">エラーが発生しました。</p>;
     }
   };
 
   render() {
-    return (
-      <div>
-        { this.handle(this.props.status) }
-      </div>
-    );
+    return <div>{this.handle(this.props.status)}</div>;
   }
 }
 
@@ -36,12 +31,12 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-Error = connect(
+export const Error = connect(
   null,
   mapDispatchToProps
-)(Error);
+)(ComponentError);
 
-Error.propTypes = {
+ComponentError.propTypes = {
   status: PropTypes.number,
   delete: PropTypes.func
 };

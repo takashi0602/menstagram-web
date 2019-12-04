@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { requestPostImages } from '../api/post';
 import { POST, successPost, failPost } from '../actions/post';
 import { loading, notLoading } from '../actions/loading';
-import * as errorHandle from "../actions/error";
+import * as errorHandle from '../actions/error';
 
 function* post(action) {
   yield put(loading());

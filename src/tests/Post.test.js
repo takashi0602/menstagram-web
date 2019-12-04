@@ -7,20 +7,7 @@ import { history } from '../history';
 import { act } from 'react-dom/test-utils';
 import { Post } from '../containers/post';
 
-let container, accessToken;
-
-const random = Math.random()
-  .toString(36)
-  .slice(-8);
-
-const registerData = {
-  payload: {
-    user_id: random,
-    screen_name: random,
-    email: `${random}@gmail.com`,
-    password: random
-  }
-};
+let container;
 
 beforeEach(() => {
   container = document.createElement('div');

@@ -7,7 +7,7 @@ import { Form } from '../../components/form';
 import { register } from '../../actions/auth/register';
 import { noAuth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
-import { Error } from "../../components/error";
+import { Error } from '../../components/error';
 
 export class RegisterContainer extends Component {
   constructor(props) {

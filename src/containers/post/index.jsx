@@ -8,7 +8,7 @@ import { auth } from '../../middleware/auth';
 import { post } from '../../actions/post';
 import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
-import { Error } from "../../components/error";
+import { Error } from '../../components/error';
 
 export class PostConatiner extends Component {
   constructor(props) {
@@ -111,7 +111,7 @@ export class PostConatiner extends Component {
       <div>
         {auth(this.props.accessToken)}
         {this.props.loading && <Loading />}
-        {this.props.status === 200 && <Redirect to={'/timeline'} />}
+        {this.props.success && <Redirect to={'/timeline'} />}
         <div className="position-relative py-3 border-bottom mb-3">
           <div className="text-center">投稿</div>
           <PostButton type="button" onClick={() => this.sendImages()}>
@@ -166,7 +166,8 @@ function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
     status: state.error.status,
-    loading: state.loading.loading
+    loading: state.loading.loading,
+    success: state.post.success
   };
 }
 
@@ -187,5 +188,6 @@ PostConatiner.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
   loading: PropTypes.bool,
-  postImages: PropTypes.func
+  postImages: PropTypes.func,
+  success: PropTypes.bool
 };
