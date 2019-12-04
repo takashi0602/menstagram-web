@@ -6,9 +6,6 @@ import { store } from '../store';
 import { history } from '../history';
 import { act } from 'react-dom/test-utils';
 import { Post } from '../containers/post';
-import { requestRegister } from '../api/auth';
-import { requestPostImages } from '../api/post';
-import titleSvg from '../assets/images/title.svg';
 
 let container, accessToken;
 
@@ -25,16 +22,6 @@ const registerData = {
   }
 };
 
-const formData = new FormData();
-formData.append('image1', titleSvg);
-
-const postImages = {
-  payload: {
-    formData,
-    text: 'テスト'
-  }
-};
-
 beforeEach(() => {
   container = document.createElement('div');
   document.body.appendChild(container);
@@ -47,7 +34,7 @@ afterEach(() => {
 
 jest.setTimeout(10000);
 
-it('can render post, request post api', () => {
+it('can render post', () => {
   act(() => {
     ReactDOM.render(
       <Provider store={store}>
@@ -65,13 +52,4 @@ it('can render post, request post api', () => {
   });
   const errorMsg = container.querySelectorAll('.text-danger');
   expect(errorMsg.length).toEqual(1);
-
-  return requestRegister(registerData).then(res => {
-    accessToken = res.response.data.access_token;
-    expect(res.response.statusText).toEqual('OK');
-    postImages.accessToken = accessToken;
-    requestPostImages(postImages).then(res => {
-      expect(res.response.statusText).toEqual('OK');
-    });
-  });
 });
