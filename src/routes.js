@@ -24,7 +24,8 @@ export const Routes = () => {
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/logout'} component={Logout} />
               <Route exact path={'/post'} component={Post} />
-              <Route exact path={'/timeline'} component={Timeline} />
+              <Route exact path={'/timeline/private'} component={Timeline} />
+              <Route exact path={'/timeline/global'} component={Timeline} />
             </Switch>
           </div>
         </ConnectedRouter>
