@@ -9,6 +9,12 @@ import { Top } from './containers/top';
 import { Register } from './containers/register';
 import { Login } from './containers/login';
 import { Logout } from './containers/logout';
+import { Notification } from './containers/notification';
+import { Follow } from './containers/notification/follow';
+import { Management } from './containers/notification/management';
+
+
+
 
 export const Routes = () => {
   return (
@@ -21,6 +27,10 @@ export const Routes = () => {
               <Route exact path={'/register'} component={Register} />
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/logout'} component={Logout} />
+              <Route exact path={'/notification'} component={Notification} />
+              <Route exact path={'/notification/follow'} component={Follow} />
+              <Route exact path={'/notification/management'} component={Management} />
+              
             </Switch>
           </div>
         </ConnectedRouter>
