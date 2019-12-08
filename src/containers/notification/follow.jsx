@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  calc,
+  followNoticeRow,
   notice_size,
   like_size,
   tital_size,
   menu_size,
-  under
+  under,
+  FollowButton,
+  UnFollowButton
 } from './styled';
 
 export class NotificationFollow extends Component {
@@ -45,7 +47,7 @@ export class NotificationFollow extends Component {
     if (follows) {
       return (
         <div className=" px-0">
-          <div className="text-center mb-5 mt-4" style={tital_size}>
+          <div className="text-center mb-4 mt-4" style={tital_size}>
             通知
           </div>
           <div className="d-flex justify-content-around border-bottom">
@@ -68,17 +70,17 @@ export class NotificationFollow extends Component {
               className="text-black-50"
               style={(menu_size, under)}
             >
-              運営
+              運営から
             </Link>
           </div>
           <div>
-            {follows.map(follow => {
+            {follows.map((follow, idx) => {
               return (
-                <div className=" px-2 py-2 m-3">
+                <div key={idx} className="d-flex px-2 py-2 m-3">
                   <Link
                     to={'/users/' + 'aaaa'}
                     className=" d-inline-block align-items-center"
-                    style={calc}
+                    style={followNoticeRow}
                   >
                     <img
                       src={follow.src_user.avater}
@@ -93,7 +95,7 @@ export class NotificationFollow extends Component {
                     >
                       {follow.src_user.screen_name}にフォローされました
                       <td></td>
-                      <a class="text-muted" style={like_size}>
+                      <a className="text-muted" style={like_size}>
                         {follow.follow.created_at.substr(0, 10)}
                       </a>
                     </a>
@@ -101,13 +103,19 @@ export class NotificationFollow extends Component {
                   {(() => {
                     if (follow.follow.is_followed) {
                       return (
-                        <button className="col-5 rounded-pill border">
+                        <button
+                          className="d-inline-block rounded-pill border"
+                          style={UnFollowButton}
+                        >
                           フォロー中
                         </button>
                       );
                     } else {
                       return (
-                        <button className="col-5 rounded-pill">
+                        <button
+                          className="d-inline-block rounded-pill"
+                          style={FollowButton}
+                        >
                           フォローする
                         </button>
                       );

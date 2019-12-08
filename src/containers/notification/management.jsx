@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  calc,
-  notice_size,
-  like_size,
-  tital_size,
-  menu_size,
-  under
-} from './styled';
+import { notice_size, like_size, tital_size, menu_size, under } from './styled';
 
 export class NotificationManagement extends Component {
   render() {
@@ -27,7 +20,7 @@ export class NotificationManagement extends Component {
     if (managements) {
       return (
         <div className=" px-0">
-          <div className="text-center mb-5 mt-4" style={tital_size}>
+          <div className="text-center mb-4 mt-4" style={tital_size}>
             通知
           </div>
           <div className="d-flex justify-content-around border-bottom">
@@ -50,17 +43,14 @@ export class NotificationManagement extends Component {
               className="text-dark"
               style={(menu_size, under)}
             >
-              運営
+              運営から
             </Link>
           </div>
           <div>
-            {managements.map(management => {
+            {managements.map((management, idx) => {
               return (
-                <div className=" px-2 py-2 m-3">
-                  <Link
-                    to={'/users/' + 'aaaa'}
-                    className=" d-inline-block align-items-center"
-                  >
+                <div key={idx} className=" px-2 py-2 m-3">
+                  <span className=" d-flex align-items-center" style={under}>
                     <img
                       src="https://placehold.jp/150x150.png?text=icon"
                       alt="user_avatar"
@@ -68,17 +58,17 @@ export class NotificationManagement extends Component {
                       height="55px"
                       width="55px"
                     />
-                    <a
+                    <span
                       className="d-inline-block pl-3 text-body"
                       style={notice_size}
                     >
                       {management.text}
                       <td></td>
-                      <a className="text-muted" style={like_size}>
+                      <span className="text-muted" style={like_size}>
                         {management.created_at.substr(0, 10)}
-                      </a>
-                    </a>
-                  </Link>
+                      </span>
+                    </span>
+                  </span>
                 </div>
               );
             })}
