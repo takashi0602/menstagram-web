@@ -11,6 +11,7 @@ import { Login } from './containers/login';
 import { Logout } from './containers/logout';
 import { Post } from './containers/post';
 import { Timeline } from './containers/timeline';
+import { Liker } from './containers/liker';
 
 export const Routes = () => {
   return (
@@ -25,6 +26,7 @@ export const Routes = () => {
               <Route exact path={'/logout'} component={Logout} />
               <Route exact path={'/post'} component={Post} />
               <Route exact path={'/timeline'} component={Timeline} />
+              <Route exact path={'/liker/:id'} component={Liker} />
             </Switch>
           </div>
         </ConnectedRouter>
