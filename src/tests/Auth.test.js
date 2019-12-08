@@ -58,7 +58,7 @@ it('can render register, request register api', () => {
 
   const button = container.querySelector('button');
   act(() => {
-    button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+    button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
   });
   const errorMsg = container.querySelectorAll('.text-danger');
   expect(errorMsg.length).toEqual(4);
@@ -100,7 +100,7 @@ it('can render login, request login api', () => {
 
   const button = container.querySelector('button');
   act(() => {
-    button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+    button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
   });
   const errorMsg = container.querySelectorAll('.text-danger');
   expect(errorMsg.length).toEqual(2);

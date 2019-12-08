@@ -3,20 +3,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { logout } from '../../actions/auth/logout';
+import { Loading } from '../../components/loading';
+import { Error } from '../../components/error';
 
 export class LogoutContainer extends Component {
-  render() {
-    const logout = () => {
-      this.props.post(this.props.accessToken);
-    };
+  logout = () => {
+    this.props.post(this.props.accessToken);
+  };
 
+  render() {
     return (
-      <div className="c-container__padding">
+      <div>
         {auth(this.props.accessToken)}
-        <h1>ログアウト</h1>
-        <button type="button" className="c-button__white" onClick={logout}>
-          ログアウト
-        </button>
+        {this.props.loading && <Loading />}
+        <div className="c-container__padding">
+          <h1>ログアウト</h1>
+          {this.props.status && <Error status={this.props.status} />}
+          <button
+            type="button"
+            className="c-button__white"
+            onClick={this.logout}
+          >
+            ログアウト
+          </button>
+        </div>
       </div>
     );
   }
@@ -25,7 +35,8 @@ export class LogoutContainer extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.auth.status
+    status: state.error.status,
+    loading: state.loading.loading
   };
 }
 
@@ -44,6 +55,7 @@ export const Logout = connect(
 
 LogoutContainer.propTypes = {
   accessToken: PropTypes.string,
-  status: PropTypes.string,
-  post: PropTypes.func
+  status: PropTypes.number,
+  post: PropTypes.func,
+  loading: PropTypes.bool
 };

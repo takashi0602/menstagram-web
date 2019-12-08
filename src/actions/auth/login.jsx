@@ -6,23 +6,20 @@ export const login = payload => {
   return {
     type: LOGIN,
     accessToken: null,
-    payload: payload,
-    status: null
+    payload: payload
   };
 };
 
 export const successLogin = accessToken => {
   return {
     type: SUCCESS_LOGIN,
-    accessToken: accessToken,
-    status: 'success'
+    accessToken: accessToken
   };
 };
 
 export const failLogin = () => {
   return {
     type: FAIL_LOGIN,
-    accessToken: null,
-    status: 'error'
+    accessToken: null
   };
 };
