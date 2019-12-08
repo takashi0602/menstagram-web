@@ -15,6 +15,7 @@ import { Post } from './containers/post';
 import { Timeline } from './containers/timeline';
 import { Liker } from './containers/liker';
 import { Notification } from './containers/notification';
+import { Report } from './containers/report';
 
 export const Routes = () => {
   return (
@@ -34,6 +35,7 @@ export const Routes = () => {
               <Route exact path={'/follow'} component={Follow} />
               <Route exact path={'/users/:id/follow'} component={Follow} />
               <Route exact path={'/notification'} component={Notification} />
+              <Route exact path={'/report'} component={Report} />
             </Switch>
           </div>
         </ConnectedRouter>
