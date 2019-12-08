@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH, faHeart } from '@fortawesome/free-solid-svg-icons';
 
-import { Relative, UserName, Menu, Like } from './styled';
+import { Relative, UserName, Menu, Like, MoreUser } from './styled';
 
 export class Post extends Component {
   render() {
@@ -36,17 +36,29 @@ export class Post extends Component {
               {props.post.liked}
             </span>
             {props.likers.map((user, idx) => {
-              return (
-                <Link key={idx} to={'/user/' + user.id}>
-                  <img
-                    alt="avatar"
-                    src={user.user.avatar}
-                    height="23px"
-                    width="23px"
-                    className="rounded-circle border mr-1"
-                  />
-                </Link>
-              );
+              if (idx < 5) {
+                return (
+                  <Link key={idx} to={'/user/' + user.id}>
+                    <img
+                      alt="avatar"
+                      src={user.user.avatar}
+                      height="23px"
+                      width="23px"
+                      className="rounded-circle border mr-1"
+                    />
+                  </Link>
+                );
+              } else {
+                return (
+                  <Link
+                    key={idx}
+                    to={'/liker/' + props.post.id}
+                    style={MoreUser}
+                  >
+                    ...
+                  </Link>
+                );
+              }
             })}
           </div>
         );
