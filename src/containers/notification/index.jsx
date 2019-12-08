@@ -1,19 +1,49 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  calc,
-  notice_size,
-  like_size,
-  tital_size,
-  menu_size,
-  under
-} from './styled';
+import { tital_size, menu_size, under } from './styled';
+import LikeNotices from '../../components/notice/like';
+import FollowNotices from '../../components/notice/follow';
+import ManageNotices from '../../components/notice/manage';
 
 export class Notification extends Component {
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      viewMode: 'LIKE'
+    };
+  }
+  changeViewMode = (e, props) => {
+    this.setState({ viewMode: props });
+  };
+
   render() {
     //ダミーデータ
-
-    const notices = [
+    const follows = [
+      {
+        id: 1,
+        src_user: {
+          user_id: 'menstagram',
+          screen_name: 'メンスタグラム公式',
+          avater: 'https://placehold.jp/150x150.png?text=icon'
+        },
+        follow: {
+          is_followed: true,
+          created_at: '2019/11/29 22:56:15'
+        }
+      },
+      {
+        id: 1,
+        src_user: {
+          user_id: 'menstagraaaaam',
+          screen_name: 'メンスタグラム非公式',
+          avater: 'https://placehold.jp/150x150.png?text=icon'
+        },
+        follow: {
+          is_followed: false,
+          created_at: '2019/11/29 22:56:15'
+        }
+      }
+    ];
+    const likes = [
       {
         id: 1,
         src_user: {
@@ -45,111 +75,71 @@ export class Notification extends Component {
         }
       }
     ];
+    const manages = [
+      {
+        id: 1,
+        text:
+          'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
+        created_at: '2019/11/29 22:56:15'
+      }
+    ];
+    const DataView = () => {
+      if (this.state.viewMode === 'LIKE') {
+        return <LikeNotices notices={likes}></LikeNotices>;
+      } else if (this.state.viewMode === 'FOLLOW') {
+        return <FollowNotices notices={follows}></FollowNotices>;
+      } else if (this.state.viewMode === 'MANAGE') {
+        return <ManageNotices notices={manages}></ManageNotices>;
+      }
+    };
 
-    //通知がある時
-
-    if (notices) {
-      return (
-        <div className=" px-0">
-          <div className="text-center mb-4 mt-4" style={tital_size}>
-            通知
-          </div>
-          <div className="d-flex justify-content-around border-bottom">
-            <Link
-              to="/notification"
-              className="text-dark mb-2"
+    return (
+      <div className=" px-0">
+        <div className="text-center mb-4 mt-4" style={tital_size}>
+          通知
+        </div>
+        <div className="container">
+          <div className="row justify-content-around border-bottom">
+            <span
+              onClick={e => this.changeViewMode(e, 'LIKE')}
+              className={
+                'col text-center pl-0 pr-0 pt-2 pb-2' +
+                (this.state.viewMode === 'LIKE'
+                  ? ' text-dark font-weight-bold '
+                  : 'text-muted')
+              }
               style={(menu_size, under)}
             >
               いいね
-            </Link>
-            <Link
-              to="/notification/follow"
-              className="text-black-50"
+            </span>
+            <span
+              onClick={e => this.changeViewMode(e, 'FOLLOW')}
+              className={
+                'col text-center pl-0 pr-0 pt-2 pb-2' +
+                (this.state.viewMode === 'FOLLOW'
+                  ? ' text-dark font-weight-bold '
+                  : 'text-muted')
+              }
               style={(menu_size, under)}
             >
               フォロー
-            </Link>
-            <Link
-              to="/notification/management"
-              className="text-black-50"
+            </span>
+            <span
+              onClick={e => this.changeViewMode(e, 'MANAGE')}
+              className={
+                'col text-center pl-0 pr-0 pt-2 pb-2' +
+                (this.state.viewMode === 'MANAGE'
+                  ? ' text-dark font-weight-bold '
+                  : 'text-muted')
+              }
               style={(menu_size, under)}
             >
               運営から
-            </Link>
-          </div>
-          <div>
-            {notices.map((notice, idx) => {
-              return (
-                <div key={idx} className=" px-2 py-2 m-3">
-                  <Link
-                    to={'/users/' + 'aaaa'}
-                    className=" d-inline-block align-items-center"
-                    style={calc}
-                  >
-                    <img
-                      src={notice.src_user.avater}
-                      alt="user_avatar"
-                      className="d-inline-block rounded-circle border"
-                      height="55px"
-                      width="55px"
-                    />
-                    <a
-                      className="d-inline-block pl-3 text-body"
-                      style={notice_size}
-                    >
-                      {notice.src_user.screen_name}さんがいいねしました
-                      <td></td>
-                      <a className="text-muted" style={like_size}>
-                        {notice.like.created_at.substr(0, 10)}
-                      </a>
-                    </a>
-                  </Link>
-                  <img
-                    src={notice.post.image}
-                    height="50px"
-                    width="50px"
-                    alt=""
-                  />
-                </div>
-              );
-            })}
+            </span>
           </div>
         </div>
-      );
-
-      //通知がない時
-    } else {
-      return (
-        <div className=" px-0">
-          <div className="text-center mb-5 mt-4" style={tital_size}>
-            通知
-          </div>
-          <div className="d-flex justify-content-around border-bottom">
-            <Link
-              to="/notification"
-              className="text-dark mb-2"
-              style={(menu_size, under)}
-            >
-              いいね
-            </Link>
-            <Link
-              to="/notification/follow"
-              className="text-black-50"
-              style={(menu_size, under)}
-            >
-              フォロー
-            </Link>
-            <Link
-              to="/notification/management"
-              className="text-black-50"
-              style={(menu_size, under)}
-            >
-              運営
-            </Link>
-          </div>
-          <div className="text-center mb-5 mt-4 p-1">通知はありません。</div>
-        </div>
-      );
-    }
+        {<DataView></DataView>}
+      </div>
+    );
   }
 }

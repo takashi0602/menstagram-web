@@ -15,8 +15,6 @@ import { Post } from './containers/post';
 import { Timeline } from './containers/timeline';
 import { Liker } from './containers/liker';
 import { Notification } from './containers/notification';
-import { NotificationFollow } from './containers/notification/follow';
-import { NotificationManagement } from './containers/notification/management';
 
 export const Routes = () => {
   return (
@@ -36,16 +34,6 @@ export const Routes = () => {
               <Route exact path={'/follow'} component={Follow} />
               <Route exact path={'/users/:id/follow'} component={Follow} />
               <Route exact path={'/notification'} component={Notification} />
-              <Route
-                exact
-                path={'/notification/follow'}
-                component={NotificationFollow}
-              />
-              <Route
-                exact
-                path={'/notification/management'}
-                component={NotificationManagement}
-              />
             </Switch>
           </div>
         </ConnectedRouter>
