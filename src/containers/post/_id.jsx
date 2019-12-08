@@ -64,6 +64,22 @@ export class PostDetail extends Component {
           screen_name: 'test4',
           avatar: 'http://placehold.it/100x100/?text=Icon'
         }
+      },
+      {
+        id: 5,
+        user: {
+          user_id: 'mno',
+          screen_name: 'test4',
+          avatar: 'http://placehold.it/100x100/?text=Icon'
+        }
+      },
+      {
+        id: 6,
+        user: {
+          user_id: 'pqr',
+          screen_name: 'test4',
+          avatar: 'http://placehold.it/100x100/?text=Icon'
+        }
       }
     ];
     return (
