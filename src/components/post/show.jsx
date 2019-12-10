@@ -38,7 +38,7 @@ export class Post extends Component {
             {props.likers.map((user, idx) => {
               if (idx < 5) {
                 return (
-                  <Link key={idx} to={'/user/' + user.id}>
+                  <Link key={idx} to={'/profile/' + user.id}>
                     <img
                       alt="avatar"
                       src={user.user.avatar}
@@ -69,7 +69,7 @@ export class Post extends Component {
         <div>
           <div className="py-3 px-4 border-bottom d-flex justify-content-between">
             <Link
-              to={'/user/' + this.props.post.user.id}
+              to={'/profile/' + this.props.post.user.id}
               className="text-dark"
               style={UserName}
             >

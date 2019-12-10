@@ -15,7 +15,7 @@ export default class FollowUser extends Component {
     return (
       <li className="row px-2 py-2">
         <Link
-          to={'/users/' + this.props.user.user_id}
+          to={'/profile/' + this.props.user.user_id}
           className="col-7 d-flex align-items-center"
           style={LinkStyle}
         >

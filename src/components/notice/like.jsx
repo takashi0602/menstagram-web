@@ -13,7 +13,7 @@ export default class LikeNotices extends Component {
               <div key={idx} className="d-flex px-2 py-2 m-3 mb-0">
                 <div className="d-inline-block" style={calc}>
                   <Link
-                    to={'/users/' + notice.src_user.user_id}
+                    to={'/profile/' + notice.src_user.user_id}
                     className=" d-flex align-items-center"
                     style={under}
                   >
