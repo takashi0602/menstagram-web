@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { UserImage, EllipsisH, RamenImage, ImageArea, LikedHeartIcon, NotLikedIcon } from './styled';
+import { DetailModal } from '../../components/modal/detail'
 
 const sliderSettings = {
   dots: true,
@@ -18,6 +19,13 @@ const sliderSettings = {
 };
 
 export class TimelinePostItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    }
+  }
+
   showImage = image => {
     return <RamenImage style={{ backgroundImage: `url(${image})` }} />;
   };
@@ -54,6 +62,14 @@ export class TimelinePostItem extends Component {
     );
   };
 
+  openModal = () => {
+    this.setState({showModal: true});
+  };
+
+  closeModal = () => {
+    this.setState({showModal: false});
+  };
+
   render() {
     return (
       <div className="mb-5">
@@ -67,7 +83,9 @@ export class TimelinePostItem extends Component {
             <div>{this.props.postItem.user.screen_name}</div>
           </Link>
           {/* TODO:クリック時モーダル表示 */}
-          <FontAwesomeIcon icon={faEllipsisH} style={EllipsisH} />
+          <div onClick={() => this.openModal()}>
+            <FontAwesomeIcon icon={faEllipsisH} style={EllipsisH} />
+          </div>
         </div>
         <ImageArea className="mb-3">
           {this.props.postItem.images.length === 1
@@ -84,6 +102,7 @@ export class TimelinePostItem extends Component {
           </div>
           <p>{this.props.postItem.text}</p>
         </div>
+        {this.state.showModal && <DetailModal number={2} closeModal={this.closeModal} postId={this.props.postItem.id} />}
       </div>
     );
   }
