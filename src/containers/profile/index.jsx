@@ -159,9 +159,7 @@ export class Profile extends Component {
     const TopHeader = () => {
       if (isMypage) {
         return (
-          <header className="py-3 px-3 d-flex justify-content-between">
-            <span className="pr-3"></span>
-            <h1></h1>
+          <header className="py-3 px-3 d-flex justify-content-end">
             <button className="text-left bg-white p-0">
               <FontAwesomeIcon icon={faBars} style={SideDrawerButton} />
             </button>
@@ -169,12 +167,10 @@ export class Profile extends Component {
         );
       } else {
         return (
-          <header className="py-3 px-3 d-flex justify-content-between">
+          <header className="py-3 px-3 d-flex justify-content-start">
             <Link className="text-left" to={parentRoute}>
               <FontAwesomeIcon icon={faChevronLeft} style={BackButton} />
             </Link>
-            <h1></h1>
-            <span className="pr-3"></span>
           </header>
         );
       }
@@ -224,7 +220,7 @@ export class Profile extends Component {
                     className="col-4 p-1"
                     style={PostLink}
                   >
-                    <img src={post.images[0]} style={PostImage} />
+                    <img src={post.images[0]} style={PostImage} alt="post" />
                     <FontAwesomeIcon
                       icon={faImages}
                       style={ImagesIcon}
@@ -255,6 +251,7 @@ export class Profile extends Component {
         <div className="text-center">
           <img
             src={user.avatar}
+            alt="avatar"
             className="d-inline-block rounded-circle border mb-2"
             height="100px"
             width="100px"

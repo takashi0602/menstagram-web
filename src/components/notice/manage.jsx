@@ -23,7 +23,6 @@ export default class ManageNotices extends Component {
                     style={notice_size}
                   >
                     {notice.text}
-                    <td></td>
                     <span className="text-muted" style={like_size}>
                       {notice.created_at.substr(0, 10)}
                     </span>
@@ -45,5 +44,5 @@ export default class ManageNotices extends Component {
 }
 
 ManageNotices.propTypes = {
-  notices: PropTypes.object
+  notices: PropTypes.array
 };

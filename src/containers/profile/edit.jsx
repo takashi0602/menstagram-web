@@ -19,8 +19,6 @@ export class ProfileEdit extends Component {
     };
   }
   render() {
-    const parentRoute = '/post/3';
-    const isMypage = true;
     const user = {
       id: 1,
       user_id: 'menstagram',
@@ -62,6 +60,7 @@ export class ProfileEdit extends Component {
         <div className="mt-3 text-center border-bottom">
           <img
             src={user.avatar}
+            alt="avatar"
             className="d-inline-block rounded-circle border mb-2"
             height="100px"
             width="100px"

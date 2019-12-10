@@ -9,16 +9,22 @@ import FollowUser from '../../components/follow';
 export class Follow extends Component {
   constructor(prop) {
     super(prop);
-    this.state = {
-      isFollowersView: true
-    };
+    if (this.props.match.url.split('/')[1] === 'followed') {
+      this.state = {
+        isFollowersView: true
+      };
+    } else {
+      this.state = {
+        isFollowersView: false
+      };
+    }
   }
 
   toggleList = (e, props) => {
     this.setState({ isFollowersView: props });
   };
   render() {
-    const parentRoute = '/';
+    const parentRoute = '/profile/1';
     const loginUser = {
       id: 100,
       user_id: 'AAABBB',
