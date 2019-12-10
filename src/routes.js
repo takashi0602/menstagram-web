@@ -16,6 +16,7 @@ import { Timeline } from './containers/timeline';
 import { Liker } from './containers/liker';
 import { Notification } from './containers/notification';
 import { Report } from './containers/report';
+import { Profile } from './containers/profile';
 
 export const Routes = () => {
   return (
@@ -28,6 +29,7 @@ export const Routes = () => {
               <Route exact path={'/register'} component={Register} />
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/logout'} component={Logout} />
+              <Route exact path={'/profile/:id'} component={Profile} />
               <Route exact path={'/post/:id'} component={PostDetail} />
               <Route exact path={'/post'} component={Post} />
               <Route exact path={'/timeline'} component={Timeline} />
