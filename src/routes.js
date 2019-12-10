@@ -8,9 +8,15 @@ import { store, persistor } from './store/index';
 import { Top } from './containers/top';
 import { Register } from './containers/register';
 import { Login } from './containers/login';
+import { Follow } from './containers/follow';
+import { PostDetail } from './containers/post/_id';
 import { Logout } from './containers/logout';
 import { Post } from './containers/post';
 import { Timeline } from './containers/timeline';
+import { Liker } from './containers/liker';
+import { Notification } from './containers/notification';
+import { Report } from './containers/report';
+import { Profile } from './containers/profile';
 
 export const Routes = () => {
   return (
@@ -23,8 +29,15 @@ export const Routes = () => {
               <Route exact path={'/register'} component={Register} />
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/logout'} component={Logout} />
+              <Route exact path={'/profile/:id'} component={Profile} />
+              <Route exact path={'/post/:id'} component={PostDetail} />
               <Route exact path={'/post'} component={Post} />
               <Route exact path={'/timeline'} component={Timeline} />
+              <Route exact path={'/liker/:id'} component={Liker} />
+              <Route exact path={'/follow'} component={Follow} />
+              <Route exact path={'/profile/:id/follow'} component={Follow} />
+              <Route exact path={'/notification'} component={Notification} />
+              <Route exact path={'/report'} component={Report} />
             </Switch>
           </div>
         </ConnectedRouter>
