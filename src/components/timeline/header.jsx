@@ -8,7 +8,7 @@ export class TimelineHeader extends Component {
       <div className="d-flex justify-content-around">
         <div>プライベート</div>
         <div>
-          <Link to="/timeline/global" className="c-link__timelineHeader">
+          <Link to="/timeline/global" className="c-link__lightgray">
             グローバル
           </Link>
         </div>
@@ -20,7 +20,7 @@ export class TimelineHeader extends Component {
     return (
       <div className="d-flex justify-content-around">
         <div>
-          <Link to="/timeline/private" className="c-link__timelineHeader">
+          <Link to="/timeline/private" className="c-link__lightgray">
             プライベート
           </Link>
         </div>

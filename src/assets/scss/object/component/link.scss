@@ -1,9 +1,18 @@
 .c-link {
-  &__timelineHeader {
-    color: #C6C6C6;
+  &__lightgray {
+    color: $main-lightgray;
     text-decoration: none;
     &:hover {
-      color: #C6C6C6;
+      color: $main-lightgray;
+      text-decoration: none;
+    }
+  }
+
+  &__black {
+    color: $main-black;
+    text-decoration: none;
+    &:hover {
+      color: $main-black;
       text-decoration: none;
     }
   }
