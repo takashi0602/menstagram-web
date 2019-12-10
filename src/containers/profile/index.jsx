@@ -184,9 +184,13 @@ export class Profile extends Component {
       if (isMypage) {
         return (
           <div className="p-2">
-            <div className="rounded-pill text-center" style={WhiteButton}>
+            <Link
+              to={'/profile/' + this.props.match.params.id + '/edit'}
+              className="d-block rounded-pill text-center"
+              style={WhiteButton}
+            >
               プロフィールの編集
-            </div>
+            </Link>
           </div>
         );
       } else if (user.is_followed) {
