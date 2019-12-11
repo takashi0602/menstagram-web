@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { BackButton, LinkStyle } from './styled';
-import FollowUser from '../../components/follow';
+import UserRow from '../../components/userRow';
 
 export class Follow extends Component {
   constructor(prop) {
@@ -60,7 +60,7 @@ export class Follow extends Component {
         return (
           <ul className="pl-0">
             {followers.map((user, idx) => {
-              return <FollowUser key={idx} user={user}></FollowUser>;
+              return <UserRow key={idx} user={user}></UserRow>;
             })}
           </ul>
         );
@@ -68,7 +68,7 @@ export class Follow extends Component {
         return (
           <ul className="pl-0">
             {follows.map((user, idx) => {
-              return <FollowUser key={idx} user={user}></FollowUser>;
+              return <UserRow key={idx} user={user}></UserRow>;
             })}
           </ul>
         );

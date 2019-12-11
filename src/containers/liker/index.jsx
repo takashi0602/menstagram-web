@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { BackButton } from './styled';
-import LikeUser from '../../components/liker';
+import UserRow from '../../components/userRow';
 
 export class Liker extends Component {
   constructor(prop) {
@@ -43,7 +43,7 @@ export class Liker extends Component {
         <div className="container">
           <ul className="pl-0 pt-2">
             {likers.map((user, idx) => {
-              return <LikeUser key={idx} user={user}></LikeUser>;
+              return <UserRow key={idx} user={user}></UserRow>;
             })}
           </ul>
         </div>
