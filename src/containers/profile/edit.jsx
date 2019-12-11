@@ -18,48 +18,50 @@ export class ProfileEdit extends Component {
       isFollowersView: true
     };
   }
-  render() {
-    const user = {
-      id: 1,
-      user_id: 'menstagram',
-      avatar: 'https://placehold.jp/150x150.png?text=icon',
-      screen_name: 'メンスタグラム公式',
-      posted: 10,
-      following: 10,
-      followed: 10,
-      is_followed: false,
-      biography:
-        'user_information. user_information. user_information. user_information.'
-    };
 
-    const TopHeader = () => {
-      return (
-        <header
-          className="py-3 px-3 border-bottom d-flex justify-content-between"
-          style={PositionParent}
+  TopHeader = () => {
+    return (
+      <header
+        className="py-3 px-3 border-bottom d-flex justify-content-between"
+        style={PositionParent}
+      >
+        <Link
+          to={'/profile/' + this.props.match.params.id}
+          className=""
+          style={BlackLink}
         >
-          <Link
-            to={'/profile/' + this.props.match.params.id}
-            className=""
-            style={BlackLink}
-          >
-            キャンセル
-          </Link>
-          <span style={Title} className="text-center">
-            プロフィールの編集
-          </span>
-          <button className="text-right bg-white p-0" style={Submit}>
-            完了
-          </button>
-        </header>
-      );
-    };
+          キャンセル
+        </Link>
+        <span style={Title} className="text-center">
+          プロフィールの編集
+        </span>
+        <button className="text-right bg-white p-0" style={Submit}>
+          完了
+        </button>
+      </header>
+    );
+  };
+
+  user = {
+    id: 1,
+    user_id: 'menstagram',
+    avatar: 'https://placehold.jp/150x150.png?text=icon',
+    screen_name: 'メンスタグラム公式',
+    posted: 10,
+    following: 10,
+    followed: 10,
+    is_followed: false,
+    biography:
+      'user_information. user_information. user_information. user_information.'
+  };
+
+  render() {
     return (
       <div>
-        {<TopHeader></TopHeader>}
+        {this.TopHeader()}
         <div className="mt-3 text-center border-bottom">
           <img
-            src={user.avatar}
+            src={this.user.avatar}
             alt="avatar"
             className="d-inline-block rounded-circle border mb-2"
             height="100px"
@@ -76,7 +78,7 @@ export class ProfileEdit extends Component {
               <input
                 type="text"
                 className="form-control"
-                value={user.screen_name}
+                value={this.user.screen_name}
               />
             </div>
             <div className="col-12">
@@ -88,7 +90,7 @@ export class ProfileEdit extends Component {
                 rows="5"
                 style={TextArea}
               >
-                {user.biography}
+                {this.user.biography}
               </textarea>
             </div>
           </div>

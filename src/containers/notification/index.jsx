@@ -14,85 +14,85 @@ export class Notification extends Component {
   changeViewMode = (e, props) => {
     this.setState({ viewMode: props });
   };
+  DataView = () => {
+    if (this.state.viewMode === 'LIKE') {
+      return <LikeNotices notices={this.likes}></LikeNotices>;
+    } else if (this.state.viewMode === 'FOLLOW') {
+      return <FollowNotices notices={this.follows}></FollowNotices>;
+    } else if (this.state.viewMode === 'MANAGE') {
+      return <ManageNotices notices={this.manages}></ManageNotices>;
+    }
+  };
 
-  render() {
-    //ダミーデータ
-    const follows = [
-      {
-        id: 1,
-        src_user: {
-          user_id: 'menstagram',
-          screen_name: 'メンスタグラム公式',
-          avater: 'https://placehold.jp/150x150.png?text=icon'
-        },
-        follow: {
-          is_followed: true,
-          created_at: '2019/11/29 22:56:15'
-        }
+  //ダミーデータ
+  follows = [
+    {
+      id: 1,
+      src_user: {
+        user_id: 'menstagram',
+        screen_name: 'メンスタグラム公式',
+        avater: 'https://placehold.jp/150x150.png?text=icon'
       },
-      {
-        id: 1,
-        src_user: {
-          user_id: 'menstagraaaaam',
-          screen_name: 'メンスタグラム非公式',
-          avater: 'https://placehold.jp/150x150.png?text=icon'
-        },
-        follow: {
-          is_followed: false,
-          created_at: '2019/11/29 22:56:15'
-        }
-      }
-    ];
-    const likes = [
-      {
-        id: 1,
-        src_user: {
-          user_id: 'menstagram',
-          screen_name: 'メンスタグラム公式',
-          avater: 'https://placehold.jp/150x150.png?text=icon'
-        },
-        post: {
-          id: 1,
-          image: 'https://placehold.jp/150x150.png?text=image'
-        },
-        like: {
-          created_at: '2019/11/29 22:56:15'
-        }
-      },
-      {
-        id: 1,
-        src_user: {
-          user_id: 'menstagram',
-          screen_name: 'メンスタグラム非公式',
-          avater: 'https://placehold.jp/150x150.png?text=icon'
-        },
-        post: {
-          id: 1,
-          image: 'https://placehold.jp/150x150.png?text=image'
-        },
-        like: {
-          created_at: '2019/11/29 22:56:15'
-        }
-      }
-    ];
-    const manages = [
-      {
-        id: 1,
-        text:
-          'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
+      follow: {
+        is_followed: true,
         created_at: '2019/11/29 22:56:15'
       }
-    ];
-    const DataView = () => {
-      if (this.state.viewMode === 'LIKE') {
-        return <LikeNotices notices={likes}></LikeNotices>;
-      } else if (this.state.viewMode === 'FOLLOW') {
-        return <FollowNotices notices={follows}></FollowNotices>;
-      } else if (this.state.viewMode === 'MANAGE') {
-        return <ManageNotices notices={manages}></ManageNotices>;
+    },
+    {
+      id: 1,
+      src_user: {
+        user_id: 'menstagraaaaam',
+        screen_name: 'メンスタグラム非公式',
+        avater: 'https://placehold.jp/150x150.png?text=icon'
+      },
+      follow: {
+        is_followed: false,
+        created_at: '2019/11/29 22:56:15'
       }
-    };
+    }
+  ];
+  likes = [
+    {
+      id: 1,
+      src_user: {
+        user_id: 'menstagram',
+        screen_name: 'メンスタグラム公式',
+        avater: 'https://placehold.jp/150x150.png?text=icon'
+      },
+      post: {
+        id: 1,
+        image: 'https://placehold.jp/150x150.png?text=image'
+      },
+      like: {
+        created_at: '2019/11/29 22:56:15'
+      }
+    },
+    {
+      id: 1,
+      src_user: {
+        user_id: 'menstagram',
+        screen_name: 'メンスタグラム非公式',
+        avater: 'https://placehold.jp/150x150.png?text=icon'
+      },
+      post: {
+        id: 1,
+        image: 'https://placehold.jp/150x150.png?text=image'
+      },
+      like: {
+        created_at: '2019/11/29 22:56:15'
+      }
+    }
+  ];
+  manages = [
+    {
+      id: 1,
+      text:
+        'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
+      created_at: '2019/11/29 22:56:15'
+    }
+  ];
 
+  render() {
     return (
       <div className=" px-0">
         <div className="text-center mb-4 mt-4" style={tital_size}>
@@ -138,7 +138,7 @@ export class Notification extends Component {
             </span>
           </div>
         </div>
-        {<DataView></DataView>}
+        {this.DataView()}
       </div>
     );
   }
