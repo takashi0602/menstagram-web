@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-  import { Absolute, Eye, Relative } from './styled';
+import { Absolute, Eye, Relative } from './styled';
 
 export class Form extends Component {
   constructor(prop) {
