@@ -12,13 +12,6 @@ import {
 } from './styled';
 
 export class ProfileEdit extends Component {
-  constructor(prop) {
-    super(prop);
-    this.state = {
-      isFollowersView: true
-    };
-  }
-
   TopHeader = () => {
     return (
       <header
@@ -78,7 +71,7 @@ export class ProfileEdit extends Component {
               <input
                 type="text"
                 className="form-control"
-                value={this.user.screen_name}
+                defaultValue={this.user.screen_name}
               />
             </div>
             <div className="col-12">
@@ -89,9 +82,8 @@ export class ProfileEdit extends Component {
                 cols="30"
                 rows="5"
                 style={TextArea}
-              >
-                {this.user.biography}
-              </textarea>
+                defaultValue={this.user.biography}
+              ></textarea>
             </div>
           </div>
         </div>
