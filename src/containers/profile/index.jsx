@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { HamMenu} from './styled';
+import { LogoutStyle} from './styled';
 import {
   faChevronLeft,
   faBars,
@@ -165,7 +166,7 @@ export class Profile extends Component {
             <h1></h1>
                 
             <HamMenu>
-                <a href='/logout'>ログアウト</a>
+                <a href='/logout' style={LogoutStyle}>ログアウト</a>
             </HamMenu>
           </header>
         );

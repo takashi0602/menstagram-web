@@ -102,3 +102,9 @@ export const manuBackground =styled.div`
   width: 100%;
   z-index: -1;
 `;
+
+export const LogoutStyle = {
+  textDecoration : 'none',
+  color : 'black',
+  fontWeight : 'lighter '
+}
