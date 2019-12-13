@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { HamMenu} from './styled';
 import {
   faChevronLeft,
   faBars,
@@ -162,9 +163,10 @@ export class Profile extends Component {
           <header className="py-3 px-3 d-flex justify-content-between">
             <span className="pr-3"></span>
             <h1></h1>
-            <button className="text-left bg-white p-0">
-              <FontAwesomeIcon icon={faBars} style={SideDrawerButton} />
-            </button>
+                
+            <HamMenu>
+                <a href='/logout'>ログアウト</a>
+            </HamMenu>
           </header>
         );
       } else {
