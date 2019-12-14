@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
 import { TimelineHeader } from '../../components/timeline/header';
 import { TimelinePostItem } from '../../components/timeline/post';
+import { privateTimeline } from "../../actions/timeline/private";
+import { globalTimeline } from "../../actions/timeline/global";
 
 const sample = [
   {
@@ -44,10 +46,35 @@ const sample = [
 export class TimelineContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      postList: []
+    };
   }
 
+  initSetTimeline = () => {
+    const params = {};
+    const pathName = this.isPathPrivate() ? 'private' : 'global';
+    return {
+      params,
+      pathName,
+      accessToken: this.props.accessToken
+    };
+  };
+
+  initGetPrivateTimeline = () => {
+    console.log('private', this.props.privateTimeline);
+    if (this.props.privateTimeline.length !== 0) return;
+    this.props.getPrivateTimeline(this.initSetTimeline());
+  };
+
+  initGetGlobalTimeline = () => {
+    console.log('global', this.props.globalTimeline);
+    if (this.props.globalTimeline.length !== 0) return;
+    this.props.getGlobalTimeline(this.initSetTimeline());
+  };
+
   isPathPrivate = () => {
-    return window.location.pathname === '/timeline/private';
+    return this.props.history.location.pathname.split('/')[2] === 'private';
   };
 
   postItems = () => {
@@ -60,6 +87,7 @@ export class TimelineContainer extends Component {
     return (
       <div>
         {auth(this.props.accessToken)}
+        {this.isPathPrivate() ? this.initGetPrivateTimeline() : this.initGetGlobalTimeline()}
         <TimelineHeader isPrivate={this.isPathPrivate()} />
         <div>{this.postItems()}</div>
       </div>
@@ -71,14 +99,19 @@ function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
     status: state.error.status,
-    loading: state.loading.loading
+    loading: state.loading.loading,
+    privateTimeline: state.privateTimeline.postList,
+    globalTimeline: state.globalTimeline.postList
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPostList() {
-      dispatch();
+    getPrivateTimeline(payload) {
+      dispatch(privateTimeline(payload));
+    },
+    getGlobalTimeline(payload) {
+      dispatch(globalTimeline(payload));
     }
   };
 }
@@ -92,5 +125,8 @@ Timeline.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
   loading: PropTypes.bool,
-  getPostList: PropTypes.func
+  privateTimeline: PropTypes.array,
+  globalTimeline: PropTypes.array,
+  getPrivateTimeline: PropTypes.func,
+  getGlobalTimeline: PropTypes.func
 };
