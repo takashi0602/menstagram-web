@@ -24,16 +24,17 @@ export default class LikeNotices extends Component {
                       height="55px"
                       width="55px"
                     />
-                    <a
+                    <div
                       className="d-inline-block pl-3 text-body"
                       style={notice_size}
                     >
-                      {notice.src_user.screen_name}さんがいいねしました
-                      <td></td>
-                      <a className="text-muted" style={like_size}>
+                      <p className="mb-0">
+                        {notice.src_user.screen_name}さんにフォローされました
+                      </p>
+                      <p className="text-muted mb-0" style={like_size}>
                         {notice.like.created_at.substr(0, 10)}
-                      </a>
-                    </a>
+                      </p>
+                    </div>
                   </Link>
                 </div>
                 <img
@@ -59,5 +60,5 @@ export default class LikeNotices extends Component {
 }
 
 LikeNotices.propTypes = {
-  notices: PropTypes.object
+  notices: PropTypes.array
 };

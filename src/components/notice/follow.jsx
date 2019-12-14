@@ -21,7 +21,7 @@ export default class FollowNotices extends Component {
                 <div className="d-inline-block" style={followNoticeRow}>
                   <Link
                     to={'/profile/' + notice.src_user.user_id}
-                    className=" d-flex align-items-center"
+                    className=" d-flex align-items-start"
                     style={under}
                   >
                     <img
@@ -31,36 +31,41 @@ export default class FollowNotices extends Component {
                       height="55px"
                       width="55px"
                     />
-                    <a
+                    <div
                       className="d-inline-block pl-3 text-body"
                       style={notice_size}
                     >
-                      {notice.src_user.screen_name}さんにフォローされました
-                      <td></td>
-                      <a className="text-muted" style={like_size}>
+                      <p className="mb-0">
+                        {notice.src_user.screen_name}さんにフォローされました
+                      </p>
+                      <p className="text-muted mb-0" style={like_size}>
                         {notice.follow.created_at.substr(0, 10)}
-                      </a>
-                    </a>
+                      </p>
+                    </div>
                   </Link>
                 </div>
                 {(() => {
                   if (notice.follow.is_followed) {
                     return (
-                      <button
-                        className="d-inline-block rounded-pill border"
-                        style={UnFollowButton}
-                      >
-                        フォロー中
-                      </button>
+                      <div className="d-flex align-items-center">
+                        <button
+                          className="d-inline-block rounded-pill border"
+                          style={UnFollowButton}
+                        >
+                          フォロー中
+                        </button>
+                      </div>
                     );
                   } else {
                     return (
-                      <button
-                        className="d-inline-block rounded-pill"
-                        style={FollowButton}
-                      >
-                        フォローする
-                      </button>
+                      <div className="d-flex align-items-center">
+                        <button
+                          className="d-inline-block rounded-pill"
+                          style={FollowButton}
+                        >
+                          フォローする
+                        </button>
+                      </div>
                     );
                   }
                 })()}
@@ -80,5 +85,5 @@ export default class FollowNotices extends Component {
 }
 
 FollowNotices.propTypes = {
-  notices: PropTypes.object
+  notices: PropTypes.array
 };

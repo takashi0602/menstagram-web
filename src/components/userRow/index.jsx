@@ -10,7 +10,7 @@ import {
   UserLink
 } from './styled';
 
-export default class LikeUser extends Component {
+export default class UserRow extends Component {
   render() {
     return (
       <li className="row px-2 py-2">
@@ -56,6 +56,6 @@ export default class LikeUser extends Component {
   }
 }
 
-LikeUser.propTypes = {
+UserRow.propTypes = {
   user: PropTypes.object
 };
