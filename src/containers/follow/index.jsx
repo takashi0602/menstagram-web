@@ -28,7 +28,7 @@ export class Follow extends Component {
       return (
         <ul className="pl-0">
           {this.followers.map((user, idx) => {
-            return <UserRow key={idx} user={user}></UserRow>;
+            return <UserRow key={idx} user={user} />;
           })}
         </ul>
       );
@@ -36,7 +36,7 @@ export class Follow extends Component {
       return (
         <ul className="pl-0">
           {this.follows.map((user, idx) => {
-            return <UserRow key={idx} user={user}></UserRow>;
+            return <UserRow key={idx} user={user} />;
           })}
         </ul>
       );

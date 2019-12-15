@@ -83,12 +83,12 @@ export class ProfileEdit extends Component {
                 rows="5"
                 style={TextArea}
                 defaultValue={this.user.biography}
-              ></textarea>
+              />
             </div>
           </div>
         </div>
 
-        <div className="container pb-2"></div>
+        <div className="container pb-2" />
       </div>
     );
   }

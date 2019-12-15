@@ -97,10 +97,7 @@ export class Profile extends Component {
                   style={PostLink}
                 >
                   <img src={post.images[0]} style={PostImage} alt="post" />
-                  <FontAwesomeIcon
-                    icon={faImages}
-                    style={ImagesIcon}
-                  ></FontAwesomeIcon>
+                  <FontAwesomeIcon icon={faImages} style={ImagesIcon} />
                 </Link>
               );
             })}

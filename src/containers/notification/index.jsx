@@ -16,11 +16,11 @@ export class Notification extends Component {
   };
   DataView = () => {
     if (this.state.viewMode === 'LIKE') {
-      return <LikeNotices notices={this.likes}></LikeNotices>;
+      return <LikeNotices notices={this.likes} />;
     } else if (this.state.viewMode === 'FOLLOW') {
-      return <FollowNotices notices={this.follows}></FollowNotices>;
+      return <FollowNotices notices={this.follows} />;
     } else if (this.state.viewMode === 'MANAGE') {
-      return <ManageNotices notices={this.manages}></ManageNotices>;
+      return <ManageNotices notices={this.manages} />;
     }
   };
 

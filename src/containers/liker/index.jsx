@@ -44,7 +44,7 @@ export class Liker extends Component {
         <div className="container">
           <ul className="pl-0 pt-2">
             {this.likers.map((user, idx) => {
-              return <UserRow key={idx} user={user}></UserRow>;
+              return <UserRow key={idx} user={user} />;
             })}
           </ul>
         </div>
