@@ -55,42 +55,42 @@ export const ImagesIcon = {
 };
 
 export const HamMenu = styled.div`
-background-color: #fff;
-box-sizing: border-box;
-height: 100%;
-padding: 10px 40px;
-position: fixed;
-right: -300px;
-top: 0;
-transition: transform 0.3s linear 0s;
-width: 300px;
-z-index: 1000;
-border: solid; 
-border-width: 1px;
-
-&::before {
   background-color: #fff;
-  border-radius: 0 0 0 10px;
-  color: #333;
-  content: "≡";
-  display: block;
-  font-size: 50px;
-  height: 50px;
-  line-height: 50px;
-  position: absolute;
-  right: 100%;
-  text-align: center;
+  box-sizing: border-box;
+  height: 100%;
+  position: fixed;
+  right: -300px;
   top: 0;
-  width: 50px;
-  border-right: solid; 
+  transition: transform 0.3s linear 0s;
+  width: 300px;
+  z-index: 1000;
+  border-left: solid #c6c6c6 1px;
   border-width: 1px;
-}
-&:hover{
-  transform: translate(-300px);
-}
+
+  &::before {
+    background-color: #fff;
+    border-radius: 0 0 0 10px;
+    color: #eb6101;
+    content: '≡';
+    display: block;
+    font-size: 50px;
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    right: 100%;
+    text-align: center;
+    top: 0;
+    margin-top: 15px;
+    margin-right: 15px;
+    width: 50px;
+    border-width: 1px;
+  }
+  &:hover {
+    transform: translate(-300px);
+  }
 `;
 
-export const manuBackground =styled.div`
+export const manuBackground = styled.div`
   background-color: #333; /*黒背景部分背景色*/
   display: block;
   height: 100%;
@@ -104,10 +104,11 @@ export const manuBackground =styled.div`
 `;
 
 export const LogoutStyle = {
-  textDecoration : 'none',
-  color : 'black',
-  fontWeight : 'lighter '
-}
+  textDecoration: 'none',
+  color: '#3C3C3C',
+  fontWeight: 'lighter ',
+  borderColor: '#C6C6C6'
+};
 export const Submit = {
   textDecoration: 'none',
   fontSize: '16px',
