@@ -1,6 +1,14 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { PRIVATE_TIMELINE, successPrivateTimeline, failPrivateTimeline } from '../actions/timeline/private';
-import { GLOBAL_TIMELINE, successGlobalTimeline, failGlobalTimeline } from '../actions/timeline/global';
+import {
+  PRIVATE_TIMELINE,
+  successPrivateTimeline,
+  failPrivateTimeline
+} from '../actions/timeline/private';
+import {
+  GLOBAL_TIMELINE,
+  successGlobalTimeline,
+  failGlobalTimeline
+} from '../actions/timeline/global';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
 import { getTimeline } from '../api/timeline';
@@ -33,5 +41,5 @@ function* globalTimeline(action) {
 
 export const timelineSaga = [
   takeEvery(PRIVATE_TIMELINE, privateTimeline),
-  takeEvery(GLOBAL_TIMELINE, globalTimeline),
+  takeEvery(GLOBAL_TIMELINE, globalTimeline)
 ];

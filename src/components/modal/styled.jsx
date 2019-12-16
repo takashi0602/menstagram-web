@@ -15,7 +15,7 @@ export const ModalBack = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #C6C6C6;
+  background-color: #c6c6c6;
   opacity: 0.4;
 `;
 
@@ -27,14 +27,14 @@ export const ModalContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  border: 1px solid #C6C6C6;
+  border: 1px solid #c6c6c6;
   border-radius: 10px;
   background-color: white;
   opacity: 1;
 `;
 
 export const ModalItem = styled.div`
-  border-bottom: 1px solid #C6C6C6;
+  border-bottom: 1px solid #c6c6c6;
 `;
 
 export const ModalCancel = styled.div`

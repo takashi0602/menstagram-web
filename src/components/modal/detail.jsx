@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Modal, ModalBack, ModalContainer, ModalItem, ModalCancel } from './styled';
+import {
+  Modal,
+  ModalBack,
+  ModalContainer,
+  ModalItem,
+  ModalCancel
+} from './styled';
 
 export class DetailModal extends Component {
   showItem = () => {
@@ -19,7 +25,10 @@ export class DetailModal extends Component {
     return (
       <div>
         <ModalItem>
-          <Link to={`/post/${this.props.postId}`} className="c-link__black d-block py-3">
+          <Link
+            to={`/post/${this.props.postId}`}
+            className="c-link__black d-block py-3"
+          >
             投稿詳細
           </Link>
         </ModalItem>
@@ -40,9 +49,10 @@ export class DetailModal extends Component {
         <ModalContainer>
           {this.props.number === 1
             ? this.showItem(this.props.number)
-            : this.showTwoItem(this.props.number)
-          }
-          <ModalCancel className="py-3" onClick={this.props.closeModal}>キャンセル</ModalCancel>
+            : this.showTwoItem(this.props.number)}
+          <ModalCancel className="py-3" onClick={this.props.closeModal}>
+            キャンセル
+          </ModalCancel>
         </ModalContainer>
       </Modal>
     );

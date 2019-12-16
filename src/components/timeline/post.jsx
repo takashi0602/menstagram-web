@@ -2,13 +2,23 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH, faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEllipsisH,
+  faHeart as solidHeart
+} from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { UserImage, EllipsisH, RamenImage, ImageArea, LikedHeartIcon, NotLikedIcon } from './styled';
-import { DetailModal } from '../../components/modal/detail'
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import {
+  UserImage,
+  EllipsisH,
+  RamenImage,
+  ImageArea,
+  LikedHeartIcon,
+  NotLikedIcon
+} from './styled';
+import { DetailModal } from '../../components/modal/detail';
 
 const sliderSettings = {
   dots: true,
@@ -23,7 +33,7 @@ export class TimelinePostItem extends Component {
     super(props);
     this.state = {
       showModal: false
-    }
+    };
   }
 
   showImage = image => {
@@ -63,11 +73,11 @@ export class TimelinePostItem extends Component {
   };
 
   openModal = () => {
-    this.setState({showModal: true});
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -96,13 +106,18 @@ export class TimelinePostItem extends Component {
           <div className="d-flex justify-content-between mb-2">
             {this.props.postItem.is_liked
               ? this.showLikePost(this.props.postItem.liked)
-              : this.showNotLikedPost(this.props.postItem.liked)
-            }
+              : this.showNotLikedPost(this.props.postItem.liked)}
             <div>{this.props.postItem.created_at}</div>
           </div>
           <p>{this.props.postItem.text}</p>
         </div>
-        {this.state.showModal && <DetailModal number={2} closeModal={this.closeModal} postId={this.props.postItem.id} />}
+        {this.state.showModal && (
+          <DetailModal
+            number={2}
+            closeModal={this.closeModal}
+            postId={this.props.postItem.id}
+          />
+        )}
       </div>
     );
   }
