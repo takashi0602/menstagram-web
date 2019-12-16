@@ -7,47 +7,12 @@ import { TimelinePostItem } from '../../components/timeline/post';
 import { privateTimeline } from "../../actions/timeline/private";
 import { globalTimeline } from "../../actions/timeline/global";
 
-const sample = [
-  {
-    id: 1,
-    text: '今週食べたラーメンです！',
-    images: [
-      'http://placehold.it/300/?text=ramen1',
-      'http://placehold.it/400/?text=ramen2',
-      'http://placehold.it/300x500/?text=ramen3',
-      'http://placehold.it/500x300/?text=ramen4'
-    ],
-    user: {
-      id: 'ramentaro',
-      screen_name: 'ramentaro',
-      avatar: 'http://placehold.it/300/'
-    },
-    liked: 5,
-    is_liked: true,
-    created_at: '2019/12/1',
-    updated_at: '2019/12/2'
-  },
-  {
-    id: 2,
-    text: '今週食べたラーメンです！',
-    images: ['http://placehold.it/500x500/?text=ramen'],
-    user: {
-      id: 'ramenjiro',
-      screen_name: 'ramenjio',
-      avatar: 'http://placehold.it/300/'
-    },
-    liked: 0,
-    is_liked: false,
-    created_at: '2019/12/2',
-    updated_at: '2019/12/3'
-  }
-];
-
 export class TimelineContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postList: []
+      notGlobalTimelineMessage: '投稿がありません。',
+      notPrivateTimelineMessage: 'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！'
     };
   }
 
@@ -63,13 +28,13 @@ export class TimelineContainer extends Component {
 
   initGetPrivateTimeline = () => {
     console.log('private', this.props.privateTimeline);
-    if (this.props.privateTimeline.length !== 0) return;
+    if (this.props.privateStatus !== -1) return;
     this.props.getPrivateTimeline(this.initSetTimeline());
   };
 
   initGetGlobalTimeline = () => {
     console.log('global', this.props.globalTimeline);
-    if (this.props.globalTimeline.length !== 0) return;
+    if (this.props.globalStatus !== -1) return;
     this.props.getGlobalTimeline(this.initSetTimeline());
   };
 
@@ -77,10 +42,18 @@ export class TimelineContainer extends Component {
     return this.props.history.location.pathname.split('/')[2] === 'private';
   };
 
-  postItems = () => {
-    return sample.map(item => (
-      <TimelinePostItem key={item.id} postItem={item} />
-    ));
+  showPostItems = () => {
+    if (this.isPathPrivate()) {
+      if (this.props.privateTimeline.length === 0) return <p className="pt-3 px-3">{this.state.notPrivateTimelineMessage}</p>;
+      return this.props.privateTimeline.map(item => (
+        <TimelinePostItem key={item.id} postItem={item} />
+      ))
+    } else {
+      if (this.props.globalTimeline.length === 0) return <p className="pt-3 px-3">{this.state.notGlobalTimelineMessage}</p>;
+      return this.props.globalTimeline.map(item => (
+        <TimelinePostItem key={item.id} postItem={item} />
+      ));
+    }
   };
 
   render() {
@@ -89,7 +62,7 @@ export class TimelineContainer extends Component {
         {auth(this.props.accessToken)}
         {this.isPathPrivate() ? this.initGetPrivateTimeline() : this.initGetGlobalTimeline()}
         <TimelineHeader isPrivate={this.isPathPrivate()} />
-        <div>{this.postItems()}</div>
+        {this.showPostItems()}
       </div>
     );
   }
@@ -101,7 +74,9 @@ function mapStateToProps(state) {
     status: state.error.status,
     loading: state.loading.loading,
     privateTimeline: state.privateTimeline.postList,
-    globalTimeline: state.globalTimeline.postList
+    privateStatus: state.privateTimeline.status,
+    globalTimeline: state.globalTimeline.postList,
+    globalStatus: state.globalTimeline.status,
   };
 }
 
@@ -126,7 +101,9 @@ Timeline.propTypes = {
   status: PropTypes.number,
   loading: PropTypes.bool,
   privateTimeline: PropTypes.array,
+  privateStatus: PropTypes.number,
   globalTimeline: PropTypes.array,
+  globalStatus: PropTypes.number,
   getPrivateTimeline: PropTypes.func,
   getGlobalTimeline: PropTypes.func
 };

@@ -8,20 +8,23 @@ export const globalTimeline = payload => {
     accessToken: payload.accessToken,
     params: payload.params,
     pathName: payload.pathName,
-    postList: []
+    postList: [],
+    status: -1
   };
 };
 
-export const successGlobalTimeline = postList => {
+export const successGlobalTimeline = response => {
   return {
     type: SUCCESS_GLOBAL_TIMELINE,
-    postList: postList
+    postList: response.data,
+    status: response.status
   };
 };
 
-export const failGlobalTimeline = () => {
+export const failGlobalTimeline = error => {
   return {
     type: FAIL_GLOBAL_TIMELINE,
-    postList: []
+    postList: [],
+    status: error.status
   };
 };

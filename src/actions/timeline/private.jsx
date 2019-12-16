@@ -12,16 +12,18 @@ export const privateTimeline = payload => {
   };
 };
 
-export const successPrivateTimeline = postList => {
+export const successPrivateTimeline = response => {
   return {
     type: SUCCESS_PRIVATE_TIMELINE,
-    postList: postList
+    postList: response.data,
+    status: response.status
   };
 };
 
-export const failPrivateTimeline = () => {
+export const failPrivateTimeline = error => {
   return {
     type: FAIL_PRIVATE_TIMELINE,
-    postList: []
+    postList: [],
+    status: error.status
   };
 };

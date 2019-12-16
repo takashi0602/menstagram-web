@@ -10,9 +10,9 @@ function* privateTimeline(action) {
   yield put(errorHandle.notError());
   const { response, error } = yield call(getTimeline, action);
   if (response) {
-    yield put(successPrivateTimeline(response.data));
+    yield put(successPrivateTimeline(response));
   } else {
-    yield put(failPrivateTimeline());
+    yield put(failPrivateTimeline(error.response));
     yield put(errorHandle.error(error.response));
   }
   yield put(notLoading());
@@ -23,9 +23,9 @@ function* globalTimeline(action) {
   yield put(errorHandle.notError());
   const { response, error } = yield call(getTimeline, action);
   if (response) {
-    yield put(successGlobalTimeline(response.data));
+    yield put(successGlobalTimeline(response));
   } else {
-    yield put(failGlobalTimeline());
+    yield put(failGlobalTimeline(error.response));
     yield put(errorHandle.error(error.response));
   }
   yield put(notLoading());
