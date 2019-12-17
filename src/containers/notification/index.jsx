@@ -3,29 +3,8 @@ import { tital_size, menu_size, under } from './styled';
 import LikeNotices from '../../components/notice/like';
 import FollowNotices from '../../components/notice/follow';
 import ManageNotices from '../../components/notice/manage';
-
-export class Notification extends Component {
-  constructor(prop) {
-    super(prop);
-    this.state = {
-      viewMode: 'LIKE'
-    };
-  }
-  changeViewMode = (e, props) => {
-    this.setState({ viewMode: props });
-  };
-  DataView = () => {
-    if (this.state.viewMode === 'LIKE') {
-      return <LikeNotices notices={this.likes} />;
-    } else if (this.state.viewMode === 'FOLLOW') {
-      return <FollowNotices notices={this.follows} />;
-    } else if (this.state.viewMode === 'MANAGE') {
-      return <ManageNotices notices={this.manages} />;
-    }
-  };
-
-  //ダミーデータ
-  follows = [
+//ダミーデータ
+const follows = [
     {
       id: 1,
       src_user: {
@@ -51,39 +30,40 @@ export class Notification extends Component {
       }
     }
   ];
-  likes = [
-    {
-      id: 1,
-      src_user: {
-        user_id: 'menstagram',
-        screen_name: 'メンスタグラム公式',
-        avater: 'https://placehold.jp/150x150.png?text=icon'
-      },
-      post: {
-        id: 1,
-        image: 'https://placehold.jp/150x150.png?text=image'
-      },
-      like: {
-        created_at: '2019/11/29 22:56:15'
-      }
+const likes = [
+  {
+    id: 1,
+    src_user: {
+      user_id: 'menstagram',
+      screen_name: 'メンスタグラム公式',
+      avater: 'https://placehold.jp/150x150.png?text=icon'
     },
-    {
+    post: {
       id: 1,
-      src_user: {
-        user_id: 'menstagram',
-        screen_name: 'メンスタグラム非公式',
-        avater: 'https://placehold.jp/150x150.png?text=icon'
-      },
-      post: {
-        id: 1,
-        image: 'https://placehold.jp/150x150.png?text=image'
-      },
-      like: {
-        created_at: '2019/11/29 22:56:15'
-      }
+      image: 'https://placehold.jp/150x150.png?text=image'
+    },
+    like: {
+      created_at: '2019/11/29 22:56:15'
     }
-  ];
-  manages = [
+  },
+  {
+    id: 1,
+    src_user: {
+      user_id: 'menstagram',
+      screen_name: 'メンスタグラム非公式',
+      avater: 'https://placehold.jp/150x150.png?text=icon'
+    },
+    post: {
+      id: 1,
+      image: 'https://placehold.jp/150x150.png?text=image'
+    },
+    like: {
+      created_at: '2019/11/29 22:56:15'
+    }
+  }
+];
+
+const manages = [
     {
       id: 1,
       text:
@@ -91,6 +71,25 @@ export class Notification extends Component {
       created_at: '2019/11/29 22:56:15'
     }
   ];
+export class Notification extends Component {
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      viewMode: 'LIKE'
+    };
+  }
+  changeViewMode = (e, props) => {
+    this.setState({ viewMode: props });
+  };
+  DataView = () => {
+    if (this.state.viewMode === 'LIKE') {
+      return <LikeNotices notices={likes} />;
+    } else if (this.state.viewMode === 'FOLLOW') {
+      return <FollowNotices notices={follows} />;
+    } else if (this.state.viewMode === 'MANAGE') {
+      return <ManageNotices notices={manages} />;
+    }
+  };
 
   render() {
     return (

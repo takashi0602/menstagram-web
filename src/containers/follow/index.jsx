@@ -6,6 +6,38 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { BackButton, LinkStyle } from './styled';
 import UserRow from '../../components/userRow';
 
+const parentRoute = '/profile/1';
+const loginUser = {
+  id: 100,
+  user_id: 'AAABBB',
+  screen_name: '表示名'
+};
+const followers = [
+  {
+    user_id: 'mensta',
+    screen_name: 'メンスタグラム公式',
+    avater:
+      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
+    is_follwed: false
+  },
+  {
+    user_id: 'menstaaaa',
+    screen_name: 'メンスタグラム非公式',
+    avater:
+      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
+    is_follwed: true
+  }
+];
+const follows = [
+  {
+    user_id: 'menstaaaa',
+    screen_name: 'メンスタグラム非公式',
+    avater:
+      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
+    is_follwed: true
+  }
+];
+
 export class Follow extends Component {
   constructor(prop) {
     super(prop);
@@ -27,62 +59,62 @@ export class Follow extends Component {
     if (this.state.isFollowersView) {
       return (
         <ul className="pl-0">
-          {this.followers.map((user, idx) => {
-            return <UserRow key={idx} user={user} />;
+          {followers.map((user, idx) => {
+            return <UserRow key={idx} user={user}></UserRow>;
           })}
         </ul>
       );
     } else {
       return (
         <ul className="pl-0">
-          {this.follows.map((user, idx) => {
-            return <UserRow key={idx} user={user} />;
+          {follows.map((user, idx) => {
+            return <UserRow key={idx} user={user}></UserRow>;
           })}
         </ul>
       );
     }
   };
 
-  parentRoute = '/profile/1';
-  loginUser = {
-    id: 100,
-    user_id: 'AAABBB',
-    screen_name: '表示名'
-  };
-  followers = [
-    {
-      user_id: 'mensta',
-      screen_name: 'メンスタグラム公式',
-      avater:
-        'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-      is_follwed: false
-    },
-    {
-      user_id: 'menstaaaa',
-      screen_name: 'メンスタグラム非公式',
-      avater:
-        'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-      is_follwed: true
-    }
-  ];
-  follows = [
-    {
-      user_id: 'menstaaaa',
-      screen_name: 'メンスタグラム非公式',
-      avater:
-        'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-      is_follwed: true
-    }
-  ];
+  // parentRoute = '/profile/1';
+  // loginUser = {
+  //   id: 100,
+  //   user_id: 'AAABBB',
+  //   screen_name: '表示名'
+  // };
+  // followers = [
+  //   {
+  //     user_id: 'mensta',
+  //     screen_name: 'メンスタグラム公式',
+  //     avater:
+  //       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
+  //     is_follwed: false
+  //   },
+  //   {
+  //     user_id: 'menstaaaa',
+  //     screen_name: 'メンスタグラム非公式',
+  //     avater:
+  //       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
+  //     is_follwed: true
+  //   }
+  // ];
+  // follows = [
+  //   {
+  //     user_id: 'menstaaaa',
+  //     screen_name: 'メンスタグラム非公式',
+  //     avater:
+  //       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
+  //     is_follwed: true
+  //   }
+  // ];
 
   render() {
     return (
       <div>
         <header className="py-3 px-3 border-bottom d-flex justify-content-between">
-          <Link className="text-left" to={this.parentRoute}>
+          <Link className="text-left" to={parentRoute}>
             <FontAwesomeIcon icon={faChevronLeft} style={BackButton} />
           </Link>
-          <h1 className="h5 mb-0 text-center">{this.loginUser.user_id}</h1>
+          <h1 className="h5 mb-0 text-center">{loginUser.user_id}</h1>
           <span className="pr-3"></span>
         </header>
         <div className="container">
@@ -97,7 +129,7 @@ export class Follow extends Component {
               }
               style={LinkStyle}
             >
-              {this.followers.length + 'フォロワー'}
+              {followers.length + 'フォロワー'}
             </span>
             <span
               onClick={e => this.toggleList(e, false)}
@@ -109,7 +141,7 @@ export class Follow extends Component {
               }
               style={LinkStyle}
             >
-              {this.follows.length + 'フォロー中'}
+              {follows.length + 'フォロー中'}
             </span>
           </div>
           {this.ToggleList()}
