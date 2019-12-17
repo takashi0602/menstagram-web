@@ -6,6 +6,22 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { BackButton } from './styled';
 import UserRow from '../../components/userRow';
 
+const likers = [
+  {
+    user_id: 'mensta',
+    screen_name: 'メンスタグラム公式',
+    avater:
+      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
+    is_followed: false
+  },
+  {
+    user_id: 'menstaaaa',
+    screen_name: 'メンスタグラム非公式',
+    avater:
+      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
+    is_followed: true
+  }
+];
 export class Liker extends Component {
   constructor(prop) {
     super(prop);
@@ -13,24 +29,8 @@ export class Liker extends Component {
       isFollowersView: true
     };
   }
-  parentRoute = '/post/' + this.props.match.params.id;
-  likers = [
-    {
-      user_id: 'mensta',
-      screen_name: 'メンスタグラム公式',
-      avater:
-        'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-      is_followed: false
-    },
-    {
-      user_id: 'menstaaaa',
-      screen_name: 'メンスタグラム非公式',
-      avater:
-        'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-      is_followed: true
-    }
-  ];
 
+parentRoute = '/post/' + this.props.match.params.id;
   render() {
     return (
       <div>

@@ -109,27 +109,36 @@ export const LogoutStyle = {
   fontWeight: 'lighter ',
   borderColor: '#C6C6C6'
 };
-export const Submit = {
-  textDecoration: 'none',
-  fontSize: '16px',
-  fontWeight: 'inherit',
-  color: '#EB6101'
-};
+export const Submit = styled.button`
+  textDecoration: none;
+  fontSize: 16px;
+  fontWeight: inherit;
+  color: #EB6101;
+  background-color: white;
+  padding: 0;
+  text-align: 'right'
+`;
 export const BlackLink = {
   color: '#3C3C3C',
   textDecoration: 'none'
 };
-export const Title = {
-  fontSize: '18px',
-  position: 'absolute',
-  left: 'calc( 50% - 68px)'
-};
-export const PositionParent = {
-  position: 'relative'
-};
-export const OrangeText = {
-  color: '#EB6101'
-};
+export const Title = styled.div`
+  fontSize: 18px;
+  position: absolute;
+  left: calc( 50% - 68px);
+  text-align: center;
+`;
+export const PositionParent = styled.header`
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #dee2e6;
+`;
+export const OrangeText = styled.div`
+  color: #EB6101;
+  margin-bottom: 1rem;
+`;
 export const TextArea = {
   resize: 'none'
 };

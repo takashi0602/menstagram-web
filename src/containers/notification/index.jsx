@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { tital_size, menu_size, under } from './styled';
+import { Title, menu_size, under } from './styled';
 import LikeNotices from '../../components/notice/like';
 import FollowNotices from '../../components/notice/follow';
 import ManageNotices from '../../components/notice/manage';
@@ -94,9 +94,9 @@ export class Notification extends Component {
   render() {
     return (
       <div className=" px-0">
-        <div className="text-center mb-4 mt-4" style={tital_size}>
+        <Title>
           通知
-        </div>
+        </Title>
         <div className="container">
           <div className="row justify-content-around border-bottom">
             <span

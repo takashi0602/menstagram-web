@@ -14,10 +14,7 @@ import {
 export class ProfileEdit extends Component {
   TopHeader = () => {
     return (
-      <header
-        className="py-3 px-3 border-bottom d-flex justify-content-between"
-        style={PositionParent}
-      >
+      <PositionParent>
         <Link
           to={'/profile/' + this.props.match.params.id}
           className=""
@@ -25,13 +22,13 @@ export class ProfileEdit extends Component {
         >
           キャンセル
         </Link>
-        <span style={Title} className="text-center">
+        <Title>
           プロフィールの編集
-        </span>
-        <button className="text-right bg-white p-0" style={Submit}>
+        </Title>
+        <Submit>
           完了
-        </button>
-      </header>
+        </Submit>
+      </PositionParent>
     );
   };
 
@@ -60,9 +57,7 @@ export class ProfileEdit extends Component {
             height="100px"
             width="100px"
           />
-          <div style={OrangeText} className="mb-3">
-            プロフィール写真の変更
-          </div>
+          <OrangeText>プロフィール写真の変更</OrangeText>
         </div>
         <div className="container">
           <div className="row pt-3">
