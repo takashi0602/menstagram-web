@@ -61,7 +61,7 @@ export const HamMenu = styled.div`
   position: fixed;
   right: -300px;
   top: 0;
-  transition: transform 0.3s linear 0s;
+  transition: transform 0.15s linear 0s;
   width: 300px;
   z-index: 1000;
   border-left: solid #c6c6c6 1px;
@@ -110,22 +110,22 @@ export const LogoutStyle = {
   borderColor: '#C6C6C6'
 };
 export const Submit = styled.button`
-  textDecoration: none;
-  fontSize: 16px;
-  fontWeight: inherit;
-  color: #EB6101;
+  textdecoration: none;
+  fontsize: 16px;
+  fontweight: inherit;
+  color: #eb6101;
   background-color: white;
   padding: 0;
-  text-align: 'right'
+  text-align: 'right';
 `;
 export const BlackLink = {
   color: '#3C3C3C',
   textDecoration: 'none'
 };
 export const Title = styled.div`
-  fontSize: 18px;
+  fontsize: 18px;
   position: absolute;
-  left: calc( 50% - 68px);
+  left: calc(50% - 68px);
   text-align: center;
 `;
 export const PositionParent = styled.header`
@@ -136,7 +136,7 @@ export const PositionParent = styled.header`
   border-bottom: 1px solid #dee2e6;
 `;
 export const OrangeText = styled.div`
-  color: #EB6101;
+  color: #eb6101;
   margin-bottom: 1rem;
 `;
 export const TextArea = {

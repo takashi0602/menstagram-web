@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { HamMenu } from './styled';
-import { LogoutStyle } from './styled';
 import { faChevronLeft, faImages } from '@fortawesome/free-solid-svg-icons';
+import { HamMenu } from '../../components/humMenu';
 import {
   BackButton,
   UserName,
@@ -28,17 +27,10 @@ export class Profile extends Component {
 
   TopHeader = () => {
     if (this.isMypage) {
+      const menuItems = [{ path: '/logout', label: 'ログアウト' }];
       return (
         <header className="py-3 px-3 d-flex justify-content-end">
-          <HamMenu>
-            <a
-              href="/logout"
-              className="d-block p-3 border-bottom"
-              style={LogoutStyle}
-            >
-              ログアウト
-            </a>
-          </HamMenu>
+          <HamMenu menuItems={menuItems} />
         </header>
       );
     } else {
