@@ -66,21 +66,6 @@ export default class FollowNotices extends Component {
       </div>
     );
   };
-  ActionButton = is_follwed => {
-    if (is_follwed) {
-      return (
-        <button className="col-5 rounded-pill border" style={UnFollowButton}>
-          フォロー中
-        </button>
-      );
-    } else {
-      return (
-        <button className="col-5 rounded-pill" style={FollowButton}>
-          フォローする
-        </button>
-      );
-    }
-  };
   render() {
     return <this.ListOrEmpty />;
   }

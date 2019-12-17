@@ -1,31 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import FollowButton from '../../components/followButton';
 
-import {
-  LinkStyle,
-  UnFollowButton,
-  FollowButton,
-  UserAvatar,
-  UserLink
-} from './styled';
+import { LinkStyle, UserAvatar, UserLink } from './styled';
 
 export default class UserRow extends Component {
-  ActionButton = is_follwed => {
-    if (is_follwed) {
-      return (
-        <button className="col-5 rounded-pill border" style={UnFollowButton}>
-          フォロー中
-        </button>
-      );
-    } else {
-      return (
-        <button className="col-5 rounded-pill" style={FollowButton}>
-          フォローする
-        </button>
-      );
-    }
-  };
   render() {
     return (
       <li className="row px-2 py-2">
@@ -48,7 +28,7 @@ export default class UserRow extends Component {
             {this.props.user.screen_name}
           </UserLink>
         </Link>
-        {<this.ActionButton is_follwed={this.props.user.is_follwed} />}
+        <FollowButton is_followed={this.props.user.is_followed} />
       </li>
     );
   }

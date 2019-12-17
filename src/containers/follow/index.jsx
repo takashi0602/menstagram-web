@@ -74,39 +74,6 @@ export class Follow extends Component {
       );
     }
   };
-
-  // parentRoute = '/profile/1';
-  // loginUser = {
-  //   id: 100,
-  //   user_id: 'AAABBB',
-  //   screen_name: '表示名'
-  // };
-  // followers = [
-  //   {
-  //     user_id: 'mensta',
-  //     screen_name: 'メンスタグラム公式',
-  //     avater:
-  //       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-  //     is_follwed: false
-  //   },
-  //   {
-  //     user_id: 'menstaaaa',
-  //     screen_name: 'メンスタグラム非公式',
-  //     avater:
-  //       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-  //     is_follwed: true
-  //   }
-  // ];
-  // follows = [
-  //   {
-  //     user_id: 'menstaaaa',
-  //     screen_name: 'メンスタグラム非公式',
-  //     avater:
-  //       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-  //     is_follwed: true
-  //   }
-  // ];
-
   render() {
     return (
       <div>
