@@ -7,8 +7,9 @@ import { TimelinePostItem } from '../../components/timeline/post';
 import { privateTimeline } from '../../actions/timeline/private';
 import { globalTimeline } from '../../actions/timeline/global';
 import { Loading } from '../../components/loading';
-import { Reload } from './styled';
+import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
+import { Scroll } from '../../components/scroll'
 
 export class TimelineContainer extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export class TimelineContainer extends Component {
     this.state = {
       notGlobalTimelineMessage: '投稿がありません。',
       notPrivateTimelineMessage:
-        'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！'
+        'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
+      showBackToTop: false
     };
   }
 
@@ -131,6 +133,16 @@ export class TimelineContainer extends Component {
     return <Reload onClick={getTimeline}>{text}</Reload>;
   };
 
+  // TODO: アニメーション
+  setScrollTop = () => {
+    window.scrollTo(0,0);
+  };
+
+  handleScroll = scrollTop => {
+    if (!this.state.showBackToTop && scrollTop > 100) this.setState({showBackToTop: true});
+    else if (this.state.showBackToTop && scrollTop <= 100) this.setState({showBackToTop: false});
+  };
+
   render() {
     return (
       <div>
@@ -139,8 +151,10 @@ export class TimelineContainer extends Component {
         {this.isPathPrivate()
           ? this.initGetPrivateTimeline()
           : this.initGetGlobalTimeline()}
+        <Scroll handleScroll={this.handleScroll} />
         <TimelineHeader isPrivate={this.isPathPrivate()} />
         {this.showReloadBar('新しい投稿を表示', this.getNewTimeline)}
+        {this.state.showBackToTop && <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>}
         {this.props.status && <Error status={this.props.status} />}
         {this.showPostItems()}
         {this.props.status && <Error status={this.props.status} />}
