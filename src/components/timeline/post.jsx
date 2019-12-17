@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faUser,
   faEllipsisH,
   faHeart as solidHeart
 } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +17,8 @@ import {
   RamenImage,
   ImageArea,
   LikedHeartIcon,
-  NotLikedIcon
+  NotLikedIcon,
+  faUserIcon
 } from './styled';
 import { DetailModal } from '../../components/modal/detail';
 
@@ -80,19 +82,26 @@ export class TimelinePostItem extends Component {
     this.setState({ showModal: false });
   };
 
+  setUserImage = () => {
+    return this.props.postItem.user.avatar
+      ? <UserImage
+          style={{
+            backgroundImage: `url(${this.props.postItem.user.avatar})`
+          }}
+        />
+      : <UserImage>
+          <FontAwesomeIcon icon={faUser} style={faUserIcon} />
+        </UserImage>
+  };
+
   render() {
     return (
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center py-2 px-3">
-          <Link to="/" className="d-flex align-items-center c-link__black">
-            <UserImage
-              style={{
-                backgroundImage: `url(${this.props.postItem.user.avatar})`
-              }}
-            />
+          <Link to={`/profile/${this.props.postItem.user.id}`} className="d-flex align-items-center c-link__black">
+            {this.setUserImage()}
             <div>{this.props.postItem.user.screen_name}</div>
           </Link>
-          {/* TODO:クリック時モーダル表示 */}
           <div onClick={() => this.openModal()}>
             <FontAwesomeIcon icon={faEllipsisH} style={EllipsisH} />
           </div>
