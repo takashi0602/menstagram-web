@@ -7,7 +7,7 @@ export const MenuOuter = styled.div`
   position: fixed;
   right: -300px;
   top: 0;
-  transition: transform 0.15s linear 0s;
+  transition: transform 0.15s ease 0s;
   width: 300px;
   z-index: 1000;
   border-left: solid #c6c6c6 1px;
