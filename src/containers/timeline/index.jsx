@@ -55,11 +55,20 @@ export class TimelineContainer extends Component {
     return this.props.history.location.pathname.split('/')[2] === 'private';
   };
 
+  getTimeline = () => {
+    this.isPathPrivate()
+      ? this.props.getPrivateTimeline(this.initSetTimeline())
+      : this.props.getGlobalTimeline(this.initSetTimeline());
+  };
+
   showPostItems = () => {
     if (this.isPathPrivate()) {
       if (this.props.privateTimeline.length === 0)
         return (
-          <p className="pt-3 px-3">{this.state.notPrivateTimelineMessage}</p>
+          <div>
+            <Reload onClick={this.getTimeline}>投稿を読み込む</Reload>
+            <p className="pt-3 px-3">{this.state.notPrivateTimelineMessage}</p>
+          </div>
         );
       return this.props.privateTimeline.map(item => (
         <TimelinePostItem key={item.id} postItem={item} />
@@ -67,7 +76,10 @@ export class TimelineContainer extends Component {
     } else {
       if (this.props.globalTimeline.length === 0)
         return (
-          <p className="pt-3 px-3">{this.state.notGlobalTimelineMessage}</p>
+          <div>
+            <Reload onClick={this.getTimeline}>投稿を読み込む</Reload>
+            <p className="pt-3 px-3">{this.state.notGlobalTimelineMessage}</p>
+          </div>
         );
       return this.props.globalTimeline.map(item => (
         <TimelinePostItem key={item.id} postItem={item} />
@@ -111,6 +123,12 @@ export class TimelineContainer extends Component {
     );
   };
 
+  showReloadBar = (text, getTimeline) => {
+    const postList = this.isPathPrivate() ? this.props.privateTimeline : this.props.globalTimeline;
+    if (postList.length === 0) return;
+    return <Reload onClick={getTimeline}>{text}</Reload>;
+  };
+
   render() {
     return (
       <div>
@@ -120,11 +138,11 @@ export class TimelineContainer extends Component {
           ? this.initGetPrivateTimeline()
           : this.initGetGlobalTimeline()}
         <TimelineHeader isPrivate={this.isPathPrivate()} />
-        {<Reload onClick={this.getNewTimeline}>新しい投稿を表示</Reload>}
+        {this.showReloadBar('新しい投稿を表示', this.getNewTimeline)}
         {this.props.status && <Error status={this.props.status} />}
         {this.showPostItems()}
         {this.props.status && <Error status={this.props.status} />}
-        <Reload onClick={this.getOldTimeline}>投稿をさらに表示</Reload>
+        {this.showReloadBar('投稿をさらに表示', this.getOldTimeline)}
       </div>
     );
   }
