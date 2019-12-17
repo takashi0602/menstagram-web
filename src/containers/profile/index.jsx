@@ -9,6 +9,7 @@ import {
   UserName,
   UserId,
   Biography,
+  EditButton,
   WhiteButton,
   FollowButton,
   noUnderline,
@@ -17,6 +18,133 @@ import {
   ImagesIcon
 } from './styled';
 
+//ダミー
+const parentRoute = '/post/3';
+const isMypage = true;
+const user = {
+  id: 1,
+  user_id: 'menstagram',
+  avatar: 'https://placehold.jp/150x150.png?text=icon',
+  screen_name: 'メンスタグラム公式',
+  posted: 10,
+  following: 10,
+  followed: 10,
+  is_followed: false,
+  biography:
+    'user_information. user_information. user_information. user_information.'
+};
+const posts = [
+  {
+    id: 1,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/300x300?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 2,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/300x500?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 3,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/500x300?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 4,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/300x200?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 5,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/300x300?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 6,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/800x300?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 7,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/300x400?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 8,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/300x300?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 9,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/300x300?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  },
+  {
+    id: 10,
+    text: 'aaaa',
+    images: [
+      'http://placehold.it/300x300?text=1',
+      'http://placehold.it/300x300?text=2',
+      'http://placehold.it/300x300?text=3',
+      'http://placehold.it/300x300?text=4'
+    ],
+    liked: 1
+  }
+];
 export class Profile extends Component {
   constructor(prop) {
     super(prop);
@@ -26,7 +154,7 @@ export class Profile extends Component {
   }
 
   TopHeader = () => {
-    if (this.isMypage) {
+    if (isMypage) {
       const menuItems = [{ path: '/logout', label: 'ログアウト' }];
       return (
         <header className="py-3 px-3 d-flex justify-content-end">
@@ -36,7 +164,7 @@ export class Profile extends Component {
     } else {
       return (
         <header className="py-3 px-3 d-flex justify-content-start">
-          <Link className="text-left" to={this.parentRoute}>
+          <Link className="text-left" to={parentRoute}>
             <FontAwesomeIcon icon={faChevronLeft} style={BackButton} />
           </Link>
         </header>
@@ -45,42 +173,38 @@ export class Profile extends Component {
   };
 
   ControllButton = () => {
-    if (this.isMypage) {
+    if (isMypage) {
       return (
         <div className="p-2">
           <Link
             to={'/profile/' + this.props.match.params.id + '/edit'}
-            className="d-block rounded-pill text-center"
-            style={WhiteButton}
+            className="d-block"
+            style={EditButton}
           >
             プロフィールの編集
           </Link>
         </div>
       );
-    } else if (this.user.is_followed) {
+    } else if (user.is_followed) {
       return (
         <div className="p-2">
-          <div className="rounded-pill text-center" style={WhiteButton}>
-            フォロー中
-          </div>
+          <WhiteButton>フォロー中</WhiteButton>
         </div>
       );
     } else {
       return (
         <div className="p-2">
-          <div className="rounded-pill text-center" style={FollowButton}>
-            フォロー
-          </div>
+          <FollowButton>フォロー</FollowButton>
         </div>
       );
     }
   };
   PostsTileView = () => {
-    if (this.posts.length > 0) {
+    if (posts.length > 0) {
       return (
         <div className="container">
           <div className="row">
-            {this.posts.map((post, idx) => {
+            {posts.map((post, idx) => {
               return (
                 <Link
                   key={idx}
@@ -88,7 +212,7 @@ export class Profile extends Component {
                   className="col-4 p-1"
                   style={PostLink}
                 >
-                  <img src={post.images[0]} style={PostImage} alt="post" />
+                  <PostImage src={post.images[0]} alt="post" />
                   <FontAwesomeIcon icon={faImages} style={ImagesIcon} />
                 </Link>
               );
@@ -111,140 +235,13 @@ export class Profile extends Component {
     }
   };
 
-  parentRoute = '/post/3';
-  isMypage = true;
-  user = {
-    id: 1,
-    user_id: 'menstagram',
-    avatar: 'https://placehold.jp/150x150.png?text=icon',
-    screen_name: 'メンスタグラム公式',
-    posted: 10,
-    following: 10,
-    followed: 10,
-    is_followed: false,
-    biography:
-      'user_information. user_information. user_information. user_information.'
-  };
-  posts = [
-    {
-      id: 1,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/300x300?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 2,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/300x500?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 3,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/500x300?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 4,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/300x200?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 5,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/300x300?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 6,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/800x300?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 7,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/300x400?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 8,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/300x300?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 9,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/300x300?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    },
-    {
-      id: 10,
-      text: 'aaaa',
-      images: [
-        'http://placehold.it/300x300?text=1',
-        'http://placehold.it/300x300?text=2',
-        'http://placehold.it/300x300?text=3',
-        'http://placehold.it/300x300?text=4'
-      ],
-      liked: 1
-    }
-  ];
-
   render() {
     return (
       <div>
         {this.TopHeader()}
         <div className="text-center">
           <img
-            src={this.user.avatar}
+            src={user.avatar}
             alt="avatar"
             className="d-inline-block rounded-circle border mb-2"
             height="100px"
@@ -252,37 +249,37 @@ export class Profile extends Component {
           />
         </div>
         <h2 className="text-center pt-2" style={UserName}>
-          {this.user.screen_name}
+          {user.screen_name}
         </h2>
         <h3 className="text-center" style={UserId}>
-          {this.user.user_id}
+          {user.user_id}
         </h3>
 
         <div className="container pb-2 border-bottom">
           <div className="row pb-2">
             <span className="col">
-              <p className="text-center mb-0">{this.posts.length}</p>
+              <p className="text-center mb-0">{posts.length}</p>
               <p className="text-center">投稿</p>
             </span>
             <Link
-              to={'/followed/' + this.user.user_id}
+              to={'/followed/' + user.user_id}
               className="col"
               style={noUnderline}
             >
-              <p className="text-center mb-0">{this.user.followed}</p>
+              <p className="text-center mb-0">{user.followed}</p>
               <p className="text-center">フォロワー</p>
             </Link>
             <Link
-              to={'/following/' + this.user.user_id}
+              to={'/following/' + user.user_id}
               className="col"
               style={noUnderline}
             >
-              <p className="text-center mb-0">{this.user.following}</p>
+              <p className="text-center mb-0">{user.following}</p>
               <p className="text-center">フォロー</p>
             </Link>
           </div>
           <div className="p-2" style={Biography}>
-            {this.user.biography}
+            {user.biography}
           </div>
           {this.ControllButton()}
         </div>

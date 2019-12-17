@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../components/post/show';
 
-const parentRoute = '/';
+const parentRoute = '/profile/menstagram';
 const BackButton = {
   fontSize: '20px',
   color: '#666666'

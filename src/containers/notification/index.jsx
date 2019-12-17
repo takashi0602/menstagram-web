@@ -5,31 +5,31 @@ import FollowNotices from '../../components/notice/follow';
 import ManageNotices from '../../components/notice/manage';
 //ダミーデータ
 const follows = [
-    {
-      id: 1,
-      src_user: {
-        user_id: 'menstagram',
-        screen_name: 'メンスタグラム公式',
-        avater: 'https://placehold.jp/150x150.png?text=icon'
-      },
-      follow: {
-        is_followed: true,
-        created_at: '2019/11/29 22:56:15'
-      }
+  {
+    id: 1,
+    src_user: {
+      user_id: 'menstagram',
+      screen_name: 'メンスタグラム公式',
+      avater: 'https://placehold.jp/150x150.png?text=icon'
     },
-    {
-      id: 1,
-      src_user: {
-        user_id: 'menstagraaaaam',
-        screen_name: 'メンスタグラム非公式',
-        avater: 'https://placehold.jp/150x150.png?text=icon'
-      },
-      follow: {
-        is_followed: false,
-        created_at: '2019/11/29 22:56:15'
-      }
+    follow: {
+      is_followed: true,
+      created_at: '2019/11/29 22:56:15'
     }
-  ];
+  },
+  {
+    id: 1,
+    src_user: {
+      user_id: 'menstagraaaaam',
+      screen_name: 'メンスタグラム非公式',
+      avater: 'https://placehold.jp/150x150.png?text=icon'
+    },
+    follow: {
+      is_followed: false,
+      created_at: '2019/11/29 22:56:15'
+    }
+  }
+];
 const likes = [
   {
     id: 1,
@@ -64,13 +64,13 @@ const likes = [
 ];
 
 const manages = [
-    {
-      id: 1,
-      text:
-        'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
-      created_at: '2019/11/29 22:56:15'
-    }
-  ];
+  {
+    id: 1,
+    text:
+      'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
+    created_at: '2019/11/29 22:56:15'
+  }
+];
 export class Notification extends Component {
   constructor(prop) {
     super(prop);
@@ -94,9 +94,7 @@ export class Notification extends Component {
   render() {
     return (
       <div className=" px-0">
-        <Title>
-          通知
-        </Title>
+        <Title>通知</Title>
         <div className="container">
           <div className="row justify-content-around border-bottom">
             <span

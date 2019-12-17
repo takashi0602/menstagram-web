@@ -20,21 +20,35 @@ export const Biography = {
   fontSize: '18px'
 };
 
-export const WhiteButton = {
+export const EditButton = {
   color: '#666666',
   border: '1px solid #C6C6C6',
   textDecoration: 'none',
   fontSize: '16px',
   height: '40px',
-  lineHeight: '40px'
+  lineHeight: '40px',
+  borderRadius: '50rem',
+  textAlign: 'center'
 };
-export const FollowButton = {
-  color: 'white',
-  backgroundColor: '#EB6101',
-  fontSize: '16px',
-  height: '40px',
-  lineHeight: '40px'
-};
+export const WhiteButton = styled.div`
+  color: #666666;
+  border: 1px solid #c6c6c6;
+  text-decoration: none;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50rem;
+  text-align: center;
+`;
+export const FollowButton = styled.div`
+  color: white;
+  background-color: #eb6101;
+  font-size: 16px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50rem;
+  text-align: center;
+`;
 
 export const noUnderline = {
   color: '#3C3C3C',
@@ -43,11 +57,11 @@ export const noUnderline = {
 export const PostLink = {
   position: 'relative'
 };
-export const PostImage = {
-  width: '100%',
-  height: '125px',
-  objectFit: 'contain'
-};
+export const PostImage = styled.img`
+  width: 100%;
+  height: 125px;
+  object-fit: contain;
+`;
 export const ImagesIcon = {
   position: 'absolute',
   top: '15px',

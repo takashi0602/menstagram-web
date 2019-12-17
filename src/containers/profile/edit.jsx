@@ -22,12 +22,8 @@ export class ProfileEdit extends Component {
         >
           キャンセル
         </Link>
-        <Title>
-          プロフィールの編集
-        </Title>
-        <Submit>
-          完了
-        </Submit>
+        <Title>プロフィールの編集</Title>
+        <Submit>完了</Submit>
       </PositionParent>
     );
   };

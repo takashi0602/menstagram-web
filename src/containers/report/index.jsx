@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { question, yesButton, noButton } from './styled';
+import { Question, YesButton, NoButton } from './styled';
 
 export class Report extends Component {
   constructor(prop) {
@@ -16,18 +16,12 @@ export class Report extends Component {
         </header>
         <div className="container">
           <div className="row">
-            <p className="col-12 m-2" style={question}>
-              投稿にラーメン以外の画像が含まれていましたか？
-            </p>
+            <Question>投稿にラーメン以外の画像が含まれていましたか？</Question>
             <div className="col text-center mt-3">
-              <span className="d-inline-block rounded-pill" style={yesButton}>
-                はい
-              </span>
+              <YesButton>はい</YesButton>
             </div>
             <div className="col text-center mt-3">
-              <span className="d-inline-block rounded-pill" style={noButton}>
-                いいえ
-              </span>
+              <NoButton>いいえ</NoButton>
             </div>
           </div>
         </div>
