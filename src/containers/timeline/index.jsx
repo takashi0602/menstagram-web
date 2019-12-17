@@ -8,7 +8,7 @@ import { privateTimeline } from '../../actions/timeline/private';
 import { globalTimeline } from '../../actions/timeline/global';
 import { Loading } from '../../components/loading';
 import { Reload } from './styled';
-import { Error } from "../../components/error";
+import { Error } from '../../components/error';
 
 export class TimelineContainer extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export class TimelineContainer extends Component {
     this.state = {
       notGlobalTimelineMessage: '投稿がありません。',
       notPrivateTimelineMessage:
-        'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
+        'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！'
     };
   }
 

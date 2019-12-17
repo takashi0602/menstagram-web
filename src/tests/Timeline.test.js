@@ -1,5 +1,3 @@
-import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { getTimeline } from '../api/timeline';
 import { requestLogin, requestRegister } from '../api/auth';
 
@@ -90,7 +88,7 @@ it('request private timeline api type new', () => {
     return getTimeline(privateTypeNew).then(timelineRes => {
       expect(timelineRes.response.statusText).toEqual('OK');
     });
-  })
+  });
 });
 
 it('request private timeline api type old', () => {
@@ -100,7 +98,7 @@ it('request private timeline api type old', () => {
     return getTimeline(privateTypeOld).then(timelineRes => {
       expect(timelineRes.response.statusText).toEqual('OK');
     });
-  })
+  });
 });
 
 it('request global timeline api', () => {
@@ -110,7 +108,7 @@ it('request global timeline api', () => {
     return getTimeline(globalTypeNull).then(timelineRes => {
       expect(timelineRes.response.statusText).toEqual('OK');
     });
-  })
+  });
 });
 
 it('request global timeline api type new', () => {
@@ -120,7 +118,7 @@ it('request global timeline api type new', () => {
     return getTimeline(globalTypeNew).then(timelineRes => {
       expect(timelineRes.response.statusText).toEqual('OK');
     });
-  })
+  });
 });
 
 it('request global timeline api type old', () => {
@@ -130,5 +128,5 @@ it('request global timeline api type old', () => {
     return getTimeline(globalTypeOld).then(timelineRes => {
       expect(timelineRes.response.statusText).toEqual('OK');
     });
-  })
+  });
 });

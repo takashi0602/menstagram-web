@@ -21,8 +21,8 @@ function* privateTimeline(action) {
     response.data.reverse();
     if (action.params.type === 'new') {
       response.data.pop();
-      response.data = response.data.concat(action.postList)
-    } else if(action.params.type === 'old') {
+      response.data = response.data.concat(action.postList);
+    } else if (action.params.type === 'old') {
       response.data.shift();
       response.data = action.postList.concat(response.data);
     }
@@ -42,8 +42,8 @@ function* globalTimeline(action) {
     response.data.reverse();
     if (action.params.type === 'new') {
       response.data.pop();
-      response.data = response.data.concat(action.postList)
-    } else if(action.params.type === 'old') {
+      response.data = response.data.concat(action.postList);
+    } else if (action.params.type === 'old') {
       response.data.shift();
       response.data = action.postList.concat(response.data);
     }
