@@ -30,7 +30,7 @@ export class Liker extends Component {
     };
   }
 
-parentRoute = '/post/' + this.props.match.params.id;
+  parentRoute = '/post/' + this.props.match.params.id;
   render() {
     return (
       <div>
@@ -43,7 +43,7 @@ parentRoute = '/post/' + this.props.match.params.id;
         </header>
         <div className="container">
           <ul className="pl-0 pt-2">
-            {this.likers.map((user, idx) => {
+            {likers.map((user, idx) => {
               return <UserRow key={idx} user={user} />;
             })}
           </ul>
