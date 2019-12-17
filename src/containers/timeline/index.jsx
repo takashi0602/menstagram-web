@@ -124,7 +124,9 @@ export class TimelineContainer extends Component {
   };
 
   showReloadBar = (text, getTimeline) => {
-    const postList = this.isPathPrivate() ? this.props.privateTimeline : this.props.globalTimeline;
+    const postList = this.isPathPrivate()
+      ? this.props.privateTimeline
+      : this.props.globalTimeline;
     if (postList.length === 0) return;
     return <Reload onClick={getTimeline}>{text}</Reload>;
   };
