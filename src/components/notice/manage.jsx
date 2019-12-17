@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { under, notice_size, like_size } from './styled';
+import { under, NoticeSize, LikeSize } from './styled';
 
 export default class ManageNotices extends Component {
   render() {
@@ -18,15 +18,10 @@ export default class ManageNotices extends Component {
                     height="55px"
                     width="55px"
                   />
-                  <span
-                    className="d-inline-block pl-3 text-body"
-                    style={notice_size}
-                  >
+                  <NoticeSize>
                     {notice.text}
-                    <span className="text-muted" style={like_size}>
-                      {notice.created_at.substr(0, 10)}
-                    </span>
-                  </span>
+                    <LikeSize>{notice.created_at.substr(0, 10)}</LikeSize>
+                  </NoticeSize>
                 </span>
               </div>
             );

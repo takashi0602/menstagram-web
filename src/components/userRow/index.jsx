@@ -11,6 +11,21 @@ import {
 } from './styled';
 
 export default class UserRow extends Component {
+  ActionButton = is_follwed => {
+    if (is_follwed) {
+      return (
+        <button className="col-5 rounded-pill border" style={UnFollowButton}>
+          フォロー中
+        </button>
+      );
+    } else {
+      return (
+        <button className="col-5 rounded-pill" style={FollowButton}>
+          フォローする
+        </button>
+      );
+    }
+  };
   render() {
     return (
       <li className="row px-2 py-2">
@@ -27,30 +42,13 @@ export default class UserRow extends Component {
             width="55px"
             style={UserAvatar}
           />
-          <span className="d-inline-block pl-2" style={UserLink}>
+          <UserLink>
             {this.props.user.user_id}
             <br />
             {this.props.user.screen_name}
-          </span>
+          </UserLink>
         </Link>
-        {(() => {
-          if (this.props.user.is_follwed) {
-            return (
-              <button
-                className="col-5 rounded-pill border"
-                style={UnFollowButton}
-              >
-                フォロー中
-              </button>
-            );
-          } else {
-            return (
-              <button className="col-5 rounded-pill" style={FollowButton}>
-                フォローする
-              </button>
-            );
-          }
-        })()}
+        {<this.ActionButton is_follwed={this.props.user.is_follwed} />}
       </li>
     );
   }

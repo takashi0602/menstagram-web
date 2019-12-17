@@ -26,7 +26,7 @@ export class Menu extends Component {
     const path = this.props.history.location.pathname.split('/')[1];
     const query = this.props.history.location.pathname.split('/')[2];
     return (
-      <nav className="d-flex justify-content-around" style={Navbar}>
+      <Navbar>
         <Link to="/timeline" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
             icon={faHome}
@@ -65,7 +65,7 @@ export class Menu extends Component {
             style={path === 'profile' ? NavIconActive : NavIconDisactive}
           />
         </Link>
-      </nav>
+      </Navbar>
     );
   };
   render() {

@@ -1,11 +1,14 @@
-export const Navbar = {
-  position: 'fixed',
-  bottom: '0px',
-  width: '100%',
-  backgroundColor: 'white',
-  zIndex: '1000',
-  borderTop: '1px solid #C6C6C6'
-};
+import styled from 'styled-components';
+export const Navbar = styled.nav`
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+  border-top: 1px solid #c6c6c6;
+  display: flex;
+  justify-content: space-around;
+`;
 export const NavIcon = {
   fontSize: '30px',
   width: 'calc( 100% / 5 )',

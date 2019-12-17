@@ -42,7 +42,7 @@ export const Routes = () => {
               <Route exact path={'/notification'} component={Notification} />
               <Route exact path={'/report'} component={Report} />
             </Switch>
-            <Route history={history} component={Menu} />
+            <Route component={Menu} />
           </div>
         </ConnectedRouter>
       </PersistGate>
