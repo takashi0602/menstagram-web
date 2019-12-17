@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const UserImage = styled.div`
   width: 40px;
   height: 40px;
-  border: 1px solid #C6C6C6;
+  border: 1px solid #c6c6c6;
   border-radius: 50%;
   margin-right: 20px;
   background: no-repeat center;

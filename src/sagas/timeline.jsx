@@ -18,6 +18,14 @@ function* privateTimeline(action) {
   yield put(errorHandle.notError());
   const { response, error } = yield call(getTimeline, action);
   if (response) {
+    response.data.reverse();
+    if (action.params.type === 'new') {
+      response.data.pop();
+      response.data = response.data.concat(action.postList)
+    } else if(action.params.type === 'old') {
+      response.data.shift();
+      response.data = action.postList.concat(response.data);
+    }
     yield put(successPrivateTimeline(response));
   } else {
     yield put(failPrivateTimeline(error.response));
@@ -31,6 +39,14 @@ function* globalTimeline(action) {
   yield put(errorHandle.notError());
   const { response, error } = yield call(getTimeline, action);
   if (response) {
+    response.data.reverse();
+    if (action.params.type === 'new') {
+      response.data.pop();
+      response.data = response.data.concat(action.postList)
+    } else if(action.params.type === 'old') {
+      response.data.shift();
+      response.data = action.postList.concat(response.data);
+    }
     yield put(successGlobalTimeline(response));
   } else {
     yield put(failGlobalTimeline(error.response));

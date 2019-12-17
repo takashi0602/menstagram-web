@@ -7,6 +7,8 @@ import { TimelinePostItem } from '../../components/timeline/post';
 import { privateTimeline } from '../../actions/timeline/private';
 import { globalTimeline } from '../../actions/timeline/global';
 import { Loading } from '../../components/loading';
+import { Reload } from './styled';
+import { Error } from "../../components/error";
 
 export class TimelineContainer extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ export class TimelineContainer extends Component {
     this.state = {
       notGlobalTimelineMessage: '投稿がありません。',
       notPrivateTimelineMessage:
-        'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！'
+        'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
     };
   }
 
@@ -24,18 +26,27 @@ export class TimelineContainer extends Component {
     return {
       params,
       pathName,
-      accessToken: this.props.accessToken
+      accessToken: this.props.accessToken,
+      postList: []
+    };
+  };
+
+  setTimeline = (params, postList) => {
+    const pathName = this.isPathPrivate() ? 'private' : 'global';
+    return {
+      params,
+      pathName,
+      accessToken: this.props.accessToken,
+      postList
     };
   };
 
   initGetPrivateTimeline = () => {
-    console.log('private', this.props.privateTimeline);
     if (this.props.privateStatus !== -1) return;
     this.props.getPrivateTimeline(this.initSetTimeline());
   };
 
   initGetGlobalTimeline = () => {
-    console.log('global', this.props.globalTimeline);
     if (this.props.globalStatus !== -1) return;
     this.props.getGlobalTimeline(this.initSetTimeline());
   };
@@ -64,6 +75,42 @@ export class TimelineContainer extends Component {
     }
   };
 
+  getOldTimeline = () => {
+    const params = {
+      post_id: this.isPathPrivate()
+        ? this.props.privateTimeline[this.props.privateTimeline.length - 1].id
+        : this.props.globalTimeline[this.props.globalTimeline.length - 1].id,
+      type: 'old'
+    };
+    this.isPathPrivate()
+      ? this.getPrivateTimeline(params)
+      : this.getGlobalTimeline(params);
+  };
+
+  getNewTimeline = () => {
+    const params = {
+      post_id: this.isPathPrivate()
+        ? this.props.privateTimeline[0].id
+        : this.props.globalTimeline[0].id,
+      type: 'new'
+    };
+    this.isPathPrivate()
+      ? this.getPrivateTimeline(params)
+      : this.getGlobalTimeline(params);
+  };
+
+  getPrivateTimeline = params => {
+    this.props.getPrivateTimeline(
+      this.setTimeline(params, this.props.privateTimeline)
+    );
+  };
+
+  getGlobalTimeline = params => {
+    this.props.getGlobalTimeline(
+      this.setTimeline(params, this.props.globalTimeline)
+    );
+  };
+
   render() {
     return (
       <div>
@@ -73,7 +120,11 @@ export class TimelineContainer extends Component {
           ? this.initGetPrivateTimeline()
           : this.initGetGlobalTimeline()}
         <TimelineHeader isPrivate={this.isPathPrivate()} />
+        {<Reload onClick={this.getNewTimeline}>新しい投稿を表示</Reload>}
+        {this.props.status && <Error status={this.props.status} />}
         {this.showPostItems()}
+        {this.props.status && <Error status={this.props.status} />}
+        <Reload onClick={this.getOldTimeline}>投稿をさらに表示</Reload>
       </div>
     );
   }

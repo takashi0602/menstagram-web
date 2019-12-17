@@ -8,7 +8,8 @@ export const privateTimeline = payload => {
     accessToken: payload.accessToken,
     params: payload.params,
     pathName: payload.pathName,
-    postList: []
+    postList: payload.postList,
+    status: -1
   };
 };
 

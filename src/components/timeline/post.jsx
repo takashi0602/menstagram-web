@@ -83,22 +83,27 @@ export class TimelinePostItem extends Component {
   };
 
   setUserImage = () => {
-    return this.props.postItem.user.avatar
-      ? <UserImage
-          style={{
-            backgroundImage: `url(${this.props.postItem.user.avatar})`
-          }}
-        />
-      : <UserImage>
-          <FontAwesomeIcon icon={faUser} style={faUserIcon} />
-        </UserImage>
+    return this.props.postItem.user.avatar ? (
+      <UserImage
+        style={{
+          backgroundImage: `url(${this.props.postItem.user.avatar})`
+        }}
+      />
+    ) : (
+      <UserImage>
+        <FontAwesomeIcon icon={faUser} style={faUserIcon} />
+      </UserImage>
+    );
   };
 
   render() {
     return (
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center py-2 px-3">
-          <Link to={`/profile/${this.props.postItem.user.id}`} className="d-flex align-items-center c-link__black">
+          <Link
+            to={`/profile/${this.props.postItem.user.user_id}`}
+            className="d-flex align-items-center c-link__black"
+          >
             {this.setUserImage()}
             <div>{this.props.postItem.user.screen_name}</div>
           </Link>
