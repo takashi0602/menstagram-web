@@ -1,9 +1,13 @@
 import styled from 'styled-components';
-export const Question = styled.p`
-  fontSize: 18px
+export const Question = styled.div`
+  font-size: 18px
   flex: 0 0 100%;
   max-width: 100%;
-  margin: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-rignt: 0.5rem;
 `;
 export const YesButton = styled.span`
   background-color: #eb6101;
