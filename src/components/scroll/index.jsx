@@ -1,16 +1,20 @@
 import React from 'react';
 
 export class Scroll extends React.Component {
+  _isMounted = false;
+
   componentDidMount = () => {
-    window.addEventListener('scroll', () => this.watchCurrentPosition(), true)
+    this._isMounted = true;
+    window.addEventListener('scroll', () => this.watchCurrentPosition(), false);
   };
 
   componentWillUnmount = () => {
-    window.removeEventListener('scroll')
+    this._isMounted = false;
+    window.removeEventListener('scroll', {}, false);
   };
 
   watchCurrentPosition = () => {
-    this.props.handleScroll(this.scrollTop());
+    if (this._isMounted) this.props.handleScroll(this.scrollTop());
   };
 
   scrollTop = () => {
