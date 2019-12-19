@@ -2,7 +2,7 @@ import styled from 'styled-components';
 export const FollowNoticeRow = styled.div`
   width: calc(100% - 103px);
   height: 55px;
-  display: inline-blocl;
+  display: inline-block;
 `;
 export const NoticeSize = styled.div`
   font-size: 12px;
@@ -16,7 +16,7 @@ export const LikeSize = styled.p`
   color: #6c757d;
   margin-bottom: 0;
 `;
-export const UnFollowButton = styled.button`
+export const UnfollowButton = styled.button`
   font-size: 12px;
   line-height: 12px;
   width: 103px;

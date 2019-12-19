@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-export const UnFollowButton = styled.button`
+export const UnfollowButton = styled.button`
   color: #666666;
   background-color: #fff;
   font-size: 16px;

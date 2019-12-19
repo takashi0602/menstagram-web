@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 // TODO faHart, faBellはフォーカスされている状態のときレギュラーアイコンにする
 //  →コンフリクトするため今はインポートしない
-import { Navbar, NavIcon, NavIconDisactive, NavIconActive } from './styled';
+import { Navbar, NavIcon, NavIconInactive, NavIconActive } from './styled';
 
 export class Menu extends Component {
   // top, register, login, logoutでは表示しない
@@ -30,13 +30,13 @@ export class Menu extends Component {
         <Link to="/timeline" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
             icon={faHome}
-            style={path === 'timeline' ? NavIconActive : NavIconDisactive}
+            style={path === 'timeline' ? NavIconActive : NavIconInactive}
           />
         </Link>
         <Link to="/like" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
             icon={faHeart}
-            style={path === 'like' ? NavIconActive : NavIconDisactive}
+            style={path === 'like' ? NavIconActive : NavIconInactive}
           />
         </Link>
         <Link to="/post" className="d-inline-block p-2" style={NavIcon}>
@@ -45,14 +45,14 @@ export class Menu extends Component {
             style={
               path === 'post' && query === undefined
                 ? NavIconActive
-                : NavIconDisactive
+                : NavIconInactive
             }
           />
         </Link>
         <Link to="/notification" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
             icon={faBell}
-            style={path === 'notification' ? NavIconActive : NavIconDisactive}
+            style={path === 'notification' ? NavIconActive : NavIconInactive}
           />
         </Link>
         <Link
@@ -62,7 +62,7 @@ export class Menu extends Component {
         >
           <FontAwesomeIcon
             icon={faUser}
-            style={path === 'profile' ? NavIconActive : NavIconDisactive}
+            style={path === 'profile' ? NavIconActive : NavIconInactive}
           />
         </Link>
       </Navbar>

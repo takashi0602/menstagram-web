@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { UnFollowButton, FollowButtonStyle } from './styled';
+import { UnfollowButton, FollowButtonStyle } from './styled';
 
 export default class FollowButton extends Component {
   render() {
     if (this.props.is_followed) {
-      return <UnFollowButton>フォロー中</UnFollowButton>;
+      return <UnfollowButton>フォロー中</UnfollowButton>;
     } else {
       return <FollowButtonStyle>フォローする</FollowButtonStyle>;
     }

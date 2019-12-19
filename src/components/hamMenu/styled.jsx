@@ -23,7 +23,7 @@ export const LogoutStyle = {
   borderBottom: '1px solid #c6c6c6'
 };
 
-export const HumButton = styled.button`
+export const HamButton = styled.button`
     background-color: rgba(255,255,255, 0);
     color: #eb6101;
     display: block;

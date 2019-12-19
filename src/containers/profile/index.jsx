@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faImages } from '@fortawesome/free-solid-svg-icons';
-import { HamMenu } from '../../components/humMenu';
+import { HamMenu } from '../../components/hamMenu';
 import {
   BackButton,
   UserName,
@@ -172,7 +172,7 @@ export class Profile extends Component {
     }
   };
 
-  ControllButton = () => {
+  ControlButton = () => {
     if (isMypage) {
       return (
         <div className="p-2">
@@ -281,7 +281,7 @@ export class Profile extends Component {
           <div className="p-2" style={Biography}>
             {user.biography}
           </div>
-          {this.ControllButton()}
+          {this.ControlButton()}
         </div>
         {this.PostsTileView()}
       </div>

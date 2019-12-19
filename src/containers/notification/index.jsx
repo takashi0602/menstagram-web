@@ -10,7 +10,7 @@ const follows = [
     src_user: {
       user_id: 'menstagram',
       screen_name: 'メンスタグラム公式',
-      avater: 'https://placehold.jp/150x150.png?text=icon'
+      avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
     follow: {
       is_followed: true,
@@ -22,7 +22,7 @@ const follows = [
     src_user: {
       user_id: 'menstagraaaaam',
       screen_name: 'メンスタグラム非公式',
-      avater: 'https://placehold.jp/150x150.png?text=icon'
+      avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
     follow: {
       is_followed: false,
@@ -36,7 +36,7 @@ const likes = [
     src_user: {
       user_id: 'menstagram',
       screen_name: 'メンスタグラム公式',
-      avater: 'https://placehold.jp/150x150.png?text=icon'
+      avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
     post: {
       id: 1,
@@ -51,7 +51,7 @@ const likes = [
     src_user: {
       user_id: 'menstagram',
       screen_name: 'メンスタグラム非公式',
-      avater: 'https://placehold.jp/150x150.png?text=icon'
+      avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
     post: {
       id: 1,

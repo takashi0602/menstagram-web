@@ -15,7 +15,7 @@ export default class UserRow extends Component {
           style={LinkStyle}
         >
           <img
-            src={this.props.user.avater}
+            src={this.props.user.avatar}
             alt="user_avatar"
             className="d-inline-block rounded-circle border"
             height="55px"

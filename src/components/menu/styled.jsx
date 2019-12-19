@@ -15,7 +15,7 @@ export const NavIcon = {
   lineHeight: '30px',
   textAlign: 'center'
 };
-export const NavIconDisactive = {
+export const NavIconInactive = {
   color: '#666666'
 };
 export const NavIconActive = {
