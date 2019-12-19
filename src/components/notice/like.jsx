@@ -49,6 +49,7 @@ export default class LikeNotices extends Component {
       </div>
     );
   };
+
   render() {
     return <this.ListOrEmpty />;
   }

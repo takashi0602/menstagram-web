@@ -7,11 +7,13 @@ import { BackButton, LinkStyle } from './styled';
 import UserRow from '../../components/userRow';
 
 const parentRoute = '/profile/1';
+
 const loginUser = {
   id: 100,
   user_id: 'AAABBB',
   screen_name: '表示名'
 };
+
 const followers = [
   {
     user_id: 'mensta',
@@ -28,6 +30,7 @@ const followers = [
     is_follwed: true
   }
 ];
+
 const follows = [
   {
     user_id: 'menstaaaa',
@@ -55,6 +58,7 @@ export class Follow extends Component {
   toggleList = (e, props) => {
     this.setState({ isFollowersView: props });
   };
+
   ToggleList = () => {
     if (this.state.isFollowersView) {
       return (
@@ -74,6 +78,7 @@ export class Follow extends Component {
       );
     }
   };
+
   render() {
     return (
       <div>

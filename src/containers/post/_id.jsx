@@ -6,10 +6,12 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../components/post/show';
 
 const parentRoute = '/profile/menstagram';
+
 const BackButton = {
   fontSize: '20px',
   color: '#666666'
 };
+
 const likers = [
   {
     id: 1,
@@ -60,6 +62,7 @@ const likers = [
     }
   }
 ];
+
 export class PostDetail extends Component {
   data = {
     id: this.props.match.params.id,
@@ -81,6 +84,7 @@ export class PostDetail extends Component {
     created_at: '2019-11-18T13:52:25.000000Z',
     updated_at: '2019-11-18T13:52:25.000000Z'
   };
+
   render() {
     return (
       <div>

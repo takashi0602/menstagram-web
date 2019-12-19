@@ -20,7 +20,9 @@ import {
 
 //ダミー
 const parentRoute = '/post/3';
+
 const isMypage = true;
+
 const user = {
   id: 1,
   user_id: 'menstagram',
@@ -33,6 +35,7 @@ const user = {
   biography:
     'user_information. user_information. user_information. user_information.'
 };
+
 const posts = [
   {
     id: 1,
@@ -145,6 +148,7 @@ const posts = [
     liked: 1
   }
 ];
+
 export class Profile extends Component {
   constructor(prop) {
     super(prop);
@@ -199,6 +203,7 @@ export class Profile extends Component {
       );
     }
   };
+
   PostsTileView = () => {
     if (posts.length > 0) {
       return (

@@ -3,6 +3,7 @@ import { Title, menu_size, under } from './styled';
 import LikeNotices from '../../components/notice/like';
 import FollowNotices from '../../components/notice/follow';
 import ManageNotices from '../../components/notice/manage';
+
 //ダミーデータ
 const follows = [
   {
@@ -30,6 +31,7 @@ const follows = [
     }
   }
 ];
+
 const likes = [
   {
     id: 1,
@@ -71,6 +73,7 @@ const manages = [
     created_at: '2019/11/29 22:56:15'
   }
 ];
+
 export class Notification extends Component {
   constructor(prop) {
     super(prop);
@@ -78,9 +81,11 @@ export class Notification extends Component {
       viewMode: 'LIKE'
     };
   }
+
   changeViewMode = (e, props) => {
     this.setState({ viewMode: props });
   };
+
   DataView = () => {
     if (this.state.viewMode === 'LIKE') {
       return <LikeNotices notices={likes} />;

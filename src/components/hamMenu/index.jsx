@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  MenuOuter,
+  MenuWrapper,
   LogoutStyle,
   HamButton,
   Open,
@@ -14,14 +14,16 @@ export class HamMenu extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
-      isMenuShow: false
+      isShowMenu: false
     };
   }
+
   toggleMenu = (e, props) => {
-    this.setState({ isMenuShow: props });
+    this.setState({ isShowMenu: props });
   };
+
   //ここで配列展開
-  MenuList = () => {
+  Menus = () => {
     return this.props.menuItems.map((item, idx) => {
       return (
         <Link key={idx} style={LogoutStyle} to={item.path}>
@@ -30,16 +32,17 @@ export class HamMenu extends Component {
       );
     });
   };
+
   render() {
     return (
       <div>
-        <MenuOuter style={this.state.isMenuShow ? Open : Close}>
-          <this.MenuList />
-          <HamButton onClick={e => this.toggleMenu(e, !this.state.isMenuShow)}>
+        <MenuWrapper style={this.state.isShowMenu ? Open : Close}>
+          <this.Menus />
+          <HamButton onClick={e => this.toggleMenu(e, !this.state.isShowMenu)}>
             ≡
           </HamButton>
-        </MenuOuter>
-        {this.state.isMenuShow && (
+        </MenuWrapper>
+        {this.state.isShowMenu && (
           <Cover onClick={e => this.toggleMenu(e, false)} />
         )}
       </div>

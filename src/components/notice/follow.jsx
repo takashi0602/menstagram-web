@@ -66,6 +66,7 @@ export default class FollowNotices extends Component {
       </div>
     );
   };
+
   render() {
     return <this.ListOrEmpty />;
   }

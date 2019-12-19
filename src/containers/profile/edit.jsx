@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import {
   Submit,
   BlackLink,
@@ -12,6 +11,19 @@ import {
 } from './styled';
 
 export class ProfileEdit extends Component {
+  user = {
+    id: 1,
+    user_id: 'menstagram',
+    avatar: 'https://placehold.jp/150x150.png?text=icon',
+    screen_name: 'メンスタグラム公式',
+    posted: 10,
+    following: 10,
+    followed: 10,
+    is_followed: false,
+    biography:
+      'user_information. user_information. user_information. user_information.'
+  };
+
   TopHeader = () => {
     return (
       <PositionParent>
@@ -26,19 +38,6 @@ export class ProfileEdit extends Component {
         <Submit>完了</Submit>
       </PositionParent>
     );
-  };
-
-  user = {
-    id: 1,
-    user_id: 'menstagram',
-    avatar: 'https://placehold.jp/150x150.png?text=icon',
-    screen_name: 'メンスタグラム公式',
-    posted: 10,
-    following: 10,
-    followed: 10,
-    is_followed: false,
-    biography:
-      'user_information. user_information. user_information. user_information.'
   };
 
   render() {

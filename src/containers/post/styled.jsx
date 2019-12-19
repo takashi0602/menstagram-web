@@ -36,6 +36,6 @@ export const Times = styled.div`
 export const TimesIcon = {
   width: '35px',
   height: '35px',
-  color: '#666666',
+  color: '#666',
   cursor: 'pointer'
 };

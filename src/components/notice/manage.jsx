@@ -33,6 +33,7 @@ export default class ManageNotices extends Component {
       </div>
     );
   };
+
   render() {
     return <this.ListOrEmpty />;
   }

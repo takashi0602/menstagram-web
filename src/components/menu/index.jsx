@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 // TODO faHart, faBellはフォーカスされている状態のときレギュラーアイコンにする
 //  →コンフリクトするため今はインポートしない
-import { Navbar, NavIcon, NavIconInactive, NavIconActive } from './styled';
+import { NavBar, NavIcon, NavIconInactive, NavIconActive } from './styled';
 
 export class Menu extends Component {
   // top, register, login, logoutでは表示しない
@@ -26,7 +26,7 @@ export class Menu extends Component {
     const path = this.props.history.location.pathname.split('/')[1];
     const query = this.props.history.location.pathname.split('/')[2];
     return (
-      <Navbar>
+      <NavBar>
         <Link to="/timeline" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
             icon={faHome}
@@ -65,13 +65,15 @@ export class Menu extends Component {
             style={path === 'profile' ? NavIconActive : NavIconInactive}
           />
         </Link>
-      </Navbar>
+      </NavBar>
     );
   };
+
   render() {
     return <div>{this.Hide()}</div>;
   }
 }
+
 Menu.propTypes = {
   history: PropTypes.object
 };

@@ -22,7 +22,10 @@ const likers = [
     is_followed: true
   }
 ];
+
 export class Liker extends Component {
+  parentRoute = '/post/' + this.props.match.params.id;
+
   constructor(prop) {
     super(prop);
     this.state = {
@@ -30,7 +33,6 @@ export class Liker extends Component {
     };
   }
 
-  parentRoute = '/post/' + this.props.match.params.id;
   render() {
     return (
       <div>

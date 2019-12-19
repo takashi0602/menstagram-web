@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FollowButton from '../../components/followButton';
+import FollowButton from '../followButtons';
 
 import { LinkStyle, UserAvatar, UserLink } from './styled';
 

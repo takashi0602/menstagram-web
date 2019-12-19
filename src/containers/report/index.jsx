@@ -8,6 +8,7 @@ export class Report extends Component {
       isFollowersView: true
     };
   }
+
   render() {
     return (
       <div>
