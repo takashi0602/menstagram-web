@@ -18,7 +18,8 @@ export class TimelineContainer extends Component {
       notGlobalTimelineMessage: '投稿がありません。',
       notPrivateTimelineMessage:
         'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
-      showBackToTop: false
+      showBackToTop: false,
+      scrollValue: 0
     };
   }
 
@@ -133,12 +134,20 @@ export class TimelineContainer extends Component {
     return <Reload onClick={getTimeline}>{text}</Reload>;
   };
 
-  // TODO: アニメーション
   setScrollTop = () => {
-    window.scrollTo(0,0);
+    let scrollValue = this.state.scrollValue;
+    let scrollSmallValue = this.state.scrollValue / 10;
+    setTimeout(function scrollAnimation() {
+      if (scrollValue > 0) {
+        scrollValue -= scrollSmallValue;
+        window.scrollTo(0, scrollValue);
+        setTimeout(scrollAnimation, 10);
+      }
+    }, 100);
   };
 
   handleScroll = scrollTop => {
+    this.setState({scrollValue: scrollTop});
     if (!this.state.showBackToTop && scrollTop > 100) this.setState({showBackToTop: true});
     else if (this.state.showBackToTop && scrollTop <= 100) this.setState({showBackToTop: false});
   };
