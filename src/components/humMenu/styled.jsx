@@ -5,35 +5,12 @@ export const MenuOuter = styled.div`
   box-sizing: border-box;
   height: 100%;
   position: fixed;
-  right: -300px;
+  right: max(calc(80px - 100vw), -300px);
   top: 0;
-  transition: transform 0.15s ease 0s;
-  width: 300px;
-  z-index: 1000;
+  width: min(calc(100vw - 80px), 300px);
+  z-index: 2000;
   border-left: solid #c6c6c6 1px;
   border-width: 1px;
-
-  &::before {
-    background-color: #fff;
-    border-radius: 0 0 0 10px;
-    color: #eb6101;
-    content: '≡';
-    display: block;
-    font-size: 50px;
-    height: 50px;
-    line-height: 50px;
-    position: absolute;
-    right: 100%;
-    text-align: center;
-    top: 0;
-    margin-top: 15px;
-    margin-right: 15px;
-    width: 50px;
-    border-width: 1px;
-  }
-  &:hover {
-    transform: translate(-300px);
-  }
 `;
 
 export const LogoutStyle = {
@@ -45,3 +22,43 @@ export const LogoutStyle = {
   padding: '1rem',
   borderBottom: '1px solid #c6c6c6'
 };
+
+export const HumButton = styled.button`
+    background-color: rgba(255,255,255, 0);
+    color: #eb6101;
+    display: block;
+    font-size: 50px;
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    right: 100%;
+    text-align: center;
+    top: 0;
+    margin-top: 15px;
+    margin-right: 15px;
+    padding: 0 0 7.5px 0;
+    width: 50px;
+    border-width: 1px;
+    border-radius: 0;
+    opacity: 1 !important;
+  }
+`;
+export const Open = {
+  transition: 'transform 0.15s ease 0s',
+  transform: 'translate( max(calc(80px - 100vw), -300px) )'
+};
+export const Close = {
+  transition: 'transform 0.15s ease 0s',
+  transform: 'translate( 0px )'
+};
+
+export const Cover = styled.div`
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1600;
+  background-color: #c6c6c6;
+  opacity: 0.2;
+`;

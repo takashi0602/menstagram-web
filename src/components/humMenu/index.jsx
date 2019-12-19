@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { MenuOuter, LogoutStyle } from './styled';
+import {
+  MenuOuter,
+  LogoutStyle,
+  HumButton,
+  Open,
+  Close,
+  Cover
+} from './styled';
 
 export class HamMenu extends Component {
+  constructor(prop) {
+    super(prop);
+    this.state = {
+      isMenuShow: false
+    };
+  }
+  toggleMenu = (e, props) => {
+    this.setState({ isMenuShow: props });
+  };
   //ここで配列展開
   MenuList = () => {
     return this.props.menuItems.map((item, idx) => {
@@ -16,9 +32,17 @@ export class HamMenu extends Component {
   };
   render() {
     return (
-      <MenuOuter>
-        <this.MenuList />
-      </MenuOuter>
+      <div>
+        <MenuOuter style={this.state.isMenuShow ? Open : Close}>
+          <this.MenuList />
+          <HumButton onClick={e => this.toggleMenu(e, !this.state.isMenuShow)}>
+            ≡
+          </HumButton>
+        </MenuOuter>
+        {this.state.isMenuShow && (
+          <Cover onClick={e => this.toggleMenu(e, false)} />
+        )}
+      </div>
     );
   }
 }
