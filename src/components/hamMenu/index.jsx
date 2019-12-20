@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import {
   MenuWrapper,
   LogoutStyle,
@@ -39,7 +41,7 @@ export class HamMenu extends Component {
         <MenuWrapper style={this.state.isShowMenu ? Open : Close}>
           <this.Menus />
           <HamButton onClick={e => this.toggleMenu(e, !this.state.isShowMenu)}>
-            ≡
+            <FontAwesomeIcon icon={faBars} />
           </HamButton>
         </MenuWrapper>
         {this.state.isShowMenu && (
