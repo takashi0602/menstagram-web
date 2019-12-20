@@ -13,9 +13,12 @@ export const UserId = {
   fontSize: '16px'
 };
 
-export const Biography = {
-  fontSize: '18px'
-};
+export const Biography = styled.div`
+  font-size: 18px;
+  padding: 0.5rem;
+  word-break: break-all;
+  white-space: pre-wrap;
+`;
 
 export const EditButton = {
   color: '#666',
