@@ -27,9 +27,10 @@ export const UnfollowButton = styled.button`
   height: 30px;
   color: #3c3c3c;
   background-color: white;
-  display; inline-block;
+  display: inline-block;
   border: #c6c6c6 1px solid;
   border-radius: 50rem;
+  padding: 7.5px;
 `;
 
 export const FollowButton = styled.button`
@@ -39,8 +40,9 @@ export const FollowButton = styled.button`
   height: 30px;
   color: white;
   background-color: #eb6101;
-  display; inline-block;
+  display: inline-block;
   border-radius: 50rem;
+  padding: 7.5px;
 `;
 
 export const Calc = styled.div`
