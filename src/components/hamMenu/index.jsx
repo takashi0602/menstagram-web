@@ -9,6 +9,8 @@ import {
   HamButton,
   Open,
   Close,
+  ButtonOpen,
+  ButtonClose,
   Cover
 } from './styled';
 
@@ -40,10 +42,13 @@ export class HamMenu extends Component {
       <div>
         <MenuWrapper style={this.state.isShowMenu ? Open : Close}>
           <this.Menus />
-          <HamButton onClick={e => this.toggleMenu(e, !this.state.isShowMenu)}>
-            <FontAwesomeIcon icon={faBars} />
-          </HamButton>
         </MenuWrapper>
+        <HamButton
+          style={this.state.isShowMenu ? ButtonOpen : ButtonClose}
+          onClick={e => this.toggleMenu(e, !this.state.isShowMenu)}
+        >
+          <FontAwesomeIcon icon={faBars} />
+        </HamButton>
         {this.state.isShowMenu && (
           <Cover onClick={e => this.toggleMenu(e, false)} />
         )}

@@ -27,16 +27,16 @@ export const HamButton = styled.button`
     background-color: rgba(255,255,255, 0);
     color: #eb6101;
     display: block;
-    font-size: 50px;
+    font-size: 21px;
     height: 50px;
-    line-height: 50px;
+    line-height: 21px;
     position: absolute;
-    right: 100%;
+    right: min(calc(100vw - 80px), 300px);
     text-align: center;
     top: 0;
     margin-top: 15px;
     margin-right: 15px;
-    padding: 0 0 7.5px 0;
+    padding: 0 ;
     width: 50px;
     border-width: 1px;
     border-radius: 0;
@@ -51,7 +51,17 @@ export const Open = {
 
 export const Close = {
   transition: 'transform 0.15s ease 0s',
+  transform: 'translate( min(calc(100vw - 80px), 300px) )'
+};
+
+export const ButtonOpen = {
+  transition: 'transform 0.15s ease 0s',
   transform: 'translate( 0px )'
+};
+
+export const ButtonClose = {
+  transition: 'transform 0.15s ease 0s',
+  transform: 'translate( min(calc(100vw - 80px ), 300px ) )'
 };
 
 export const Cover = styled.div`
