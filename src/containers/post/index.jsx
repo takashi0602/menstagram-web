@@ -5,7 +5,7 @@ import { PostButton, PostLabel, RenderImage, Times, TimesIcon } from './styled';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
-import { post } from '../../actions/post';
+import { post, failPost } from '../../actions/post';
 import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
@@ -107,12 +107,17 @@ export class PostConatiner extends Component {
     return validation;
   };
 
+  postSuccess = () => {
+    this.props.changeSuccessValue();
+    return <Redirect to={'/timeline'} />
+  };
+
   render() {
     return (
       <div>
         {auth(this.props.accessToken)}
         {this.props.loading && <Loading />}
-        {this.props.success && <Redirect to={'/timeline'} />}
+        {this.props.success && this.postSuccess()}
         <div className="position-relative py-3 border-bottom mb-3">
           <div className="text-center">投稿</div>
           <PostButton type="button" onClick={() => this.sendImages()}>
@@ -129,9 +134,7 @@ export class PostConatiner extends Component {
               this.changeText(e);
             }}
           />
-          {this.state.errorText && (
-            <p className="text-danger">256文字以下で入力してください。</p>
-          )}
+          {this.state.errorText && <p className="text-danger">256文字以下で入力してください。</p>}
           {this.state.files.length <= 3 && (
             <div>
               <PostLabel htmlFor="postImage">画像を追加する</PostLabel>
@@ -150,13 +153,9 @@ export class PostConatiner extends Component {
               />
             </div>
           )}
-          {this.state.errorFile && (
-            <p className="text-danger">画像は必須です。</p>
-          )}
-          {this.state.errorFileFormat && (
-            <p className="text-danger">画像のみ選択できます。</p>
-          )}
-          {!!this.state.files.length && this.readerImages()}
+          {this.state.errorFile && <p className="text-danger">画像は必須です。</p>}
+          {this.state.errorFileFormat && <p className="text-danger">画像のみ選択できます。</p>}
+          {this.state.files.length !== 0 && this.readerImages()}
         </div>
       </div>
     );
@@ -176,6 +175,9 @@ function mapDispatchToProps(dispatch) {
   return {
     postImages(payload, accessToken) {
       dispatch(post(payload, accessToken));
+    },
+    changeSuccessValue() {
+      dispatch(failPost());
     }
   };
 }
@@ -190,5 +192,6 @@ PostConatiner.propTypes = {
   status: PropTypes.number,
   loading: PropTypes.bool,
   postImages: PropTypes.func,
-  success: PropTypes.bool
+  success: PropTypes.bool,
+  changeSuccessValue: PropTypes.func
 };
