@@ -21,6 +21,7 @@ export class PostConatiner extends Component {
       errorFileFormat: false
     };
   }
+
   uploadImages = e => {
     this.setState({ errorFile: false });
     this.setState({ errorFileFormat: false });

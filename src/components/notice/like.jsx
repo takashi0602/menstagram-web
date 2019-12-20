@@ -22,7 +22,7 @@ export default class LikeNotices extends Component {
                   style={under}
                 >
                   <img
-                    src={notice.src_user.avater}
+                    src={notice.src_user.avatar}
                     alt="user_avatar"
                     className="d-inline-block rounded-circle border"
                     height="55px"
@@ -49,6 +49,7 @@ export default class LikeNotices extends Component {
       </div>
     );
   };
+
   render() {
     return <this.ListOrEmpty />;
   }

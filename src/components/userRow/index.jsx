@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FollowButton from '../../components/followButton';
+import FollowButton from '../followButtons';
 
 import { LinkStyle, UserAvatar, UserLink } from './styled';
 
@@ -15,7 +15,7 @@ export default class UserRow extends Component {
           style={LinkStyle}
         >
           <img
-            src={this.props.user.avater}
+            src={this.props.user.avatar}
             alt="user_avatar"
             className="d-inline-block rounded-circle border"
             height="55px"

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faImages } from '@fortawesome/free-solid-svg-icons';
-import { HamMenu } from '../../components/humMenu';
+import { HamMenu } from '../../components/hamMenu';
 import {
   BackButton,
   UserName,
@@ -20,7 +20,9 @@ import {
 
 //ダミー
 const parentRoute = '/post/3';
+
 const isMypage = true;
+
 const user = {
   id: 1,
   user_id: 'menstagram',
@@ -33,6 +35,7 @@ const user = {
   biography:
     'user_information. user_information. user_information. user_information.'
 };
+
 const posts = [
   {
     id: 1,
@@ -145,6 +148,7 @@ const posts = [
     liked: 1
   }
 ];
+
 export class Profile extends Component {
   constructor(prop) {
     super(prop);
@@ -172,7 +176,7 @@ export class Profile extends Component {
     }
   };
 
-  ControllButton = () => {
+  ControlButton = () => {
     if (isMypage) {
       return (
         <div className="p-2">
@@ -199,6 +203,7 @@ export class Profile extends Component {
       );
     }
   };
+
   PostsTileView = () => {
     if (posts.length > 0) {
       return (
@@ -281,7 +286,7 @@ export class Profile extends Component {
           <div className="p-2" style={Biography}>
             {user.biography}
           </div>
-          {this.ControllButton()}
+          {this.ControlButton()}
         </div>
         {this.PostsTileView()}
       </div>

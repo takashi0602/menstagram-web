@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MenuOuter = styled.div`
+export const MenuWrapper = styled.div`
   background-color: #fff;
   box-sizing: border-box;
   height: 100%;
@@ -23,7 +23,7 @@ export const LogoutStyle = {
   borderBottom: '1px solid #c6c6c6'
 };
 
-export const HumButton = styled.button`
+export const HamButton = styled.button`
     background-color: rgba(255,255,255, 0);
     color: #eb6101;
     display: block;
@@ -43,10 +43,12 @@ export const HumButton = styled.button`
     opacity: 1 !important;
   }
 `;
+
 export const Open = {
   transition: 'transform 0.15s ease 0s',
   transform: 'translate( max(calc(80px - 100vw), -300px) )'
 };
+
 export const Close = {
   transition: 'transform 0.15s ease 0s',
   transform: 'translate( 0px )'

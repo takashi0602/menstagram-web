@@ -6,7 +6,7 @@ import {
   NoticeSize,
   LikeSize,
   under,
-  UnFollowButton,
+  UnfollowButton,
   FollowButton
 } from './styled';
 
@@ -29,7 +29,7 @@ export default class FollowNotices extends Component {
                   style={under}
                 >
                   <img
-                    src={notice.src_user.avater}
+                    src={notice.src_user.avatar}
                     alt="user_avatar"
                     className="d-inline-block rounded-circle border"
                     height="55px"
@@ -49,7 +49,7 @@ export default class FollowNotices extends Component {
                 if (notice.follow.is_followed) {
                   return (
                     <div className="d-flex align-items-center">
-                      <UnFollowButton>フォロー中</UnFollowButton>
+                      <UnfollowButton>フォロー中</UnfollowButton>
                     </div>
                   );
                 } else {
@@ -66,6 +66,7 @@ export default class FollowNotices extends Component {
       </div>
     );
   };
+
   render() {
     return <this.ListOrEmpty />;
   }

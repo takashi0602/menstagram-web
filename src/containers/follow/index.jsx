@@ -7,32 +7,35 @@ import { BackButton, LinkStyle } from './styled';
 import UserRow from '../../components/userRow';
 
 const parentRoute = '/profile/1';
+
 const loginUser = {
   id: 100,
   user_id: 'AAABBB',
   screen_name: '表示名'
 };
+
 const followers = [
   {
     user_id: 'mensta',
     screen_name: 'メンスタグラム公式',
-    avater:
+    avatar:
       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
     is_follwed: false
   },
   {
     user_id: 'menstaaaa',
     screen_name: 'メンスタグラム非公式',
-    avater:
+    avatar:
       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
     is_follwed: true
   }
 ];
+
 const follows = [
   {
     user_id: 'menstaaaa',
     screen_name: 'メンスタグラム非公式',
-    avater:
+    avatar:
       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
     is_follwed: true
   }
@@ -55,6 +58,7 @@ export class Follow extends Component {
   toggleList = (e, props) => {
     this.setState({ isFollowersView: props });
   };
+
   ToggleList = () => {
     if (this.state.isFollowersView) {
       return (
@@ -74,6 +78,7 @@ export class Follow extends Component {
       );
     }
   };
+
   render() {
     return (
       <div>

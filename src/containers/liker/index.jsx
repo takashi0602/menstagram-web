@@ -10,19 +10,22 @@ const likers = [
   {
     user_id: 'mensta',
     screen_name: 'メンスタグラム公式',
-    avater:
+    avatar:
       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
     is_followed: false
   },
   {
     user_id: 'menstaaaa',
     screen_name: 'メンスタグラム非公式',
-    avater:
+    avatar:
       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
     is_followed: true
   }
 ];
+
 export class Liker extends Component {
+  parentRoute = '/post/' + this.props.match.params.id;
+
   constructor(prop) {
     super(prop);
     this.state = {
@@ -30,7 +33,6 @@ export class Liker extends Component {
     };
   }
 
-  parentRoute = '/post/' + this.props.match.params.id;
   render() {
     return (
       <div>
