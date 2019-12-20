@@ -283,9 +283,7 @@ export class Profile extends Component {
               <p className="text-center">フォロー</p>
             </Link>
           </div>
-          <div className="p-2" style={Biography}>
-            {user.biography}
-          </div>
+          <Biography>{user.biography}</Biography>
           {this.ControlButton()}
         </div>
         {this.PostsTileView()}
