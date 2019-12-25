@@ -4,13 +4,9 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../components/post/show';
+import { BackButton, Title } from './styled';
 
 const parentRoute = '/profile/menstagram';
-
-const BackButton = {
-  fontSize: '20px',
-  color: '#666666'
-};
 
 const likers = [
   {
@@ -88,12 +84,11 @@ export class PostDetail extends Component {
   render() {
     return (
       <div>
-        <header className="py-3 px-3 border-bottom d-flex justify-content-between">
-          <Link className="text-left" to={parentRoute}>
-            <FontAwesomeIcon icon={faChevronLeft} style={BackButton} />
+        <header className="py-3 px-3 border-bottom">
+          <Link className="text-left" to={parentRoute} style={BackButton}>
+            <FontAwesomeIcon icon={faChevronLeft} />
           </Link>
-          <h1 className="h5 mb-0 text-center">投稿</h1>
-          <span></span>
+          <Title>投稿</Title>
         </header>
         <Post isTimeline={false} post={this.data} likers={likers} />
       </div>

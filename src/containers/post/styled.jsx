@@ -39,3 +39,20 @@ export const TimesIcon = {
   color: '#666',
   cursor: 'pointer'
 };
+
+export const BackButton = {
+  fontSize: '1.25rem',
+  height: '20px',
+  lineHeight: '20px',
+  color: '#666666',
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  margin: '1rem 0 1rem 1rem'
+};
+export const Title = styled.h1`
+  font-size: 20px;
+  line-height: 20px;
+  margin-bottom: 0;
+  text-align: center;
+`;
