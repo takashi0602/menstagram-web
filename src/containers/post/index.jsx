@@ -111,7 +111,7 @@ export class PostConatiner extends Component {
       <div>
         {auth(this.props.accessToken)}
         {this.props.loading && <Loading />}
-        {this.props.success && <Redirect to={'/timeline'} />}
+        {this.props.success && <Redirect to={'/timeline/private'} />}
         <div className="position-relative py-3 border-bottom mb-3">
           <div className="text-center">投稿</div>
           <PostButton type="button" onClick={() => this.sendImages()}>

@@ -1,0 +1,19 @@
+.c-link {
+  &__lightgray {
+    color: $main-lightgray;
+    text-decoration: none;
+    &:hover {
+      color: $main-lightgray;
+      text-decoration: none;
+    }
+  }
+
+  &__black {
+    color: $main-black;
+    text-decoration: none;
+    &:hover {
+      color: $main-black;
+      text-decoration: none;
+    }
+  }
+}
