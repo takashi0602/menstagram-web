@@ -109,7 +109,7 @@ export class PostConatiner extends Component {
 
   postSuccess = () => {
     this.props.changeSuccessValue();
-    return <Redirect to={'/timeline'} />
+    return <Redirect to={'/timeline/private'} />
   };
 
   render() {
