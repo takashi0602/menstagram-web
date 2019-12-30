@@ -25,7 +25,7 @@ import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
-import { TwoChoiceModal } from '../../components/modal/TwoChoiceModal';
+import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 
 //ダミー
 const parentRoute = '/post/3';
