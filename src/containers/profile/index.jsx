@@ -21,6 +21,7 @@ import { connect } from 'react-redux';
 import {auth} from "../../middleware/auth";
 import {Loading} from "../../components/loading";
 import {Error} from "../../components/error";
+import {TwoChoiceModal} from "../../components/modal";
 
 //ダミー
 const parentRoute = '/post/3';
@@ -148,7 +149,8 @@ export class Profile extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
-      isFollowersView: true
+      isFollowersView: true,
+      showModal: false
     };
   }
 
@@ -156,7 +158,7 @@ export class Profile extends Component {
     if (isMypage) {
       return (
         <MyProfileHeader>
-          <HamMenu menuItems={[]} logout={() => this.logout()} />
+          <HamMenu menuItems={[]} logout={() => this.openModal()} />
         </MyProfileHeader>
       );
     } else {
@@ -238,6 +240,14 @@ export class Profile extends Component {
     this.props.post(this.props.accessToken);
   };
 
+  openModal = () => {
+    this.setState({showModal: true});
+  };
+
+  closeModal = () => {
+    this.setState({showModal: false});
+  };
+
   render() {
     return (
       <div>
@@ -279,6 +289,14 @@ export class Profile extends Component {
           </div>
         </div>
         {this.PostsTileView()}
+        {this.state.showModal &&
+          <TwoChoiceModal
+            text={'ログアウトしますか？'}
+            buttonName={'ログアウト'}
+            closeModal={() => this.closeModal()}
+            submit={() => this.logout()}
+          />
+        }
       </div>
     );
   }

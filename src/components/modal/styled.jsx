@@ -7,6 +7,7 @@ export const Modal = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 300;
 `;
 
 export const ModalBack = styled.div`
