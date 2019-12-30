@@ -49,7 +49,7 @@ export class Menu extends Component {
             }
           />
         </Link>
-        <Link to="/notification" className="d-inline-block p-2" style={NavIcon}>
+        <Link to="/notification/liked" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
             icon={faBell}
             style={path === 'notification' ? NavIconActive : NavIconInactive}

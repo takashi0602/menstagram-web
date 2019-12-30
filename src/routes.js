@@ -38,7 +38,9 @@ export const Routes = () => {
               <Route exact path={'/followed/:id'} component={Follow} />
               <Route exact path={'/following/:id'} component={Follow} />
               <Route exact path={'/profile/:id/edit'} component={ProfileEdit} />
-              <Route exact path={'/notification'} component={Notification} />
+              <Route exact path={'/notification/liked'} component={Notification} />
+              <Route exact path={'/notification/followed'} component={Notification} />
+              <Route exact path={'/notification/system'} component={Notification} />
               <Route exact path={'/report'} component={Report} />
             </Switch>
             <Route component={Menu} />
