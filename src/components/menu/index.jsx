@@ -27,7 +27,11 @@ export class Menu extends Component {
     const query = this.props.history.location.pathname.split('/')[2];
     return (
       <NavBar>
-        <Link to="/timeline/private" className="d-inline-block p-2" style={NavIcon}>
+        <Link
+          to="/timeline/private"
+          className="d-inline-block p-2"
+          style={NavIcon}
+        >
           <FontAwesomeIcon
             icon={faHome}
             style={path === 'timeline' ? NavIconActive : NavIconInactive}
@@ -49,7 +53,11 @@ export class Menu extends Component {
             }
           />
         </Link>
-        <Link to="/notification/liked" className="d-inline-block p-2" style={NavIcon}>
+        <Link
+          to="/notification/liked"
+          className="d-inline-block p-2"
+          style={NavIcon}
+        >
           <FontAwesomeIcon
             icon={faBell}
             style={path === 'notification' ? NavIconActive : NavIconInactive}

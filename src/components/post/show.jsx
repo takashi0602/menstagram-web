@@ -2,9 +2,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faEllipsisH, faHeart, faUser} from '@fortawesome/free-solid-svg-icons';
-import { Like, ImageArea, RamenImage, UserImage, EllipsisH, faUserIcon, LikerImage, LikerIcon } from './styled';
-import { DetailModal } from "../modal/detail";
+import {
+  faEllipsisH,
+  faHeart,
+  faUser
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  Like,
+  ImageArea,
+  RamenImage,
+  UserImage,
+  EllipsisH,
+  faUserIcon,
+  LikerImage,
+  LikerIcon
+} from './styled';
+import { DetailModal } from '../modal/detail';
 import Slider from 'react-slick';
 
 const sliderSettings = {
@@ -52,25 +65,33 @@ export class Post extends Component {
   };
 
   showLiker = () => {
-    const likerList = this.props.likers.map((liker) => {
+    const likerList = this.props.likers.map(liker => {
       return (
         <Link key={liker.user.user_id} to={'/profile/' + liker.user.user_id}>
-          {liker.user.avatar
-            ? <LikerImage style={{backgroundImage: `url(${liker.user.avatar})`}} />
-            : (<LikerImage>
-                <FontAwesomeIcon icon={faUser} style={LikerIcon} />
-              </LikerImage>)}
+          {liker.user.avatar ? (
+            <LikerImage
+              style={{ backgroundImage: `url(${liker.user.avatar})` }}
+            />
+          ) : (
+            <LikerImage>
+              <FontAwesomeIcon icon={faUser} style={LikerIcon} />
+            </LikerImage>
+          )}
         </Link>
       );
     });
     if (this.props.postItem.liked > 5) {
       likerList.push(
-        <Link key={'more'} to={'/liker/' + this.props.postItem.id} className="c-link__black">
+        <Link
+          key={'more'}
+          to={'/liker/' + this.props.postItem.id}
+          className="c-link__black"
+        >
           ...
         </Link>
-      )
+      );
     }
-    return likerList
+    return likerList;
   };
 
   showImage = image => {
@@ -124,10 +145,7 @@ export class Post extends Component {
           {this.postDetails()}
         </div>
         {this.state.showModal && (
-          <DetailModal
-            number={1}
-            closeModal={this.closeModal}
-          />
+          <DetailModal number={1} closeModal={this.closeModal} />
         )}
       </div>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Modal, ModalBack, ModalContainer} from "./styled";
+import { Modal, ModalBack, ModalContainer } from './styled';
 
 export class TwoChoiceModal extends Component {
   render() {
@@ -10,8 +10,20 @@ export class TwoChoiceModal extends Component {
         <ModalContainer className="p-4">
           <p className="text-left mb-5">{this.props.text}</p>
           <div className="d-flex justify-content-around">
-            <button type="button" className="c-button__white" onClick={this.props.closeModal}>キャンセル</button>
-            <button type="button" className="c-button__orange" onClick={this.props.submit}>{this.props.buttonName}</button>
+            <button
+              type="button"
+              className="c-button__white"
+              onClick={this.props.closeModal}
+            >
+              キャンセル
+            </button>
+            <button
+              type="button"
+              className="c-button__orange"
+              onClick={this.props.submit}
+            >
+              {this.props.buttonName}
+            </button>
           </div>
         </ModalContainer>
       </Modal>

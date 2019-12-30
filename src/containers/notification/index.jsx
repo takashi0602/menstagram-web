@@ -3,7 +3,8 @@ import { Title } from './styled';
 import LikeNotices from '../../components/notification/like';
 import FollowNotices from '../../components/notification/follow';
 import ManageNotices from '../../components/notification/manage';
-import {NotificationHeader} from "../../components/notification/header";
+import { NotificationHeader } from '../../components/notification/header';
+import PropTypes from 'prop-types';
 
 //ダミーデータ
 const follows = [
@@ -104,9 +105,17 @@ export class Notification extends Component {
     return (
       <div className=" px-0">
         <Title>通知</Title>
-        {<NotificationHeader pathName={this.props.history.location.pathname.split('/')[2]} />}
+        {
+          <NotificationHeader
+            pathName={this.props.history.location.pathname.split('/')[2]}
+          />
+        }
         {this.DataView()}
       </div>
     );
   }
 }
+
+Notification.propTypes = {
+  history: PropTypes.object
+};

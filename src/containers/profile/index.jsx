@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faChevronLeft, faImages, faUser} from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faImages,
+  faUser
+} from '@fortawesome/free-solid-svg-icons';
 import { HamMenu } from '../../components/hamMenu';
 import {
   backButton,
@@ -16,12 +20,12 @@ import {
   userIcon,
   Item
 } from './styled';
-import {logout} from "../../actions/auth/logout";
+import { logout } from '../../actions/auth/logout';
 import { connect } from 'react-redux';
-import {auth} from "../../middleware/auth";
-import {Loading} from "../../components/loading";
-import {Error} from "../../components/error";
-import {TwoChoiceModal} from "../../components/modal/TwoChoiceModal";
+import { auth } from '../../middleware/auth';
+import { Loading } from '../../components/loading';
+import { Error } from '../../components/error';
+import { TwoChoiceModal } from '../../components/modal/TwoChoiceModal';
 
 //ダミー
 const parentRoute = '/post/3';
@@ -45,9 +49,7 @@ const posts = [
   {
     id: 1,
     text: 'aaaa',
-    images: [
-      'http://placehold.it/300x300?text=1'
-    ],
+    images: ['http://placehold.it/300x300?text=1'],
     liked: 1
   },
   {
@@ -83,9 +85,7 @@ const posts = [
   {
     id: 5,
     text: 'aaaa',
-    images: [
-      'http://placehold.it/300x300?text=1'
-    ],
+    images: ['http://placehold.it/300x300?text=1'],
     liked: 1
   },
   {
@@ -145,7 +145,7 @@ const posts = [
   }
 ];
 
-export class Profile extends Component {
+class ProfileContainer extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
@@ -176,18 +176,25 @@ export class Profile extends Component {
     if (isMypage) {
       return (
         <button type="button" className="c-button__white px-0 w-100">
-          <Link to={`/profile/${this.props.match.params.id}/edit`} className="d-inline-block w-100 c-link__gray">
+          <Link
+            to={`/profile/${this.props.match.params.id}/edit`}
+            className="d-inline-block w-100 c-link__gray"
+          >
             プロフィールの編集
           </Link>
         </button>
       );
     } else if (user.is_followed) {
       return (
-        <button type="button" className="c-button__white w-100">フォロー中</button>
+        <button type="button" className="c-button__white w-100">
+          フォロー中
+        </button>
       );
     } else {
       return (
-        <button type="button" className="c-button__orange w-100">フォローする</button>
+        <button type="button" className="c-button__orange w-100">
+          フォローする
+        </button>
       );
     }
   };
@@ -204,7 +211,9 @@ export class Profile extends Component {
                 className="col-4 p-1 position-relative"
               >
                 <PostImage src={post.images[0]} alt="post" />
-                {post.images.length !== 1 && <FontAwesomeIcon icon={faImages} style={imagesIcon} />}
+                {post.images.length !== 1 && (
+                  <FontAwesomeIcon icon={faImages} style={imagesIcon} />
+                )}
               </Link>
             );
           })}
@@ -228,7 +237,8 @@ export class Profile extends Component {
   };
 
   showUserImage = () => {
-    if (user.avatar) return <UserImage style={{backgroundImage: `url(${user.avatar})`}} />
+    if (user.avatar)
+      return <UserImage style={{ backgroundImage: `url(${user.avatar})` }} />;
     return (
       <UserImage>
         <FontAwesomeIcon icon={faUser} style={userIcon} />
@@ -241,11 +251,11 @@ export class Profile extends Component {
   };
 
   openModal = () => {
-    this.setState({showModal: true});
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   };
 
   render() {
@@ -257,12 +267,8 @@ export class Profile extends Component {
         {this.props.status && <Error status={this.props.status} />}
         <div className="text-center">
           {this.showUserImage()}
-          <UserName>
-            {user.screen_name}
-          </UserName>
-          <UserId>
-            {user.user_id}
-          </UserId>
+          <UserName>{user.screen_name}</UserName>
+          <UserId>{user.user_id}</UserId>
         </div>
         <div className="mb-2 border-bottom">
           <div className="d-flex justify-content-around mb-2">
@@ -289,14 +295,14 @@ export class Profile extends Component {
           </div>
         </div>
         {this.PostsTileView()}
-        {this.state.showModal &&
+        {this.state.showModal && (
           <TwoChoiceModal
             text={'ログアウトしますか？'}
             buttonName={'ログアウト'}
             closeModal={() => this.closeModal()}
             submit={() => this.logout()}
           />
-        }
+        )}
       </div>
     );
   }
@@ -318,12 +324,12 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-Profile = connect(
+export const Profile = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Profile);
+)(ProfileContainer);
 
-Profile.propTypes = {
+ProfileContainer.propTypes = {
   match: PropTypes.object,
   accessToken: PropTypes.string,
   status: PropTypes.number,

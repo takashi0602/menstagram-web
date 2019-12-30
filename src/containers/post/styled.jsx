@@ -41,9 +41,9 @@ export const TimesIcon = {
 };
 
 export const BackButton = styled.div`
-  fontSize: 1.25rem;
+  fontsize: 1.25rem;
   height: 20px;
-  lineHeight: 20px;
+  lineheight: 20px;
   color: #666666;
   position: absolute;
   top: 0;

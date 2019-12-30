@@ -5,9 +5,7 @@ import { under, NoticeSize, LikeSize } from './styled';
 export default class ManageNotices extends Component {
   ListOrEmpty = () => {
     if (this.props.notices.length === 0) {
-      return (
-        <div className="text-center pt-3">通知はありません。</div>
-      );
+      return <div className="text-center pt-3">通知はありません。</div>;
     }
     return (
       <div>
@@ -36,9 +34,7 @@ export default class ManageNotices extends Component {
 
   render() {
     return (
-      <div className="c-container__padding pt-3">
-        {this.ListOrEmpty()}
-      </div>
+      <div className="c-container__padding pt-3">{this.ListOrEmpty()}</div>
     );
   }
 }

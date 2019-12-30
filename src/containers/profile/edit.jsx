@@ -8,10 +8,12 @@ import {
   PositionParent,
   OrangeText,
   TextArea,
-  ItemLabel, UserImage, userIcon
+  ItemLabel,
+  UserImage,
+  userIcon
 } from './styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faChevronLeft, faUser} from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const user = {
   id: 1,
@@ -32,7 +34,7 @@ export class ProfileEdit extends Component {
     this.state = {
       newImage: [],
       errorFileFormat: false
-    }
+    };
   }
   TopHeader = () => {
     return (
@@ -52,7 +54,8 @@ export class ProfileEdit extends Component {
 
   showUserImage = () => {
     if (this.state.newImage.length !== 0) return this.returnNewImage();
-    if (user.avatar) return <UserImage style={{backgroundImage: `url(${user.avatar})`}} />;
+    if (user.avatar)
+      return <UserImage style={{ backgroundImage: `url(${user.avatar})` }} />;
     return (
       <UserImage>
         <FontAwesomeIcon icon={faUser} style={userIcon} />
@@ -64,7 +67,13 @@ export class ProfileEdit extends Component {
     const createObjectURL =
       (window.URL || window.webkitURL).createObjectURL ||
       window.createObjectURL;
-    return <UserImage style={{backgroundImage: `url('${createObjectURL(this.state.newImage)}')`}} />
+    return (
+      <UserImage
+        style={{
+          backgroundImage: `url('${createObjectURL(this.state.newImage)}')`
+        }}
+      />
+    );
   };
 
   setNewImage = e => {
@@ -73,7 +82,7 @@ export class ProfileEdit extends Component {
       this.setState({ errorFileFormat: true });
       return;
     }
-    this.setState({newImage: e.target.files[0]});
+    this.setState({ newImage: e.target.files[0] });
   };
 
   render() {
@@ -84,18 +93,22 @@ export class ProfileEdit extends Component {
           {this.showUserImage()}
           <div className="text-center">
             {/*TODO: プロフィール画像変更APIが完成次第に実装*/}
-            <OrangeText htmlFor="profileImage" className="c-link__lightgray">プロフィール写真の変更</OrangeText>
+            <OrangeText htmlFor="profileImage" className="c-link__lightgray">
+              プロフィール写真の変更
+            </OrangeText>
             {/*<input*/}
-              {/*id="profileImage"*/}
-              {/*type="file"*/}
-              {/*className="d-none"*/}
-              {/*accept="image/*"*/}
-              {/*multiple*/}
-              {/*onChange={e => {*/}
-                {/*this.setNewImage(e);*/}
-              {/*}}*/}
+            {/*id="profileImage"*/}
+            {/*type="file"*/}
+            {/*className="d-none"*/}
+            {/*accept="image/*"*/}
+            {/*multiple*/}
+            {/*onChange={e => {*/}
+            {/*this.setNewImage(e);*/}
+            {/*}}*/}
             {/*/>*/}
-            {this.state.errorFileFormat && <p className="text-danger">画像を選択してください。</p>}
+            {this.state.errorFileFormat && (
+              <p className="text-danger">画像を選択してください。</p>
+            )}
           </div>
         </div>
         <div className="c-container__padding">
