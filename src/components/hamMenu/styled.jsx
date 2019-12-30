@@ -34,7 +34,7 @@ export const HamButton = styled.button`
     right: min(calc(100vw - 80px), 300px);
     text-align: center;
     top: 0;
-    margin-right: 15px;
+    margin-right: 5px;
     padding: 0 ;
     width: 50px;
     border-width: 1px;
