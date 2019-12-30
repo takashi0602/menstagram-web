@@ -7,5 +7,5 @@ export const auth = accessToken => {
 };
 
 export const noAuth = accessToken => {
-  if (accessToken) return <Redirect to={'/logout'} />;
+  if (accessToken) return <Redirect to={'/timeline/private'} />;
 };

@@ -21,10 +21,10 @@ export const successPrivateTimeline = response => {
   };
 };
 
-export const failPrivateTimeline = error => {
+export const failPrivateTimeline = status => {
   return {
     type: FAIL_PRIVATE_TIMELINE,
     postList: [],
-    status: error.status
+    status: status
   };
 };

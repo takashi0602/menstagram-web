@@ -28,7 +28,7 @@ function* privateTimeline(action) {
     }
     yield put(successPrivateTimeline(response));
   } else {
-    yield put(failPrivateTimeline(error.response));
+    yield put(failPrivateTimeline(error.response.status));
     yield put(errorHandle.error(error.response));
   }
   yield put(notLoading());
@@ -49,7 +49,7 @@ function* globalTimeline(action) {
     }
     yield put(successGlobalTimeline(response));
   } else {
-    yield put(failGlobalTimeline(error.response));
+    yield put(failGlobalTimeline(error.response.status));
     yield put(errorHandle.error(error.response));
   }
   yield put(notLoading());
