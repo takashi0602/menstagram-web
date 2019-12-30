@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { HeaderTitle, FaChevronLeftStyle, faChevronLeftIconStyle } from './styled';
+import {
+  HeaderTitle,
+  FaChevronLeftStyle,
+  faChevronLeftIconStyle
+} from './styled';
 
 export class FollowHeader extends Component {
   showHeader = () => {
@@ -20,7 +24,9 @@ export class FollowHeader extends Component {
       <div className="row justify-content-around mx-0 mb-3">
         <div className="col text-center">フォロワー</div>
         <Link
-          to={`/following/${this.props.history.location.pathname.split('/')[2]}`}
+          to={`/following/${
+            this.props.history.location.pathname.split('/')[2]
+          }`}
           className="col text-center c-link__lightgray"
         >
           フォロー中
@@ -44,7 +50,9 @@ export class FollowHeader extends Component {
   };
 
   goBack = () => {
-    this.props.history.push(`/profile/${this.props.history.location.pathname.split('/')[2]}`);
+    this.props.history.push(
+      `/profile/${this.props.history.location.pathname.split('/')[2]}`
+    );
   };
 
   render() {
@@ -52,9 +60,14 @@ export class FollowHeader extends Component {
       <div className="pt-3">
         <div className="position-relative mb-4">
           <FaChevronLeftStyle onClick={this.goBack}>
-            <FontAwesomeIcon icon={faChevronLeft} style={faChevronLeftIconStyle} />
+            <FontAwesomeIcon
+              icon={faChevronLeft}
+              style={faChevronLeftIconStyle}
+            />
           </FaChevronLeftStyle>
-          <HeaderTitle>{this.props.history.location.pathname.split('/')[2]}</HeaderTitle>
+          <HeaderTitle>
+            {this.props.history.location.pathname.split('/')[2]}
+          </HeaderTitle>
         </div>
         <div className="border-bottom">{this.showHeader()}</div>
       </div>

@@ -27,9 +27,15 @@ export default class FollowListItem extends Component {
           </UserLink>
         </Link>
         <div className="col-5 p-0 text-right">
-          {this.props.user.is_follwed
-            ? <FollowButton type="button" className="c-button__white">フォロー中</FollowButton>
-            : <FollowButton type="button" className="c-button__orange">フォローする</FollowButton>}
+          {this.props.user.is_follwed ? (
+            <FollowButton type="button" className="c-button__white">
+              フォロー中
+            </FollowButton>
+          ) : (
+            <FollowButton type="button" className="c-button__orange">
+              フォローする
+            </FollowButton>
+          )}
         </div>
       </li>
     );
