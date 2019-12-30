@@ -7,23 +7,33 @@ import {
   Title,
   PositionParent,
   OrangeText,
-  TextArea
+  TextArea,
+  ItemLabel, UserImage, userIcon
 } from './styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faChevronLeft, faUser} from '@fortawesome/free-solid-svg-icons';
+
+const user = {
+  id: 1,
+  user_id: 'menstagram',
+  avatar: '',
+  screen_name: 'メンスタグラム公式',
+  posted: 10,
+  following: 10,
+  followed: 10,
+  is_followed: false,
+  biography:
+    'user_information. user_information. user_information. user_information.'
+};
 
 export class ProfileEdit extends Component {
-  user = {
-    id: 1,
-    user_id: 'menstagram',
-    avatar: 'https://placehold.jp/150x150.png?text=icon',
-    screen_name: 'メンスタグラム公式',
-    posted: 10,
-    following: 10,
-    followed: 10,
-    is_followed: false,
-    biography:
-      'user_information. user_information. user_information. user_information.'
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      newImage: [],
+      errorFileFormat: false
+    }
+  }
   TopHeader = () => {
     return (
       <PositionParent>
@@ -32,7 +42,7 @@ export class ProfileEdit extends Component {
           className=""
           style={blackLink}
         >
-          キャンセル
+          <FontAwesomeIcon icon={faChevronLeft} />
         </Link>
         <Title>プロフィールの編集</Title>
         <Submit>完了</Submit>
@@ -40,45 +50,73 @@ export class ProfileEdit extends Component {
     );
   };
 
+  showUserImage = () => {
+    if (this.state.newImage.length !== 0) return this.returnNewImage();
+    if (user.avatar) return <UserImage style={{backgroundImage: `url(${user.avatar})`}} />;
+    return (
+      <UserImage>
+        <FontAwesomeIcon icon={faUser} style={userIcon} />
+      </UserImage>
+    );
+  };
+
+  returnNewImage = () => {
+    const createObjectURL =
+      (window.URL || window.webkitURL).createObjectURL ||
+      window.createObjectURL;
+    return <UserImage style={{backgroundImage: `url('${createObjectURL(this.state.newImage)}')`}} />
+  };
+
+  setNewImage = e => {
+    this.setState({ errorFileFormat: false });
+    if (e.target.files && !e.target.files[0].type.startsWith('image')) {
+      this.setState({ errorFileFormat: true });
+      return;
+    }
+    this.setState({newImage: e.target.files[0]});
+  };
+
   render() {
     return (
       <div>
         {this.TopHeader()}
         <div className="mt-3 text-center border-bottom">
-          <img
-            src={this.user.avatar}
-            alt="avatar"
-            className="d-inline-block rounded-circle border mb-2"
-            height="100px"
-            width="100px"
-          />
-          <OrangeText>プロフィール写真の変更</OrangeText>
-        </div>
-        <div className="container">
-          <div className="row pt-3">
-            <div className="col">スクリーンネーム</div>
-            <div className="col">
-              <input
-                type="text"
-                className="form-control"
-                defaultValue={this.user.screen_name}
-              />
-            </div>
-            <div className="col-12">
-              <p>自己紹介</p>
-              <textarea
-                name=""
-                className="form-control"
-                cols="30"
-                rows="5"
-                style={TextArea}
-                defaultValue={this.user.biography}
-              />
-            </div>
+          {this.showUserImage()}
+          <div className="text-center">
+            {/*TODO: プロフィール画像変更APIが完成次第に実装*/}
+            <OrangeText htmlFor="profileImage" className="c-link__lightgray">プロフィール写真の変更</OrangeText>
+            {/*<input*/}
+              {/*id="profileImage"*/}
+              {/*type="file"*/}
+              {/*className="d-none"*/}
+              {/*accept="image/*"*/}
+              {/*multiple*/}
+              {/*onChange={e => {*/}
+                {/*this.setNewImage(e);*/}
+              {/*}}*/}
+            {/*/>*/}
+            {this.state.errorFileFormat && <p className="text-danger">画像を選択してください。</p>}
           </div>
         </div>
-
-        <div className="container pb-2" />
+        <div className="c-container__padding">
+          <div className="d-flex pt-3 align-items-center">
+            <ItemLabel>スクリーンネーム</ItemLabel>
+            <input
+              type="text"
+              className="form-control"
+              defaultValue={user.screen_name}
+            />
+          </div>
+          <div>
+            <label>自己紹介</label>
+            <TextArea
+              className="form-control"
+              cols="30"
+              rows="5"
+              defaultValue={user.biography}
+            />
+          </div>
+        </div>
       </div>
     );
   }

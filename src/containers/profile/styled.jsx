@@ -54,11 +54,10 @@ export const imagesIcon = {
 export const Submit = styled.button`
   text-decoration: none;
   fontsize: 16px;
-  font-weight: inherit;
+  font-weight: normal;
   color: #eb6101;
   background-color: white;
   padding: 0;
-  text-align: 'right';
 `;
 
 export const blackLink = {
@@ -69,8 +68,8 @@ export const blackLink = {
 export const Title = styled.div`
   fontsize: 18px;
   position: absolute;
-  left: calc(50% - 68px);
-  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export const PositionParent = styled.header`
@@ -81,14 +80,15 @@ export const PositionParent = styled.header`
   border-bottom: 1px solid #dee2e6;
 `;
 
-export const OrangeText = styled.div`
+export const OrangeText = styled.label`
   color: #eb6101;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 `;
 
-export const TextArea = {
-  resize: 'none'
-};
+export const TextArea = styled.textarea`
+  resize: 'none';
+  word-break: break-all;
+`;
 
 export const MyProfileHeader = styled.header`
   width: 100%;
@@ -97,4 +97,9 @@ export const MyProfileHeader = styled.header`
 
 export const Item = styled.div`
   width: 30%;
+`;
+
+export const ItemLabel = styled.label`
+  white-space: nowrap;
+  margin-right: 10px;
 `;
