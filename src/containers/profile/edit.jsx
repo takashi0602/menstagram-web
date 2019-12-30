@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Submit,
-  BlackLink,
+  blackLink,
   Title,
   PositionParent,
   OrangeText,
@@ -30,7 +30,7 @@ export class ProfileEdit extends Component {
         <Link
           to={'/profile/' + this.props.match.params.id}
           className=""
-          style={BlackLink}
+          style={blackLink}
         >
           キャンセル
         </Link>
