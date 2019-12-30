@@ -9,8 +9,7 @@ import {
   faBell,
   faUser
 } from '@fortawesome/free-solid-svg-icons';
-// TODO faHart, faBellはフォーカスされている状態のときレギュラーアイコンにする
-//  →コンフリクトするため今はインポートしない
+import { faHeart as regularHeart, faBell as regularBell } from '@fortawesome/free-regular-svg-icons';
 import { NavBar, NavIcon, NavIconInactive, NavIconActive } from './styled';
 
 export class Menu extends Component {
@@ -39,7 +38,7 @@ export class Menu extends Component {
         </Link>
         <Link to="/like" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
-            icon={faHeart}
+            icon={path === 'like' ? faHeart : regularHeart}
             style={path === 'like' ? NavIconActive : NavIconInactive}
           />
         </Link>
@@ -59,7 +58,7 @@ export class Menu extends Component {
           style={NavIcon}
         >
           <FontAwesomeIcon
-            icon={faBell}
+            icon={path === 'notification' ? faBell : regularBell}
             style={path === 'notification' ? NavIconActive : NavIconInactive}
           />
         </Link>
