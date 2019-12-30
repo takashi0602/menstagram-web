@@ -2,163 +2,140 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH, faHeart } from '@fortawesome/free-solid-svg-icons';
+import {faEllipsisH, faHeart, faUser} from '@fortawesome/free-solid-svg-icons';
+import { Like, ImageArea, RamenImage, UserImage, EllipsisH, faUserIcon, LikerImage, LikerIcon } from './styled';
+import { DetailModal } from "../modal/detail";
+import Slider from 'react-slick';
 
-import { Relative, UserName, Menu, Like, MoreUser } from './styled';
+const sliderSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1
+};
 
 export class Post extends Component {
-  created = new Date(this.props.post.created_at);
-  ToggleView = props => {
-    if (props.isTimeline) {
-      // タイムライン
-      return (
-        <div>
-          <div className="mt-4 d-flex justify-content-between">
-            <span>
-              <FontAwesomeIcon icon={faHeart} style={Like} />
-              {props.post.liked}
-            </span>
-            <span>{this.created.toLocaleDateString()}</span>
-          </div>
-          <div>{props.post.text}</div>
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    };
+  }
+
+  setUserImage = () => {
+    return this.props.postItem.user.avatar ? (
+      <UserImage
+        style={{
+          backgroundImage: `url(${this.props.postItem.user.avatar})`
+        }}
+      />
+    ) : (
+      <UserImage>
+        <FontAwesomeIcon icon={faUser} style={faUserIcon} />
+      </UserImage>
+    );
+  };
+
+  postDetails = () => {
+    return (
+      <div className="px-3">
+        <div>{this.props.postItem.created_at}</div>
+        <p>{this.props.postItem.text}</p>
+        <div className="d-flex align-items-center">
+          <FontAwesomeIcon icon={faHeart} style={Like} />
+          <div className="mr-2">{this.props.postItem.liked}</div>
+          {this.showLiker()}
         </div>
-      );
-    } else {
-      // 詳細表示
+      </div>
+    );
+  };
+
+  showLiker = () => {
+    const likerList = this.props.likers.map((liker) => {
       return (
-        <div>
-          <h6 className="mt-4">{this.created.toLocaleDateString()}</h6>
-          <p>{props.post.text}</p>
-          <span className="mr-1">
-            <FontAwesomeIcon icon={faHeart} style={Like} />
-            {props.post.liked}
-          </span>
-          {props.likers.map((user, idx) => {
-            if (idx < 5) {
-              return (
-                <Link key={idx} to={'/profile/' + user.id}>
-                  <img
-                    alt="avatar"
-                    src={user.user.avatar}
-                    height="23px"
-                    width="23px"
-                    className="rounded-circle border mr-1"
-                  />
-                </Link>
-              );
-            } else {
-              return (
-                <Link key={idx} to={'/liker/' + props.post.id} style={MoreUser}>
-                  ...
-                </Link>
-              );
-            }
-          })}
-        </div>
+        <Link key={liker.user.user_id} to={'/profile/' + liker.user.user_id}>
+          {liker.user.avatar
+            ? <LikerImage style={{backgroundImage: `url(${liker.user.avatar})`}} />
+            : (<LikerImage>
+                <FontAwesomeIcon icon={faUser} style={LikerIcon} />
+              </LikerImage>)}
+        </Link>
       );
+    });
+    if (this.props.postItem.liked > 5) {
+      likerList.push(
+        <Link key={'more'} to={'/liker/' + this.props.postItem.id} className="c-link__black">
+          ...
+        </Link>
+      )
     }
+    return likerList
+  };
+
+  showImage = image => {
+    return <RamenImage style={{ backgroundImage: `url(${image})` }} />;
+  };
+
+  showImageSlick = images => {
+    return (
+      <Slider {...sliderSettings}>
+        {images.map((image, index) => {
+          return (
+            <div key={index}>
+              <RamenImage style={{ backgroundImage: `url(${image})` }} />
+            </div>
+          );
+        })}
+      </Slider>
+    );
+  };
+
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
   };
 
   render() {
     return (
-      <Relative>
-        <div>
-          <div className="py-3 px-4 border-bottom d-flex justify-content-between">
-            <Link
-              to={'/profile/' + this.props.post.user.id}
-              className="text-dark"
-              style={UserName}
-            >
-              <img
-                src={this.props.post.user.avatar}
-                alt="user-icon"
-                height="38px"
-                width="38px"
-                className="rounded-circle border"
-              />
-              <span className="ml-3 h5">
-                {this.props.post.user.screen_name}
-              </span>
-            </Link>
-            <FontAwesomeIcon
-              className="text-right"
-              icon={faEllipsisH}
-              style={Menu}
-            />
-          </div>
-
-          <div className="px-0">
-            <div
-              id="carouselExampleControls"
-              className="carousel slide"
-              data-ride="carousel"
-            >
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img
-                    className="d-block w-100"
-                    src={this.props.post.images[0]}
-                    alt="First slide"
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    className="d-block w-100"
-                    src={this.props.post.images[1]}
-                    alt="Second slide"
-                  />
-                </div>
-                <div className="carousel-item">
-                  <img
-                    className="d-block w-100"
-                    src={this.props.post.images[2]}
-                    alt="Third slide"
-                  />
-                </div>
-              </div>
-              <a
-                className="carousel-control-prev"
-                href="#carouselExampleControls"
-                role="button"
-                data-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="sr-only">Previous</span>
-              </a>
-              <a
-                className="carousel-control-next"
-                href="#carouselExampleControls"
-                role="button"
-                data-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="sr-only">Next</span>
-              </a>
-            </div>
-
-            <div className="px-3 pb-3">
-              <this.ToggleView
-                isTimeline={this.props.isTimeline}
-                post={this.props.post}
-                likers={this.props.likers}
-              />
-            </div>
+      <div>
+        <div className="d-flex justify-content-between align-items-center py-2 px-3">
+          <Link
+            to={`/profile/${this.props.postItem.user.user_id}`}
+            className="d-flex align-items-center c-link__black"
+          >
+            {this.setUserImage()}
+            <div>{this.props.postItem.user.screen_name}</div>
+          </Link>
+          <div onClick={() => this.openModal()}>
+            <FontAwesomeIcon icon={faEllipsisH} style={EllipsisH} />
           </div>
         </div>
-      </Relative>
+
+        <div>
+          <ImageArea className="mb-3">
+            {this.props.postItem.images.length === 1
+              ? this.showImage(this.props.postItem.images[0])
+              : this.showImageSlick(this.props.postItem.images)}
+          </ImageArea>
+          {this.postDetails()}
+        </div>
+        {this.state.showModal && (
+          <DetailModal
+            number={1}
+            closeModal={this.closeModal}
+          />
+        )}
+      </div>
     );
   }
 }
 
 Post.propTypes = {
-  isTimeline: PropTypes.bool,
   parentRoute: PropTypes.string,
-  post: PropTypes.object,
+  postItem: PropTypes.object,
   likers: PropTypes.array
 };

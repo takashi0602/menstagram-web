@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../components/post/show';
 import { BackButton, Title } from './styled';
-
-const parentRoute = '/profile/menstagram';
 
 const likers = [
   {
@@ -14,7 +11,7 @@ const likers = [
     user: {
       user_id: 'abc',
       screen_name: 'test1',
-      avatar: 'http://placehold.it/100x100/?text=Icon'
+      avatar: ''
     }
   },
   {
@@ -38,22 +35,14 @@ const likers = [
     user: {
       user_id: 'jkl',
       screen_name: 'test4',
-      avatar: 'http://placehold.it/100x100/?text=Icon'
+      avatar: ''
     }
   },
   {
     id: 5,
     user: {
       user_id: 'mno',
-      screen_name: 'test4',
-      avatar: 'http://placehold.it/100x100/?text=Icon'
-    }
-  },
-  {
-    id: 6,
-    user: {
-      user_id: 'pqr',
-      screen_name: 'test4',
+      screen_name: 'test5',
       avatar: 'http://placehold.it/100x100/?text=Icon'
     }
   }
@@ -70,32 +59,37 @@ export class PostDetail extends Component {
       'http://placehold.it/300x300?text=3',
       'http://placehold.it/300x300?text=4'
     ],
-    liked: 1,
+    liked: 20,
     user: {
-      id: 1,
       user_id: 'J4N1AmVPxT',
       screen_name: 'user_name',
-      avatar: 'http://placehold.it/100x100/?text=Icon'
+      avatar: ''
     },
-    created_at: '2019-11-18T13:52:25.000000Z',
-    updated_at: '2019-11-18T13:52:25.000000Z'
+    created_at: '2019/12/12 12:12:12',
+    updated_at: '2019/12/12 12:12:12'
+  };
+
+  // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
+  goBack = () => {
+    this.props.history.goBack();
   };
 
   render() {
     return (
       <div>
         <header className="py-3 px-3 border-bottom">
-          <Link className="text-left" to={parentRoute} style={BackButton}>
+          <BackButton onClick={this.goBack}>
             <FontAwesomeIcon icon={faChevronLeft} />
-          </Link>
+          </BackButton>
           <Title>投稿</Title>
         </header>
-        <Post isTimeline={false} post={this.data} likers={likers} />
+        <Post postItem={this.data} likers={likers} />
       </div>
     );
   }
 }
 
 PostDetail.propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object,
+  history: PropTypes.object
 };
