@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { LinkStyle, UserAvatar, UserLink, FollowButton } from './styled';
 
-export default class FollowListItem extends Component {
+export default class LikerListItem extends Component {
   render() {
     return (
       <li className="row mx-0 mb-3 align-items-center">
@@ -42,6 +42,6 @@ export default class FollowListItem extends Component {
   }
 }
 
-FollowListItem.propTypes = {
+LikerListItem.propTypes = {
   user: PropTypes.object
 };

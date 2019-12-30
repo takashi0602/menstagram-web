@@ -9,7 +9,10 @@ import {
   faBell,
   faUser
 } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as regularHeart, faBell as regularBell } from '@fortawesome/free-regular-svg-icons';
+import {
+  faHeart as regularHeart,
+  faBell as regularBell
+} from '@fortawesome/free-regular-svg-icons';
 import { NavBar, NavIcon, NavIconInactive, NavIconActive } from './styled';
 
 export class Menu extends Component {

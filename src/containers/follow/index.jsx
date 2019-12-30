@@ -9,14 +9,14 @@ const followers = [
     screen_name: 'メンスタグラム公式',
     avatar:
       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-    is_follwed: false
+    is_followed: false
   },
   {
     user_id: 'menstaaaa',
     screen_name: 'メンスタグラム非公式',
     avatar:
       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-    is_follwed: true
+    is_followed: true
   }
 ];
 
@@ -26,7 +26,7 @@ const follows = [
     screen_name: 'メンスタグラム非公式',
     avatar:
       'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-    is_follwed: true
+    is_followed: true
   }
 ];
 
