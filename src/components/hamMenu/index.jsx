@@ -5,18 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import {
   MenuWrapper,
-  LogoutStyle,
+  itemStyle,
   HamButton,
   Open,
   Close,
   ButtonOpen,
   ButtonClose,
-  Cover
+  Cover,
+  LogoutItem
 } from './styled';
 
 export class HamMenu extends Component {
-  constructor(prop) {
-    super(prop);
+  constructor(props) {
+    super(props);
     this.state = {
       isShowMenu: false
     };
@@ -30,18 +31,23 @@ export class HamMenu extends Component {
   Menus = () => {
     return this.props.menuItems.map((item, idx) => {
       return (
-        <Link key={idx} style={LogoutStyle} to={item.path}>
+        <Link key={idx} style={itemStyle} to={item.path}>
           {item.label}
         </Link>
       );
     });
   };
 
+  logout = () => {
+    this.props.logout();
+  };
+
   render() {
     return (
-      <div>
+      <div className="position-relative">
         <MenuWrapper style={this.state.isShowMenu ? Open : Close}>
-          <this.Menus />
+          {this.Menus()}
+          <LogoutItem onClick={() => this.logout()}>ログアウト</LogoutItem>
         </MenuWrapper>
         <HamButton
           style={this.state.isShowMenu ? ButtonOpen : ButtonClose}
@@ -58,5 +64,6 @@ export class HamMenu extends Component {
 }
 
 HamMenu.propTypes = {
-  menuItems: PropTypes.array
+  menuItems: PropTypes.array,
+  logout: PropTypes.func
 };

@@ -109,7 +109,7 @@ export class PostConatiner extends Component {
 
   postSuccess = () => {
     this.props.changeSuccessValue();
-    return <Redirect to={'/timeline'} />
+    return <Redirect to={'/timeline/private'} />;
   };
 
   render() {
@@ -127,14 +127,16 @@ export class PostConatiner extends Component {
         <div className="c-container__padding">
           {this.props.status && <Error status={this.props.status} />}
           <textarea
-            className="form-control mb-3"
+            className="c-form__textArea mb-3"
             rows="4"
             placeholder="文章を記入してください"
             onChange={e => {
               this.changeText(e);
             }}
           />
-          {this.state.errorText && <p className="text-danger">256文字以下で入力してください。</p>}
+          {this.state.errorText && (
+            <p className="text-danger">256文字以下で入力してください。</p>
+          )}
           {this.state.files.length <= 3 && (
             <div>
               <PostLabel htmlFor="postImage">画像を追加する</PostLabel>
@@ -153,8 +155,12 @@ export class PostConatiner extends Component {
               />
             </div>
           )}
-          {this.state.errorFile && <p className="text-danger">画像は必須です。</p>}
-          {this.state.errorFileFormat && <p className="text-danger">画像のみ選択できます。</p>}
+          {this.state.errorFile && (
+            <p className="text-danger">画像は必須です。</p>
+          )}
+          {this.state.errorFileFormat && (
+            <p className="text-danger">画像のみ選択できます。</p>
+          )}
           {this.state.files.length !== 0 && this.readerImages()}
         </div>
       </div>

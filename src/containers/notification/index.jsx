@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { Title, menu_size, under } from './styled';
-import LikeNotices from '../../components/notice/like';
-import FollowNotices from '../../components/notice/follow';
-import ManageNotices from '../../components/notice/manage';
+import { Title } from './styled';
+import LikeNotices from '../../components/notification/like';
+import FollowNotices from '../../components/notification/follow';
+import ManageNotices from '../../components/notification/manage';
+import { NotificationHeader } from '../../components/notification/header';
+import PropTypes from 'prop-types';
+import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
+import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 
 //ダミーデータ
 const follows = [
@@ -71,6 +75,12 @@ const manages = [
     text:
       'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
     created_at: '2019/11/29 22:56:15'
+  },
+  {
+    id: 2,
+    text:
+      'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
+    created_at: '2019/11/29 22:56:15'
   }
 ];
 
@@ -78,70 +88,59 @@ export class Notification extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
-      viewMode: 'LIKE'
+      showModal: false
     };
   }
 
-  changeViewMode = (e, props) => {
-    this.setState({ viewMode: props });
-  };
-
   DataView = () => {
-    if (this.state.viewMode === 'LIKE') {
+    const path = this.props.history.location.pathname.split('/')[2];
+    if (path === 'liked') {
       return <LikeNotices notices={likes} />;
-    } else if (this.state.viewMode === 'FOLLOW') {
-      return <FollowNotices notices={follows} />;
-    } else if (this.state.viewMode === 'MANAGE') {
+    } else if (path === 'followed') {
+      return (
+        <FollowNotices notices={follows} openModal={() => this.openModal()} />
+      );
+    } else if (path === 'system') {
       return <ManageNotices notices={manages} />;
     }
   };
 
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
+  unfollow = () => {
+    console.log('フォローをはずす');
+  };
+
   render() {
     return (
-      <div className=" px-0">
+      <div>
+        <ScrollToTopOnMount />
         <Title>通知</Title>
-        <div className="container">
-          <div className="row justify-content-around border-bottom">
-            <span
-              onClick={e => this.changeViewMode(e, 'LIKE')}
-              className={
-                'col text-center pl-0 pr-0 pt-2 pb-2' +
-                (this.state.viewMode === 'LIKE'
-                  ? ' text-dark font-weight-bold '
-                  : 'text-muted')
-              }
-              style={(menu_size, under)}
-            >
-              いいね
-            </span>
-            <span
-              onClick={e => this.changeViewMode(e, 'FOLLOW')}
-              className={
-                'col text-center pl-0 pr-0 pt-2 pb-2' +
-                (this.state.viewMode === 'FOLLOW'
-                  ? ' text-dark font-weight-bold '
-                  : 'text-muted')
-              }
-              style={(menu_size, under)}
-            >
-              フォロー
-            </span>
-            <span
-              onClick={e => this.changeViewMode(e, 'MANAGE')}
-              className={
-                'col text-center pl-0 pr-0 pt-2 pb-2' +
-                (this.state.viewMode === 'MANAGE'
-                  ? ' text-dark font-weight-bold '
-                  : 'text-muted')
-              }
-              style={(menu_size, under)}
-            >
-              運営から
-            </span>
-          </div>
-        </div>
+        {
+          <NotificationHeader
+            pathName={this.props.history.location.pathname.split('/')[2]}
+          />
+        }
         {this.DataView()}
+        {this.state.showModal && (
+          <TwoChoiceModal
+            text={'フォローをはずしますか？'}
+            buttonName={'はずす'}
+            closeModal={() => this.closeModal()}
+            submit={() => this.unfollow()}
+          />
+        )}
       </div>
     );
   }
 }
+
+Notification.propTypes = {
+  history: PropTypes.object
+};

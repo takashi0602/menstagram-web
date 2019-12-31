@@ -8,12 +8,12 @@ export const MenuWrapper = styled.div`
   right: max(calc(80px - 100vw), -300px);
   top: 0;
   width: min(calc(100vw - 80px), 300px);
-  z-index: 2000;
+  z-index: 200;
   border-left: solid #c6c6c6 1px;
   border-width: 1px;
 `;
 
-export const LogoutStyle = {
+export const itemStyle = {
   textDecoration: 'none',
   color: '#3c3c3c',
   fontWeight: 'lighter',
@@ -34,8 +34,7 @@ export const HamButton = styled.button`
     right: min(calc(100vw - 80px), 300px);
     text-align: center;
     top: 0;
-    margin-top: 15px;
-    margin-right: 15px;
+    margin-right: 5px;
     padding: 0 ;
     width: 50px;
     border-width: 1px;
@@ -70,7 +69,12 @@ export const Cover = styled.div`
   left: 0px;
   width: 100vw;
   height: 100vh;
-  z-index: 1600;
+  z-index: 100;
   background-color: #c6c6c6;
   opacity: 0.2;
+`;
+
+export const LogoutItem = styled.div`
+  padding: 1rem;
+  border-bottom: 1px solid #c6c6c6;
 `;

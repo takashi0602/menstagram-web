@@ -10,7 +10,6 @@ import { Register } from './containers/register';
 import { Login } from './containers/login';
 import { Follow } from './containers/follow';
 import { PostDetail } from './containers/post/_id';
-import { Logout } from './containers/logout';
 import { Post } from './containers/post';
 import { Timeline } from './containers/timeline';
 import { Liker } from './containers/liker';
@@ -30,16 +29,30 @@ export const Routes = () => {
               <Route exact path={'/'} component={Top} />
               <Route exact path={'/register'} component={Register} />
               <Route exact path={'/login'} component={Login} />
-              <Route exact path={'/logout'} component={Logout} />
               <Route exact path={'/profile/:id'} component={Profile} />
               <Route exact path={'/post/:id'} component={PostDetail} />
               <Route exact path={'/post'} component={Post} />
-              <Route exact path={'/timeline'} component={Timeline} />
+              <Route exact path={'/timeline/private'} component={Timeline} />
+              <Route exact path={'/timeline/global'} component={Timeline} />
               <Route exact path={'/liker/:id'} component={Liker} />
               <Route exact path={'/followed/:id'} component={Follow} />
               <Route exact path={'/following/:id'} component={Follow} />
               <Route exact path={'/profile/:id/edit'} component={ProfileEdit} />
-              <Route exact path={'/notification'} component={Notification} />
+              <Route
+                exact
+                path={'/notification/liked'}
+                component={Notification}
+              />
+              <Route
+                exact
+                path={'/notification/followed'}
+                component={Notification}
+              />
+              <Route
+                exact
+                path={'/notification/system'}
+                component={Notification}
+              />
               <Route exact path={'/report'} component={Report} />
             </Switch>
             <Route component={Menu} />

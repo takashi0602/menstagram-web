@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
-import { Question, YesButton, NoButton } from './styled';
+import { HeaderTitle } from './styled';
+import PropTypes from 'prop-types';
 
 export class Report extends Component {
-  constructor(prop) {
-    super(prop);
-    this.state = {
-      isFollowersView: true
-    };
-  }
+  // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
+  goBack = () => {
+    this.props.history.goBack();
+  };
 
   render() {
     return (
       <div>
         <header className="py-3 px-3 border-bottom">
-          <h1 className="h5 mb-0 text-center">ラーメンじゃないよ報告</h1>
+          <HeaderTitle>ラーメンじゃないよ報告</HeaderTitle>
         </header>
-        <div className="container">
-          <div className="row">
-            <Question>投稿にラーメン以外の画像が含まれていましたか？</Question>
-            <div className="col text-center mt-3">
-              <YesButton>はい</YesButton>
+        <div className="c-container__padding">
+          <p className="py-3 mb-4">
+            投稿にラーメン以外の画像が含まれていましたか？
+          </p>
+          <div className="d-flex justify-content-around">
+            <div>
+              <button
+                type="button"
+                className="c-button__orange"
+                onClick={this.goBack}
+              >
+                はい
+              </button>
             </div>
-            <div className="col text-center mt-3">
-              <NoButton>いいえ</NoButton>
+            <div>
+              <button
+                type="button"
+                className="c-button__white"
+                onClick={this.goBack}
+              >
+                いいえ
+              </button>
             </div>
           </div>
         </div>
@@ -30,3 +43,7 @@ export class Report extends Component {
     );
   }
 }
+
+Report.propTypes = {
+  history: PropTypes.object
+};

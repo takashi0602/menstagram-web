@@ -9,8 +9,10 @@ import {
   faBell,
   faUser
 } from '@fortawesome/free-solid-svg-icons';
-// TODO faHart, faBellはフォーカスされている状態のときレギュラーアイコンにする
-//  →コンフリクトするため今はインポートしない
+import {
+  faHeart as regularHeart,
+  faBell as regularBell
+} from '@fortawesome/free-regular-svg-icons';
 import { NavBar, NavIcon, NavIconInactive, NavIconActive } from './styled';
 
 export class Menu extends Component {
@@ -27,7 +29,11 @@ export class Menu extends Component {
     const query = this.props.history.location.pathname.split('/')[2];
     return (
       <NavBar>
-        <Link to="/timeline" className="d-inline-block p-2" style={NavIcon}>
+        <Link
+          to="/timeline/private"
+          className="d-inline-block p-2"
+          style={NavIcon}
+        >
           <FontAwesomeIcon
             icon={faHome}
             style={path === 'timeline' ? NavIconActive : NavIconInactive}
@@ -35,7 +41,7 @@ export class Menu extends Component {
         </Link>
         <Link to="/like" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
-            icon={faHeart}
+            icon={path === 'like' ? faHeart : regularHeart}
             style={path === 'like' ? NavIconActive : NavIconInactive}
           />
         </Link>
@@ -49,9 +55,13 @@ export class Menu extends Component {
             }
           />
         </Link>
-        <Link to="/notification" className="d-inline-block p-2" style={NavIcon}>
+        <Link
+          to="/notification/liked"
+          className="d-inline-block p-2"
+          style={NavIcon}
+        >
           <FontAwesomeIcon
-            icon={faBell}
+            icon={path === 'notification' ? faBell : regularBell}
             style={path === 'notification' ? NavIconActive : NavIconInactive}
           />
         </Link>

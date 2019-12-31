@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { BackButton } from './styled';
-import UserRow from '../../components/userRow';
+import {
+  faChevronLeftIconStyle,
+  FaChevronLeftStyle,
+  HeaderTitle
+} from './styled';
+import LikerListItem from '../../components/liker';
+import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 
 const likers = [
   {
@@ -24,37 +28,71 @@ const likers = [
 ];
 
 export class Liker extends Component {
-  parentRoute = '/post/' + this.props.match.params.id;
-
   constructor(prop) {
     super(prop);
     this.state = {
-      isFollowersView: true
+      showModal: false
     };
   }
+
+  // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
+  goBack = () => {
+    this.props.history.goBack();
+  };
+
+  openModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
+  // TODO: フォローはずす
+  unfollow = () => {
+    console.log('フォローをはずす');
+  };
 
   render() {
     return (
       <div>
-        <header className="py-3 px-3 border-bottom d-flex justify-content-between">
-          <Link className="text-left" to={this.parentRoute}>
-            <FontAwesomeIcon icon={faChevronLeft} style={BackButton} />
-          </Link>
-          <h1 className="h5 mb-0 text-center">いいねした人</h1>
-          <span className="pr-3"></span>
+        <header className="pt-3 mb-3 border-bottom">
+          <div className="position-relative mb-4">
+            <FaChevronLeftStyle onClick={this.goBack}>
+              <FontAwesomeIcon
+                icon={faChevronLeft}
+                style={faChevronLeftIconStyle}
+              />
+            </FaChevronLeftStyle>
+            <HeaderTitle>いいねした人</HeaderTitle>
+          </div>
         </header>
-        <div className="container">
-          <ul className="pl-0 pt-2">
+        <div className="c-container__padding">
+          <ul className="pl-0">
             {likers.map((user, idx) => {
-              return <UserRow key={idx} user={user} />;
+              return (
+                <LikerListItem
+                  key={idx}
+                  user={user}
+                  openModal={() => this.openModal()}
+                />
+              );
             })}
           </ul>
         </div>
+        {this.state.showModal && (
+          <TwoChoiceModal
+            text={'フォローをはずしますか？'}
+            buttonName={'はずす'}
+            closeModal={() => this.closeModal()}
+            submit={() => this.unfollow()}
+          />
+        )}
       </div>
     );
   }
 }
 
 Liker.propTypes = {
-  match: PropTypes.object
+  history: PropTypes.object
 };

@@ -18,3 +18,22 @@ export const faChevronLeftIconStyle = {
   width: 'auto',
   height: '20px'
 };
+
+export const LinkStyle = {
+  textDecoration: 'none'
+};
+
+export const UserAvatar = {
+  verticalAlign: 'top'
+};
+
+export const UserLink = styled.p`
+  font-size: 12px;
+  padding-left: 10px;
+  margin: 0;
+  color: #3c3c3c;
+`;
+
+export const FollowButton = styled.button`
+  white-space: nowrap;
+`;

@@ -1,65 +1,43 @@
 import styled from 'styled-components';
 
-export const BackButton = {
+export const backButton = {
   fontSize: '27px',
   color: '#666'
 };
 
-export const UserName = {
-  fontSize: '20px'
-};
-
-export const UserId = {
-  fontSize: '16px'
-};
-
-export const Biography = styled.div`
-  font-size: 18px;
-  padding: 0.5rem;
-  word-break: break-all;
-  white-space: pre-wrap;
+export const UserName = styled.h3`
+  font-size: 20px;
 `;
 
-export const EditButton = {
-  color: '#666',
-  border: '1px solid #C6C6C6',
-  textDecoration: 'none',
-  fontSize: '16px',
-  height: '40px',
-  lineHeight: '40px',
-  borderRadius: '50rem',
-  textAlign: 'center'
-};
+export const UserId = styled.h5`
+  font-size: 16px;
+`;
 
-export const WhiteButton = styled.div`
-  color: #666;
+export const UserImage = styled.div`
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 10px;
+  background: no-repeat center;
+  background-size: contain;
+  border-radius: 50%;
   border: 1px solid #c6c6c6;
-  text-decoration: none;
-  font-size: 16px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 50rem;
-  text-align: center;
+  position: relative;
 `;
 
-export const FollowButton = styled.div`
-  color: #fff;
-  background-color: #eb6101;
-  font-size: 16px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 50rem;
-  text-align: center;
+export const userIcon = {
+  width: '70px',
+  height: '70px',
+  color: '#666666',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)'
+};
+
+export const Biography = styled.p`
+  font-size: 18px;
+  word-break: break-all;
 `;
-
-export const noUnderline = {
-  color: '#3C3C3C',
-  textDecoration: 'none'
-};
-
-export const PostLink = {
-  position: 'relative'
-};
 
 export const PostImage = styled.img`
   width: 100%;
@@ -67,7 +45,7 @@ export const PostImage = styled.img`
   object-fit: contain;
 `;
 
-export const ImagesIcon = {
+export const imagesIcon = {
   position: 'absolute',
   top: '15px',
   right: '15px'
@@ -76,14 +54,13 @@ export const ImagesIcon = {
 export const Submit = styled.button`
   text-decoration: none;
   fontsize: 16px;
-  font-weight: inherit;
+  font-weight: normal;
   color: #eb6101;
   background-color: white;
   padding: 0;
-  text-align: 'right';
 `;
 
-export const BlackLink = {
+export const blackLink = {
   color: '#3C3C3C',
   textDecoration: 'none'
 };
@@ -91,8 +68,8 @@ export const BlackLink = {
 export const Title = styled.div`
   fontsize: 18px;
   position: absolute;
-  left: calc(50% - 68px);
-  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export const PositionParent = styled.header`
@@ -103,11 +80,21 @@ export const PositionParent = styled.header`
   border-bottom: 1px solid #dee2e6;
 `;
 
-export const OrangeText = styled.div`
+export const OrangeText = styled.label`
   color: #eb6101;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 `;
 
-export const TextArea = {
-  resize: 'none'
-};
+export const MyProfileHeader = styled.header`
+  width: 100%;
+  height: 50px;
+`;
+
+export const Item = styled.div`
+  width: 30%;
+`;
+
+export const ItemLabel = styled.label`
+  white-space: nowrap;
+  margin-right: 10px;
+`;
