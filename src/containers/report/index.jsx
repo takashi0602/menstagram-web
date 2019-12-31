@@ -22,7 +22,7 @@ export class Report extends Component {
             <div>
               <button
                 type="button"
-                className="c-button__orange px-5"
+                className="c-button__orange"
                 onClick={this.goBack}
               >
                 はい
@@ -31,7 +31,7 @@ export class Report extends Component {
             <div>
               <button
                 type="button"
-                className="c-button__white px-5"
+                className="c-button__white"
                 onClick={this.goBack}
               >
                 いいえ
