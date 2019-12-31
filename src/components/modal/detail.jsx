@@ -13,8 +13,7 @@ export class DetailModal extends Component {
   showItem = () => {
     return (
       <ModalItem className="py-3">
-        {/* TODO: リンク先 */}
-        <Link to="" className="c-link__black">
+        <Link to="/report" className="c-link__black">
           ラーメンじゃないよ報告
         </Link>
       </ModalItem>
@@ -33,8 +32,7 @@ export class DetailModal extends Component {
           </Link>
         </ModalItem>
         <ModalItem>
-          {/* TODO: リンク先 */}
-          <Link to="/" className="c-link__black d-block py-3">
+          <Link to="/report" className="c-link__black d-block py-3">
             ラーメンじゃないよ報告
           </Link>
         </ModalItem>

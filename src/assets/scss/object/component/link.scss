@@ -16,4 +16,13 @@
       text-decoration: none;
     }
   }
+
+  &__gray {
+    color: $main-gray;
+    text-decoration: none;
+    &:hover {
+      color: $main-gray;
+      text-decoration: none;
+    }
+  }
 }

@@ -10,4 +10,26 @@
   &::placeholder {
     color: $main-lightgray;
   }
+  &:focus {
+    outline-color: $main-orange;
+  }
+
+  &__textArea {
+    display: block;
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid $main-lightgray;
+    border-radius: 5px;
+    color: $main-gray;
+    resize: none;
+    word-break: break-all;
+    &::placeholder {
+      color: $main-lightgray;
+    }
+    &:focus {
+      outline-color: $main-orange;
+    }
+  }
 }

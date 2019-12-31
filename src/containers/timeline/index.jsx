@@ -9,7 +9,8 @@ import { globalTimeline } from '../../actions/timeline/global';
 import { Loading } from '../../components/loading';
 import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
-import { Scroll } from '../../components/scroll'
+import { Scroll } from '../../components/scroll';
+import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 
 export class TimelineContainer extends Component {
   constructor(props) {
@@ -147,15 +148,18 @@ export class TimelineContainer extends Component {
   };
 
   handleScroll = scrollTop => {
-    this.setState({scrollValue: scrollTop});
-    if (!this.state.showBackToTop && scrollTop > 100) this.setState({showBackToTop: true});
-    else if (this.state.showBackToTop && scrollTop <= 100) this.setState({showBackToTop: false});
+    this.setState({ scrollValue: scrollTop });
+    if (!this.state.showBackToTop && scrollTop > 100)
+      this.setState({ showBackToTop: true });
+    else if (this.state.showBackToTop && scrollTop <= 100)
+      this.setState({ showBackToTop: false });
   };
 
   render() {
     return (
       <div>
         {auth(this.props.accessToken)}
+        <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
         {this.isPathPrivate()
           ? this.initGetPrivateTimeline()
@@ -163,7 +167,9 @@ export class TimelineContainer extends Component {
         <Scroll handleScroll={this.handleScroll} />
         <TimelineHeader isPrivate={this.isPathPrivate()} />
         {this.showReloadBar('新しい投稿を表示', this.getNewTimeline)}
-        {this.state.showBackToTop && <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>}
+        {this.state.showBackToTop && (
+          <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>
+        )}
         {this.props.status && <Error status={this.props.status} />}
         {this.showPostItems()}
         {this.props.status && <Error status={this.props.status} />}

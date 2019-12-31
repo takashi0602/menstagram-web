@@ -3,7 +3,7 @@ body {
   border: none;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'ヒラギノ角ゴ Pro W3', 'ヒラギノ角ゴ W3', 'メイリオ', sans-serif;
+  font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Sans", "ヒラギノ角ゴシック", sans-serif;
   font-size: 16px;
   font-weight: normal;
   color: $main-black;
@@ -26,10 +26,11 @@ a {
 }
 
 button {
+  width: 120px;
   border: none;
   border-radius: 20px;
   box-sizing: border-box;
-  padding: 7.5px 20px;
+  padding: 7.5px 0;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;

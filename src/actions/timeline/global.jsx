@@ -21,10 +21,10 @@ export const successGlobalTimeline = response => {
   };
 };
 
-export const failGlobalTimeline = error => {
+export const failGlobalTimeline = status => {
   return {
     type: FAIL_GLOBAL_TIMELINE,
     postList: [],
-    status: error.status
+    status: status
   };
 };

@@ -1,6 +1,6 @@
 {
   "short_name": "Menstagram",
-  "name": "Menstagramは世界中のラーメンコミュニティを支える特化型SNSです。",
+  "name": "SUSURU FOREVER, SUSURU ANYWHERE.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#eb6101",
   "background_color": "#ffffff"
 }
