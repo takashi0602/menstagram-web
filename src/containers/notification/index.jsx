@@ -6,6 +6,7 @@ import ManageNotices from '../../components/notification/manage';
 import { NotificationHeader } from '../../components/notification/header';
 import PropTypes from 'prop-types';
 import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
+import {TwoChoiceModal} from "../../components/modal/twoChoiceModal";
 
 //ダミーデータ
 const follows = [
@@ -87,7 +88,7 @@ export class Notification extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
-      viewMode: 'LIKE'
+      showModal: false
     };
   }
 
@@ -96,10 +97,22 @@ export class Notification extends Component {
     if (path === 'liked') {
       return <LikeNotices notices={likes} />;
     } else if (path === 'followed') {
-      return <FollowNotices notices={follows} />;
+      return <FollowNotices notices={follows} openModal={() => this.openModal()} />;
     } else if (path === 'system') {
       return <ManageNotices notices={manages} />;
     }
+  };
+
+  openModal = () => {
+    this.setState({showModal: true});
+  };
+
+  closeModal = () => {
+    this.setState({showModal: false});
+  };
+
+  unfollow = () => {
+    console.log('フォローをはずす');
   };
 
   render() {
@@ -113,6 +126,14 @@ export class Notification extends Component {
           />
         }
         {this.DataView()}
+        {this.state.showModal && (
+          <TwoChoiceModal
+            text={'フォローをはずしますか？'}
+            buttonName={'はずす'}
+            closeModal={() => this.closeModal()}
+            submit={() => this.unfollow()}
+          />
+        )}
       </div>
     );
   }

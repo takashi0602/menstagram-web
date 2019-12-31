@@ -8,6 +8,7 @@ import {
   HeaderTitle
 } from './styled';
 import LikerListItem from '../../components/liker';
+import {TwoChoiceModal} from "../../components/modal/twoChoiceModal";
 
 const likers = [
   {
@@ -30,13 +31,26 @@ export class Liker extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
-      isFollowersView: true
+      showModal: false
     };
   }
 
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
   goBack = () => {
     this.props.history.goBack();
+  };
+
+  openModal = () => {
+    this.setState({showModal: true});
+  };
+
+  closeModal = () => {
+    this.setState({showModal: false});
+  };
+
+  // TODO: フォローはずす
+  unfollow = () => {
+    console.log('フォローをはずす');
   };
 
   render() {
@@ -56,10 +70,18 @@ export class Liker extends Component {
         <div className="c-container__padding">
           <ul className="pl-0">
             {likers.map((user, idx) => {
-              return <LikerListItem key={idx} user={user} />;
+              return <LikerListItem key={idx} user={user} openModal={() => this.openModal()} />;
             })}
           </ul>
         </div>
+        {this.state.showModal && (
+          <TwoChoiceModal
+            text={'フォローをはずしますか？'}
+            buttonName={'はずす'}
+            closeModal={() => this.closeModal()}
+            submit={() => this.unfollow()}
+          />
+        )}
       </div>
     );
   }

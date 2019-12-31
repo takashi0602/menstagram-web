@@ -28,7 +28,7 @@ export default class LikerListItem extends Component {
         </Link>
         <div className="col-5 p-0 text-right">
           {this.props.user.is_followed ? (
-            <FollowButton type="button" className="c-button__white">
+            <FollowButton type="button" className="c-button__white" onClick={this.props.openModal}>
               フォロー中
             </FollowButton>
           ) : (
@@ -43,5 +43,6 @@ export default class LikerListItem extends Component {
 }
 
 LikerListItem.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  openModal: PropTypes.func
 };

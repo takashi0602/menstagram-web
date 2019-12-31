@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import FollowListItem from '../../components/follow';
 import { FollowHeader } from '../../components/follow/header';
 import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
+import {TwoChoiceModal} from "../../components/modal/twoChoiceModal";
 
 const followers = [
   {
@@ -35,7 +36,8 @@ export class Follow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFollowersView: true
+      isFollowersView: true,
+      showModal: false
     };
   }
 
@@ -44,7 +46,7 @@ export class Follow extends Component {
       return (
         <ul className="pl-0">
           {followers.map((user, idx) => {
-            return <FollowListItem key={idx} user={user} />;
+            return <FollowListItem key={idx} user={user} openModal={() => this.openModal()} />;
           })}
         </ul>
       );
@@ -52,11 +54,24 @@ export class Follow extends Component {
       return (
         <ul className="pl-0">
           {follows.map((user, idx) => {
-            return <FollowListItem key={idx} user={user} />;
+            return <FollowListItem key={idx} user={user} openModal={() => this.openModal()} />;
           })}
         </ul>
       );
     }
+  };
+
+  openModal = () => {
+    this.setState({showModal: true});
+  };
+
+  closeModal = () => {
+    this.setState({showModal: false});
+  };
+
+  // TODO: フォローはずす
+  unfollow = () => {
+    console.log('フォローをはずす');
   };
 
   render() {
@@ -65,6 +80,14 @@ export class Follow extends Component {
         <ScrollToTopOnMount />
         {<FollowHeader history={this.props.history} />}
         <div className="c-container__padding pt-3">{this.ToggleList()}</div>
+        {this.state.showModal && (
+          <TwoChoiceModal
+            text={'フォローをはずしますか？'}
+            buttonName={'はずす'}
+            closeModal={() => this.closeModal()}
+            submit={() => this.unfollow()}
+          />
+        )}
       </div>
     );
   }
