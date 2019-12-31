@@ -66,3 +66,7 @@ export const LikerIcon = {
   left: '50%',
   transform: 'translate(-50%, -50%)'
 };
+
+export const PostText = styled.p`
+  margin-bottom: 64px;
+`;

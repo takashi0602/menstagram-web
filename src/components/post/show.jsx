@@ -15,7 +15,8 @@ import {
   EllipsisH,
   faUserIcon,
   LikerImage,
-  LikerIcon
+  LikerIcon,
+  PostText
 } from './styled';
 import { DetailModal } from '../modal/detail';
 import Slider from 'react-slick';
@@ -52,14 +53,14 @@ export class Post extends Component {
 
   postDetails = () => {
     return (
-      <div className="px-3">
-        <div>{this.props.postItem.created_at}</div>
-        <p>{this.props.postItem.text}</p>
-        <div className="d-flex align-items-center">
+      <div className="c-container__padding">
+        <div className="d-flex align-items-center mb-1">
           <FontAwesomeIcon icon={faHeart} style={Like} />
           <div className="mr-2">{this.props.postItem.liked}</div>
           {this.showLiker()}
         </div>
+        <div className="mb-3">{this.props.postItem.created_at}</div>
+        {this.props.postItem.text.length > 0 && <PostText>{this.props.postItem.text}</PostText>}
       </div>
     );
   };
