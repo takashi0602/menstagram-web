@@ -127,7 +127,7 @@ export class PostConatiner extends Component {
         <div className="c-container__padding">
           {this.props.status && <Error status={this.props.status} />}
           <textarea
-            className="form-control mb-3"
+            className="c-form__textArea mb-3"
             rows="4"
             placeholder="文章を記入してください"
             onChange={e => {

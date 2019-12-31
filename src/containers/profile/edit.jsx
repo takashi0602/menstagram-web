@@ -7,7 +7,6 @@ import {
   Title,
   PositionParent,
   OrangeText,
-  TextArea,
   ItemLabel,
   UserImage,
   userIcon
@@ -116,16 +115,14 @@ export class ProfileEdit extends Component {
             <ItemLabel>スクリーンネーム</ItemLabel>
             <input
               type="text"
-              className="form-control"
+              className="c-form"
               defaultValue={user.screen_name}
             />
           </div>
           <div>
             <label>自己紹介</label>
-            <TextArea
-              className="form-control"
-              cols="30"
-              rows="5"
+            <textarea
+              className="c-form__textArea"
               defaultValue={user.biography}
             />
           </div>
