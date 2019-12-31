@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export class Scroll extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   _isMounted = false;
 
   componentDidMount = () => {
@@ -31,7 +27,7 @@ export class Scroll extends React.Component {
   };
 
   render() {
-    return <div />;
+    return null;
   }
 }
 

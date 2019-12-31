@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../components/post/show';
 import { BackButton, Title } from './styled';
+import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
 
 const likers = [
   {
@@ -77,6 +78,7 @@ export class PostDetail extends Component {
   render() {
     return (
       <div>
+        <ScrollToTopOnMount />
         <header className="py-3 px-3 border-bottom">
           <BackButton onClick={this.goBack}>
             <FontAwesomeIcon icon={faChevronLeft} />

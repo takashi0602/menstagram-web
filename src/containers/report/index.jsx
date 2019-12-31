@@ -3,10 +3,6 @@ import { HeaderTitle } from './styled';
 import PropTypes from 'prop-types';
 
 export class Report extends Component {
-  constructor(prop) {
-    super(prop);
-  }
-
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
   goBack = () => {
     this.props.history.goBack();

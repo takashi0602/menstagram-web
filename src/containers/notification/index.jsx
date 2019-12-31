@@ -5,6 +5,7 @@ import FollowNotices from '../../components/notification/follow';
 import ManageNotices from '../../components/notification/manage';
 import { NotificationHeader } from '../../components/notification/header';
 import PropTypes from 'prop-types';
+import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
 
 //ダミーデータ
 const follows = [
@@ -103,7 +104,8 @@ export class Notification extends Component {
 
   render() {
     return (
-      <div className=" px-0">
+      <div>
+        <ScrollToTopOnMount />
         <Title>通知</Title>
         {
           <NotificationHeader

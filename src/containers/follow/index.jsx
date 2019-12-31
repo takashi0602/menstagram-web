@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FollowListItem from '../../components/follow';
 import { FollowHeader } from '../../components/follow/header';
+import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
 
 const followers = [
   {
@@ -61,6 +62,7 @@ export class Follow extends Component {
   render() {
     return (
       <div>
+        <ScrollToTopOnMount />
         {<FollowHeader history={this.props.history} />}
         <div className="c-container__padding pt-3">{this.ToggleList()}</div>
       </div>

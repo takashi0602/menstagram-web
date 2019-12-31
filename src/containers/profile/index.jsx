@@ -26,6 +26,7 @@ import { auth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
+import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
 
 //ダミー
 const parentRoute = '/post/3';
@@ -262,6 +263,7 @@ class ProfileContainer extends Component {
     return (
       <div>
         {auth(this.props.accessToken)}
+        <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
         {this.TopHeader()}
         {this.props.status && <Error status={this.props.status} />}
