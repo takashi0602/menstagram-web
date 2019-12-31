@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../components/post/show';
 import { BackButton, Title } from './styled';
-import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
+import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 
 const likers = [
   {

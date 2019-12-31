@@ -5,8 +5,8 @@ import FollowNotices from '../../components/notification/follow';
 import ManageNotices from '../../components/notification/manage';
 import { NotificationHeader } from '../../components/notification/header';
 import PropTypes from 'prop-types';
-import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
-import {TwoChoiceModal} from "../../components/modal/twoChoiceModal";
+import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
+import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 
 //ダミーデータ
 const follows = [
@@ -97,18 +97,20 @@ export class Notification extends Component {
     if (path === 'liked') {
       return <LikeNotices notices={likes} />;
     } else if (path === 'followed') {
-      return <FollowNotices notices={follows} openModal={() => this.openModal()} />;
+      return (
+        <FollowNotices notices={follows} openModal={() => this.openModal()} />
+      );
     } else if (path === 'system') {
       return <ManageNotices notices={manages} />;
     }
   };
 
   openModal = () => {
-    this.setState({showModal: true});
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   };
 
   unfollow = () => {

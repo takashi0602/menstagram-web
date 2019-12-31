@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FollowListItem from '../../components/follow';
 import { FollowHeader } from '../../components/follow/header';
-import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
-import {TwoChoiceModal} from "../../components/modal/twoChoiceModal";
+import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
+import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 
 const followers = [
   {
@@ -46,7 +46,13 @@ export class Follow extends Component {
       return (
         <ul className="pl-0">
           {followers.map((user, idx) => {
-            return <FollowListItem key={idx} user={user} openModal={() => this.openModal()} />;
+            return (
+              <FollowListItem
+                key={idx}
+                user={user}
+                openModal={() => this.openModal()}
+              />
+            );
           })}
         </ul>
       );
@@ -54,7 +60,13 @@ export class Follow extends Component {
       return (
         <ul className="pl-0">
           {follows.map((user, idx) => {
-            return <FollowListItem key={idx} user={user} openModal={() => this.openModal()} />;
+            return (
+              <FollowListItem
+                key={idx}
+                user={user}
+                openModal={() => this.openModal()}
+              />
+            );
           })}
         </ul>
       );
@@ -62,11 +74,11 @@ export class Follow extends Component {
   };
 
   openModal = () => {
-    this.setState({showModal: true});
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   };
 
   // TODO: フォローはずす

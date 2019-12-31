@@ -42,7 +42,11 @@ export default class FollowNotices extends Component {
             if (notice.follow.is_followed) {
               return (
                 <div className="d-flex align-items-center">
-                  <NowrapButton type="button" className="c-button__white" onClick={this.props.openModal}>
+                  <NowrapButton
+                    type="button"
+                    className="c-button__white"
+                    onClick={this.props.openModal}
+                  >
                     フォロー中
                   </NowrapButton>
                 </div>

@@ -10,7 +10,7 @@ import { Loading } from '../../components/loading';
 import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
-import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
+import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 
 export class TimelineContainer extends Component {
   constructor(props) {

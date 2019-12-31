@@ -26,7 +26,7 @@ import { auth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
-import {ScrollToTopOnMount} from "../../components/scroll/scrollToTopOnMount";
+import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 
 //ダミー
 const parentRoute = '/post/3';

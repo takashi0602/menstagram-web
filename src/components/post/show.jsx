@@ -60,7 +60,9 @@ export class Post extends Component {
           {this.showLiker()}
         </div>
         <div className="mb-3">{this.props.postItem.created_at}</div>
-        {this.props.postItem.text.length > 0 && <PostText>{this.props.postItem.text}</PostText>}
+        {this.props.postItem.text.length > 0 && (
+          <PostText>{this.props.postItem.text}</PostText>
+        )}
       </div>
     );
   };

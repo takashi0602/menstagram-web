@@ -1,11 +1,11 @@
-import { Component } from 'react'
+import { Component } from 'react';
 
 export class ScrollToTopOnMount extends Component {
-  componentDidMount(prevProps) {
-    window.scrollTo(0, 0)
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   render() {
-    return null
+    return null;
   }
 }

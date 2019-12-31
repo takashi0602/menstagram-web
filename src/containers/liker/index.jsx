@@ -8,7 +8,7 @@ import {
   HeaderTitle
 } from './styled';
 import LikerListItem from '../../components/liker';
-import {TwoChoiceModal} from "../../components/modal/twoChoiceModal";
+import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 
 const likers = [
   {
@@ -41,11 +41,11 @@ export class Liker extends Component {
   };
 
   openModal = () => {
-    this.setState({showModal: true});
+    this.setState({ showModal: true });
   };
 
   closeModal = () => {
-    this.setState({showModal: false});
+    this.setState({ showModal: false });
   };
 
   // TODO: フォローはずす
@@ -70,7 +70,13 @@ export class Liker extends Component {
         <div className="c-container__padding">
           <ul className="pl-0">
             {likers.map((user, idx) => {
-              return <LikerListItem key={idx} user={user} openModal={() => this.openModal()} />;
+              return (
+                <LikerListItem
+                  key={idx}
+                  user={user}
+                  openModal={() => this.openModal()}
+                />
+              );
             })}
           </ul>
         </div>
