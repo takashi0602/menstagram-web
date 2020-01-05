@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import titleSvg from '../../assets/images/title.svg';
-import { SubTitle } from './styled';
+import titleImage from '../../assets/images/title.png';
+import { SubTitle, TitleImage } from './styled';
 import { noAuth } from '../../middleware/auth';
 import { connect } from 'react-redux';
 
@@ -12,7 +12,7 @@ export class TopContainer extends Component {
       <div className="c-container__padding">
         {noAuth(this.props.accessToken)}
         <div className="text-center pt-5 mb-3">
-          <img src={titleSvg} alt="Menstagram" className="mb-3" />
+          <TitleImage className="mb-3" style={{ backgroundImage: `url(${titleImage})` }} />
           <div className="mb-3">
             <img
               src="http://placehold.it/100x100/?text=Icon"
