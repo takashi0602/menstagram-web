@@ -1,0 +1,10 @@
+.c-image {
+  &__title {
+    width: 100%;
+    max-width: 450px;
+    height: calc(100vw * 0.3);
+    background: no-repeat center url('../../../images/title.png');
+    background-size: contain;
+    margin: 0 auto;
+  }
+}
