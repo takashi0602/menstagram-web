@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import titleSvg from '../../assets/images/title.svg';
 import { Form } from '../../components/form';
 import { register } from '../../actions/auth/register';
 import { noAuth } from '../../middleware/auth';
@@ -105,8 +104,8 @@ export class RegisterContainer extends Component {
         {noAuth(this.props.accessToken)}
         {this.props.loading && <Loading />}
         <div className="c-container__padding">
-          <div className="text-center pt-5 mb-5">
-            <img src={titleSvg} alt="Menstagram" />
+          <div className="pt-5 mb-5">
+            <div className="c-image__title" />
           </div>
           {this.props.status && <Error status={this.props.status} />}
           <div className="mb-4">
