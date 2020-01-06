@@ -18,6 +18,7 @@ import { Report } from './containers/report';
 import { Profile } from './containers/profile';
 import { ProfileEdit } from './containers/profile/edit';
 import { Menu } from './components/menu';
+import { Like } from "./containers/likes";
 
 export const Routes = () => {
   return (
@@ -34,6 +35,7 @@ export const Routes = () => {
               <Route exact path={'/post'} component={Post} />
               <Route exact path={'/timeline/private'} component={Timeline} />
               <Route exact path={'/timeline/global'} component={Timeline} />
+              <Route exact path={'/likes'} component={Like} />
               <Route exact path={'/liker/:id'} component={Liker} />
               <Route exact path={'/followed/:id'} component={Follow} />
               <Route exact path={'/following/:id'} component={Follow} />

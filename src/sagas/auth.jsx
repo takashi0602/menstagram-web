@@ -9,10 +9,10 @@ import { LOGIN, successLogin, failLogin } from '../actions/auth/login';
 import { LOGOUT, successLogout, failLogout } from '../actions/auth/logout';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
-import { failPrivateTimeline } from '../actions/timeline/private';
-import { failGlobalTimeline } from '../actions/timeline/global';
+import { clearState } from "../actions/clearState";
 
 function* register(payload) {
+  yield put(clearState());
   yield put(loading());
   yield put(errorHandle.notError());
   const { response, error } = yield call(requestRegister, payload);
@@ -26,6 +26,7 @@ function* register(payload) {
 }
 
 function* login(payload) {
+  yield put(clearState());
   yield put(loading());
   yield put(errorHandle.notError());
   const { response, error } = yield call(requestLogin, payload);
@@ -44,12 +45,11 @@ function* logout(payload) {
   const { response, error } = yield call(requestLogout, payload.accessToken);
   if (response) {
     yield put(successLogout());
+    yield put(clearState());
   } else {
     yield put(failLogout(payload.accessToken));
     yield put(errorHandle.error(error.response));
   }
-  yield put(failPrivateTimeline(-1));
-  yield put(failGlobalTimeline(-1));
   yield put(notLoading());
 }
 
