@@ -5,7 +5,7 @@ import { auth } from '../../middleware/auth';
 import { LikePostItem } from '../../components/likes/post';
 import { likes } from '../../actions/likes';
 import { Loading } from '../../components/loading';
-import { Reload, BackToTop } from '../timeline/styled';
+import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
