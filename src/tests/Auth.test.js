@@ -7,7 +7,6 @@ import { history } from '../history';
 import { act } from 'react-dom/test-utils';
 import { Register } from '../containers/register';
 import { Login } from '../containers/Login';
-import { Logout } from '../containers/Logout';
 import { requestRegister, requestLogin, requestLogout } from '../api/auth';
 
 let container, accessToken;
@@ -69,18 +68,7 @@ it('can render register, request register api', () => {
   });
 });
 
-it('can render logout, request logout api', () => {
-  act(() => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Logout />
-        </ConnectedRouter>
-      </Provider>,
-      container
-    );
-  });
-
+it('request logout api', () => {
   return requestLogout(accessToken).then(res =>
     expect(res.response.statusText).toEqual('OK')
   );
