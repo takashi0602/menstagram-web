@@ -39,10 +39,10 @@ export class Menu extends Component {
             style={path === 'timeline' ? NavIconActive : NavIconInactive}
           />
         </Link>
-        <Link to="/like" className="d-inline-block p-2" style={NavIcon}>
+        <Link to="/likes" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
-            icon={path === 'like' ? faHeart : regularHeart}
-            style={path === 'like' ? NavIconActive : NavIconInactive}
+            icon={path === 'likes' ? faHeart : regularHeart}
+            style={path === 'likes' ? NavIconActive : NavIconInactive}
           />
         </Link>
         <Link to="/post" className="d-inline-block p-2" style={NavIcon}>
