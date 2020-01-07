@@ -1,12 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {
-  LIKES,
-  successLikes,
-  failLikes
-} from '../actions/likes';
+import { LIKES, successLikes, failLikes } from '../actions/likes';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
-import { getLikes } from "../api/likes";
+import { getLikes } from '../api/likes';
 
 function* likes(action) {
   yield put(loading());
@@ -29,6 +25,4 @@ function* likes(action) {
   yield put(notLoading());
 }
 
-export const likesSaga = [
-  takeEvery(LIKES, likes)
-];
+export const likesSaga = [takeEvery(LIKES, likes)];

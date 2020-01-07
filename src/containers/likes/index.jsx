@@ -9,7 +9,7 @@ import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
-import { likePost, notLikePost } from "../../actions/likePost";
+import { likePost, notLikePost } from '../../actions/likePost';
 
 class LikeContainer extends Component {
   constructor(props) {
@@ -129,11 +129,14 @@ class LikeContainer extends Component {
       item.is_liked = false;
       this.setState({ likePostId: -1 });
     }
-    return <LikePostItem
-      key={item.id} postItem={item}
-      likePost={this.likePost}
-      notLikePost={this.notLikePost}
-    />
+    return (
+      <LikePostItem
+        key={item.id}
+        postItem={item}
+        likePost={this.likePost}
+        notLikePost={this.notLikePost}
+      />
+    );
   };
 
   render() {
@@ -152,7 +155,8 @@ class LikeContainer extends Component {
         {this.props.status && <Error status={this.props.status} />}
         {this.showPostItems()}
         {this.props.status && <Error status={this.props.status} />}
-        {this.props.likes.length > 9 && this.showReloadBar('いいねした投稿をさらに表示', this.getOldLikes)}
+        {this.props.likes.length > 9 &&
+          this.showReloadBar('いいねした投稿をさらに表示', this.getOldLikes)}
       </div>
     );
   }
