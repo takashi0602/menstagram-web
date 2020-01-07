@@ -1,5 +1,6 @@
 import { getLikes } from '../api/likes';
-import { requestLogin, requestRegister } from '../api/auth';
+import { requestRegister } from '../api/auth';
+import { postLikePost, postNotLikePost } from '../api/likePost';
 
 jest.setTimeout(10000);
 
@@ -12,13 +13,6 @@ const registerData = {
     user_id: random,
     screen_name: random,
     email: `${random}@gmail.com`,
-    password: random
-  }
-};
-
-const loginData = {
-  payload: {
-    user_id: random,
     password: random
   }
 };
@@ -39,37 +33,40 @@ const typeNew = {
 const typeOld = {
   accessToken: '',
   params: {
-    post_id: '10',
+    post_id: '1',
     type: 'old'
   }
 };
 
-it('request likes api', () => {
-  return requestRegister(registerData).then(registerRes => {
-    typeNull.accessToken = registerRes.response.data.access_token;
-    expect(registerRes.response.statusText).toEqual('OK');
-    return getLikes(typeNull).then(likesRes => {
-      expect(likesRes.response.statusText).toEqual('OK');
-    });
-  });
+const likedPost = {
+  accessToken: '',
+  postId: '1'
+};
+
+it('request likes api, request likePost api', async () => {
+  const registerRes = await requestRegister(registerData);
+  typeNull.accessToken = registerRes.response.data.access_token;
+  typeNew.accessToken = registerRes.response.data.access_token;
+  typeOld.accessToken = registerRes.response.data.access_token;
+  likedPost.accessToken = registerRes.response.data.access_token;
+  expect(registerRes.response.statusText).toEqual('OK');
+
+  const likedPostRes = await postLikePost(likedPost);
+  expect(likedPostRes.response.statusText).toEqual('OK');
+
+  const likesRes = await getLikes(typeNull);
+  expect(likesRes.response.statusText).toEqual('OK');
 });
 
-it('request likes api type new', () => {
-  return requestLogin(loginData).then(loginRes => {
-    typeNew.accessToken = loginRes.response.data.access_token;
-    expect(loginRes.response.statusText).toEqual('OK');
-    return getLikes(typeNew).then(likesRes => {
-      expect(likesRes.response.statusText).toEqual('OK');
-    });
-  });
+it('request likes api type new', async () => {
+  const likesRes = await getLikes(typeNew);
+  expect(likesRes.response.statusText).toEqual('OK');
 });
 
-it('request likes api type old', () => {
-  return requestLogin(loginData).then(loginRes => {
-    typeOld.accessToken = loginRes.response.data.access_token;
-    expect(loginRes.response.statusText).toEqual('OK');
-    return getLikes(typeOld).then(likesRes => {
-      expect(likesRes.response.statusText).toEqual('OK');
-    });
-  });
+it('request likes api type old, request notLikePost api', async () => {
+  const likesRes = await getLikes(typeOld);
+  expect(likesRes.response.statusText).toEqual('OK');
+
+  const likedPostRes = await postNotLikePost(likedPost);
+  expect(likedPostRes.response.statusText).toEqual('OK');
 });
