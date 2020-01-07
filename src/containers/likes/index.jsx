@@ -97,6 +97,7 @@ class LikeContainer extends Component {
       this.setState({ showBackToTop: false });
   };
 
+  // TODO: いいね機能の改善
   likePost = postId => {
     this.setState({ likedPost: true });
     this.setState({ likePostId: postId });
