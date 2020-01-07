@@ -5,6 +5,7 @@ import { timelineSaga } from './timeline';
 import { likesSaga } from './likes';
 import { profileSaga } from './profile';
 import { userPostsSaga } from './userPosts';
+import { likePostSaga } from './likePost';
 
 export default function* rootSaga() {
   yield all([
@@ -12,6 +13,7 @@ export default function* rootSaga() {
     ...postSaga,
     ...timelineSaga,
     ...likesSaga,
+    ...likePostSaga,
     ...profileSaga,
     ...userPostsSaga
   ]);
