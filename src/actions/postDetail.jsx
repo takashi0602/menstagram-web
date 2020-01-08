@@ -6,9 +6,8 @@ export const postDetail = payload => {
   return {
     type: POST_DETAIL,
     accessToken: payload.accessToken,
-    payload: payload.params,
-    status: -1,
-    postDetail: payload.postDetail
+    params: payload.params,
+    status: -1
   };
 };
 
