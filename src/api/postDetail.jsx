@@ -10,7 +10,7 @@ export const requestPostDetail = request => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${request.accessToken}`
     },
-    params: request.payload
+    params: request.params
   })
     .then(response => ({ response }))
     .catch(error => ({ error }));

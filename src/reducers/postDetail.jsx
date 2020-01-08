@@ -11,9 +11,9 @@ const initialState = {
       avatar: ''
     },
     created_at: '',
-    updated_at: ''
-  },
-  liker: []
+    updated_at: '',
+    liker: []
+  }
 };
 
 export function postDetail(state = initialState, action) {

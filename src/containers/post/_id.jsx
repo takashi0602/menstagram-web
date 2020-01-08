@@ -22,21 +22,7 @@ export class PostDetailContainer extends Component {
     };
     return {
       params,
-      accessToken: this.props.accessToken,
-      postDetail: {
-        id: undefined,
-        text: '',
-        images: [],
-        liked: undefined,
-        user: {
-          user_id: '',
-          screen_name: '',
-          avatar: ''
-        },
-        created_at: '',
-        updated_at: '',
-        liker: []
-      }
+      accessToken: this.props.accessToken
     };
   };
 
