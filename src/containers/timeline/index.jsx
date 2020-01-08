@@ -11,6 +11,7 @@ import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
+import { likePost, notLikePost } from "../../actions/likePost";
 
 export class TimelineContainer extends Component {
   constructor(props) {
@@ -20,7 +21,9 @@ export class TimelineContainer extends Component {
       notPrivateTimelineMessage:
         'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
       showBackToTop: false,
-      scrollValue: 0
+      scrollValue: 0,
+      likedPost: false,
+      likePostId: -1
     };
   }
 
@@ -75,7 +78,7 @@ export class TimelineContainer extends Component {
           </div>
         );
       return this.props.privateTimeline.map(item => (
-        <TimelinePostItem key={item.id} postItem={item} />
+        this.getTimelinePostItem(item)
       ));
     } else {
       if (this.props.globalTimeline.length === 0)
@@ -86,7 +89,7 @@ export class TimelineContainer extends Component {
           </div>
         );
       return this.props.globalTimeline.map(item => (
-        <TimelinePostItem key={item.id} postItem={item} />
+        this.getTimelinePostItem(item)
       ));
     }
   };
@@ -155,6 +158,41 @@ export class TimelineContainer extends Component {
       this.setState({ showBackToTop: false });
   };
 
+  // TODO: いいね機能の改善
+  likePost = postId => {
+    this.setState({likedPost: true});
+    this.setState({likePostId: postId});
+    const payload = {
+      accessToken: this.props.accessToken,
+      postId: postId
+    };
+    this.props.likePost(payload);
+  };
+
+  notLikePost = postId => {
+    this.setState({likedPost: false});
+    this.setState({likePostId: postId});
+    const payload = {
+      accessToken: this.props.accessToken,
+      postId: postId
+    };
+    this.props.notLikePost(payload);
+  };
+
+  getTimelinePostItem = item => {
+    if (this.state.likePostId === item.id && this.state.likedPost) {
+      item.liked++;
+      item.is_liked = true;
+      this.setState({likePostId: -1});
+    }
+    if (this.state.likePostId === item.id && !this.state.likedPost) {
+      item.liked--;
+      item.is_liked = false;
+      this.setState({likePostId: -1});
+    }
+    return <TimelinePostItem key={item.id} postItem={item} likePost={(postId) => this.likePost(postId)} notLikePost={(postId) => this.notLikePost(postId)} />
+  };
+
   render() {
     return (
       <div>
@@ -198,6 +236,12 @@ function mapDispatchToProps(dispatch) {
     },
     getGlobalTimeline(payload) {
       dispatch(globalTimeline(payload));
+    },
+    likePost(payload) {
+      dispatch(likePost(payload));
+    },
+    notLikePost(payload) {
+      dispatch(notLikePost(payload));
     }
   };
 }
@@ -217,5 +261,7 @@ TimelineContainer.propTypes = {
   globalTimeline: PropTypes.array,
   globalStatus: PropTypes.number,
   getPrivateTimeline: PropTypes.func,
-  getGlobalTimeline: PropTypes.func
+  getGlobalTimeline: PropTypes.func,
+  likePost: PropTypes.func,
+  notLikePost: PropTypes.func
 };

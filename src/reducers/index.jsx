@@ -9,6 +9,7 @@ import { error } from './error';
 import { privateTimeline } from './timeline/private';
 import { globalTimeline } from './timeline/global';
 import { likes } from './likes';
+import { likePost } from './likePost';
 
 const combineReducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const combineReducer = combineReducers({
   likes,
   privateTimeline,
   globalTimeline,
+  likePost,
   error,
   router: connectRouter(history)
 });

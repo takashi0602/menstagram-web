@@ -59,7 +59,9 @@ export class LikePostItem extends Component {
   showLikePost = number => {
     return (
       <div>
-        <FontAwesomeIcon icon={solidHeart} style={LikedHeartIcon} />
+        <span onClick={this.notLikePost}>
+          <FontAwesomeIcon icon={solidHeart} style={LikedHeartIcon} />
+        </span>
         <span className="align-top">{number}</span>
       </div>
     );
@@ -68,7 +70,9 @@ export class LikePostItem extends Component {
   showNotLikedPost = number => {
     return (
       <div>
-        <FontAwesomeIcon icon={regularHeart} style={NotLikedIcon} />
+        <span onClick={this.likePost}>
+          <FontAwesomeIcon icon={regularHeart} style={NotLikedIcon} />
+        </span>
         <span className="align-top">{number}</span>
       </div>
     );
@@ -94,6 +98,14 @@ export class LikePostItem extends Component {
         <FontAwesomeIcon icon={faUser} style={faUserIcon} />
       </UserImage>
     );
+  };
+
+  likePost = () => {
+    return this.props.likePost(this.props.postItem.id);
+  };
+
+  notLikePost = () => {
+    return this.props.notLikePost(this.props.postItem.id);
   };
 
   render() {
@@ -138,5 +150,7 @@ export class LikePostItem extends Component {
 }
 
 LikePostItem.propTypes = {
-  postItem: PropTypes.object
+  postItem: PropTypes.object,
+  likePost: PropTypes.func,
+  notLikePost: PropTypes.func
 };
