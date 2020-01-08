@@ -59,7 +59,9 @@ export class TimelinePostItem extends Component {
   showLikePost = number => {
     return (
       <div>
-        <FontAwesomeIcon icon={solidHeart} style={LikedHeartIcon} />
+        <span onClick={() => this.props.notLikePost(this.props.postItem.id)}>
+          <FontAwesomeIcon icon={solidHeart} style={LikedHeartIcon} />
+        </span>
         <span className="align-top">{number}</span>
       </div>
     );
@@ -68,7 +70,9 @@ export class TimelinePostItem extends Component {
   showNotLikedPost = number => {
     return (
       <div>
-        <FontAwesomeIcon icon={regularHeart} style={NotLikedIcon} />
+        <span onClick={() => this.props.likePost(this.props.postItem.id)}>
+          <FontAwesomeIcon icon={regularHeart} style={NotLikedIcon} />
+        </span>
         <span className="align-top">{number}</span>
       </div>
     );
@@ -138,5 +142,7 @@ export class TimelinePostItem extends Component {
 }
 
 TimelinePostItem.propTypes = {
-  postItem: PropTypes.object
+  postItem: PropTypes.object,
+  likePost: PropTypes.func,
+  notLikePost: PropTypes.func
 };
