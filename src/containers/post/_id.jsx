@@ -11,26 +11,6 @@ import { postDetail, failPostDetail } from '../../actions/postDetail';
 import { Loading } from '../../components/loading';
 
 export class PostDetailContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      postDetail: {
-        id: undefined,
-        text: '',
-        images: [],
-        liked: undefined,
-        user: {
-          user_id: '',
-          screen_name: '',
-          avatar: ''
-        },
-        created_at: '',
-        updated_at: ''
-      },
-      liker: []
-    };
-  }
-
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
   goBack = () => {
     this.props.history.goBack();
