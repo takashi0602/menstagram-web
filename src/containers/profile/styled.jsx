@@ -85,11 +85,6 @@ export const OrangeText = styled.label`
   margin-bottom: 10px;
 `;
 
-export const MyProfileHeader = styled.header`
-  width: 100%;
-  height: 50px;
-`;
-
 export const Item = styled.div`
   width: 30%;
 `;

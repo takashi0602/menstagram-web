@@ -4,6 +4,8 @@ import { postSaga } from './post';
 import { postDetailSaga } from './postDetail';
 import { timelineSaga } from './timeline';
 import { likesSaga } from './likes';
+import { profileSaga } from './profile';
+import { userPostsSaga } from './userPosts';
 import { likePostSaga } from './likePost';
 
 export default function* rootSaga() {
@@ -13,6 +15,8 @@ export default function* rootSaga() {
     ...postDetailSaga,
     ...timelineSaga,
     ...likesSaga,
-    ...likePostSaga
+    ...likePostSaga,
+    ...profileSaga,
+    ...userPostsSaga
   ]);
 }

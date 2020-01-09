@@ -9,6 +9,8 @@ import { error } from './error';
 import { privateTimeline } from './timeline/private';
 import { globalTimeline } from './timeline/global';
 import { likes } from './likes';
+import { profile } from './profile';
+import { userPosts } from './userPosts';
 import { likePost } from './likePost';
 
 const combineReducer = combineReducers({
@@ -17,6 +19,8 @@ const combineReducer = combineReducers({
   post,
   postDetail,
   likes,
+  profile,
+  userPosts,
   privateTimeline,
   globalTimeline,
   likePost,
