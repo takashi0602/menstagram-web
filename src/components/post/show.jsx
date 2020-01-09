@@ -68,13 +68,12 @@ export class Post extends Component {
   };
 
   showLiker = () => {
-    const likerList = this.props.likers.map(liker => {
+    if (this.props.postItem.liker === undefined) return;
+    const likerList = this.props.postItem.liker.map(liker => {
       return (
-        <Link key={liker.user.user_id} to={'/profile/' + liker.user.user_id}>
-          {liker.user.avatar ? (
-            <LikerImage
-              style={{ backgroundImage: `url(${liker.user.avatar})` }}
-            />
+        <Link key={liker.user_id} to={'/profile/' + liker.user_id}>
+          {liker.avatar ? (
+            <LikerImage style={{ backgroundImage: `url(${liker.avatar})` }} />
           ) : (
             <LikerImage>
               <FontAwesomeIcon icon={faUser} style={LikerIcon} />
@@ -157,6 +156,5 @@ export class Post extends Component {
 
 Post.propTypes = {
   parentRoute: PropTypes.string,
-  postItem: PropTypes.object,
-  likers: PropTypes.array
+  postItem: PropTypes.object
 };

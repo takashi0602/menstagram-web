@@ -5,79 +5,47 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../components/post/show';
 import { BackButton, Title } from './styled';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
+import { connect } from 'react-redux';
+import { auth } from '../../middleware/auth';
+import { postDetail, failPostDetail } from '../../actions/postDetail';
+import { Loading } from '../../components/loading';
 
-const likers = [
-  {
-    id: 1,
-    user: {
-      user_id: 'abc',
-      screen_name: 'test1',
-      avatar: ''
-    }
-  },
-  {
-    id: 2,
-    user: {
-      user_id: 'def',
-      screen_name: 'test2',
-      avatar: 'http://placehold.it/100x100/?text=Icon'
-    }
-  },
-  {
-    id: 3,
-    user: {
-      user_id: 'ghi',
-      screen_name: 'test3',
-      avatar: 'http://placehold.it/100x100/?text=Icon'
-    }
-  },
-  {
-    id: 4,
-    user: {
-      user_id: 'jkl',
-      screen_name: 'test4',
-      avatar: ''
-    }
-  },
-  {
-    id: 5,
-    user: {
-      user_id: 'mno',
-      screen_name: 'test5',
-      avatar: 'http://placehold.it/100x100/?text=Icon'
-    }
-  }
-];
-
-export class PostDetail extends Component {
-  data = {
-    id: this.props.match.params.id,
-    text:
-      'Eum consequatur magnam laboriosam cumque blanditiis consequatur est in. Enim veniam fuga iure odio qui dolorem impedit alias. Itaque veniam odit aut. Provident eum sint quia rem impedit.',
-    images: [
-      'http://placehold.it/300x300?text=1',
-      'http://placehold.it/300x300?text=2',
-      'http://placehold.it/300x300?text=3',
-      'http://placehold.it/300x300?text=4'
-    ],
-    liked: 20,
-    user: {
-      user_id: 'J4N1AmVPxT',
-      screen_name: 'user_name',
-      avatar: ''
-    },
-    created_at: '2019/12/12 12:12:12',
-    updated_at: '2019/12/12 12:12:12'
-  };
-
+export class PostDetailContainer extends Component {
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
   goBack = () => {
     this.props.history.goBack();
   };
 
+  initPostDetail = () => {
+    const params = {
+      post_id: this.props.match.params.id
+    };
+    return {
+      params,
+      accessToken: this.props.accessToken
+    };
+  };
+
+  initGetData = () => {
+    // query check
+    if (Number.isNaN(Number(this.props.match.params.id))) return;
+    // TODO: 404画面の表示
+
+    //id:1 -> timeline -> id:2
+    if (Number(this.props.match.params.id) !== this.props.postDetail.id) {
+      this.props.getPostDetail(this.initPostDetail());
+      return;
+    }
+    if (this.props.status !== -1) return;
+    this.props.getPostDetail(this.initPostDetail());
+  };
+
   render() {
     return (
       <div>
+        {auth(this.props.accessToken)}
+        {this.props.loading && <Loading />}
+        {this.initGetData()}
         <ScrollToTopOnMount />
         <header className="py-3 px-3 border-bottom">
           <BackButton onClick={this.goBack}>
@@ -85,13 +53,44 @@ export class PostDetail extends Component {
           </BackButton>
           <Title>投稿</Title>
         </header>
-        <Post postItem={this.data} likers={likers} />
+        {this.props.postDetail && <Post postItem={this.props.postDetail} />}
       </div>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    accessToken: state.auth.accessToken,
+    status: state.postDetail.status,
+    loading: state.loading.loading,
+    success: state.post.success,
+    postDetail: state.postDetail.postDetail
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    getPostDetail(payload) {
+      dispatch(postDetail(payload));
+    },
+    changeSuccessValue() {
+      dispatch(failPostDetail());
+    }
+  };
+}
 
-PostDetail.propTypes = {
+export const PostDetail = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostDetailContainer);
+
+PostDetailContainer.propTypes = {
   match: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
+  accessToken: PropTypes.string,
+  status: PropTypes.number,
+  loading: PropTypes.bool,
+  getPostDetail: PropTypes.func,
+  success: PropTypes.bool,
+  changeSuccessValue: PropTypes.func,
+  postDetail: PropTypes.object
 };
