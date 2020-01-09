@@ -18,7 +18,7 @@ import { Report } from './containers/report';
 import { Profile } from './containers/profile';
 import { ProfileEdit } from './containers/profile/edit';
 import { Menu } from './components/menu';
-import { Like } from "./containers/likes";
+import { Like } from './containers/likes';
 
 export const Routes = () => {
   return (
