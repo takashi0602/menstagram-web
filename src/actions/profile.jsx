@@ -7,7 +7,7 @@ export const profile = payload => {
     type: PROFILE,
     accessToken: payload.accessToken,
     params: payload.params,
-    profile: payload.postList,
+    profile: {},
     profileStatus: -1
   };
 };

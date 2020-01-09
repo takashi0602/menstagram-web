@@ -7,7 +7,7 @@ export const userPosts = payload => {
     type: USER_POSTS,
     accessToken: payload.accessToken,
     params: payload.params,
-    userPosts: payload.userPosts,
+    userPosts: [],
     userPostStatus: -1
   };
 };

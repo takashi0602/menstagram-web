@@ -15,7 +15,6 @@ import {
   Biography,
   PostImage,
   imagesIcon,
-  MyProfileHeader,
   UserImage,
   userIcon,
   Item
@@ -30,9 +29,6 @@ import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 
-//ダミー
-const parentRoute = '/post/3';
-
 class ProfileContainer extends Component {
   constructor(prop) {
     super(prop);
@@ -43,20 +39,18 @@ class ProfileContainer extends Component {
   }
 
   TopHeader = () => {
+    return (
+      <header className="py-3 pl-3 d-flex justify-content-between">
+        <span className="text-left" onClick={this.goBack}>
+          <FontAwesomeIcon icon={faChevronLeft} style={backButton} />
+        </span>
+        {this.HamMenuButton()}
+      </header>
+    );
+  };
+  HamMenuButton = () => {
     if (this.props.profile.is_me) {
-      return (
-        <MyProfileHeader>
-          <HamMenu menuItems={[]} logout={() => this.openModal()} />
-        </MyProfileHeader>
-      );
-    } else {
-      return (
-        <header className="py-3 px-3 d-flex justify-content-start">
-          <Link className="text-left" to={parentRoute}>
-            <FontAwesomeIcon icon={faChevronLeft} style={backButton} />
-          </Link>
-        </header>
-      );
+      return <HamMenu menuItems={[]} logout={() => this.openModal()} />;
     }
   };
 
@@ -138,6 +132,11 @@ class ProfileContainer extends Component {
     );
   };
 
+  // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
+  goBack = () => {
+    this.props.history.goBack();
+  };
+
   logout = () => {
     this.props.post(this.props.accessToken);
   };
@@ -152,21 +151,9 @@ class ProfileContainer extends Component {
 
   initSetProfileData = () => {
     const params = { user_id: this.props.match.params.id };
-    const profile = {
-      id: NaN,
-      user_id: '',
-      avatar: '',
-      screen_name: '',
-      posted: NaN,
-      following: NaN,
-      followed: NaN,
-      is_followed: false,
-      biography: ''
-    };
     return {
       params,
-      accessToken: this.props.accessToken,
-      profile
+      accessToken: this.props.accessToken
     };
   };
 
@@ -181,12 +168,12 @@ class ProfileContainer extends Component {
   };
 
   initGetProfile = () => {
-    if (this.props.match.params.id !== this.props.profile.user_id) {
+    if (
+      this.props.match.params.id !== this.props.profile.user_id ||
+      this.props.profileStatus === -1
+    ) {
       this.props.getProfile(this.initSetProfileData());
-      return;
     }
-    if (this.props.profileStatus !== -1) return;
-    this.props.getProfile(this.initSetProfileData());
   };
 
   initGetUserPosts = () => {
@@ -297,6 +284,7 @@ export const Profile = connect(
 ProfileContainer.propTypes = {
   match: PropTypes.object,
   accessToken: PropTypes.string,
+  history: PropTypes.object,
   status: PropTypes.number,
   profileStatus: PropTypes.number,
   userPostsStatus: PropTypes.number,
