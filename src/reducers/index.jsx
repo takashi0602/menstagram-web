@@ -12,6 +12,7 @@ import { likes } from './likes';
 import { profile } from './profile';
 import { userPosts } from './userPosts';
 import { likePost } from './likePost';
+import { likers } from './likers';
 
 const combineReducer = combineReducers({
   auth,
@@ -24,6 +25,7 @@ const combineReducer = combineReducers({
   privateTimeline,
   globalTimeline,
   likePost,
+  likers,
   error,
   router: connectRouter(history)
 });
