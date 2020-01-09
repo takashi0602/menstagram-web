@@ -30,13 +30,13 @@ export default class LikerListItem extends Component {
           {this.props.user.is_followed ? (
             <FollowButton
               type="button"
-              className="c-button__white"
+              className="c-button__white c-button__commonWidth"
               onClick={this.props.openModal}
             >
               フォロー中
             </FollowButton>
           ) : (
-            <FollowButton type="button" className="c-button__orange">
+            <FollowButton type="button" className="c-button__orange c-button__commonWidth">
               フォローする
             </FollowButton>
           )}
