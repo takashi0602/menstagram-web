@@ -46,8 +46,7 @@ export class LikerContainer extends Component {
     };
     return {
       params,
-      accessToken: this.props.accessToken,
-      likerList: []
+      accessToken: this.props.accessToken
     };
   };
 

@@ -7,7 +7,7 @@ export const likers = payload => {
     type: LIKERS,
     accessToken: payload.accessToken,
     params: payload.params,
-    likerList: payload.likerList,
+    likerList: [],
     status: -1,
     postId: payload.params.post_id
   };
