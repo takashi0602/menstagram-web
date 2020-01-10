@@ -9,7 +9,7 @@ export const privateTimeline = payload => {
     params: payload.params,
     pathName: payload.pathName,
     postList: payload.postList,
-    status: -1
+    status: 200
   };
 };
 

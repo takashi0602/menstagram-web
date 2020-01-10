@@ -9,7 +9,7 @@ export const globalTimeline = payload => {
     params: payload.params,
     pathName: payload.pathName,
     postList: payload.postList,
-    status: -1
+    status: 200
   };
 };
 
