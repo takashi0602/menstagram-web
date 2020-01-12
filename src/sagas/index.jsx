@@ -8,6 +8,8 @@ import { profileSaga } from './profile';
 import { userPostsSaga } from './userPosts';
 import { likePostSaga } from './likePost';
 import { likersSaga } from './likers';
+import { followingSaga } from './following';
+import { followedSaga } from './followed';
 
 export default function* rootSaga() {
   yield all([
@@ -19,6 +21,8 @@ export default function* rootSaga() {
     ...likePostSaga,
     ...likersSaga,
     ...profileSaga,
-    ...userPostsSaga
+    ...userPostsSaga,
+    ...followingSaga,
+    ...followedSaga
   ]);
 }
