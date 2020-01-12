@@ -24,7 +24,6 @@ export class FollowContainer extends Component {
       return (
         <ul className="pl-0">
           {this.props.followingList.map((user, idx) => {
-            if (user.is_me) return null; // eslint対策
             return (
               <FollowListItem
                 key={idx}
@@ -39,7 +38,6 @@ export class FollowContainer extends Component {
       return (
         <ul className="pl-0">
           {this.props.followedList.map((user, idx) => {
-            if (user.is_me) return null; // eslint対策
             return (
               <FollowListItem
                 key={idx}
