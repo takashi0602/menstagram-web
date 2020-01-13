@@ -1,0 +1,20 @@
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { postProfileEdit } from '../api/profileEdit';
+import { PROFILE_EDIT, successProfileEdit, failProfileEdit } from '../actions/profileEdit';
+import { loading, notLoading } from '../actions/loading';
+import * as errorHandle from '../actions/error';
+
+function* profileEdit(action) {
+  yield put(loading());
+  yield put(errorHandle.notError());
+  const { response, error } = yield call(postProfileEdit, action);
+  if (response) {
+    yield put(successProfileEdit());
+  } else {
+    yield put(failProfileEdit());
+    yield put(errorHandle.error(error.response));
+  }
+  yield put(notLoading());
+}
+
+export const profileEditSaga = [takeEvery(PROFILE_EDIT, profileEdit)];
