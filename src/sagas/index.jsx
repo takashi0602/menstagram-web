@@ -24,7 +24,7 @@ export default function* rootSaga() {
     ...profileSaga,
     ...userPostsSaga,
     ...followingSaga,
-    ...followedSaga
+    ...followedSaga,
     ...profileEditSaga
   ]);
 }
