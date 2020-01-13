@@ -13,6 +13,7 @@ import { profile } from './profile';
 import { userPosts } from './userPosts';
 import { likePost } from './likePost';
 import { likers } from './likers';
+import { profileEdit } from './profileEdit';
 
 const combineReducer = combineReducers({
   auth,
@@ -22,6 +23,7 @@ const combineReducer = combineReducers({
   likes,
   profile,
   userPosts,
+  profileEdit,
   privateTimeline,
   globalTimeline,
   likePost,

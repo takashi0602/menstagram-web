@@ -1,6 +1,7 @@
 export const PROFILE = 'PROFILE';
 export const SUCCESS_PROFILE = 'SUCCESS_PROFILE';
 export const FAIL_PROFILE = 'FAIL_PROFILE';
+export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 
 export const profile = payload => {
   return {
@@ -25,5 +26,13 @@ export const failProfile = status => {
     type: FAIL_PROFILE,
     profile: {},
     profileStatus: status
+  };
+};
+
+export const clearProfile = () => {
+  return {
+    type: CLEAR_PROFILE,
+    profile: {},
+    profileStatus: -1
   };
 };

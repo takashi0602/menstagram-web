@@ -36,7 +36,10 @@ export default class LikerListItem extends Component {
               フォロー中
             </FollowButton>
           ) : (
-            <FollowButton type="button" className="c-button__orange c-button__commonWidth">
+            <FollowButton
+              type="button"
+              className="c-button__orange c-button__commonWidth"
+            >
               フォローする
             </FollowButton>
           )}
