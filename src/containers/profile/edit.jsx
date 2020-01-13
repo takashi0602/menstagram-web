@@ -13,8 +13,8 @@ import {
 } from './styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faUser } from '@fortawesome/free-solid-svg-icons';
-import { profile } from "../../actions/profile";
-import { profileEdit } from "../../actions/profileEdit";
+import { profile, clearProfile } from "../../actions/profile";
+import { profileEdit, failProfileEdit } from "../../actions/profileEdit";
 import { connect } from 'react-redux';
 import { Loading } from "../../components/loading";
 import { Redirect } from 'react-router-dom';
@@ -26,18 +26,12 @@ class ProfileEditContainer extends Component {
     this.state = {
       newImage: [],
       errorFileFormat: false,
-      profile: {
-        screenName: '',
-        biography: ''
-      },
-      errorProfile: {
-        screenName: false,
-        biography: false
-      },
-      changeProfile: {
-        screenName: false,
-        biography: false
-      }
+      screenName: '',
+      biography: '',
+      errorScreenName: false,
+      errorBiography: false,
+      changeScreenName: false,
+      changeBiography: false
     };
   }
 
@@ -58,9 +52,9 @@ class ProfileEditContainer extends Component {
   };
 
   showSubmitButton = () => {
-    if (this.state.errorProfile.screenName ||
-      this.state.errorProfile.biography ||
-      (!this.state.changeProfile.screenName && !this.state.changeProfile.biography))
+    if (this.state.errorScreenName ||
+      this.state.errorBiography ||
+      (!this.state.changeScreenName && !this.state.changeBiography))
       return <Submit className='c-link__lightgray'>完了</Submit>;
     return <Submit onClick={this.requestEditProfile}>完了</Submit>;
   };
@@ -103,8 +97,8 @@ class ProfileEditContainer extends Component {
     const payload = {
       accessToken: this.props.accessToken,
       profile: {
-        screenName: this.state.changeProfile.screenName ? this.state.profile.screenName : this.props.profile.screen_name,
-        biography: this.state.changeProfile.biography ? this.state.profile.biography : this.props.profile.biography
+        screenName: this.state.changeBiography ? this.state.screenName : this.props.profile.screen_name,
+        biography: this.state.changeBiography ? this.state.biography : this.props.profile.biography
       }
     };
     this.props.postProfileEdit(payload);
@@ -128,6 +122,12 @@ class ProfileEditContainer extends Component {
       return <Redirect to={`/profile/${this.props.match.params.id}`} />;
   };
 
+  redirectMyProfile = () => {
+    this.props.clearProfile();
+    this.props.clearProfileEdit();
+    return <Redirect to={`/profile/${this.props.match.params.id}`} />;
+  };
+
   getDefaultValue = name => {
     if (!this.props.profile) return '';
     return this.props.profile[name];
@@ -135,52 +135,28 @@ class ProfileEditContainer extends Component {
 
   changeScreenName = e => {
     this.setState({
-      errorProfile: {
-        screenName: false
-      },
-      changeProfile: {
-        screenName: true
-      }
+      errorScreenName: false,
+      changeScreenName: true
     });
-    this.setState({
-      profile: {
-        screenName: e.target.value
-      }
-    });
-    this.validationMaxLength('screenName', e.target.value.length, 16);
+    this.setState({ screenName: e.target.value });
+    this.validationMaxLength('ScreenName', e.target.value.length, 16);
   };
 
   changeBiography = e => {
     this.setState({
-      errorProfile: {
-        biography: false
-      },
-      changeProfile: {
-        biography: true
-      }
+      errorBiography: false,
+      changeBiography: true
     });
-    this.setState({
-      profile: {
-        biography: e.target.value
-      }
-    });
-    this.validationMaxLength('biography', e.target.value.length, 128);
+    this.setState({ biography: e.target.value });
+    this.validationMaxLength('Biography', e.target.value.length, 128);
   };
 
   validationMaxLength = (name, targetLength, length) => {
     if (targetLength > length) {
-      this.setState({
-        errorProfile: {
-          [name]: true
-        }
-      });
+      this.setState({[`error${name}`]: true});
     }
-    if (name === 'screenName' && targetLength === 0) {
-      this.setState({
-        errorProfile: {
-          screenName: true
-        }
-      });
+    if (name === 'ScreenName' && targetLength === 0) {
+      this.setState({ screenName: true });
     }
   };
 
@@ -191,6 +167,7 @@ class ProfileEditContainer extends Component {
   render() {
     return (
       <div>
+        {this.props.profileEditSuccess && this.redirectMyProfile()}
         {this.initGetProfile()}
         {this.isMe()}
         {this.props.loading && <Loading />}
@@ -219,18 +196,20 @@ class ProfileEditContainer extends Component {
         </div>
         <div className="c-container__padding">
           {this.props.status && <Error status={this.props.status} />}
-          <div className="d-flex align-items-center">
-            <ItemLabel>スクリーンネーム</ItemLabel>
-            <input
-              type="text"
-              className="c-form"
-              defaultValue={this.getDefaultValue('screen_name')}
-              onChange={e => {
-                this.changeScreenName(e);
-              }}
-            />
+          <div className="mb-3">
+            <div className="d-flex align-items-center">
+              <ItemLabel>スクリーンネーム</ItemLabel>
+              <input
+                type="text"
+                className="c-form"
+                defaultValue={this.getDefaultValue('screen_name')}
+                onChange={e => {
+                  this.changeScreenName(e);
+                }}
+              />
+            </div>
+            {this.state.errorScreenName && this.getErrorMessageMaxLength('1文字以上、16文字以下で入力してください。')}
           </div>
-          {this.state.errorProfile.screenName && this.getErrorMessageMaxLength('1文字以上、16文字以下で入力してください。')}
           <div>
             <label>自己紹介</label>
             <textarea
@@ -241,7 +220,7 @@ class ProfileEditContainer extends Component {
               }}
             />
           </div>
-          {this.state.errorProfile.biography && this.getErrorMessageMaxLength('128文字以下で入力してください。')}
+          {this.state.errorBiography && this.getErrorMessageMaxLength('128文字以下で入力してください。')}
         </div>
       </div>
     );
@@ -266,6 +245,12 @@ function mapDispatchToProps(dispatch) {
     },
     postProfileEdit(payload) {
       dispatch(profileEdit(payload));
+    },
+    clearProfile() {
+      dispatch(clearProfile());
+    },
+    clearProfileEdit() {
+      dispatch(failProfileEdit())
     }
   };
 }
@@ -284,5 +269,8 @@ ProfileEdit.propTypes = {
   profile: PropTypes.object,
   getProfile: PropTypes.func,
   postProfileEdit: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  profileEditSuccess: PropTypes.number,
+  clearProfile: PropTypes.func,
+  clearProfileEdit: PropTypes.func
 };
