@@ -12,14 +12,14 @@ export class TwoChoiceModal extends Component {
           <div className="d-flex justify-content-around">
             <button
               type="button"
-              className="c-button__white"
+              className="c-button__white c-button__commonWidth"
               onClick={this.props.closeModal}
             >
               キャンセル
             </button>
             <button
               type="button"
-              className="c-button__orange"
+              className="c-button__orange c-button__commonWidth"
               onClick={this.props.submit}
             >
               {this.props.buttonName}

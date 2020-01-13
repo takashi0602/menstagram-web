@@ -11,7 +11,7 @@ import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
-import { likePost, notLikePost } from "../../actions/likePost";
+import { likePost, notLikePost } from '../../actions/likePost';
 
 export class TimelineContainer extends Component {
   constructor(props) {
@@ -77,9 +77,9 @@ export class TimelineContainer extends Component {
             <p className="pt-3 px-3">{this.state.notPrivateTimelineMessage}</p>
           </div>
         );
-      return this.props.privateTimeline.map(item => (
+      return this.props.privateTimeline.map(item =>
         this.getTimelinePostItem(item)
-      ));
+      );
     } else {
       if (this.props.globalTimeline.length === 0)
         return (
@@ -88,9 +88,9 @@ export class TimelineContainer extends Component {
             <p className="pt-3 px-3">{this.state.notGlobalTimelineMessage}</p>
           </div>
         );
-      return this.props.globalTimeline.map(item => (
+      return this.props.globalTimeline.map(item =>
         this.getTimelinePostItem(item)
-      ));
+      );
     }
   };
 
@@ -160,8 +160,8 @@ export class TimelineContainer extends Component {
 
   // TODO: いいね機能の改善
   likePost = postId => {
-    this.setState({likedPost: true});
-    this.setState({likePostId: postId});
+    this.setState({ likedPost: true });
+    this.setState({ likePostId: postId });
     const payload = {
       accessToken: this.props.accessToken,
       postId: postId
@@ -170,8 +170,8 @@ export class TimelineContainer extends Component {
   };
 
   notLikePost = postId => {
-    this.setState({likedPost: false});
-    this.setState({likePostId: postId});
+    this.setState({ likedPost: false });
+    this.setState({ likePostId: postId });
     const payload = {
       accessToken: this.props.accessToken,
       postId: postId
@@ -183,14 +183,21 @@ export class TimelineContainer extends Component {
     if (this.state.likePostId === item.id && this.state.likedPost) {
       item.liked++;
       item.is_liked = true;
-      this.setState({likePostId: -1});
+      this.setState({ likePostId: -1 });
     }
     if (this.state.likePostId === item.id && !this.state.likedPost) {
       item.liked--;
       item.is_liked = false;
-      this.setState({likePostId: -1});
+      this.setState({ likePostId: -1 });
     }
-    return <TimelinePostItem key={item.id} postItem={item} likePost={(postId) => this.likePost(postId)} notLikePost={(postId) => this.notLikePost(postId)} />
+    return (
+      <TimelinePostItem
+        key={item.id}
+        postItem={item}
+        likePost={postId => this.likePost(postId)}
+        notLikePost={postId => this.notLikePost(postId)}
+      />
+    );
   };
 
   render() {

@@ -8,7 +8,7 @@ import {
   failNotLikePost
 } from '../actions/likePost';
 import * as errorHandle from '../actions/error';
-import { postLikePost, postNotLikePost } from "../api/likePost";
+import { postLikePost, postNotLikePost } from '../api/likePost';
 
 function* likePost(action) {
   yield put(errorHandle.notError());

@@ -27,7 +27,7 @@ export const failLikePost = () => {
     type: FAIL_LIKE_POST,
     postId: -1,
     success: false
-  }
+  };
 };
 
 export const notLikePost = payload => {
@@ -52,5 +52,5 @@ export const failNotLikePost = () => {
     type: FAIL_NOT_LIKE_POST,
     postId: -1,
     success: false
-  }
+  };
 };

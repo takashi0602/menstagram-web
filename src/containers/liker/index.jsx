@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { auth } from '../../middleware/auth';
+import { likers } from '../../actions/likers';
+import { Loading } from '../../components/loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -10,24 +14,7 @@ import {
 import LikerListItem from '../../components/liker';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 
-const likers = [
-  {
-    user_id: 'mensta',
-    screen_name: 'メンスタグラム公式',
-    avatar:
-      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-    is_followed: false
-  },
-  {
-    user_id: 'menstaaaa',
-    screen_name: 'メンスタグラム非公式',
-    avatar:
-      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-    is_followed: true
-  }
-];
-
-export class Liker extends Component {
+export class LikerContainer extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
@@ -53,9 +40,31 @@ export class Liker extends Component {
     console.log('フォローをはずす');
   };
 
+  initSetLikersData = () => {
+    const params = {
+      post_id: this.props.match.params.id
+    };
+    return {
+      params,
+      accessToken: this.props.accessToken
+    };
+  };
+
+  initGetLikers = () => {
+    // stateに保持するpostIdとURLのパラメータが違うときはリクエストを発火
+    if (this.props.postId !== this.props.match.params.id) {
+      this.props.getLikers(this.initSetLikersData());
+    }
+    if (this.props.likerStatus !== -1) return;
+    this.props.getLikers(this.initSetLikersData());
+  };
+
   render() {
     return (
       <div>
+        {auth(this.props.accessToken)}
+        {this.props.loading && <Loading />}
+        {this.initGetLikers()}
         <header className="pt-3 mb-3 border-bottom">
           <div className="position-relative mb-4">
             <FaChevronLeftStyle onClick={this.goBack}>
@@ -69,7 +78,7 @@ export class Liker extends Component {
         </header>
         <div className="c-container__padding">
           <ul className="pl-0">
-            {likers.map((user, idx) => {
+            {this.props.likerList.map((user, idx) => {
               return (
                 <LikerListItem
                   key={idx}
@@ -93,6 +102,37 @@ export class Liker extends Component {
   }
 }
 
-Liker.propTypes = {
-  history: PropTypes.object
+function mapStateToProps(state) {
+  return {
+    accessToken: state.auth.accessToken,
+    status: state.error.status,
+    loading: state.loading.loading,
+    likerList: state.likers.likerList,
+    likerStatus: state.likers.status,
+    postId: state.likers.postId
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    getLikers(payload) {
+      dispatch(likers(payload));
+    }
+  };
+}
+
+export const Liker = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LikerContainer);
+
+LikerContainer.propTypes = {
+  accessToken: PropTypes.string,
+  status: PropTypes.number,
+  loading: PropTypes.bool,
+  history: PropTypes.object,
+  match: PropTypes.object,
+  getLikers: PropTypes.func,
+  likerList: PropTypes.array,
+  likerStatus: PropTypes.number,
+  postId: PropTypes.string
 };
