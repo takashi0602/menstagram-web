@@ -28,6 +28,7 @@ export default class FollowListItem extends Component {
       );
     }
   };
+
   render() {
     return (
       <li className="row mx-0 mb-3 align-items-center">

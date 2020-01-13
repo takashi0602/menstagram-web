@@ -14,7 +14,12 @@ export function profile(state = initialState, action) {
       };
     case 'FAIL_PROFILE':
       return {
-        prorile: action.profile,
+        profile: action.profile,
+        profileStatus: action.profileStatus
+      };
+    case 'CLEAR_PROFILE':
+      return {
+        profile: action.profile,
         profileStatus: action.profileStatus
       };
     default:
