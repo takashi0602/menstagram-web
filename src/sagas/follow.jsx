@@ -8,9 +8,11 @@ import {
   failUnfollow
 } from '../actions/follow';
 import * as errorHandle from '../actions/error';
+import { loading, notLoading } from "../actions/loading";
 import { postFollow, postUnfollow } from "../api/follow";
 
 function* follow(action) {
+  yield put(loading());
   yield put(errorHandle.notError());
   const { response, error } = yield call(postFollow, action);
   if (response) {
@@ -19,9 +21,11 @@ function* follow(action) {
     yield put(failFollow());
     yield put(errorHandle.error(error.response));
   }
+  yield put(notLoading());
 }
 
 function* unfollow(action) {
+  yield put(loading());
   yield put(errorHandle.notError());
   const { response, error } = yield call(postUnfollow, action);
   if (response) {
@@ -30,6 +34,7 @@ function* unfollow(action) {
     yield put(failUnfollow());
     yield put(errorHandle.error(error.response));
   }
+  yield put(notLoading());
 }
 
 export const followSaga = [

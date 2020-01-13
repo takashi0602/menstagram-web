@@ -9,15 +9,15 @@ export const follow = payload => {
   return {
     type: FOLLOW,
     accessToken: payload.accessToken,
-    userId: payload.userId,
+    targetUserId: payload.targetUserId,
     success: false
   };
 };
 
-export const successFollow = userId => {
+export const successFollow = targetUserId => {
   return {
     type: SUCCESS_FOLLOW,
-    userId: userId,
+    targetUserId: targetUserId,
     success: true
   };
 };
@@ -25,7 +25,7 @@ export const successFollow = userId => {
 export const failFollow = () => {
   return {
     type: FAIL_FOLLOW,
-    userId: -1,
+    targetUserId: -1,
     success: false
   }
 };
@@ -34,15 +34,15 @@ export const unfollow = payload => {
   return {
     type: UNFOLLOW,
     accessToken: payload.accessToken,
-    userId: payload.userId,
+    targetUserId: payload.targetUserId,
     success: false
   };
 };
 
-export const successUnfollow = userId => {
+export const successUnfollow = targetUserId => {
   return {
     type: SUCCESS_UNFOLLOW,
-    userId: userId,
+    targetUserId: targetUserId,
     success: true
   };
 };
@@ -50,7 +50,7 @@ export const successUnfollow = userId => {
 export const failUnfollow = () => {
   return {
     type: FAIL_UNFOLLOW,
-    userId: -1,
+    targetUserId: -1,
     success: false
   }
 };

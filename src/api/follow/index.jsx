@@ -10,7 +10,7 @@ export const postFollow = request => {
       Authorization: `Bearer ${request.accessToken}`
     },
     data: {
-      target_user_id: request.userId
+      target_user_id: request.targetUserId
     }
   })
     .then(response => ({ response }))
@@ -25,7 +25,7 @@ export const postUnfollow = request => {
       Authorization: `Bearer ${request.accessToken}`
     },
     data: {
-      target_user_id: request.userId
+      target_user_id: request.targetUserId
     }
   })
     .then(response => ({ response }))

@@ -1,5 +1,5 @@
 const initialState = {
-  userId: -1,
+  targetUserId: -1,
   success: false
 };
 
@@ -9,24 +9,24 @@ export function follow(state = initialState, action) {
       return state;
     case 'SUCCESS_FOLLOW':
       return {
-        userId: action.userId,
+        targetUserId: action.targetUserId,
         success: action.success
       };
     case 'FAIL_FOLLOW':
       return {
-        userId: action.userId,
+        targetUserId: action.targetUserId,
         success: action.success
       };
     case 'UNFOLLOW':
       return state;
     case 'SUCCESS_UNFOLLOW':
       return {
-        userId: action.userId,
+        targetUserId: action.targetUserId,
         success: action.success
       };
     case 'FAIL_UNFOLLOW':
       return {
-        userId: action.userId,
+        targetUserId: action.targetUserId,
         success: action.success
       };
     default:
