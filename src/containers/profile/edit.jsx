@@ -97,7 +97,7 @@ class ProfileEditContainer extends Component {
     const payload = {
       accessToken: this.props.accessToken,
       profile: {
-        screenName: this.state.changeBiography ? this.state.screenName : this.props.profile.screen_name,
+        screenName: this.state.changeScreenName ? this.state.screenName : this.props.profile.screen_name,
         biography: this.state.changeBiography ? this.state.biography : this.props.profile.biography
       }
     };
