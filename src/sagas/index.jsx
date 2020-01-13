@@ -8,6 +8,8 @@ import { profileSaga } from './profile';
 import { userPostsSaga } from './userPosts';
 import { likePostSaga } from './likePost';
 import { likersSaga } from './likers';
+import { followingSaga } from './following';
+import { followedSaga } from './followed';
 import { profileEditSaga } from './profileEdit';
 
 export default function* rootSaga() {
@@ -21,6 +23,8 @@ export default function* rootSaga() {
     ...likersSaga,
     ...profileSaga,
     ...userPostsSaga,
+    ...followingSaga,
+    ...followedSaga
     ...profileEditSaga
   ]);
 }

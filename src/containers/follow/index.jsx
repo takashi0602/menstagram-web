@@ -1,38 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { auth } from '../../middleware/auth';
+import { Loading } from '../../components/loading';
 import FollowListItem from '../../components/follow';
 import { FollowHeader } from '../../components/follow/header';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
+import { following } from '../../actions/follow/following';
+import { followed } from '../../actions/follow/followed';
 
-const followers = [
-  {
-    user_id: 'mensta',
-    screen_name: 'メンスタグラム公式',
-    avatar:
-      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-    is_followed: false
-  },
-  {
-    user_id: 'menstaaaa',
-    screen_name: 'メンスタグラム非公式',
-    avatar:
-      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-    is_followed: true
-  }
-];
-
-const follows = [
-  {
-    user_id: 'menstaaaa',
-    screen_name: 'メンスタグラム非公式',
-    avatar:
-      'https://placehold.jp/150x150.png?text=%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3',
-    is_followed: true
-  }
-];
-
-export class Follow extends Component {
+export class FollowContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,10 +20,10 @@ export class Follow extends Component {
   }
 
   ToggleList = () => {
-    if (this.props.history.location.pathname.split('/')[1] === 'followed') {
+    if (this.isPathFollowing()) {
       return (
         <ul className="pl-0">
-          {followers.map((user, idx) => {
+          {this.props.followingList.map((user, idx) => {
             return (
               <FollowListItem
                 key={idx}
@@ -59,7 +37,7 @@ export class Follow extends Component {
     } else {
       return (
         <ul className="pl-0">
-          {follows.map((user, idx) => {
+          {this.props.followedList.map((user, idx) => {
             return (
               <FollowListItem
                 key={idx}
@@ -86,10 +64,50 @@ export class Follow extends Component {
     console.log('フォローをはずす');
   };
 
+  isPathFollowing = () => {
+    return this.props.history.location.pathname.split('/')[1] === 'following';
+  };
+  targetUserId = () => {
+    return this.props.history.location.pathname.split('/')[2];
+  };
+
+  initSetPayload = () => {
+    const params = {
+      user_id: this.props.match.params.id
+    };
+    return {
+      params,
+      accessToken: this.props.accessToken
+    };
+  };
+
+  initGetFollowing = () => {
+    if (
+      this.props.followingStatus === -1 ||
+      this.props.followingTargetUserId !== this.targetUserId()
+    ) {
+      this.props.getFollowing(this.initSetPayload());
+    }
+  };
+
+  initGetFollowed = () => {
+    if (
+      this.props.followedStatus === -1 ||
+      this.props.followedTargetUserId !== this.targetUserId()
+    ) {
+      this.props.getFollowed(this.initSetPayload());
+    }
+  };
+
   render() {
     return (
       <div>
+        {auth(this.props.accessToken)}
         <ScrollToTopOnMount />
+        {this.props.loading && <Loading />}
+        {this.isPathFollowing()
+          ? this.initGetFollowing()
+          : this.initGetFollowed()}
         {<FollowHeader history={this.props.history} />}
         <div className="c-container__padding pt-3">{this.ToggleList()}</div>
         {this.state.showModal && (
@@ -105,6 +123,47 @@ export class Follow extends Component {
   }
 }
 
-Follow.propTypes = {
-  history: PropTypes.object
+function mapStateToProps(state) {
+  return {
+    accessToken: state.auth.accessToken,
+    status: state.error.status,
+    loading: state.loading.loading,
+    followingList: state.following.followingList,
+    followingStatus: state.following.followingStatus,
+    followingTargetUserId: state.following.targetUserId,
+    followedList: state.followed.followedList,
+    followedStatus: state.followed.followedStatus,
+    followedTargetUserId: state.followed.followedTargetUserId
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getFollowing(payload) {
+      dispatch(following(payload));
+    },
+    getFollowed(payload) {
+      dispatch(followed(payload));
+    }
+  };
+}
+
+export const Follow = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FollowContainer);
+
+FollowContainer.propTypes = {
+  accessToken: PropTypes.string,
+  history: PropTypes.object,
+  match: PropTypes.object,
+  loading: PropTypes.bool,
+  getFollowing: PropTypes.func,
+  followingList: PropTypes.array,
+  followingStatus: PropTypes.number,
+  followingTargetUserId: PropTypes.string,
+  getFollowed: PropTypes.func,
+  followedList: PropTypes.array,
+  followedStatus: PropTypes.number,
+  followedTargetUserId: PropTypes.string
 };
