@@ -54,7 +54,10 @@ export default class FollowNotices extends Component {
             } else {
               return (
                 <div className="d-flex align-items-center">
-                  <NowrapButton type="button" className="c-button__orange c-button__commonWidth">
+                  <NowrapButton
+                    type="button"
+                    className="c-button__orange c-button__commonWidth"
+                  >
                     フォローする
                   </NowrapButton>
                 </div>

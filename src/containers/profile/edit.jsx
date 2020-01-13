@@ -13,12 +13,12 @@ import {
 } from './styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faUser } from '@fortawesome/free-solid-svg-icons';
-import { profile, clearProfile } from "../../actions/profile";
-import { profileEdit, failProfileEdit } from "../../actions/profileEdit";
+import { profile, clearProfile } from '../../actions/profile';
+import { profileEdit, failProfileEdit } from '../../actions/profileEdit';
 import { connect } from 'react-redux';
-import { Loading } from "../../components/loading";
+import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
-import { Error } from "../../components/error";
+import { Error } from '../../components/error';
 
 class ProfileEditContainer extends Component {
   constructor(props) {
@@ -38,11 +38,7 @@ class ProfileEditContainer extends Component {
   TopHeader = () => {
     return (
       <PositionParent>
-        <Link
-          to={'/profile/' + this.props.match.params.id}
-          className=""
-          style={blackLink}
-        >
+        <Link to={`/profile/${this.props.match.params.id}`} style={blackLink}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </Link>
         <Title>プロフィールの編集</Title>
@@ -52,17 +48,23 @@ class ProfileEditContainer extends Component {
   };
 
   showSubmitButton = () => {
-    if (this.state.errorScreenName ||
+    if (
+      this.state.errorScreenName ||
       this.state.errorBiography ||
-      (!this.state.changeScreenName && !this.state.changeBiography))
-      return <Submit className='c-link__lightgray'>完了</Submit>;
+      (!this.state.changeScreenName && !this.state.changeBiography)
+    )
+      return <Submit className="c-link__lightgray">完了</Submit>;
     return <Submit onClick={this.requestEditProfile}>完了</Submit>;
   };
 
   showUserImage = () => {
     if (this.state.newImage.length !== 0) return this.returnNewImage();
-    if (this.props.profile.hasOwnProperty('avatar') && this.props.profile.avatar)
-      return <UserImage style={{ backgroundImage: `url(${this.props.profile.avatar})` }} />;
+    if (!!this.props.profile && this.props.profile.avatar)
+      return (
+        <UserImage
+          style={{ backgroundImage: `url(${this.props.profile.avatar})` }}
+        />
+      );
     return (
       <UserImage>
         <FontAwesomeIcon icon={faUser} style={userIcon} />
@@ -97,8 +99,12 @@ class ProfileEditContainer extends Component {
     const payload = {
       accessToken: this.props.accessToken,
       profile: {
-        screenName: this.state.changeScreenName ? this.state.screenName : this.props.profile.screen_name,
-        biography: this.state.changeBiography ? this.state.biography : this.props.profile.biography
+        screenName: this.state.changeScreenName
+          ? this.state.screenName
+          : this.props.profile.screen_name,
+        biography: this.state.changeBiography
+          ? this.state.biography
+          : this.props.profile.biography
       }
     };
     this.props.postProfileEdit(payload);
@@ -118,7 +124,7 @@ class ProfileEditContainer extends Component {
   };
 
   isMe = () => {
-    if (this.props.profile.hasOwnProperty('is_me') && !this.props.profile.is_me)
+    if (!this.props.profile && !this.props.profile.is_me)
       return <Redirect to={`/profile/${this.props.match.params.id}`} />;
   };
 
@@ -153,15 +159,15 @@ class ProfileEditContainer extends Component {
 
   validationMaxLength = (name, targetLength, length) => {
     if (targetLength > length) {
-      this.setState({[`error${name}`]: true});
+      this.setState({ [`error${name}`]: true });
     }
     if (name === 'ScreenName' && targetLength === 0) {
       this.setState({ screenName: true });
     }
   };
 
-  getErrorMessageMaxLength = (message) => {
-    return <p className="text-danger">{message}</p>
+  getErrorMessageMaxLength = message => {
+    return <p className="text-danger">{message}</p>;
   };
 
   render() {
@@ -208,7 +214,10 @@ class ProfileEditContainer extends Component {
                 }}
               />
             </div>
-            {this.state.errorScreenName && this.getErrorMessageMaxLength('1文字以上、16文字以下で入力してください。')}
+            {this.state.errorScreenName &&
+              this.getErrorMessageMaxLength(
+                '1文字以上、16文字以下で入力してください。'
+              )}
           </div>
           <div>
             <label>自己紹介</label>
@@ -220,7 +229,8 @@ class ProfileEditContainer extends Component {
               }}
             />
           </div>
-          {this.state.errorBiography && this.getErrorMessageMaxLength('128文字以下で入力してください。')}
+          {this.state.errorBiography &&
+            this.getErrorMessageMaxLength('128文字以下で入力してください。')}
         </div>
       </div>
     );
@@ -250,7 +260,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(clearProfile());
     },
     clearProfileEdit() {
-      dispatch(failProfileEdit())
+      dispatch(failProfileEdit());
     }
   };
 }
@@ -260,7 +270,7 @@ export const ProfileEdit = connect(
   mapDispatchToProps
 )(ProfileEditContainer);
 
-ProfileEdit.propTypes = {
+ProfileEditContainer.propTypes = {
   match: PropTypes.object,
   accessToken: PropTypes.string,
   history: PropTypes.object,
@@ -270,7 +280,7 @@ ProfileEdit.propTypes = {
   getProfile: PropTypes.func,
   postProfileEdit: PropTypes.func,
   loading: PropTypes.bool,
-  profileEditSuccess: PropTypes.number,
+  profileEditSuccess: PropTypes.bool,
   clearProfile: PropTypes.func,
   clearProfileEdit: PropTypes.func
 };

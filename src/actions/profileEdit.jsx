@@ -8,19 +8,19 @@ export const profileEdit = payload => {
     accessToken: payload.accessToken,
     profile: payload.profile,
     success: false
-  }
+  };
 };
 
 export const successProfileEdit = () => {
   return {
     type: SUCCESS_PROFILE_EDIT,
     success: true
-  }
+  };
 };
 
 export const failProfileEdit = () => {
   return {
     type: FAIL_PROFILE_EDIT,
     success: false
-  }
+  };
 };

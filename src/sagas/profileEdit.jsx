@@ -1,6 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { patchProfileEdit } from '../api/profileEdit';
-import { PROFILE_EDIT, successProfileEdit, failProfileEdit } from '../actions/profileEdit';
+import {
+  PROFILE_EDIT,
+  successProfileEdit,
+  failProfileEdit
+} from '../actions/profileEdit';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
 

@@ -1,4 +1,4 @@
-import { patchProfileEdit } from "../api/profileEdit";
+import { patchProfileEdit } from '../api/profileEdit';
 import { requestRegister } from '../api/auth';
 import { getProfile } from '../api/profile';
 
