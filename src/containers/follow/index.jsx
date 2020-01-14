@@ -17,7 +17,8 @@ export class FollowContainer extends Component {
     this.state = {
       isFollowersView: true,
       showModal: false,
-      userId: false
+      userId: false,
+      targetIndex: -1
     };
   }
 
@@ -29,9 +30,10 @@ export class FollowContainer extends Component {
             return (
               <FollowListItem
                 key={idx}
+                index={idx}
                 user={user}
-                openModal={userId => this.openModal(userId)}
-                follow={userId => this.follow(userId)}
+                openModal={(userId, idx) => this.openModal(userId, idx)}
+                follow={(userId, idx) => this.follow(userId, idx)}
               />
             );
           })}
@@ -44,9 +46,10 @@ export class FollowContainer extends Component {
             return (
               <FollowListItem
                 key={idx}
+                index={idx}
                 user={user}
-                openModal={userId => this.openModal(userId)}
-                follow={userId => this.follow(userId)}
+                openModal={(userId, idx) => this.openModal(userId, idx)}
+                follow={(userId, idx) => this.follow(userId, idx)}
               />
             );
           })}
@@ -58,18 +61,24 @@ export class FollowContainer extends Component {
   openModal = (userId, idx) => {
     this.setState({ showModal: true });
     this.setState({ userId: userId });
+    this.setState({ targetIndex: idx })
   };
 
   closeModal = () => {
     this.setState({ showModal: false });
   };
 
-  follow = userId => {
+  follow = (userId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
       targetUserId: userId
     };
     this.props.follow(payload);
+    if (this.isPathFollowing()) {
+      this.props.followingList[idx].is_following = true;
+    } else {
+      this.props.followedList[idx].is_following = true;
+    }
   };
 
   unfollow = () => {
@@ -79,6 +88,11 @@ export class FollowContainer extends Component {
     };
     this.props.unfollow(payload);
     this.closeModal();
+    if (this.isPathFollowing()) {
+      this.props.followingList[this.state.targetIndex].is_following = false;
+    } else {
+      this.props.followedList[this.state.targetIndex].is_following = false;
+    }
   };
 
   isPathFollowing = () => {
