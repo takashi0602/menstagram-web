@@ -28,13 +28,15 @@ import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
+import { follow, unfollow } from "../../actions/follow";
 
 class ProfileContainer extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
       isFollowersView: true,
-      showModal: false
+      showLogoutModal: false,
+      showUnfollowModal: false
     };
   }
 
@@ -50,7 +52,7 @@ class ProfileContainer extends Component {
   };
   HamMenuButton = () => {
     if (this.props.profile.is_me) {
-      return <HamMenu menuItems={[]} logout={() => this.openModal()} />;
+      return <HamMenu menuItems={[]} logout={() => this.openLogoutModal()} />;
     }
   };
 
@@ -68,13 +70,13 @@ class ProfileContainer extends Component {
       );
     } else if (this.props.profile.is_followed) {
       return (
-        <button type="button" className="c-button__white w-100">
+        <button type="button" className="c-button__white w-100" onClick={this.openUnfollowModal}>
           フォロー中
         </button>
       );
     } else {
       return (
-        <button type="button" className="c-button__orange w-100">
+        <button type="button" className="c-button__orange w-100" onClick={this.follow}>
           フォローする
         </button>
       );
@@ -141,12 +143,12 @@ class ProfileContainer extends Component {
     this.props.post(this.props.accessToken);
   };
 
-  openModal = () => {
-    this.setState({ showModal: true });
+  openLogoutModal = () => {
+    this.setState({ showLogoutModal: true });
   };
 
-  closeModal = () => {
-    this.setState({ showModal: false });
+  closeLogoutModal = () => {
+    this.setState({ showLogoutModal: false });
   };
 
   initSetProfileData = () => {
@@ -183,6 +185,35 @@ class ProfileContainer extends Component {
     }
     if (this.props.userPostsStatus !== -1) return;
     this.props.getUserPosts(this.initSetUserPosts());
+  };
+
+  follow = () => {
+    const payload = {
+      accessToken: this.props.accessToken,
+      targetUserId: this.props.profile.user_id
+    };
+    this.props.follow(payload);
+    // TODO: api通信後にプロフィール取得 or 200が返ってきた段階でtrueにする
+    this.props.profile.is_followed = true;
+  };
+
+  unfollow = () => {
+    const payload = {
+      accessToken: this.props.accessToken,
+      targetUserId: this.props.profile.user_id
+    };
+    this.props.unfollow(payload);
+    this.closeUnfollowModal();
+    // TODO: api通信後にプロフィール取得 or 200が返ってきた段階でfalseにする
+    this.props.profile.is_followed = false;
+  };
+
+  openUnfollowModal = () => {
+    this.setState({ showUnfollowModal: true });
+  };
+
+  closeUnfollowModal = () => {
+    this.setState({ showUnfollowModal: false });
   };
 
   render() {
@@ -237,11 +268,19 @@ class ProfileContainer extends Component {
           </div>
         </div>
         {this.PostsTileView()}
-        {this.state.showModal && (
+        {this.state.showUnfollowModal && (
+          <TwoChoiceModal
+            text={'フォローをはずしますか？'}
+            buttonName={'はずす'}
+            closeModal={() => this.closeUnfollowModal()}
+            submit={() => this.unfollow()}
+          />
+        )}
+        {this.state.showLogoutModal && (
           <TwoChoiceModal
             text={'ログアウトしますか？'}
             buttonName={'ログアウト'}
-            closeModal={() => this.closeModal()}
+            closeModal={() => this.closeLogoutModal()}
             submit={() => this.logout()}
           />
         )}
@@ -272,6 +311,12 @@ function mapDispatchToProps(dispatch) {
     },
     getUserPosts(payload) {
       dispatch(userPosts(payload));
+    },
+    follow(payload) {
+      dispatch(follow(payload))
+    },
+    unfollow(payload) {
+      dispatch(unfollow(payload))
     }
   };
 }
@@ -293,5 +338,7 @@ ProfileContainer.propTypes = {
   post: PropTypes.func,
   getProfile: PropTypes.func,
   getUserPosts: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  follow: PropTypes.func,
+  unfollow: PropTypes.func
 };
