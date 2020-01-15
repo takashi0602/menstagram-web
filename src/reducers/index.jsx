@@ -15,7 +15,7 @@ import { likePost } from './likePost';
 import { likers } from './likers';
 import { following } from './following';
 import { followed } from './followed';
-import { follow } from "./follow";
+import { follow } from './follow';
 import { profileEdit } from './profileEdit';
 
 const combineReducer = combineReducers({

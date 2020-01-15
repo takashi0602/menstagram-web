@@ -11,7 +11,9 @@ export default class FollowListItem extends Component {
         <FollowButton
           type="button"
           className="c-button__white c-button__commonWidth"
-          onClick={() => this.props.openModal(this.props.user.user_id, this.props.index)}
+          onClick={() =>
+            this.props.openModal(this.props.user.user_id, this.props.index)
+          }
         >
           フォロー中
         </FollowButton>
@@ -21,7 +23,9 @@ export default class FollowListItem extends Component {
         <FollowButton
           type="button"
           className="c-button__orange c-button__commonWidth"
-          onClick={() => this.props.follow(this.props.user.user_id, this.props.index)}
+          onClick={() =>
+            this.props.follow(this.props.user.user_id, this.props.index)
+          }
         >
           フォローする
         </FollowButton>

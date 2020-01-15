@@ -8,8 +8,8 @@ import {
   failUnfollow
 } from '../actions/follow';
 import * as errorHandle from '../actions/error';
-import { loading, notLoading } from "../actions/loading";
-import { postFollow, postUnfollow } from "../api/follow";
+import { loading, notLoading } from '../actions/loading';
+import { postFollow, postUnfollow } from '../api/follow';
 
 function* follow(action) {
   yield put(loading());

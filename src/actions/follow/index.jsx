@@ -27,7 +27,7 @@ export const failFollow = () => {
     type: FAIL_FOLLOW,
     targetUserId: -1,
     success: false
-  }
+  };
 };
 
 export const unfollow = payload => {
@@ -52,5 +52,5 @@ export const failUnfollow = () => {
     type: FAIL_UNFOLLOW,
     targetUserId: -1,
     success: false
-  }
+  };
 };

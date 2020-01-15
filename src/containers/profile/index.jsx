@@ -28,7 +28,7 @@ import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
-import { follow, unfollow } from "../../actions/follow";
+import { follow, unfollow } from '../../actions/follow';
 
 class ProfileContainer extends Component {
   constructor(prop) {
@@ -70,13 +70,21 @@ class ProfileContainer extends Component {
       );
     } else if (this.props.profile.is_followed) {
       return (
-        <button type="button" className="c-button__white w-100" onClick={this.openUnfollowModal}>
+        <button
+          type="button"
+          className="c-button__white w-100"
+          onClick={this.openUnfollowModal}
+        >
           フォロー中
         </button>
       );
     } else {
       return (
-        <button type="button" className="c-button__orange w-100" onClick={this.follow}>
+        <button
+          type="button"
+          className="c-button__orange w-100"
+          onClick={this.follow}
+        >
           フォローする
         </button>
       );
@@ -313,10 +321,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(userPosts(payload));
     },
     follow(payload) {
-      dispatch(follow(payload))
+      dispatch(follow(payload));
     },
     unfollow(payload) {
-      dispatch(unfollow(payload))
+      dispatch(unfollow(payload));
     }
   };
 }

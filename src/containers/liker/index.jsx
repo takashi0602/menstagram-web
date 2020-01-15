@@ -13,7 +13,7 @@ import {
 } from './styled';
 import LikerListItem from '../../components/liker';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
-import { follow, unfollow } from "../../actions/follow";
+import { follow, unfollow } from '../../actions/follow';
 
 export class LikerContainer extends Component {
   constructor(prop) {
@@ -46,7 +46,7 @@ export class LikerContainer extends Component {
       targetUserId: userId
     };
     this.props.follow(payload);
-    this.props.likerList[idx].is_following = true
+    this.props.likerList[idx].is_following = true;
   };
 
   // TODO: フォローはずす
@@ -56,7 +56,7 @@ export class LikerContainer extends Component {
       targetUserId: this.state.userId
     };
     this.props.unfollow(payload);
-    this.props.likerList[this.state.targetIndex].is_following = false
+    this.props.likerList[this.state.targetIndex].is_following = false;
   };
 
   initSetLikersData = () => {
@@ -161,5 +161,7 @@ LikerContainer.propTypes = {
   getLikers: PropTypes.func,
   likerList: PropTypes.array,
   likerStatus: PropTypes.number,
-  postId: PropTypes.string
+  postId: PropTypes.string,
+  follow: PropTypes.func,
+  unfollow: PropTypes.func
 };

@@ -61,7 +61,7 @@ export class FollowContainer extends Component {
   openModal = (userId, idx) => {
     this.setState({ showModal: true });
     this.setState({ userId: userId });
-    this.setState({ targetIndex: idx })
+    this.setState({ targetIndex: idx });
   };
 
   closeModal = () => {
