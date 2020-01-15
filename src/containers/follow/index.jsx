@@ -9,13 +9,16 @@ import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { following } from '../../actions/follow/following';
 import { followed } from '../../actions/follow/followed';
+import { follow, unfollow } from '../../actions/follow';
 
 export class FollowContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isFollowersView: true,
-      showModal: false
+      showModal: false,
+      userId: '',
+      targetIndex: -1
     };
   }
 
@@ -27,8 +30,10 @@ export class FollowContainer extends Component {
             return (
               <FollowListItem
                 key={idx}
+                index={idx}
                 user={user}
-                openModal={() => this.openModal()}
+                openModal={(userId, idx) => this.openModal(userId, idx)}
+                follow={(userId, idx) => this.follow(userId, idx)}
               />
             );
           })}
@@ -41,8 +46,10 @@ export class FollowContainer extends Component {
             return (
               <FollowListItem
                 key={idx}
+                index={idx}
                 user={user}
-                openModal={() => this.openModal()}
+                openModal={(userId, idx) => this.openModal(userId, idx)}
+                follow={(userId, idx) => this.follow(userId, idx)}
               />
             );
           })}
@@ -51,22 +58,47 @@ export class FollowContainer extends Component {
     }
   };
 
-  openModal = () => {
+  openModal = (userId, idx) => {
     this.setState({ showModal: true });
+    this.setState({ userId: userId });
+    this.setState({ targetIndex: idx });
   };
 
   closeModal = () => {
     this.setState({ showModal: false });
   };
 
-  // TODO: フォローはずす
+  follow = (userId, idx) => {
+    const payload = {
+      accessToken: this.props.accessToken,
+      targetUserId: userId
+    };
+    this.props.follow(payload);
+    if (this.isPathFollowing()) {
+      this.props.followingList[idx].is_following = true;
+    } else {
+      this.props.followedList[idx].is_following = true;
+    }
+  };
+
   unfollow = () => {
-    console.log('フォローをはずす');
+    const payload = {
+      accessToken: this.props.accessToken,
+      targetUserId: this.state.userId
+    };
+    this.props.unfollow(payload);
+    this.closeModal();
+    if (this.isPathFollowing()) {
+      this.props.followingList[this.state.targetIndex].is_following = false;
+    } else {
+      this.props.followedList[this.state.targetIndex].is_following = false;
+    }
   };
 
   isPathFollowing = () => {
     return this.props.history.location.pathname.split('/')[1] === 'following';
   };
+
   targetUserId = () => {
     return this.props.history.location.pathname.split('/')[2];
   };
@@ -115,7 +147,7 @@ export class FollowContainer extends Component {
             text={'フォローをはずしますか？'}
             buttonName={'はずす'}
             closeModal={() => this.closeModal()}
-            submit={() => this.unfollow()}
+            submit={userId => this.unfollow(userId)}
           />
         )}
       </div>
@@ -144,6 +176,12 @@ function mapDispatchToProps(dispatch) {
     },
     getFollowed(payload) {
       dispatch(followed(payload));
+    },
+    follow(payload) {
+      dispatch(follow(payload));
+    },
+    unfollow(payload) {
+      dispatch(unfollow(payload));
     }
   };
 }
@@ -165,5 +203,7 @@ FollowContainer.propTypes = {
   getFollowed: PropTypes.func,
   followedList: PropTypes.array,
   followedStatus: PropTypes.number,
-  followedTargetUserId: PropTypes.string
+  followedTargetUserId: PropTypes.string,
+  follow: PropTypes.func,
+  unfollow: PropTypes.func
 };

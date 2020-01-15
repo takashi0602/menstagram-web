@@ -13,12 +13,15 @@ import {
 } from './styled';
 import LikerListItem from '../../components/liker';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
+import { follow, unfollow } from '../../actions/follow';
 
 export class LikerContainer extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
-      showModal: false
+      showModal: false,
+      userId: '',
+      targetIndex: -1
     };
   }
 
@@ -27,17 +30,33 @@ export class LikerContainer extends Component {
     this.props.history.goBack();
   };
 
-  openModal = () => {
+  openModal = (userId, idx) => {
     this.setState({ showModal: true });
+    this.setState({ userId: userId });
+    this.setState({ targetIndex: idx });
   };
 
   closeModal = () => {
     this.setState({ showModal: false });
   };
 
+  follow = (userId, idx) => {
+    const payload = {
+      accessToken: this.props.accessToken,
+      targetUserId: userId
+    };
+    this.props.follow(payload);
+    this.props.likerList[idx].is_following = true;
+  };
+
   // TODO: フォローはずす
   unfollow = () => {
-    console.log('フォローをはずす');
+    const payload = {
+      accessToken: this.props.accessToken,
+      targetUserId: this.state.userId
+    };
+    this.props.unfollow(payload);
+    this.props.likerList[this.state.targetIndex].is_following = false;
   };
 
   initSetLikersData = () => {
@@ -83,7 +102,9 @@ export class LikerContainer extends Component {
                 <LikerListItem
                   key={idx}
                   user={user}
-                  openModal={() => this.openModal()}
+                  index={idx}
+                  openModal={(userId, idx) => this.openModal(userId, idx)}
+                  follow={(userId, idx) => this.follow(userId, idx)}
                 />
               );
             })}
@@ -116,6 +137,12 @@ function mapDispatchToProps(dispatch) {
   return {
     getLikers(payload) {
       dispatch(likers(payload));
+    },
+    follow(payload) {
+      dispatch(follow(payload));
+    },
+    unfollow(payload) {
+      dispatch(unfollow(payload));
     }
   };
 }
@@ -134,5 +161,7 @@ LikerContainer.propTypes = {
   getLikers: PropTypes.func,
   likerList: PropTypes.array,
   likerStatus: PropTypes.number,
-  postId: PropTypes.string
+  postId: PropTypes.string,
+  follow: PropTypes.func,
+  unfollow: PropTypes.func
 };

@@ -34,10 +34,12 @@ button {
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
-  &:hover {
-    opacity: 0.7;
-  }
   &:focus {
     outline: none;
+  }
+  @include desktop() {
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
