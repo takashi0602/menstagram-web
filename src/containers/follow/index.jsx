@@ -17,7 +17,7 @@ export class FollowContainer extends Component {
     this.state = {
       isFollowersView: true,
       showModal: false,
-      userId: false,
+      userId: '',
       targetIndex: -1
     };
   }
@@ -178,10 +178,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(followed(payload));
     },
     follow(payload) {
-      dispatch(follow(payload))
+      dispatch(follow(payload));
     },
     unfollow(payload) {
-      dispatch(unfollow(payload))
+      dispatch(unfollow(payload));
     }
   };
 }
