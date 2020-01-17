@@ -10,16 +10,18 @@ export const register = payload => {
   };
 };
 
-export const successRegister = accessToken => {
+export const successRegister = payload => {
   return {
     type: SUCCESS_REGISTER,
-    accessToken: accessToken
+    accessToken: payload.accessToken,
+    userId: payload.userId
   };
 };
 
 export const failRegister = () => {
   return {
     type: FAIL_REGISTER,
-    accessToken: null
+    accessToken: null,
+    userId: ''
   };
 };

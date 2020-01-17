@@ -10,16 +10,18 @@ export const login = payload => {
   };
 };
 
-export const successLogin = accessToken => {
+export const successLogin = payload => {
   return {
     type: SUCCESS_LOGIN,
-    accessToken: accessToken
+    accessToken: payload.accessToken,
+    userId: payload.userId
   };
 };
 
 export const failLogin = () => {
   return {
     type: FAIL_LOGIN,
-    accessToken: null
+    accessToken: null,
+    userId: ''
   };
 };

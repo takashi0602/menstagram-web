@@ -148,7 +148,11 @@ class ProfileContainer extends Component {
   };
 
   logout = () => {
-    this.props.post(this.props.accessToken);
+    const payload = {
+      accessToken: this.props.accessToken,
+      userId: this.props.userId
+    };
+    this.props.logout(payload);
   };
 
   openLogoutModal = () => {
@@ -300,6 +304,7 @@ class ProfileContainer extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
+    userId: state.auth.userId,
     status: state.error.status,
     loading: state.loading.loading,
     profileStatus: state.profile.profileStatus,
@@ -311,7 +316,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    post(payload) {
+    logout(payload) {
       dispatch(logout(payload));
     },
     getProfile(payload) {
@@ -337,13 +342,14 @@ export const Profile = connect(
 ProfileContainer.propTypes = {
   match: PropTypes.object,
   accessToken: PropTypes.string,
+  userId: PropTypes.string,
   history: PropTypes.object,
   status: PropTypes.number,
   profileStatus: PropTypes.number,
   userPostsStatus: PropTypes.number,
   profile: PropTypes.object,
   userPosts: PropTypes.array,
-  post: PropTypes.func,
+  logout: PropTypes.func,
   getProfile: PropTypes.func,
   getUserPosts: PropTypes.func,
   loading: PropTypes.bool,

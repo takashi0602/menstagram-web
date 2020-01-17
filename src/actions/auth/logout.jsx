@@ -5,20 +5,23 @@ export const FAIL_LOGOUT = 'FAIL_LOGOUT';
 export const logout = payload => {
   return {
     type: LOGOUT,
-    accessToken: payload
+    accessToken: payload.accessToken,
+    userId: payload.userId
   };
 };
 
 export const successLogout = () => {
   return {
     type: SUCCESS_LOGOUT,
-    accessToken: null
+    accessToken: null,
+    userId: ''
   };
 };
 
-export const failLogout = accessToken => {
+export const failLogout = payload => {
   return {
     type: FAIL_LOGOUT,
-    accessToken: accessToken
+    accessToken: payload.accessToken,
+    userId: payload.userId
   };
 };
