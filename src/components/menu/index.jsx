@@ -14,6 +14,7 @@ import {
   faBell as regularBell
 } from '@fortawesome/free-regular-svg-icons';
 import { NavBar, NavIcon, NavIconInactive, NavIconActive } from './styled';
+import connect from "react-redux/es/connect/connect";
 
 export class Menu extends Component {
   // top, register, login, logoutでは表示しない
@@ -66,7 +67,7 @@ export class Menu extends Component {
           />
         </Link>
         <Link
-          to="/profile/menstagram"
+          to={`/profile/${this.props.userId}`}
           className="d-inline-block p-2"
           style={NavIcon}
         >
@@ -84,6 +85,18 @@ export class Menu extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    userId: state.auth.userId
+  };
+}
+
+Menu = connect(
+  mapStateToProps,
+  null
+)(Menu);
+
 Menu.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  userId: PropTypes.string
 };
