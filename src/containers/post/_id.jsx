@@ -7,8 +7,9 @@ import { BackButton, Title } from './styled';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
-import { postDetail, failPostDetail } from '../../actions/postDetail';
+import { postDetail } from '../../actions/postDetail';
 import { Loading } from '../../components/loading';
+import { likePost, notLikePost } from "../../actions/likePost";
 
 export class PostDetailContainer extends Component {
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
@@ -27,17 +28,33 @@ export class PostDetailContainer extends Component {
   };
 
   initGetData = () => {
-    // query check
     if (Number.isNaN(Number(this.props.match.params.id))) return;
-    // TODO: 404画面の表示
-
-    //id:1 -> timeline -> id:2
     if (Number(this.props.match.params.id) !== this.props.postDetail.id) {
       this.props.getPostDetail(this.initPostDetail());
       return;
     }
     if (this.props.status !== -1) return;
     this.props.getPostDetail(this.initPostDetail());
+  };
+
+  likePost = () => {
+    const payload = {
+      accessToken: this.props.accessToken,
+      postId: this.props.postDetail.id
+    };
+    this.props.likePost(payload);
+    this.props.postDetail.is_liked = true;
+    this.props.postDetail.liked += 1;
+  };
+
+  notLikePost = () => {
+    const payload = {
+      accessToken: this.props.accessToken,
+      postId: this.props.postDetail.id
+    };
+    this.props.notLikePost(payload);
+    this.props.postDetail.is_liked = false;
+    this.props.postDetail.liked -= 1;
   };
 
   render() {
@@ -53,7 +70,12 @@ export class PostDetailContainer extends Component {
           </BackButton>
           <Title>投稿</Title>
         </header>
-        {this.props.postDetail && <Post postItem={this.props.postDetail} />}
+        {this.props.postDetail &&
+          <Post postItem={this.props.postDetail}
+            likePost={this.likePost}
+            notLikePost={this.notLikePost}
+          />
+        }
       </div>
     );
   }
@@ -72,8 +94,11 @@ function mapDispatchToProps(dispatch) {
     getPostDetail(payload) {
       dispatch(postDetail(payload));
     },
-    changeSuccessValue() {
-      dispatch(failPostDetail());
+    likePost(payload) {
+      dispatch(likePost(payload));
+    },
+    notLikePost(payload) {
+      dispatch(notLikePost(payload));
     }
   };
 }
@@ -91,6 +116,7 @@ PostDetailContainer.propTypes = {
   loading: PropTypes.bool,
   getPostDetail: PropTypes.func,
   success: PropTypes.bool,
-  changeSuccessValue: PropTypes.func,
-  postDetail: PropTypes.object
+  postDetail: PropTypes.object,
+  likePost: PropTypes.func,
+  notLikePost: PropTypes.func
 };
