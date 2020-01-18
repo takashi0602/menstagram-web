@@ -18,8 +18,6 @@ class LikeContainer extends Component {
       notLikesMessage: 'いいねした投稿はありません。',
       showBackToTop: false,
       scrollValue: 0,
-      likedPost: false,
-      likePostId: -1
     };
   }
 
@@ -57,7 +55,7 @@ class LikeContainer extends Component {
           <p className="pt-3 px-3">{this.state.notLikesMessage}</p>
         </div>
       );
-    return this.props.likes.map(item => this.getLikePostItem(item));
+    return this.props.likes.map((item, idx) => this.getLikePostItem(item, idx));
   };
 
   getOldLikes = () => {
@@ -98,43 +96,34 @@ class LikeContainer extends Component {
   };
 
   // TODO: いいね機能の改善
-  likePost = postId => {
-    this.setState({ likedPost: true });
-    this.setState({ likePostId: postId });
+  likePost = (postId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
       postId: postId
     };
     this.props.likePost(payload);
+    this.props.likes[idx].is_liked = true;
+    this.props.likes[idx].liked += 1;
   };
 
-  notLikePost = postId => {
-    this.setState({ likedPost: false });
-    this.setState({ likePostId: postId });
+  notLikePost = (postId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
       postId: postId
     };
     this.props.notLikePost(payload);
+    this.props.likes[idx].is_liked = false;
+    this.props.likes[idx].liked -= 1;
   };
 
-  getLikePostItem = item => {
-    if (this.state.likePostId === item.id && this.state.likedPost) {
-      item.liked++;
-      item.is_liked = true;
-      this.setState({ likePostId: -1 });
-    }
-    if (this.state.likePostId === item.id && !this.state.likedPost) {
-      item.liked--;
-      item.is_liked = false;
-      this.setState({ likePostId: -1 });
-    }
+  getLikePostItem = (item, idx) => {
     return (
       <LikePostItem
         key={item.id}
+        index={idx}
         postItem={item}
-        likePost={this.likePost}
-        notLikePost={this.notLikePost}
+        likePost={(postId, idx) => this.likePost(postId, idx)}
+        notLikePost={(postId, idx) => this.notLikePost(postId, idx)}
       />
     );
   };
