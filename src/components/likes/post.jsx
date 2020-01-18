@@ -101,11 +101,11 @@ export class LikePostItem extends Component {
   };
 
   likePost = () => {
-    return this.props.likePost(this.props.postItem.id);
+    return this.props.likePost(this.props.postItem.id, this.props.index);
   };
 
   notLikePost = () => {
-    return this.props.notLikePost(this.props.postItem.id);
+    return this.props.notLikePost(this.props.postItem.id, this.props.index);
   };
 
   render() {
@@ -152,5 +152,6 @@ export class LikePostItem extends Component {
 LikePostItem.propTypes = {
   postItem: PropTypes.object,
   likePost: PropTypes.func,
-  notLikePost: PropTypes.func
+  notLikePost: PropTypes.func,
+  index: PropTypes.number
 };

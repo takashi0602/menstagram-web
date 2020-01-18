@@ -22,8 +22,6 @@ export class TimelineContainer extends Component {
         'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
       showBackToTop: false,
       scrollValue: 0,
-      likedPost: false,
-      likePostId: -1
     };
   }
 
