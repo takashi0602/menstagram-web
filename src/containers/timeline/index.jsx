@@ -77,8 +77,8 @@ export class TimelineContainer extends Component {
             <p className="pt-3 px-3">{this.state.notPrivateTimelineMessage}</p>
           </div>
         );
-      return this.props.privateTimeline.map(item =>
-        this.getTimelinePostItem(item)
+      return this.props.privateTimeline.map((item, idx) =>
+        this.getTimelinePostItem(item, idx)
       );
     } else {
       if (this.props.globalTimeline.length === 0)
@@ -88,8 +88,8 @@ export class TimelineContainer extends Component {
             <p className="pt-3 px-3">{this.state.notGlobalTimelineMessage}</p>
           </div>
         );
-      return this.props.globalTimeline.map(item =>
-        this.getTimelinePostItem(item)
+      return this.props.globalTimeline.map((item, idx) =>
+        this.getTimelinePostItem(item, idx)
       );
     }
   };
@@ -159,43 +159,44 @@ export class TimelineContainer extends Component {
   };
 
   // TODO: いいね機能の改善
-  likePost = postId => {
-    this.setState({ likedPost: true });
-    this.setState({ likePostId: postId });
+  likePost = (postId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
       postId: postId
     };
     this.props.likePost(payload);
+    if (this.isPathPrivate()) {
+      this.props.privateTimeline[idx].liked += 1;
+      this.props.privateTimeline[idx].is_liked = true;
+    } else {
+      this.props.globalTimeline[idx].liked += 1;
+      this.props.globalTimeline[idx].is_liked = true;
+    }
   };
 
-  notLikePost = postId => {
-    this.setState({ likedPost: false });
-    this.setState({ likePostId: postId });
+  notLikePost = (postId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
       postId: postId
     };
     this.props.notLikePost(payload);
+    if (this.isPathPrivate()) {
+      this.props.privateTimeline[idx].liked -= 1;
+      this.props.privateTimeline[idx].is_liked = false;
+    } else {
+      this.props.globalTimeline[idx].liked -= 1;
+      this.props.globalTimeline[idx].is_liked = false;
+    }
   };
 
-  getTimelinePostItem = item => {
-    if (this.state.likePostId === item.id && this.state.likedPost) {
-      item.liked++;
-      item.is_liked = true;
-      this.setState({ likePostId: -1 });
-    }
-    if (this.state.likePostId === item.id && !this.state.likedPost) {
-      item.liked--;
-      item.is_liked = false;
-      this.setState({ likePostId: -1 });
-    }
+  getTimelinePostItem = (item, idx) => {
     return (
       <TimelinePostItem
         key={item.id}
+        index={idx}
         postItem={item}
-        likePost={postId => this.likePost(postId)}
-        notLikePost={postId => this.notLikePost(postId)}
+        likePost={(postId, idx) => this.likePost(postId, idx)}
+        notLikePost={(postId, idx) => this.notLikePost(postId, idx)}
       />
     );
   };
