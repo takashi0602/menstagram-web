@@ -12,6 +12,18 @@ export const PostButton = styled.button`
   background-color: transparent;
 `;
 
+export const DisabledPostButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  padding: 0;
+  color: #c6c6c6;
+  font-weight: normal;
+  cursor: pointer;
+  background-color: transparent;
+`;
+
 export const PostLabel = styled.label`
   color: #eb6101;
   cursor: pointer;

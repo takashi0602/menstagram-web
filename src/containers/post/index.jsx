@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { PostButton, PostLabel, RenderImage, Times, TimesIcon } from './styled';
+import {
+  PostButton,
+  DisabledPostButton,
+  PostLabel,
+  RenderImage,
+  Times,
+  TimesIcon
+} from './styled';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
 import { post, failPost } from '../../actions/post';
+import { notError } from '../../actions/error';
 import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
@@ -53,16 +61,14 @@ export class PostConatiner extends Component {
   };
 
   mapImages = files => {
-    const createObjectURL =
-      (window.URL || window.webkitURL).createObjectURL ||
-      window.createObjectURL;
+    const isRamen = this.props.status !== 406;
     return files.map((file, index) => {
       return (
         <li key={index} className="list-unstyled w-50 mb-2">
           <div className="position-relative px-2">
-            <RenderImage
-              style={{ backgroundImage: `url('${createObjectURL(file)}')` }}
-            />
+            {isRamen
+              ? this.renderImage(file)
+              : this.renderNotRamenImage(file, index)}
             <Times onClick={() => this.deleteFile(index)}>
               <FontAwesomeIcon icon={faTimesCircle} style={TimesIcon} />
             </Times>
@@ -72,10 +78,49 @@ export class PostConatiner extends Component {
     });
   };
 
+  renderImage = file => {
+    const createObjectURL =
+      (window.URL || window.webkitURL).createObjectURL ||
+      window.createObjectURL;
+    return (
+      <RenderImage
+        style={{ backgroundImage: `url('${createObjectURL(file)}')` }}
+      />
+    );
+  };
+
+  renderNotRamenImage = (file, idx) => {
+    const createObjectURL =
+      (window.URL || window.webkitURL).createObjectURL ||
+      window.createObjectURL;
+    if (this.props.isRamens[idx]) {
+      return (
+        <RenderImage
+          style={{ backgroundImage: `url('${createObjectURL(file)}')` }}
+        />
+      );
+    } else {
+      return (
+        <RenderImage
+          style={{
+            backgroundImage: `url('${createObjectURL(file)}')`,
+            border: 'solid 5px red',
+            borderRadius: '5px'
+          }}
+        />
+      );
+    }
+  };
+
   deleteFile = index => {
     const files = this.state.files;
     files.splice(index, 1);
     this.setState({ files: files });
+    if (this.props.isRamens.length !== 0) {
+      this.props.isRamens.splice(index, 1);
+      const isRamen = this.props.isRamens.filter(isRamen => isRamen === false);
+      if (isRamen.length === 0) this.props.initErrorStatus();
+    }
   };
 
   sendImages = () => {
@@ -112,6 +157,18 @@ export class PostConatiner extends Component {
     return <Redirect to={'/timeline/private'} />;
   };
 
+  showActiveButton = () => {
+    return (
+      <PostButton type="button" onClick={() => this.sendImages()}>
+        投稿する
+      </PostButton>
+    );
+  };
+
+  showNotActiveButton = () => {
+    return <DisabledPostButton type="button">投稿する</DisabledPostButton>;
+  };
+
   render() {
     return (
       <div>
@@ -120,9 +177,9 @@ export class PostConatiner extends Component {
         {this.props.success && this.postSuccess()}
         <div className="position-relative py-3 border-bottom mb-3">
           <div className="text-center">投稿</div>
-          <PostButton type="button" onClick={() => this.sendImages()}>
-            投稿する
-          </PostButton>
+          {this.state.files.length === 0 || this.props.status
+            ? this.showNotActiveButton()
+            : this.showActiveButton()}
         </div>
         <div className="c-container__padding">
           {this.props.status && <Error status={this.props.status} />}
@@ -173,7 +230,8 @@ function mapStateToProps(state) {
     accessToken: state.auth.accessToken,
     status: state.error.status,
     loading: state.loading.loading,
-    success: state.post.success
+    success: state.post.success,
+    isRamens: state.post.isRamens
   };
 }
 
@@ -184,6 +242,9 @@ function mapDispatchToProps(dispatch) {
     },
     changeSuccessValue() {
       dispatch(failPost());
+    },
+    initErrorStatus() {
+      dispatch(notError());
     }
   };
 }
@@ -199,5 +260,7 @@ PostConatiner.propTypes = {
   loading: PropTypes.bool,
   postImages: PropTypes.func,
   success: PropTypes.bool,
-  changeSuccessValue: PropTypes.func
+  changeSuccessValue: PropTypes.func,
+  isRamens: PropTypes.array,
+  initErrorStatus: PropTypes.func
 };
