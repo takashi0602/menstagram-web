@@ -114,6 +114,7 @@ export class FollowContainer extends Component {
   };
 
   initGetFollowing = () => {
+    if (this.props.loading) return;
     if (
       this.props.followingStatus === -1 ||
       this.props.followingTargetUserId !== this.targetUserId()
@@ -123,6 +124,7 @@ export class FollowContainer extends Component {
   };
 
   initGetFollowed = () => {
+    if (this.props.loading) return;
     if (
       this.props.followedStatus === -1 ||
       this.props.followedTargetUserId !== this.targetUserId()
