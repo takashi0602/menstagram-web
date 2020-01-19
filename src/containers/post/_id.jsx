@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../../components/post/show';
-import { BackButton, Title } from './styled';
+import { BackButton, Title, ChevronLeftIcons } from './styled';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
@@ -66,7 +66,7 @@ export class PostDetailContainer extends Component {
         <ScrollToTopOnMount />
         <header className="py-3 px-3 border-bottom">
           <BackButton onClick={this.goBack}>
-            <FontAwesomeIcon icon={faChevronLeft} />
+            <FontAwesomeIcon icon={faChevronLeft} style={ChevronLeftIcons} />
           </BackButton>
           <Title>投稿</Title>
         </header>

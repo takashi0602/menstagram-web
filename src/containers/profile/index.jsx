@@ -9,7 +9,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { HamMenu } from '../../components/hamMenu';
 import {
-  backButton,
+  BackButton,
+  ChevronLeftIcons,
   UserName,
   UserId,
   Biography,
@@ -43,9 +44,9 @@ class ProfileContainer extends Component {
   TopHeader = () => {
     return (
       <header className="py-3 pl-3 d-flex justify-content-between">
-        <span className="text-left" onClick={this.goBack}>
-          <FontAwesomeIcon icon={faChevronLeft} style={backButton} />
-        </span>
+        <BackButton onClick={this.goBack}>
+          <FontAwesomeIcon icon={faChevronLeft} style={ChevronLeftIcons} />
+        </BackButton>
         {this.HamMenuButton()}
       </header>
     );
@@ -182,21 +183,15 @@ class ProfileContainer extends Component {
   };
 
   initGetProfile = () => {
-    if (
-      this.props.match.params.id !== this.props.profile.user_id ||
-      this.props.profileStatus === -1
-    ) {
+    if (this.props.match.params.id !== this.props.profile.user_id && this.props.profileStatus === -1) {
       this.props.getProfile(this.initSetProfileData());
     }
   };
 
   initGetUserPosts = () => {
-    if (this.props.match.params.id !== this.props.profile.user_id) {
+    if (this.props.match.params.id !== this.props.profile.user_id && this.props.userPostsStatus === -1) {
       this.props.getUserPosts(this.initSetUserPosts());
-      return;
     }
-    if (this.props.userPostsStatus !== -1) return;
-    this.props.getUserPosts(this.initSetUserPosts());
   };
 
   follow = () => {
@@ -232,10 +227,10 @@ class ProfileContainer extends Component {
     return (
       <div>
         {auth(this.props.accessToken)}
-        {this.initGetProfile()}
-        {this.initGetUserPosts()}
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
+        {!this.props.loading && this.initGetProfile()}
+        {!this.props.loading && this.initGetUserPosts()}
         {this.TopHeader()}
         {this.props.status && <Error status={this.props.status} />}
         <div className="text-center">
@@ -247,7 +242,7 @@ class ProfileContainer extends Component {
           <div className="d-flex justify-content-around mb-2">
             <Item>
               <div className="text-center mb-0">
-                {this.props.userPosts.length}
+                {this.props.profile.posted}
               </div>
               <div className="text-center">投稿</div>
             </Item>
