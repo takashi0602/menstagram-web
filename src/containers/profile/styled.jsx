@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 
 export const BackButton = styled.div`
   width: 20px

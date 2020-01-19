@@ -12,7 +12,7 @@ export const FaChevronLeftStyle = styled.div`
   top: 50%;
   left: 20px;
   transform: translateY(-50%);
-  color: #666666
+  color: #666666;
 `;
 
 export const faChevronLeftIconStyle = {

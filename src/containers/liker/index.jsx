@@ -71,7 +71,10 @@ export class LikerContainer extends Component {
 
   initGetLikers = () => {
     // stateに保持するpostIdとURLのパラメータが違うときはリクエストを発火
-    if (this.props.postId !== this.props.match.params.id || this.props.likerStatus === -1) {
+    if (
+      this.props.postId !== this.props.match.params.id ||
+      this.props.likerStatus === -1
+    ) {
       this.props.getLikers(this.initSetLikersData());
     }
   };
@@ -128,7 +131,7 @@ function mapStateToProps(state) {
     loading: state.loading.loading,
     likerList: state.likers.likerList,
     likerStatus: state.likers.status,
-    postId: state.likers.postId,
+    postId: state.likers.postId
   };
 }
 function mapDispatchToProps(dispatch) {

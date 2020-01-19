@@ -32,7 +32,10 @@ export class PostDetailContainer extends Component {
       // TODO: 404ページへ遷移する
       return;
     }
-    if (this.props.postDetailStatus === -1 || Number(this.props.match.params.id) !== this.props.postDetail.id) {
+    if (
+      this.props.postDetailStatus === -1 ||
+      Number(this.props.match.params.id) !== this.props.postDetail.id
+    ) {
       this.props.getPostDetail(this.initPostDetail());
     }
   };

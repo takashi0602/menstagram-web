@@ -183,13 +183,19 @@ class ProfileContainer extends Component {
   };
 
   initGetProfile = () => {
-    if (this.props.match.params.id !== this.props.profile.user_id && this.props.profileStatus === -1) {
+    if (
+      this.props.match.params.id !== this.props.profile.user_id &&
+      this.props.profileStatus === -1
+    ) {
       this.props.getProfile(this.initSetProfileData());
     }
   };
 
   initGetUserPosts = () => {
-    if (this.props.match.params.id !== this.props.profile.user_id && this.props.userPostsStatus === -1) {
+    if (
+      this.props.match.params.id !== this.props.profile.user_id &&
+      this.props.userPostsStatus === -1
+    ) {
       this.props.getUserPosts(this.initSetUserPosts());
     }
   };
