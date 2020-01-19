@@ -53,17 +53,22 @@ export const TimesIcon = {
 };
 
 export const BackButton = styled.div`
-  fontsize: 1.25rem;
   height: 20px;
-  lineheight: 20px;
+  line-height: 20px;
   color: #666666;
   position: absolute;
   top: 0;
   left: 0;
   margin: 1rem 0 1rem 1rem;
 `;
+
+export const ChevronLeftIcons = {
+  width: '12.5px',
+  height: '20px'
+};
+
 export const Title = styled.h1`
-  font-size: 20px;
+  font-size: 16px;
   line-height: 20px;
   margin-bottom: 0;
   text-align: center;

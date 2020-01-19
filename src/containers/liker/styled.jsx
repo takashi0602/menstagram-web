@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderTitle = styled.div`
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
 `;
 
@@ -12,6 +12,7 @@ export const FaChevronLeftStyle = styled.div`
   top: 50%;
   left: 20px;
   transform: translateY(-50%);
+  color: #666666;
 `;
 
 export const faChevronLeftIconStyle = {

@@ -8,7 +8,7 @@ export const likes = payload => {
     accessToken: payload.accessToken,
     params: payload.params,
     postList: payload.postList,
-    status: -1
+    status: 200
   };
 };
 

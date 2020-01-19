@@ -5,6 +5,11 @@ const initialState = {
 
 export function globalTimeline(state = initialState, action) {
   switch (action.type) {
+    case 'GLOBAL_TIMELINE':
+      return {
+        postList: action.postList,
+        status: action.status
+      };
     case 'SUCCESS_GLOBAL_TIMELINE':
       return {
         postList: action.postList,

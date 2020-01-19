@@ -1,8 +1,15 @@
 import styled from 'styled-components';
 
-export const backButton = {
-  fontSize: '27px',
-  color: '#666'
+export const BackButton = styled.div`
+  width: 20px
+  height: 20px;
+  color: #666666;
+  padding: 5px 0 0 5px;
+`;
+
+export const ChevronLeftIcons = {
+  width: 'auto',
+  height: '20px'
 };
 
 export const UserName = styled.h3`
