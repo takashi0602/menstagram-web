@@ -12,15 +12,18 @@ export const requestPostImages = request => {
     },
     data: request.payload.formData
   })
-    .then(response =>
-      request.payload.text === ''
+    .then(response => {
+      for (let i = 0; i < response.data.is_ramens.length; i++) {
+        if (!response.data.is_ramens[i]) return { response };
+      }
+      return request.payload.text === ''
         ? { response }
-        : requestPostText(request, response.data.post_id)
-    )
+        : requestPostText(request, response.data.post_id, response.data)
+    })
     .catch(error => ({ error }));
 };
 
-const requestPostText = (request, postId) => {
+const requestPostText = (request, postId, postImageResponse) => {
   return axios({
     method: 'POST',
     url: `${baseUrl}/v1/post/text`,
@@ -33,6 +36,9 @@ const requestPostText = (request, postId) => {
       text: request.payload.text
     }
   })
-    .then(response => ({ response }))
+    .then(response => {
+      response.data.is_ramens = postImageResponse.is_ramens;
+      return { response }
+    })
     .catch(error => ({ error }));
 };
