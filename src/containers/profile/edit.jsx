@@ -174,9 +174,9 @@ class ProfileEditContainer extends Component {
     return (
       <div>
         {this.props.profileEditSuccess && this.redirectMyProfile()}
-        {this.initGetProfile()}
         {this.isMe()}
         {this.props.loading && <Loading />}
+        {!this.props.loading && this.initGetProfile()}
         {this.TopHeader()}
         <div className="pt-3 mb-3 text-center border-bottom">
           {this.showUserImage()}
