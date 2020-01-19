@@ -17,7 +17,7 @@ class LikeContainer extends Component {
     this.state = {
       notLikesMessage: 'いいねした投稿はありません。',
       showBackToTop: false,
-      scrollValue: 0,
+      scrollValue: 0
     };
   }
 

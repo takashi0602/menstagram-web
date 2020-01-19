@@ -21,7 +21,7 @@ export class TimelineContainer extends Component {
       notPrivateTimelineMessage:
         'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
       showBackToTop: false,
-      scrollValue: 0,
+      scrollValue: 0
     };
   }
 

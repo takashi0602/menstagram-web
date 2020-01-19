@@ -18,7 +18,7 @@ export const requestPostImages = request => {
       }
       return request.payload.text === ''
         ? { response }
-        : requestPostText(request, response.data.post_id, response.data)
+        : requestPostText(request, response.data.post_id, response.data);
     })
     .catch(error => ({ error }));
 };
@@ -38,7 +38,7 @@ const requestPostText = (request, postId, postImageResponse) => {
   })
     .then(response => {
       response.data.is_ramens = postImageResponse.is_ramens;
-      return { response }
+      return { response };
     })
     .catch(error => ({ error }));
 };

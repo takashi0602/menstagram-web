@@ -11,7 +11,7 @@ export const notLikedHeart = {
   width: '20px',
   height: '20px',
   color: '#666666',
-  marginRight: '10px',
+  marginRight: '10px'
 };
 
 export const UserImage = styled.div`

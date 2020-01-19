@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { postDetail } from '../../actions/postDetail';
 import { Loading } from '../../components/loading';
-import { likePost, notLikePost } from "../../actions/likePost";
+import { likePost, notLikePost } from '../../actions/likePost';
 
 export class PostDetailContainer extends Component {
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
@@ -70,12 +70,13 @@ export class PostDetailContainer extends Component {
           </BackButton>
           <Title>投稿</Title>
         </header>
-        {this.props.postDetail &&
-          <Post postItem={this.props.postDetail}
+        {this.props.postDetail && (
+          <Post
+            postItem={this.props.postDetail}
             likePost={this.likePost}
             notLikePost={this.notLikePost}
           />
-        }
+        )}
       </div>
     );
   }

@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { PostButton, DisabledPostButton, PostLabel, RenderImage, Times, TimesIcon } from './styled';
+import {
+  PostButton,
+  DisabledPostButton,
+  PostLabel,
+  RenderImage,
+  Times,
+  TimesIcon
+} from './styled';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
@@ -59,7 +66,9 @@ export class PostConatiner extends Component {
       return (
         <li key={index} className="list-unstyled w-50 mb-2">
           <div className="position-relative px-2">
-            { isRamen ? this.renderImage(file) : this.renderNotRamenImage(file, index) }
+            {isRamen
+              ? this.renderImage(file)
+              : this.renderNotRamenImage(file, index)}
             <Times onClick={() => this.deleteFile(index)}>
               <FontAwesomeIcon icon={faTimesCircle} style={TimesIcon} />
             </Times>
@@ -93,7 +102,11 @@ export class PostConatiner extends Component {
     } else {
       return (
         <RenderImage
-          style={{ backgroundImage: `url('${createObjectURL(file)}')`, border: 'solid 5px red', borderRadius: '5px' }}
+          style={{
+            backgroundImage: `url('${createObjectURL(file)}')`,
+            border: 'solid 5px red',
+            borderRadius: '5px'
+          }}
         />
       );
     }
@@ -153,11 +166,7 @@ export class PostConatiner extends Component {
   };
 
   showNotActiveButton = () => {
-    return (
-      <DisabledPostButton type="button">
-        投稿する
-      </DisabledPostButton>
-    );
+    return <DisabledPostButton type="button">投稿する</DisabledPostButton>;
   };
 
   render() {
@@ -168,11 +177,9 @@ export class PostConatiner extends Component {
         {this.props.success && this.postSuccess()}
         <div className="position-relative py-3 border-bottom mb-3">
           <div className="text-center">投稿</div>
-          {
-            this.state.files.length === 0 || this.props.status
-              ? this.showNotActiveButton()
-              : this.showActiveButton()
-          }
+          {this.state.files.length === 0 || this.props.status
+            ? this.showNotActiveButton()
+            : this.showActiveButton()}
         </div>
         <div className="c-container__padding">
           {this.props.status && <Error status={this.props.status} />}
@@ -237,7 +244,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(failPost());
     },
     initErrorStatus() {
-      dispatch(notError())
+      dispatch(notError());
     }
   };
 }

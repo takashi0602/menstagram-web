@@ -14,9 +14,9 @@ import {
   faBell as regularBell
 } from '@fortawesome/free-regular-svg-icons';
 import { NavBar, NavIcon, NavIconInactive, NavIconActive } from './styled';
-import connect from "react-redux/es/connect/connect";
+import connect from 'react-redux/es/connect/connect';
 
-export class Menu extends Component {
+class MenuComponent extends Component {
   // top, register, login, logoutでは表示しない
   Hide = () => {
     if (
@@ -91,12 +91,12 @@ function mapStateToProps(state) {
   };
 }
 
-Menu = connect(
+export const Menu = connect(
   mapStateToProps,
   null
-)(Menu);
+)(MenuComponent);
 
-Menu.propTypes = {
+MenuComponent.propTypes = {
   history: PropTypes.object,
   userId: PropTypes.string
 };
