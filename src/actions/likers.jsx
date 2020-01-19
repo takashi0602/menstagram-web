@@ -8,7 +8,7 @@ export const likers = payload => {
     accessToken: payload.accessToken,
     params: payload.params,
     likerList: [],
-    status: -1,
+    status: 200,
     postId: payload.params.post_id
   };
 };

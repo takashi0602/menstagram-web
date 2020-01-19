@@ -6,7 +6,11 @@ const initialState = {
 export function likers(state = initialState, action) {
   switch (action.type) {
     case 'LIKERS':
-      return state;
+      return {
+        likerList: action.likerList,
+        status: action.status,
+        postId: action.postId
+      };
     case 'SUCCESS_LIKERS':
       return {
         likerList: action.likerList,
