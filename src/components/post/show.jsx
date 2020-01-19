@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEllipsisH,
-  faHeart,
-  faUser
+  faUser,
+  faHeart as solidHeart
 } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import {
-  Like,
+  likedHeart,
+  notLikedHeart,
   ImageArea,
   RamenImage,
   UserImage,
@@ -20,6 +22,8 @@ import {
 } from './styled';
 import { DetailModal } from '../modal/detail';
 import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const sliderSettings = {
   dots: true,
@@ -55,15 +59,28 @@ export class Post extends Component {
     return (
       <div className="c-container__padding">
         <div className="d-flex align-items-center mb-1">
-          <FontAwesomeIcon icon={faHeart} style={Like} />
+          {this.showHeartIcon()}
           <div className="mr-2">{this.props.postItem.liked}</div>
           {this.showLiker()}
         </div>
         <div className="mb-3">{this.props.postItem.created_at}</div>
-        {this.props.postItem.text.length > 0 && (
-          <PostText>{this.props.postItem.text}</PostText>
-        )}
+        <PostText>{this.props.postItem.text}</PostText>
       </div>
+    );
+  };
+
+  showHeartIcon = () => {
+    if (this.props.postItem.is_liked) {
+      return (
+        <span onClick={this.props.notLikePost}>
+          <FontAwesomeIcon icon={solidHeart} style={likedHeart} />
+        </span>
+      );
+    }
+    return (
+      <span onClick={this.props.likePost}>
+        <FontAwesomeIcon icon={regularHeart} style={notLikedHeart} />
+      </span>
     );
   };
 
@@ -155,6 +172,7 @@ export class Post extends Component {
 }
 
 Post.propTypes = {
-  parentRoute: PropTypes.string,
-  postItem: PropTypes.object
+  postItem: PropTypes.object,
+  likePost: PropTypes.func,
+  notLikePost: PropTypes.func
 };

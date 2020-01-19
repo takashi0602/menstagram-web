@@ -13,6 +13,12 @@ export class ComponentError extends Component {
         persistor.purge();
         this.props.delete();
         return;
+      case 406:
+        return (
+          <p className="text-danger">
+            投稿された画像はラーメンではありません。
+          </p>
+        );
       default:
         return <p className="text-danger">エラーが発生しました。</p>;
     }

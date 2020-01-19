@@ -14,13 +14,15 @@ export const post = (payload, accessToken) => {
 export const successPost = () => {
   return {
     type: SUCCESS_POST,
-    success: true
+    success: true,
+    isRamens: []
   };
 };
 
-export const failPost = () => {
+export const failPost = isRamens => {
   return {
     type: FAIL_POST,
-    success: false
+    success: false,
+    isRamens: isRamens
   };
 };

@@ -1,8 +1,17 @@
 import styled from 'styled-components';
 
-export const Like = {
+export const likedHeart = {
+  width: '20px',
+  height: '20px',
   color: '#EB6101',
-  marginRight: '5px'
+  marginRight: '10px'
+};
+
+export const notLikedHeart = {
+  width: '20px',
+  height: '20px',
+  color: '#666666',
+  marginRight: '10px'
 };
 
 export const UserImage = styled.div`

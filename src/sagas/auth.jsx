@@ -17,7 +17,11 @@ function* register(payload) {
   yield put(errorHandle.notError());
   const { response, error } = yield call(requestRegister, payload);
   if (response) {
-    yield put(successRegister(response.data.access_token));
+    const successData = {
+      accessToken: response.data.access_token,
+      userId: payload.payload.user_id
+    };
+    yield put(successRegister(successData));
   } else {
     yield put(failRegister());
     yield put(errorHandle.error(error.response));
@@ -31,7 +35,11 @@ function* login(payload) {
   yield put(errorHandle.notError());
   const { response, error } = yield call(requestLogin, payload);
   if (response) {
-    yield put(successLogin(response.data.access_token));
+    const successData = {
+      accessToken: response.data.access_token,
+      userId: payload.payload.user_id
+    };
+    yield put(successLogin(successData));
   } else {
     yield put(failLogin());
     yield put(errorHandle.error(error.response));
@@ -47,7 +55,11 @@ function* logout(payload) {
     yield put(successLogout());
     yield put(clearState());
   } else {
-    yield put(failLogout(payload.accessToken));
+    const failData = {
+      accessToken: payload.accessToken,
+      userId: payload.user_id
+    };
+    yield put(failLogout(failData));
     yield put(errorHandle.error(error.response));
   }
   yield put(notLoading());

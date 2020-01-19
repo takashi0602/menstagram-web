@@ -4,6 +4,35 @@ import PropTypes from 'prop-types';
 import { LinkStyle, UserAvatar, UserLink, FollowButton } from './styled';
 
 export default class FollowListItem extends Component {
+  actionButton = () => {
+    if (this.props.user.is_me) return;
+    if (this.props.user.is_following) {
+      return (
+        <FollowButton
+          type="button"
+          className="c-button__white c-button__commonWidth"
+          onClick={() =>
+            this.props.openModal(this.props.user.user_id, this.props.index)
+          }
+        >
+          フォロー中
+        </FollowButton>
+      );
+    } else {
+      return (
+        <FollowButton
+          type="button"
+          className="c-button__orange c-button__commonWidth"
+          onClick={() =>
+            this.props.follow(this.props.user.user_id, this.props.index)
+          }
+        >
+          フォローする
+        </FollowButton>
+      );
+    }
+  };
+
   render() {
     return (
       <li className="row mx-0 mb-3 align-items-center">
@@ -26,21 +55,7 @@ export default class FollowListItem extends Component {
             {this.props.user.user_id}
           </UserLink>
         </Link>
-        <div className="col-5 p-0 text-right">
-          {this.props.user.is_followed ? (
-            <FollowButton
-              type="button"
-              className="c-button__white c-button__commonWidth"
-              onClick={this.props.openModal}
-            >
-              フォロー中
-            </FollowButton>
-          ) : (
-            <FollowButton type="button" className="c-button__orange c-button__commonWidth">
-              フォローする
-            </FollowButton>
-          )}
-        </div>
+        <div className="col-5 p-0 text-right">{this.actionButton()}</div>
       </li>
     );
   }
@@ -48,5 +63,7 @@ export default class FollowListItem extends Component {
 
 FollowListItem.propTypes = {
   user: PropTypes.object,
-  openModal: PropTypes.func
+  openModal: PropTypes.func,
+  follow: PropTypes.func,
+  index: PropTypes.number
 };
