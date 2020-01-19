@@ -11,7 +11,8 @@
     color: $main-lightgray;
   }
   &:focus {
-    outline-color: $main-orange;
+    border: solid 1px $main-orange;
+    outline: none;
   }
 
   &__textArea {
@@ -29,7 +30,8 @@
       color: $main-lightgray;
     }
     &:focus {
-      outline-color: $main-orange;
+      border: solid 1px $main-orange;
+      outline: none;
     }
   }
 }
