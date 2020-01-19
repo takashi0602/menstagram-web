@@ -7,7 +7,7 @@ export const postDetail = payload => {
     type: POST_DETAIL,
     accessToken: payload.accessToken,
     params: payload.params,
-    status: -1
+    status: 200
   };
 };
 

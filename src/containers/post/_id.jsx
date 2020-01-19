@@ -28,13 +28,13 @@ export class PostDetailContainer extends Component {
   };
 
   initGetData = () => {
-    if (Number.isNaN(Number(this.props.match.params.id))) return;
-    if (Number(this.props.match.params.id) !== this.props.postDetail.id) {
-      this.props.getPostDetail(this.initPostDetail());
+    if (!Number(this.props.match.params.id)) {
+      // TODO: 404ページへ遷移する
       return;
     }
-    if (this.props.status !== -1) return;
-    this.props.getPostDetail(this.initPostDetail());
+    if (this.props.postDetailStatus === -1 || Number(this.props.match.params.id) !== this.props.postDetail.id) {
+      this.props.getPostDetail(this.initPostDetail());
+    }
   };
 
   likePost = () => {
@@ -62,7 +62,7 @@ export class PostDetailContainer extends Component {
       <div>
         {auth(this.props.accessToken)}
         {this.props.loading && <Loading />}
-        {this.initGetData()}
+        {!this.props.loading && this.initGetData()}
         <ScrollToTopOnMount />
         <header className="py-3 px-3 border-bottom">
           <BackButton onClick={this.goBack}>
@@ -81,15 +81,18 @@ export class PostDetailContainer extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
     status: state.postDetail.status,
     loading: state.loading.loading,
     success: state.post.success,
-    postDetail: state.postDetail.postDetail
+    postDetail: state.postDetail.postDetail,
+    postDetailStatus: state.postDetail.status
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     getPostDetail(payload) {
@@ -119,5 +122,6 @@ PostDetailContainer.propTypes = {
   success: PropTypes.bool,
   postDetail: PropTypes.object,
   likePost: PropTypes.func,
-  notLikePost: PropTypes.func
+  notLikePost: PropTypes.func,
+  postDetailStatus: PropTypes.number
 };

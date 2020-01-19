@@ -18,6 +18,11 @@ const initialState = {
 
 export function postDetail(state = initialState, action) {
   switch (action.type) {
+    case 'POST_DETAIL':
+      return {
+        status: action.status,
+        postDetail: state.postDetail
+      };
     case 'SUCCESS_POST_DETAIL':
       return {
         status: action.status,
