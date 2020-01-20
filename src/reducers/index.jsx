@@ -10,7 +10,7 @@ import { privateTimeline } from './timeline/private';
 import { globalTimeline } from './timeline/global';
 import { likes } from './likes';
 import { profile } from './profile';
-import { userPosts } from './userPosts';
+import { profilePosts } from './profilePosts';
 import { likePost } from './likePost';
 import { likers } from './likers';
 import { following } from './following';
@@ -25,7 +25,7 @@ const combineReducer = combineReducers({
   postDetail,
   likes,
   profile,
-  userPosts,
+  profilePosts,
   profileEdit,
   privateTimeline,
   globalTimeline,

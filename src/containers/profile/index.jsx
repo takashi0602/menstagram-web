@@ -21,8 +21,7 @@ import {
   Item
 } from './styled';
 import { logout } from '../../actions/auth/logout';
-import { profile } from '../../actions/profile';
-import { userPosts } from '../../actions/userPosts';
+import { profilePosts } from '../../actions/profilePosts';
 import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
@@ -93,10 +92,10 @@ class ProfileContainer extends Component {
   };
 
   PostsTileView = () => {
-    if (this.props.userPosts.length > 0) {
+    if (this.props.posts.length > 0) {
       return (
         <div className="row m-0">
-          {this.props.userPosts.map((post, idx) => {
+          {this.props.posts.map((post, idx) => {
             return (
               <Link
                 key={idx}
@@ -164,7 +163,7 @@ class ProfileContainer extends Component {
     this.setState({ showLogoutModal: false });
   };
 
-  initSetProfileData = () => {
+  initSetUserPosts = () => {
     const params = { user_id: this.props.match.params.id };
     return {
       params,
@@ -172,31 +171,12 @@ class ProfileContainer extends Component {
     };
   };
 
-  initSetUserPosts = () => {
-    const params = { user_id: this.props.match.params.id };
-    const UserPosts = [];
-    return {
-      params,
-      accessToken: this.props.accessToken,
-      UserPosts
-    };
-  };
-
-  initGetProfile = () => {
+  initGetProfilePosts = () => {
     if (
-      this.props.match.params.id !== this.props.profile.user_id &&
-      this.props.profileStatus === -1
+      this.props.match.params.id !== this.props.profile.user_id ||
+      this.props.postsStatus === -1
     ) {
-      this.props.getProfile(this.initSetProfileData());
-    }
-  };
-
-  initGetUserPosts = () => {
-    if (
-      this.props.match.params.id !== this.props.profile.user_id &&
-      this.props.userPostsStatus === -1
-    ) {
-      this.props.getUserPosts(this.initSetUserPosts());
+      this.props.getProfilePosts(this.initSetUserPosts());
     }
   };
 
@@ -235,8 +215,7 @@ class ProfileContainer extends Component {
         {auth(this.props.accessToken)}
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
-        {!this.props.loading && this.initGetProfile()}
-        {!this.props.loading && this.initGetUserPosts()}
+        {!this.props.loading && this.initGetProfilePosts()}
         {this.TopHeader()}
         {this.props.status && <Error status={this.props.status} />}
         <div className="text-center">
@@ -310,8 +289,8 @@ function mapStateToProps(state) {
     loading: state.loading.loading,
     profileStatus: state.profile.profileStatus,
     profile: state.profile.profile,
-    userPostsStatus: state.userPosts.userPostsStatus,
-    userPosts: state.userPosts.userPosts
+    postsStatus: state.profilePosts.status,
+    posts: state.profilePosts.posts
   };
 }
 
@@ -320,11 +299,8 @@ function mapDispatchToProps(dispatch) {
     logout(payload) {
       dispatch(logout(payload));
     },
-    getProfile(payload) {
-      dispatch(profile(payload));
-    },
-    getUserPosts(payload) {
-      dispatch(userPosts(payload));
+    getProfilePosts(payload) {
+      dispatch(profilePosts(payload));
     },
     follow(payload) {
       dispatch(follow(payload));
@@ -347,12 +323,11 @@ ProfileContainer.propTypes = {
   history: PropTypes.object,
   status: PropTypes.number,
   profileStatus: PropTypes.number,
-  userPostsStatus: PropTypes.number,
+  postsStatus: PropTypes.number,
   profile: PropTypes.object,
-  userPosts: PropTypes.array,
+  posts: PropTypes.array,
   logout: PropTypes.func,
-  getProfile: PropTypes.func,
-  getUserPosts: PropTypes.func,
+  getProfilePosts: PropTypes.func,
   loading: PropTypes.bool,
   follow: PropTypes.func,
   unfollow: PropTypes.func
