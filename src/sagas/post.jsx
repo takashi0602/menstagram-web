@@ -3,6 +3,8 @@ import { requestPostImages } from '../api/post';
 import { POST, successPost, failPost } from '../actions/post';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
+import { clearPrivateTimeline } from "../actions/timeline/private";
+import { clearGlobalTimeline } from "../actions/timeline/global";
 
 function* post(action) {
   yield put(loading());
@@ -18,6 +20,8 @@ function* post(action) {
     yield put(errorHandle.error(error.response));
   }
   if (isRamen) {
+    yield put(clearPrivateTimeline());
+    yield put(clearGlobalTimeline());
     yield put(successPost());
   } else {
     const ramenJudgeError = {

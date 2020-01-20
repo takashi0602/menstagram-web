@@ -20,6 +20,11 @@ export function privateTimeline(state = initialState, action) {
         postList: action.postList,
         status: action.status
       };
+    case 'CLEAR_PRIVATE_TIMELINE':
+      return {
+        postList: action.postList,
+        status: action.status
+      };
     default:
       return state;
   }

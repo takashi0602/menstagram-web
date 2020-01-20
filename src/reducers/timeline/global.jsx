@@ -20,6 +20,11 @@ export function globalTimeline(state = initialState, action) {
         postList: action.postList,
         status: action.status
       };
+    case 'CLEAR_GLOBAL_TIMELINE':
+      return {
+        postList: action.postList,
+        status: action.status
+      };
     default:
       return state;
   }
