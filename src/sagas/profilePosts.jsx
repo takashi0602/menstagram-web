@@ -7,8 +7,8 @@ import {
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
 import { getProfilePosts } from '../api/profilePosts';
-import { getProfile } from "../api/profile";
-import { failProfile, successProfile } from "../actions/profile";
+import { getProfile } from '../api/profile';
+import { failProfile, successProfile } from '../actions/profile';
 
 function* profilePosts(action) {
   yield put(loading());

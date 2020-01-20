@@ -167,7 +167,7 @@ class ProfileContainer extends Component {
     const params = { user_id: this.props.match.params.id };
     return {
       params,
-      accessToken: this.props.accessToken,
+      accessToken: this.props.accessToken
     };
   };
 
