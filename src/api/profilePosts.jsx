@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
-export const getUserPosts = request => {
+export const getProfilePosts = request => {
   return axios({
     method: 'GET',
     url: `${baseUrl}/v1/user/posts`,
@@ -11,6 +11,6 @@ export const getUserPosts = request => {
     },
     params: request.params
   })
-    .then(response => ({ response }))
-    .catch(error => ({ error }));
+    .then(postsResponse => ({ postsResponse }))
+    .catch(postsError => ({ postsError }));
 };

@@ -9,7 +9,7 @@ export const profile = payload => {
     accessToken: payload.accessToken,
     params: payload.params,
     profile: {},
-    profileStatus: -1
+    profileStatus: 200
   };
 };
 

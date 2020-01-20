@@ -1,6 +1,6 @@
 import { requestLogin, requestRegister } from '../api/auth';
 import { getProfile } from '../api/profile';
-import { getUserPosts } from '../api/userPosts';
+import { getUserPosts } from '../api/profilePosts';
 
 jest.setTimeout(10000);
 

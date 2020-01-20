@@ -6,7 +6,10 @@ const initialState = {
 export function profile(state = initialState, action) {
   switch (action.type) {
     case 'PROFILE':
-      return state;
+      return {
+        profile: action.profile,
+        profileStatus: action.profileStatus
+      };
     case 'SUCCESS_PROFILE':
       return {
         profile: action.profile,
