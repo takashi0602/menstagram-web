@@ -30,31 +30,19 @@ export const Routes = () => {
               <Route exact path={'/'} component={Top} />
               <Route exact path={'/register'} component={Register} />
               <Route exact path={'/login'} component={Login} />
-              <Route exact path={'/profile/:id'} component={Profile} />
-              <Route exact path={'/post/:id'} component={PostDetail} />
+              <Route exact path={'/user/:id'} component={Profile} />
+              <Route exact path={'/user/:id/edit'} component={ProfileEdit} />
+              <Route exact path={'/user/:id/following'} component={Follow} />
+              <Route exact path={'/user/:id/followed'} component={Follow} />
               <Route exact path={'/post'} component={Post} />
+              <Route exact path={'/post/:id'} component={PostDetail} />
+              <Route exact path={'/post/:id/liker'} component={Liker} />
               <Route exact path={'/timeline/private'} component={Timeline} />
               <Route exact path={'/timeline/global'} component={Timeline} />
               <Route exact path={'/likes'} component={Like} />
-              <Route exact path={'/liker/:id'} component={Liker} />
-              <Route exact path={'/followed/:id'} component={Follow} />
-              <Route exact path={'/following/:id'} component={Follow} />
-              <Route exact path={'/profile/:id/edit'} component={ProfileEdit} />
-              <Route
-                exact
-                path={'/notification/liked'}
-                component={Notification}
-              />
-              <Route
-                exact
-                path={'/notification/followed'}
-                component={Notification}
-              />
-              <Route
-                exact
-                path={'/notification/system'}
-                component={Notification}
-              />
+              <Route exact path={'/notice/liked'} component={Notification} />
+              <Route exact path={'/notice/followed'} component={Notification} />
+              <Route exact path={'/notice/system'} component={Notification} />
               <Route exact path={'/report'} component={Report} />
             </Switch>
             <Route component={Menu} />

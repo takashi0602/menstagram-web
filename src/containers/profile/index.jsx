@@ -61,7 +61,7 @@ class ProfileContainer extends Component {
       return (
         <button type="button" className="c-button__white px-0 w-100">
           <Link
-            to={`/profile/${this.props.match.params.id}/edit`}
+            to={`/user/${this.props.match.params.id}/edit`}
             className="d-inline-block w-100 c-link__gray"
           >
             プロフィールの編集
@@ -233,7 +233,7 @@ class ProfileContainer extends Component {
             </Item>
             <Item>
               <Link
-                to={`/followed/${this.props.profile.user_id}`}
+                to={`/user/${this.props.profile.user_id}/followed`}
                 className="c-link__black"
               >
                 <div className="text-center mb-0">
@@ -244,7 +244,7 @@ class ProfileContainer extends Component {
             </Item>
             <Item>
               <Link
-                to={`/following/${this.props.profile.user_id}`}
+                to={`/user/${this.props.profile.user_id}/following`}
                 className="c-link__black"
               >
                 <div className="text-center mb-0">
