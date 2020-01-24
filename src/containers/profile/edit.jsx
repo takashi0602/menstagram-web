@@ -38,7 +38,7 @@ class ProfileEditContainer extends Component {
   TopHeader = () => {
     return (
       <PositionParent>
-        <Link to={`/profile/${this.props.match.params.id}`} style={blackLink}>
+        <Link to={`/user/${this.props.match.params.id}`} style={blackLink}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </Link>
         <Title>プロフィールの編集</Title>
@@ -125,13 +125,13 @@ class ProfileEditContainer extends Component {
 
   isMe = () => {
     if (!this.props.profile && !this.props.profile.is_me)
-      return <Redirect to={`/profile/${this.props.match.params.id}`} />;
+      return <Redirect to={`/user/${this.props.match.params.id}`} />;
   };
 
   redirectMyProfile = () => {
     this.props.clearProfile();
     this.props.clearProfileEdit();
-    return <Redirect to={`/profile/${this.props.match.params.id}`} />;
+    return <Redirect to={`/user/${this.props.match.params.id}`} />;
   };
 
   getDefaultValue = name => {

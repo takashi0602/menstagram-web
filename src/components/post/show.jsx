@@ -88,7 +88,7 @@ export class Post extends Component {
     if (this.props.postItem.liker === undefined) return;
     const likerList = this.props.postItem.liker.map(liker => {
       return (
-        <Link key={liker.user_id} to={'/profile/' + liker.user_id}>
+        <Link key={liker.user_id} to={`/user/${liker.user_id}`}>
           {liker.avatar ? (
             <LikerImage style={{ backgroundImage: `url(${liker.avatar})` }} />
           ) : (
@@ -103,7 +103,7 @@ export class Post extends Component {
       likerList.push(
         <Link
           key={'more'}
-          to={'/liker/' + this.props.postItem.id}
+          to={`/post/${this.props.postItem.id}/liker`}
           className="c-link__black"
         >
           ...
@@ -144,7 +144,7 @@ export class Post extends Component {
       <div>
         <div className="d-flex justify-content-between align-items-center py-2 px-3">
           <Link
-            to={`/profile/${this.props.postItem.user.user_id}`}
+            to={`/user/${this.props.postItem.user.user_id}`}
             className="d-flex align-items-center c-link__black"
           >
             {this.setUserImage()}

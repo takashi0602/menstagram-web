@@ -96,7 +96,7 @@ export class FollowContainer extends Component {
   };
 
   isPathFollowing = () => {
-    return this.props.history.location.pathname.split('/')[1] === 'following';
+    return this.props.history.location.pathname.split('/')[3] === 'following';
   };
 
   targetUserId = () => {
