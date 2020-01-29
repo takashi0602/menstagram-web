@@ -1,8 +1,9 @@
 # menstagram-web
 
-**🍜 SUSURU FOREVER, SUSURU ANYWHERE 🍜**
+<img src="logo.png" width="500">
 
-menstagram-webはMenstagramのフロントエンド開発のためのリポジトリです。
+**🍜 SUSURU FOREVER, SUSURU ANYWHERE 🍜**
+menstagram-webはMenstagramのWebアプリケーション開発のためのリポジトリです。
 
 ### 環境構築
 
