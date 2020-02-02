@@ -105,7 +105,8 @@ class ProfileEditContainer extends Component {
         biography: this.state.changeBiography
           ? this.state.biography
           : this.props.profile.biography
-      }
+      },
+      userId: this.props.match.params.id
     };
     this.props.postProfileEdit(payload);
   };
@@ -128,11 +129,11 @@ class ProfileEditContainer extends Component {
       return <Redirect to={`/user/${this.props.match.params.id}`} />;
   };
 
-  redirectMyProfile = () => {
-    this.props.clearProfile();
-    this.props.clearProfileEdit();
-    return <Redirect to={`/user/${this.props.match.params.id}`} />;
-  };
+  // redirectMyProfile = () => {
+  //   this.props.clearProfile();
+  //   this.props.clearProfileEdit();
+  //   return <Redirect to={`/user/${this.props.match.params.id}`} />;
+  // };
 
   getDefaultValue = name => {
     if (!this.props.profile) return '';
@@ -173,7 +174,7 @@ class ProfileEditContainer extends Component {
   render() {
     return (
       <div>
-        {this.props.profileEditSuccess && this.redirectMyProfile()}
+        {/*{this.props.profileEditSuccess && this.redirectMyProfile()}*/}
         {this.isMe()}
         {this.props.loading && <Loading />}
         {!this.props.loading && this.initGetProfile()}

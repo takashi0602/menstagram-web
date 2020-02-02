@@ -20,6 +20,8 @@ export function profilePosts(state = initialState, action) {
         posts: action.posts,
         status: action.status
       };
+    case 'CLEAR_PROFILE_POSTS':
+      return initialState;
     default:
       return state;
   }

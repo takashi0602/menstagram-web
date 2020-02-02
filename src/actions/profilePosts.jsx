@@ -1,6 +1,7 @@
 export const PROFILE_POSTS = 'PROFILE_POSTS';
 export const SUCCESS_PROFILE_POSTS = 'SUCCESS_PROFILE_POSTS';
 export const FAIL_PROFILE_POSTS = 'FAIL_PROFILE_POSTS';
+export const CLEAR_PROFILE_POSTS = 'CLEAR_PROFILE_POSTS';
 
 export const profilePosts = payload => {
   return {
@@ -25,5 +26,13 @@ export const failProfilePosts = status => {
     type: FAIL_PROFILE_POSTS,
     posts: [],
     status: status
+  };
+};
+
+export const clearProfilePosts = () => {
+  return {
+    type: CLEAR_PROFILE_POSTS,
+    posts: [],
+    status: -1
   };
 };
