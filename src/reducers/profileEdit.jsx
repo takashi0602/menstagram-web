@@ -12,6 +12,10 @@ export function profileEdit(state = initialState, action) {
       return {
         success: action.success
       };
+    case 'CLEAR_PROFILE_EDIT':
+      return {
+        success: action.success
+      };
     default:
       return state;
   }

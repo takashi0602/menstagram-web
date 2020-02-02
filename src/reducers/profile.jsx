@@ -21,10 +21,7 @@ export function profile(state = initialState, action) {
         profileStatus: action.profileStatus
       };
     case 'CLEAR_PROFILE':
-      return {
-        profile: action.profile,
-        profileStatus: action.profileStatus
-      };
+      return initialState;
     default:
       return state;
   }
