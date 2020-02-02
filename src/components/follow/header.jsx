@@ -11,7 +11,7 @@ import {
 
 export class FollowHeader extends Component {
   showHeader = () => {
-    const pathName = this.props.history.location.pathname.split('/')[1];
+    const pathName = this.props.history.location.pathname.split('/')[3];
     if (pathName === 'followed') {
       return this.followedHeader();
     } else if (pathName === 'following') {
@@ -24,9 +24,9 @@ export class FollowHeader extends Component {
       <div className="row justify-content-around mx-0 mb-3">
         <div className="col text-center">フォロワー</div>
         <Link
-          to={`/following/${
+          to={`/user/${
             this.props.history.location.pathname.split('/')[2]
-          }`}
+          }/following`}
           className="col text-center c-link__lightgray"
         >
           フォロー中
@@ -39,7 +39,9 @@ export class FollowHeader extends Component {
     return (
       <div className="row justify-content-around mx-0 mb-3">
         <Link
-          to={`/followed/${this.props.history.location.pathname.split('/')[2]}`}
+          to={`/user/${
+            this.props.history.location.pathname.split('/')[2]
+          }/followed`}
           className="col text-center c-link__lightgray"
         >
           フォロワー
@@ -51,7 +53,7 @@ export class FollowHeader extends Component {
 
   goBack = () => {
     this.props.history.push(
-      `/profile/${this.props.history.location.pathname.split('/')[2]}`
+      `/user/${this.props.history.location.pathname.split('/')[2]}`
     );
   };
 

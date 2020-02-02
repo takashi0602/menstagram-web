@@ -113,7 +113,7 @@ export class LikePostItem extends Component {
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center py-2 px-3">
           <Link
-            to={`/profile/${this.props.postItem.user.user_id}`}
+            to={`/user/${this.props.postItem.user.user_id}`}
             className="d-flex align-items-center c-link__black"
           >
             {this.setUserImage()}

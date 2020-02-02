@@ -18,15 +18,12 @@ export class NotificationHeader extends Component {
       <div className="row justify-content-around mx-0 mb-3">
         <div className="col text-center">いいね</div>
         <Link
-          to="/notification/followed"
+          to="/notice/followed"
           className="col text-center c-link__lightgray"
         >
           フォロー
         </Link>
-        <Link
-          to="/notification/system"
-          className="col text-center c-link__lightgray"
-        >
+        <Link to="/notice/system" className="col text-center c-link__lightgray">
           運営から
         </Link>
       </div>
@@ -36,17 +33,11 @@ export class NotificationHeader extends Component {
   choiceFollowedHeader = () => {
     return (
       <div className="row justify-content-around mx-0 mb-3">
-        <Link
-          to="/notification/liked"
-          className="col text-center c-link__lightgray"
-        >
+        <Link to="/notice/liked" className="col text-center c-link__lightgray">
           いいね
         </Link>
         <div className="col text-center">フォロー</div>
-        <Link
-          to="/notification/system"
-          className="col text-center c-link__lightgray"
-        >
+        <Link to="/notice/system" className="col text-center c-link__lightgray">
           運営から
         </Link>
       </div>
@@ -56,14 +47,11 @@ export class NotificationHeader extends Component {
   choiceManagementHeader = () => {
     return (
       <div className="row justify-content-around mx-0 mb-3">
-        <Link
-          to="/notification/liked"
-          className="col text-center c-link__lightgray"
-        >
+        <Link to="/notice/liked" className="col text-center c-link__lightgray">
           いいね
         </Link>
         <Link
-          to="/notification/followed"
+          to="/notice/followed"
           className="col text-center c-link__lightgray"
         >
           フォロー

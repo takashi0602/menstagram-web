@@ -56,24 +56,20 @@ class MenuComponent extends Component {
             }
           />
         </Link>
-        <Link
-          to="/notification/liked"
-          className="d-inline-block p-2"
-          style={NavIcon}
-        >
+        <Link to="/notice/liked" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
-            icon={path === 'notification' ? faBell : regularBell}
-            style={path === 'notification' ? NavIconActive : NavIconInactive}
+            icon={path === 'notice' ? faBell : regularBell}
+            style={path === 'notice' ? NavIconActive : NavIconInactive}
           />
         </Link>
         <Link
-          to={`/profile/${this.props.userId}`}
+          to={`/user/${this.props.userId}`}
           className="d-inline-block p-2"
           style={NavIcon}
         >
           <FontAwesomeIcon
             icon={faUser}
-            style={path === 'profile' ? NavIconActive : NavIconInactive}
+            style={path === 'user' ? NavIconActive : NavIconInactive}
           />
         </Link>
       </NavBar>

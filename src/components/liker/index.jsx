@@ -37,7 +37,7 @@ export default class LikerListItem extends Component {
     return (
       <li className="row mx-0 mb-3 align-items-center">
         <Link
-          to={`/profile/${this.props.user.user_id}`}
+          to={`/user/${this.props.user.user_id}`}
           className="col-7 d-flex align-items-center p-0 pr-1"
           style={LinkStyle}
         >

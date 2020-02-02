@@ -19,7 +19,7 @@ export default class FollowNotices extends Component {
         <div key={idx} className="d-flex mb-3">
           <FollowNoticeRow>
             <Link
-              to={`/profile/${notice.src_user.user_id}`}
+              to={`/user/${notice.src_user.user_id}`}
               className=" d-flex align-items-start"
               style={under}
             >
