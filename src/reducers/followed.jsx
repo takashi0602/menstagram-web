@@ -1,6 +1,7 @@
 const initialState = {
   followedList: [],
-  followedStatus: -1
+  followedStatus: -1,
+  followedTargetUserId: ''
 };
 
 export function followed(state = initialState, action) {
@@ -14,6 +15,12 @@ export function followed(state = initialState, action) {
         followedTargetUserId: action.followedTargetUserId
       };
     case 'FAIL_FOLLOWED':
+      return {
+        followedList: action.followedList,
+        followedStatus: action.followedStatus,
+        followedTargetUserId: action.followedTargetUserId
+      };
+    case 'CLEAR_FOLLOWED':
       return {
         followedList: action.followedList,
         followedStatus: action.followedStatus,

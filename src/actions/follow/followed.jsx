@@ -1,6 +1,7 @@
 export const FOLLOWED = 'FOLLOWED';
 export const SUCCESS_FOLLOWED = 'SUCCESS_FOLLOWED';
 export const FAIL_FOLLOWED = 'FAIL_FOLLOWED';
+export const CLEAR_FOLLOWED = 'CLEAR_FOLLOWED';
 
 export const followed = payload => {
   return {
@@ -26,6 +27,15 @@ export const failFollowed = status => {
     type: FAIL_FOLLOWED,
     followedList: [],
     followedStatus: status,
+    followedTargetUserId: ''
+  };
+};
+
+export const clearFollowed = () => {
+  return {
+    type: CLEAR_FOLLOWED,
+    followedList: [],
+    followedStatus: -1,
     followedTargetUserId: ''
   };
 };
