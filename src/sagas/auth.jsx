@@ -10,6 +10,7 @@ import { LOGOUT, successLogout, failLogout } from '../actions/auth/logout';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
 import { clearState } from '../actions/clearState';
+import { history } from '../history';
 
 function* register(payload) {
   yield put(clearState());
@@ -22,6 +23,7 @@ function* register(payload) {
       userId: payload.payload.user_id
     };
     yield put(successRegister(successData));
+    yield call(history.push, '/timeline/private');
   } else {
     yield put(failRegister());
     yield put(errorHandle.error(error.response));
@@ -40,6 +42,7 @@ function* login(payload) {
       userId: payload.payload.user_id
     };
     yield put(successLogin(successData));
+    yield call(history.push, '/timeline/private');
   } else {
     yield put(failLogin());
     yield put(errorHandle.error(error.response));
@@ -54,6 +57,7 @@ function* logout(payload) {
   if (response) {
     yield put(successLogout());
     yield put(clearState());
+    yield call(history.push, '/login');
   } else {
     const failData = {
       accessToken: payload.accessToken,

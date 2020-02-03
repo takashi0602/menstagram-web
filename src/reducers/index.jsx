@@ -40,7 +40,9 @@ const combineReducer = combineReducers({
 
 export const reducer = (state, action) => {
   if (action.type === 'CLEAR_STATE') {
-    state = undefined;
+    state = {
+      router: state.router
+    };
   }
   return combineReducer(state, action);
 };
