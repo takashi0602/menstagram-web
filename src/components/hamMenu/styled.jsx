@@ -16,7 +16,6 @@ export const MenuWrapper = styled.div`
 export const itemStyle = {
   textDecoration: 'none',
   color: '#3c3c3c',
-  fontWeight: 'lighter',
   borderColor: '#c6c6c6',
   display: 'block',
   padding: '1rem',
