@@ -1,6 +1,7 @@
 export const FOLLOWING = 'FOLLOWING';
 export const SUCCESS_FOLLOWING = 'SUCCESS_FOLLOWING';
 export const FAIL_FOLLOWING = 'FAIL_FOLLOWING';
+export const CLEAR_FOLLOWING = 'CLEAR_FOLLOWING';
 
 export const following = payload => {
   return {
@@ -26,6 +27,15 @@ export const failFollowing = status => {
     type: FAIL_FOLLOWING,
     followingList: [],
     followingStatus: status,
+    followingTargetUserId: ''
+  };
+};
+
+export const clearFollowing = () => {
+  return {
+    type: CLEAR_FOLLOWING,
+    followingList: [],
+    followingStatus: -1,
     followingTargetUserId: ''
   };
 };

@@ -164,7 +164,7 @@ function mapStateToProps(state) {
     loading: state.loading.loading,
     followingList: state.following.followingList,
     followingStatus: state.following.followingStatus,
-    followingTargetUserId: state.following.targetUserId,
+    followingTargetUserId: state.following.followingTargetUserId,
     followedList: state.followed.followedList,
     followedStatus: state.followed.followedStatus,
     followedTargetUserId: state.followed.followedTargetUserId
