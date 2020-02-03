@@ -31,7 +31,13 @@ export class HamMenu extends Component {
     return this.props.menuItems.map((item, idx) => {
       if (item.targetBlank) {
         return (
-          <a key={idx} href={item.path} target="_blank" rel="noreferrer noopener" style={itemStyle}>
+          <a
+            key={idx}
+            href={item.path}
+            target="_blank"
+            rel="noreferrer noopener"
+            style={itemStyle}
+          >
             {item.label}
           </a>
         );

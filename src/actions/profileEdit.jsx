@@ -31,5 +31,5 @@ export const clearProfileEdit = () => {
   return {
     type: CLEAR_PROFILE_EDIT,
     success: false
-  }
+  };
 };

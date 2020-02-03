@@ -53,9 +53,15 @@ class ProfileContainer extends Component {
   HamMenuButton = () => {
     if (!this.props.profile.is_me) return;
     const menuItems = [
-      {label: '問題の報告', path: 'https://forms.gle/FeK1F9dinHAS6LoB8', targetBlank: true}
+      {
+        label: '問題の報告',
+        path: 'https://forms.gle/FeK1F9dinHAS6LoB8',
+        targetBlank: true
+      }
     ];
-    return <HamMenu menuItems={menuItems} logout={() => this.openLogoutModal()} />;
+    return (
+      <HamMenu menuItems={menuItems} logout={() => this.openLogoutModal()} />
+    );
   };
 
   ControlButton = () => {

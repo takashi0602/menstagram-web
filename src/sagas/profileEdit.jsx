@@ -6,10 +6,10 @@ import {
   failProfileEdit,
   clearProfileEdit
 } from '../actions/profileEdit';
-import { clearProfilePosts } from "../actions/profilePosts";
+import { clearProfilePosts } from '../actions/profilePosts';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
-import { history } from '../history'
+import { history } from '../history';
 
 function* profileEdit(action) {
   yield put(loading());
