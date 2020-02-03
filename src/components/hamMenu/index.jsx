@@ -27,11 +27,17 @@ export class HamMenu extends Component {
     this.setState({ isShowMenu: props });
   };
 
-  //ここで配列展開
   Menus = () => {
     return this.props.menuItems.map((item, idx) => {
+      if (item.targetBlank) {
+        return (
+          <a key={idx} href={item.path} target="_blank" rel="noreferrer noopener" style={itemStyle}>
+            {item.label}
+          </a>
+        );
+      }
       return (
-        <Link key={idx} style={itemStyle} to={item.path}>
+        <Link key={idx} to={item.path} style={itemStyle}>
           {item.label}
         </Link>
       );
