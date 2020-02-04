@@ -60,6 +60,15 @@ export class PostDetailContainer extends Component {
     this.props.postDetail.liked -= 1;
   };
 
+  showPost = () => {
+    if (!this.props.postDetail.images.length) return;
+    return <Post
+      postItem={this.props.postDetail}
+      likePost={this.likePost}
+      notLikePost={this.notLikePost}
+    />
+  };
+
   render() {
     return (
       <div>
@@ -73,13 +82,7 @@ export class PostDetailContainer extends Component {
           </BackButton>
           <Title>投稿</Title>
         </header>
-        {this.props.postDetail && (
-          <Post
-            postItem={this.props.postDetail}
-            likePost={this.likePost}
-            notLikePost={this.notLikePost}
-          />
-        )}
+        {this.showPost()}
       </div>
     );
   }
