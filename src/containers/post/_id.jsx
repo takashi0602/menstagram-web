@@ -62,11 +62,13 @@ export class PostDetailContainer extends Component {
 
   showPost = () => {
     if (!this.props.postDetail.images.length) return;
-    return <Post
-      postItem={this.props.postDetail}
-      likePost={this.likePost}
-      notLikePost={this.notLikePost}
-    />
+    return (
+      <Post
+        postItem={this.props.postDetail}
+        likePost={this.likePost}
+        notLikePost={this.notLikePost}
+      />
+    );
   };
 
   render() {
