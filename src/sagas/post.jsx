@@ -8,23 +8,23 @@ function* post(action) {
   yield put(loading());
   yield put(errorHandle.notError());
   const { response, error } = yield call(requestPostImages, action);
-  let isRamen = true;
   if (response) {
+    let isRamen = true;
     for (let i = 0; i < response.data.is_ramens.length; i++) {
       if (!response.data.is_ramens[i]) isRamen = false;
     }
+    if (isRamen) {
+      yield put(successPost());
+    } else {
+      const ramenJudgeError = {
+        status: 406
+      };
+      yield put(failPost(response.data.is_ramens));
+      yield put(errorHandle.error(ramenJudgeError));
+    }
   } else {
-    yield put(failPost(response.data.is_ramens));
+    yield put(failPost([]));
     yield put(errorHandle.error(error.response));
-  }
-  if (isRamen) {
-    yield put(successPost());
-  } else {
-    const ramenJudgeError = {
-      status: 406
-    };
-    yield put(failPost(response.data.is_ramens));
-    yield put(errorHandle.error(ramenJudgeError));
   }
   yield put(notLoading());
 }
