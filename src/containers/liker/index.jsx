@@ -25,6 +25,10 @@ export class LikerContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.getLikers(this.initSetLikersData());
+  }
+
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
   goBack = () => {
     this.props.history.goBack();
@@ -69,22 +73,11 @@ export class LikerContainer extends Component {
     };
   };
 
-  initGetLikers = () => {
-    // stateに保持するpostIdとURLのパラメータが違うときはリクエストを発火
-    if (
-      this.props.postId !== this.props.match.params.id ||
-      this.props.likerStatus === -1
-    ) {
-      this.props.getLikers(this.initSetLikersData());
-    }
-  };
-
   render() {
     return (
       <div>
         {auth(this.props.accessToken)}
         {this.props.loading && <Loading />}
-        {!this.props.loading && this.initGetLikers()}
         <header className="pt-3 mb-3 border-bottom">
           <div className="position-relative mb-3">
             <FaChevronLeftStyle onClick={this.goBack}>
@@ -129,9 +122,7 @@ function mapStateToProps(state) {
     accessToken: state.auth.accessToken,
     status: state.error.status,
     loading: state.loading.loading,
-    likerList: state.likers.likerList,
-    likerStatus: state.likers.status,
-    postId: state.likers.postId
+    likerList: state.likers.likerList
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -161,8 +152,6 @@ LikerContainer.propTypes = {
   match: PropTypes.object,
   getLikers: PropTypes.func,
   likerList: PropTypes.array,
-  likerStatus: PropTypes.number,
-  postId: PropTypes.string,
   follow: PropTypes.func,
   unfollow: PropTypes.func
 };
