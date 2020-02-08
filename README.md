@@ -20,6 +20,7 @@ $ yarn start       // 起動
 $ yarn build       // ビルド
 $ yarn test        // テスト
 $ yarn lint        // コード修正
+$ make tunnel      // localhost.runで公開
 ```
 
 ### ディレクトリ構造
