@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import connect from 'react-redux/es/connect/connect';
-import { notError } from "../../actions/error";
+import { notError } from '../../actions/error';
 
 class InitErrorComponent extends Component {
   state = {
@@ -9,8 +9,7 @@ class InitErrorComponent extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    console.log(props.location);
-    if(props.location !== state.location) {
+    if (props.location !== state.location) {
       props.initError();
       return {
         location: props.location
@@ -38,5 +37,6 @@ export const InitError = connect(
 )(InitErrorComponent);
 
 InitErrorComponent.propTypes = {
+  location: PropTypes.object,
   initError: PropTypes.func
 };
