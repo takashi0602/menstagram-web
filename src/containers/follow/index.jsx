@@ -24,38 +24,51 @@ export class FollowContainer extends Component {
 
   ToggleList = () => {
     if (this.isPathFollowing()) {
-      return (
-        <ul className="pl-0">
-          {this.props.followingList.map((user, idx) => {
-            return (
-              <FollowListItem
-                key={idx}
-                index={idx}
-                user={user}
-                openModal={(userId, idx) => this.openModal(userId, idx)}
-                follow={(userId, idx) => this.follow(userId, idx)}
-              />
-            );
-          })}
-        </ul>
-      );
-    } else {
-      return (
-        <ul className="pl-0">
-          {this.props.followedList.map((user, idx) => {
-            return (
-              <FollowListItem
-                key={idx}
-                index={idx}
-                user={user}
-                openModal={(userId, idx) => this.openModal(userId, idx)}
-                follow={(userId, idx) => this.follow(userId, idx)}
-              />
-            );
-          })}
-        </ul>
-      );
+      return this.showFollowingList();
     }
+    return this.showFollowedList();
+  };
+
+  showFollowingList = () => {
+    if (this.props.followingList.length === 0) {
+      return <p className="text-center">ユーザーをフォローしていません。<br/>フォローしてみましょう。</p>;
+    }
+    return (
+      <ul className="pl-0">
+        {this.props.followingList.map((user, idx) => {
+          return (
+            <FollowListItem
+              key={idx}
+              index={idx}
+              user={user}
+              openModal={(userId, idx) => this.openModal(userId, idx)}
+              follow={(userId, idx) => this.follow(userId, idx)}
+            />
+          );
+        })}
+      </ul>
+    );
+  };
+
+  showFollowedList = () => {
+    if (this.props.followedList.length === 0) {
+      return <p className="text-center">フォロワーはいません。</p>;
+    }
+    return (
+      <ul className="pl-0">
+        {this.props.followedList.map((user, idx) => {
+          return (
+            <FollowListItem
+              key={idx}
+              index={idx}
+              user={user}
+              openModal={(userId, idx) => this.openModal(userId, idx)}
+              follow={(userId, idx) => this.follow(userId, idx)}
+            />
+          );
+        })}
+      </ul>
+    );
   };
 
   openModal = (userId, idx) => {
@@ -143,7 +156,7 @@ export class FollowContainer extends Component {
           ? this.initGetFollowing()
           : this.initGetFollowed()}
         {<FollowHeader history={this.props.history} />}
-        <div className="c-container__padding pt-3">{this.ToggleList()}</div>
+        {!this.props.loading && <div className="c-container__padding pt-3">{this.ToggleList()}</div>}
         {this.state.showModal && (
           <TwoChoiceModal
             text={'フォローをはずしますか？'}
