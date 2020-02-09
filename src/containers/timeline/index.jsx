@@ -83,7 +83,7 @@ export class TimelineContainer extends Component {
         return (
           <div>
             <Reload onClick={this.getTimeline}>投稿を読み込む</Reload>
-            <p className="pt-3 px-3">{this.state.notGlobalTimelineMessage}</p>
+            <p className="pt-3 px-3 text-center">{this.state.notGlobalTimelineMessage}</p>
           </div>
         );
       return this.props.globalTimeline.map((item, idx) =>
