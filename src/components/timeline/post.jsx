@@ -52,7 +52,11 @@ export class TimelinePostItem extends Component {
         {images.map((image, index) => {
           return (
             <div key={index} className="text-center">
-              <RamenImage src={image} alt="hoge" onError={e => this.imageError(e)} />
+              <RamenImage
+                src={image}
+                alt="hoge"
+                onError={e => this.imageError(e)}
+              />
             </div>
           );
         })}
@@ -113,7 +117,7 @@ export class TimelinePostItem extends Component {
   };
 
   imageError = e => {
-    return e.target.src = 'http://placehold.it/500/?text=NotFound'
+    return (e.target.src = 'http://placehold.it/500/?text=NotFound');
   };
 
   render() {

@@ -223,22 +223,24 @@ export class PostConatiner extends Component {
   showErrorMessage = () => {
     let errorMessages = [];
     if (this.state.errorText)
-      errorMessages.push(<p className="text-danger">256文字以下で入力してください。</p>);
+      errorMessages.push(
+        <p className="text-danger">256文字以下で入力してください。</p>
+      );
     if (this.state.errorFile)
       errorMessages.push(<p className="text-danger">画像は必須です。</p>);
     if (this.state.errorFileFormat)
       errorMessages.push(<p className="text-danger">画像のみ選択できます。</p>);
     if (this.state.errorFileCount)
-      errorMessages.push(<p className="text-danger">画像は4枚まで選択可能です。</p>);
+      errorMessages.push(
+        <p className="text-danger">画像は4枚まで選択可能です。</p>
+      );
     if (this.state.errorFileSize)
-      errorMessages.push(<p className="text-danger">画像1枚のサイズは5MBが上限です。</p>);
+      errorMessages.push(
+        <p className="text-danger">画像1枚のサイズは5MBが上限です。</p>
+      );
 
     if (errorMessages.length !== 0) {
-      return (
-        <div>
-          {errorMessages.map(errorMessage => errorMessage)}
-        </div>
-      );
+      return <div>{errorMessages.map(errorMessage => errorMessage)}</div>;
     }
     return null;
   };
