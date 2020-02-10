@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const NavBar = styled.nav`
   position: fixed;
-  bottom: 0px;
+  left: 0;
+  bottom: 0;
   width: 100%;
   background-color: #fff;
   z-index: 50;
