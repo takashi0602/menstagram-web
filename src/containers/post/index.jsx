@@ -28,7 +28,8 @@ export class PostConatiner extends Component {
       errorFile: false,
       errorText: false,
       errorFileFormat: false,
-      errorFileCount: false
+      errorFileCount: false,
+      errorFileSize: false
     };
   }
 
@@ -36,6 +37,7 @@ export class PostConatiner extends Component {
     this.setState({ errorFile: false });
     this.setState({ errorFileFormat: false });
     this.setState({ errorFileCount: false });
+    this.setState({ errorFileSize: false });
 
     const total = this.state.files.length + e.target.files.length;
     if (total > 4) {
@@ -43,22 +45,23 @@ export class PostConatiner extends Component {
       return;
     }
 
-    const files = this.state.files;
+    const files = [];
     let errorFileFormat = false;
+    let errorFileSize = false;
     for (let file of e.target.files) {
       if (!file.type.startsWith('image')) {
-        console.log('画像じゃない');
         errorFileFormat = true;
+        this.setState({ errorFileFormat: true });
+      } else if (file.size > 5120000) {
+        errorFileSize = true;
+        this.setState({ errorFileSize: true });
       } else {
         files.push(file);
       }
     }
 
-    if (errorFileFormat) {
-      this.setState({ errorFileFormat: errorFileFormat });
-    } else {
-      this.setState({ files: files });
-    }
+    if (errorFileFormat || errorFileSize) return;
+    this.setState({ files: this.state.files.concat(files) });
   };
 
   // TODO: 再レンダリングの際に画像も再レンダリングされる現象を解消
@@ -135,6 +138,7 @@ export class PostConatiner extends Component {
     this.setState({ errorFile: false });
     this.setState({ errorFileFormat: false });
     this.setState({ errorFileCount: false });
+    this.setState({ errorFileSize: false });
 
     const files = this.state.files;
     files.splice(index, 1);
@@ -226,6 +230,8 @@ export class PostConatiner extends Component {
       errorMessages.push(<p className="text-danger">画像のみ選択できます。</p>);
     if (this.state.errorFileCount)
       errorMessages.push(<p className="text-danger">画像は4枚まで選択可能です。</p>);
+    if (this.state.errorFileSize)
+      errorMessages.push(<p className="text-danger">画像1枚のサイズは5MBが上限です。</p>);
 
     if (errorMessages.length !== 0) {
       return (
