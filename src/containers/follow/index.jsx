@@ -31,7 +31,13 @@ export class FollowContainer extends Component {
 
   showFollowingList = () => {
     if (this.props.followingList.length === 0) {
-      return <p className="text-center">ユーザーをフォローしていません。<br/>フォローしてみましょう。</p>;
+      return (
+        <p className="text-center">
+          ユーザーをフォローしていません。
+          <br />
+          フォローしてみましょう。
+        </p>
+      );
     }
     return (
       <ul className="pl-0">
@@ -156,7 +162,9 @@ export class FollowContainer extends Component {
           ? this.initGetFollowing()
           : this.initGetFollowed()}
         {<FollowHeader history={this.props.history} />}
-        {!this.props.loading && <div className="c-container__padding pt-3">{this.ToggleList()}</div>}
+        {!this.props.loading && (
+          <div className="c-container__padding pt-3">{this.ToggleList()}</div>
+        )}
         {this.state.showModal && (
           <TwoChoiceModal
             text={'フォローをはずしますか？'}

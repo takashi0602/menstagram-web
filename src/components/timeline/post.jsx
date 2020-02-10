@@ -39,7 +39,11 @@ export class TimelinePostItem extends Component {
   }
 
   showImage = image => {
-    return <RamenImage style={{ backgroundImage: `url(${image})` }} />;
+    return (
+      <div className="text-center">
+        <RamenImage src={image} alt="hoge" onError={e => this.imageError(e)} />
+      </div>
+    );
   };
 
   showImageSlick = images => {
@@ -47,8 +51,12 @@ export class TimelinePostItem extends Component {
       <Slider {...sliderSettings}>
         {images.map((image, index) => {
           return (
-            <div key={index}>
-              <RamenImage style={{ backgroundImage: `url(${image})` }} />
+            <div key={index} className="text-center">
+              <RamenImage
+                src={image}
+                alt="hoge"
+                onError={e => this.imageError(e)}
+              />
             </div>
           );
         })}
@@ -106,6 +114,10 @@ export class TimelinePostItem extends Component {
         <FontAwesomeIcon icon={faUser} style={faUserIcon} />
       </UserImage>
     );
+  };
+
+  imageError = e => {
+    return (e.target.src = 'http://placehold.it/500/?text=NotFound');
   };
 
   render() {
