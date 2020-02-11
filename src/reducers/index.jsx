@@ -8,7 +8,7 @@ import { postDetail } from './postDetail';
 import { error } from './error';
 import { privateTimeline } from './timeline/private';
 import { globalTimeline } from './timeline/global';
-import { likes } from './likes';
+import { yums } from './yums';
 import { profile } from './profile';
 import { profilePosts } from './profilePosts';
 import { yum } from './yum';
@@ -23,7 +23,7 @@ const combineReducer = combineReducers({
   loading,
   slurp,
   postDetail,
-  likes,
+  yums,
   profile,
   profilePosts,
   profileEdit,

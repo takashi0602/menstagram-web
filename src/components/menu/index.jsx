@@ -40,10 +40,10 @@ class MenuComponent extends Component {
             style={path === 'timeline' ? NavIconActive : NavIconInactive}
           />
         </Link>
-        <Link to="/likes" className="d-inline-block p-2" style={NavIcon}>
+        <Link to="/yums" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
-            icon={path === 'likes' ? faHeart : regularHeart}
-            style={path === 'likes' ? NavIconActive : NavIconInactive}
+            icon={path === 'yums' ? faHeart : regularHeart}
+            style={path === 'yums' ? NavIconActive : NavIconInactive}
           />
         </Link>
         <Link to="/slurp" className="d-inline-block p-2" style={NavIcon}>

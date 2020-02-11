@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
-import { LikePostItem } from '../../components/likes/post';
-import { likes } from '../../actions/likes';
+import { YumsItem } from '../../components/yums';
+import { yums } from '../../actions/yums';
 import { Loading } from '../../components/loading';
 import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
@@ -11,68 +11,68 @@ import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { yum, unyum } from '../../actions/yum';
 
-class LikeContainer extends Component {
+class YumsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notLikesMessage: 'いいねした投稿はありません。',
+      notYumsMessage: 'まだヤムはされていません。',
       showBackToTop: false,
       scrollValue: 0
     };
   }
 
-  initSetLikesData = () => {
+  initSetYumsData = () => {
     const params = {};
     return {
       params,
       accessToken: this.props.accessToken,
-      postList: []
+      slurpList: []
     };
   };
 
-  setLikesData = (params, postList) => {
+  setYumsData = (params, slurpList) => {
     return {
       params,
       accessToken: this.props.accessToken,
-      postList
+      slurpList
     };
   };
 
-  initGetLikes = () => {
-    if (this.props.likesStatus !== -1) return;
-    this.props.getLikes(this.initSetLikesData());
+  initGetYums = () => {
+    if (this.props.yumsStatus !== -1) return;
+    this.props.getYums(this.initSetYumsData());
   };
 
-  getLikes = (params, postList) => {
-    this.props.getLikes(this.setLikesData(params, postList));
+  getYums = (params, slurpList) => {
+    this.props.getYums(this.setYumsData(params, slurpList));
   };
 
-  showPostItems = () => {
-    if (this.props.likes.length === 0)
+  showSlurpItems = () => {
+    if (this.props.yums.length === 0)
       return (
         <div>
-          <Reload onClick={this.getUpdateLikes}>更新する</Reload>
-          <p className="pt-3 px-3 text-center">{this.state.notLikesMessage}</p>
+          <Reload onClick={this.getUpdateYums}>更新する</Reload>
+          <p className="pt-3 px-3 text-center">{this.state.notYumsMessage}</p>
         </div>
       );
-    return this.props.likes.map((item, idx) => this.getLikePostItem(item, idx));
+    return this.props.yums.map((item, idx) => this.getYumsItem(item, idx));
   };
 
-  getOldLikes = () => {
+  getOldYums = () => {
     const params = {
-      post_id: this.props.likes[this.props.likes.length - 1].id,
+      slurp_id: this.props.yums[this.props.yums.length - 1].id,
       type: 'old'
     };
-    this.getLikes(params, this.props.likes);
+    this.getYums(params, this.props.yums);
   };
 
-  getUpdateLikes = () => {
-    this.getLikes({}, []);
+  getUpdateYums = () => {
+    this.getYums({}, this.props.yums);
   };
 
-  showReloadBar = (text, getTimeline) => {
-    if (this.props.likes.length === 0) return;
-    return <Reload onClick={getTimeline}>{text}</Reload>;
+  showReloadBar = (text, getYums) => {
+    if (this.props.yums.length === 0) return;
+    return <Reload onClick={getYums}>{text}</Reload>;
   };
 
   setScrollTop = () => {
@@ -96,34 +96,34 @@ class LikeContainer extends Component {
   };
 
   // TODO: いいね機能の改善
-  likePost = (postId, idx) => {
+  yum = (slurpId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
-      postId: postId
+      slurpId: slurpId
     };
-    this.props.likePost(payload);
-    this.props.likes[idx].is_liked = true;
-    this.props.likes[idx].liked += 1;
+    this.props.yum(payload);
+    this.props.yums[idx].is_yum = true;
+    this.props.yums[idx].yum_count += 1;
   };
 
-  notLikePost = (postId, idx) => {
+  unyum = (slurpId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
-      postId: postId
+      slurpId: slurpId
     };
-    this.props.notLikePost(payload);
-    this.props.likes[idx].is_liked = false;
-    this.props.likes[idx].liked -= 1;
+    this.props.unyum(payload);
+    this.props.yums[idx].is_yum = false;
+    this.props.yums[idx].yum_count -= 1;
   };
 
-  getLikePostItem = (item, idx) => {
+  getYumsItem = (item, idx) => {
     return (
-      <LikePostItem
+      <YumsItem
         key={item.id}
         index={idx}
-        postItem={item}
-        likePost={(postId, idx) => this.likePost(postId, idx)}
-        notLikePost={(postId, idx) => this.notLikePost(postId, idx)}
+        slurpItem={item}
+        yum={(slurpId, idx) => this.yum(slurpId, idx)}
+        unyum={(slurpId, idx) => this.unyum(slurpId, idx)}
       />
     );
   };
@@ -134,18 +134,18 @@ class LikeContainer extends Component {
         {auth(this.props.accessToken)}
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
-        {this.initGetLikes()}
+        {this.initGetYums()}
         <Scroll handleScroll={this.handleScroll} />
         <div className="p-3 text-center border-bottom">いいね</div>
-        {this.showReloadBar('更新する', this.getUpdateLikes)}
+        {this.showReloadBar('更新する', this.getUpdateYums)}
         {this.state.showBackToTop && (
           <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>
         )}
         {this.props.status && <Error status={this.props.status} />}
-        {this.showPostItems()}
+        {this.showSlurpItems()}
         {this.props.status && <Error status={this.props.status} />}
-        {this.props.likes.length > 9 &&
-          this.showReloadBar('いいねした投稿をさらに表示', this.getOldLikes)}
+        {this.props.yums.length > 9 &&
+          this.showReloadBar('ヤムをさらに表示', this.getOldYums)}
       </div>
     );
   }
@@ -156,38 +156,38 @@ function mapStateToProps(state) {
     accessToken: state.auth.accessToken,
     status: state.error.status,
     loading: state.loading.loading,
-    likes: state.likes.postList,
-    likesStatus: state.likes.status
+    yums: state.yums.slurpList,
+    yumsStatus: state.yums.status
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getLikes(payload) {
-      dispatch(likes(payload));
+    getYums(payload) {
+      dispatch(yums(payload));
     },
-    likePost(payload) {
+    yum(payload) {
       dispatch(yum(payload));
     },
-    notLikePost(payload) {
+    unyum(payload) {
       dispatch(unyum(payload));
     }
   };
 }
 
-export const Like = connect(
+export const Yums = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LikeContainer);
+)(YumsContainer);
 
-LikeContainer.propTypes = {
+YumsContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
   loading: PropTypes.bool,
   history: PropTypes.object,
-  likes: PropTypes.array,
-  likesStatus: PropTypes.number,
-  getLikes: PropTypes.func,
-  likePost: PropTypes.func,
-  notLikePost: PropTypes.func
+  yums: PropTypes.array,
+  yumsStatus: PropTypes.number,
+  getYums: PropTypes.func,
+  yum: PropTypes.func,
+  unyum: PropTypes.func
 };

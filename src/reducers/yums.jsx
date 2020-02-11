@@ -1,23 +1,23 @@
 const initialState = {
-  postList: [],
+  slurpList: [],
   status: -1
 };
 
-export function likes(state = initialState, action) {
+export function yums(state = initialState, action) {
   switch (action.type) {
-    case 'LIKES':
+    case 'YUMS':
       return {
-        postList: action.postList,
+        slurpList: action.slurpList,
         status: action.status
       };
-    case 'SUCCESS_LIKES':
+    case 'SUCCESS_YUMS':
       return {
-        postList: action.postList,
+        slurpList: action.slurpList,
         status: action.status
       };
-    case 'FAIL_LIKES':
+    case 'FAIL_YUMS':
       return {
-        postList: action.postList,
+        slurpList: action.slurpList,
         status: action.status
       };
     default:

@@ -3,7 +3,7 @@ import { authSaga } from './auth';
 import { slurpSaga } from './slurp';
 import { postDetailSaga } from './postDetail';
 import { timelineSaga } from './timeline';
-import { likesSaga } from './likes';
+import { yumsSaga } from './yums';
 import { profileSaga } from './profile';
 import { profilePostsSaga } from './profilePosts';
 import { yumSaga } from './yum';
@@ -19,7 +19,7 @@ export default function* rootSaga() {
     ...slurpSaga,
     ...postDetailSaga,
     ...timelineSaga,
-    ...likesSaga,
+    ...yumsSaga,
     ...yumSaga,
     ...likersSaga,
     ...profileSaga,

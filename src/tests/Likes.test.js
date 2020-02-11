@@ -1,4 +1,4 @@
-import { getLikes } from '../api/likes';
+import { getLikes } from '../api/yums';
 import { requestRegister } from '../api/auth';
 import { postLikePost, postNotLikePost } from '../api/yum';
 

@@ -18,7 +18,7 @@ import { Report } from './containers/report';
 import { Profile } from './containers/profile';
 import { ProfileEdit } from './containers/profile/edit';
 import { Menu } from './components/menu';
-import { Like } from './containers/likes';
+import { Yums } from './containers/yums';
 import { InitError } from './components/error/init';
 
 export const Routes = () => {
@@ -41,7 +41,7 @@ export const Routes = () => {
               <Route exact path={'/slurp/:id/liker'} component={Liker} />
               <Route exact path={'/timeline/private'} component={Timeline} />
               <Route exact path={'/timeline/global'} component={Timeline} />
-              <Route exact path={'/likes'} component={Like} />
+              <Route exact path={'/yums'} component={Yums} />
               <Route exact path={'/notice/liked'} component={Notification} />
               <Route exact path={'/notice/followed'} component={Notification} />
               <Route exact path={'/notice/system'} component={Notification} />
