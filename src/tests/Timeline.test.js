@@ -10,7 +10,7 @@ const random = Math.random()
 const registerData = {
   payload: {
     user_id: random,
-    screen_name: random,
+    user_name: random,
     email: `${random}@gmail.com`,
     password: random
   }
@@ -33,7 +33,7 @@ const privateTypeNew = {
   accessToken: '',
   pathName: 'private',
   params: {
-    post_id: '1',
+    slurp_id: '1',
     type: 'new'
   }
 };
@@ -42,7 +42,7 @@ const privateTypeOld = {
   accessToken: '',
   pathName: 'private',
   params: {
-    post_id: '10',
+    slurp_id: '1',
     type: 'old'
   }
 };
@@ -57,7 +57,7 @@ const globalTypeNew = {
   accessToken: '',
   pathName: 'global',
   params: {
-    post_id: '1',
+    slurp_id: '1',
     type: 'new'
   }
 };
@@ -66,7 +66,7 @@ const globalTypeOld = {
   accessToken: '',
   pathName: 'global',
   params: {
-    post_id: '10',
+    slurp_id: '1',
     type: 'old'
   }
 };

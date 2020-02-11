@@ -28,7 +28,7 @@ export class DetailModal extends Component {
             to={`/slurp/${this.props.slurpId}`}
             className="c-link__black d-block py-3"
           >
-            投稿詳細
+            詳細へ移動
           </Link>
         </ModalItem>
         <ModalItem>

@@ -37,7 +37,4 @@ function* unyum(action) {
   yield put(notLoading());
 }
 
-export const yumSaga = [
-  takeEvery(YUM, yum),
-  takeEvery(UNYUM, unyum)
-];
+export const yumSaga = [takeEvery(YUM, yum), takeEvery(UNYUM, unyum)];
