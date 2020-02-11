@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const likedHeart = {
+export const yumHeart = {
   width: '20px',
   height: '20px',
   color: '#EB6101',
   marginRight: '10px'
 };
 
-export const notLikedHeart = {
+export const unyumHeart = {
   width: '20px',
   height: '20px',
   color: '#666666',
@@ -55,7 +55,7 @@ export const RamenImage = styled.div`
   background-size: contain;
 `;
 
-export const LikerImage = styled.div`
+export const YumsImage = styled.div`
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -66,7 +66,7 @@ export const LikerImage = styled.div`
   position: relative;
 `;
 
-export const LikerIcon = {
+export const YumsIcon = {
   width: '15px',
   height: '15px',
   color: '#666666',
@@ -76,6 +76,6 @@ export const LikerIcon = {
   transform: 'translate(-50%, -50%)'
 };
 
-export const PostText = styled.p`
+export const SlurpText = styled.p`
   margin-bottom: 64px;
 `;

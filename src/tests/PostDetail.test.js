@@ -1,4 +1,4 @@
-import { requestPostDetail } from '../api/postDetail';
+import { requestPostDetail } from '../api/slurpDetail';
 import { requestRegister } from '../api/auth';
 
 jest.setTimeout(10000);

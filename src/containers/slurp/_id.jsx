@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Post } from '../../components/post/show';
+import { SlurpComponent } from '../../components/slurpDetail';
 import { BackButton, Title, ChevronLeftIcons } from './styled';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
-import { postDetail } from '../../actions/postDetail';
+import { slurpDetail } from '../../actions/slurpDetail';
 import { Loading } from '../../components/loading';
 import { yum, unyum } from '../../actions/yum';
 
-export class PostDetailContainer extends Component {
+class SlurpDetailContainer extends Component {
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
   goBack = () => {
     this.props.history.goBack();
   };
 
-  initPostDetail = () => {
+  initSlurpDetail = () => {
     const params = {
-      post_id: this.props.match.params.id
+      slurp_id: this.props.match.params.id
     };
     return {
       params,
@@ -33,40 +33,44 @@ export class PostDetailContainer extends Component {
       return;
     }
     if (
-      this.props.postDetailStatus === -1 ||
-      Number(this.props.match.params.id) !== this.props.postDetail.id
+      this.props.slurpDetailStatus === -1 ||
+      Number(this.props.match.params.id) !== this.props.slurpDetail.id
     ) {
-      this.props.getPostDetail(this.initPostDetail());
+      this.props.getSlurpDetail(this.initSlurpDetail());
     }
   };
 
-  likePost = () => {
+  yum = () => {
     const payload = {
       accessToken: this.props.accessToken,
-      postId: this.props.postDetail.id
+      slurpId: this.props.slurpDetail.id
     };
-    this.props.likePost(payload);
-    this.props.postDetail.is_liked = true;
-    this.props.postDetail.liked += 1;
+    this.props.yum(payload);
+    this.props.slurpDetail.is_yum = true;
+    this.props.slurpDetail.yum_count += 1;
   };
 
-  notLikePost = () => {
+  unyum = () => {
     const payload = {
       accessToken: this.props.accessToken,
-      postId: this.props.postDetail.id
+      slurpId: this.props.slurpDetail.id
     };
-    this.props.notLikePost(payload);
-    this.props.postDetail.is_liked = false;
-    this.props.postDetail.liked -= 1;
+    this.props.unyum(payload);
+    this.props.slurpDetail.is_yum = false;
+    this.props.slurpDetail.yum_count -= 1;
   };
 
-  showPost = () => {
-    if (!this.props.postDetail.images.length) return;
+  showSlurp = () => {
+    if (
+      !this.props.slurpDetail.images.length ||
+      Number(this.props.match.params.id) !== this.props.slurpDetail.id
+    )
+      return;
     return (
-      <Post
-        postItem={this.props.postDetail}
-        likePost={this.likePost}
-        notLikePost={this.notLikePost}
+      <SlurpComponent
+        slurpItem={this.props.slurpDetail}
+        yum={this.yum}
+        unyum={this.unyum}
       />
     );
   };
@@ -84,7 +88,7 @@ export class PostDetailContainer extends Component {
           </BackButton>
           <Title>投稿</Title>
         </header>
-        {this.showPost()}
+        {this.showSlurp()}
       </div>
     );
   }
@@ -93,43 +97,43 @@ export class PostDetailContainer extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.postDetail.status,
+    status: state.slurpDetail.status,
     loading: state.loading.loading,
-    success: state.post.success,
-    postDetail: state.postDetail.postDetail,
-    postDetailStatus: state.postDetail.status
+    success: state.slurp.success,
+    slurpDetail: state.slurpDetail.slurpDetail,
+    slurpDetailStatus: state.slurpDetail.status
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPostDetail(payload) {
-      dispatch(postDetail(payload));
+    getSlurpDetail(payload) {
+      dispatch(slurpDetail(payload));
     },
-    likePost(payload) {
+    yum(payload) {
       dispatch(yum(payload));
     },
-    notLikePost(payload) {
+    unyum(payload) {
       dispatch(unyum(payload));
     }
   };
 }
 
-export const PostDetail = connect(
+export const SlurpDetail = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostDetailContainer);
+)(SlurpDetailContainer);
 
-PostDetailContainer.propTypes = {
+SlurpDetailContainer.propTypes = {
   match: PropTypes.object,
   history: PropTypes.object,
   accessToken: PropTypes.string,
   status: PropTypes.number,
   loading: PropTypes.bool,
-  getPostDetail: PropTypes.func,
+  getSlurpDetail: PropTypes.func,
   success: PropTypes.bool,
-  postDetail: PropTypes.object,
-  likePost: PropTypes.func,
-  notLikePost: PropTypes.func,
-  postDetailStatus: PropTypes.number
+  slurpDetail: PropTypes.object,
+  yum: PropTypes.func,
+  unyum: PropTypes.func,
+  slurpDetailStatus: PropTypes.number
 };

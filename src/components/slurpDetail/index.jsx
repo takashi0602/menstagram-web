@@ -9,16 +9,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import {
-  likedHeart,
-  notLikedHeart,
+  yumHeart,
+  unyumHeart,
   ImageArea,
   RamenImage,
   UserImage,
   EllipsisH,
   faUserIcon,
-  LikerImage,
-  LikerIcon,
-  PostText
+  YumsImage,
+  YumsIcon,
+  SlurpText
 } from './styled';
 import { DetailModal } from '../modal/detail';
 import Slider from 'react-slick';
@@ -33,7 +33,7 @@ const sliderSettings = {
   slidesToScroll: 1
 };
 
-export class Post extends Component {
+export class SlurpComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,10 +42,10 @@ export class Post extends Component {
   }
 
   setUserImage = () => {
-    return this.props.postItem.user.avatar ? (
+    return this.props.slurpItem.user.avatar ? (
       <UserImage
         style={{
-          backgroundImage: `url(${this.props.postItem.user.avatar})`
+          backgroundImage: `url(${this.props.slurpItem.user.avatar})`
         }}
       />
     ) : (
@@ -55,62 +55,62 @@ export class Post extends Component {
     );
   };
 
-  postDetails = () => {
+  slurpDetails = () => {
     return (
       <div className="c-container__padding">
         <div className="d-flex align-items-center mb-1">
           {this.showHeartIcon()}
-          <div className="mr-2">{this.props.postItem.liked}</div>
-          {this.showLiker()}
+          <div className="mr-2">{this.props.slurpItem.yum_count}</div>
+          {this.showYums()}
         </div>
-        <div className="mb-3">{this.props.postItem.created_at}</div>
-        <PostText>{this.props.postItem.text}</PostText>
+        <div className="mb-3">{this.props.slurpItem.created_at}</div>
+        <SlurpText>{this.props.slurpItem.text}</SlurpText>
       </div>
     );
   };
 
   showHeartIcon = () => {
-    if (this.props.postItem.is_liked) {
+    if (this.props.slurpItem.is_yum) {
       return (
-        <span onClick={this.props.notLikePost}>
-          <FontAwesomeIcon icon={solidHeart} style={likedHeart} />
+        <span onClick={this.props.unyum}>
+          <FontAwesomeIcon icon={solidHeart} style={yumHeart} />
         </span>
       );
     }
     return (
-      <span onClick={this.props.likePost}>
-        <FontAwesomeIcon icon={regularHeart} style={notLikedHeart} />
+      <span onClick={this.props.yum}>
+        <FontAwesomeIcon icon={regularHeart} style={unyumHeart} />
       </span>
     );
   };
 
-  showLiker = () => {
-    if (this.props.postItem.liker === undefined) return;
-    const likerList = this.props.postItem.liker.map(liker => {
+  showYums = () => {
+    if (this.props.slurpItem.yums.length === 0) return;
+    const yums = this.props.slurpItem.yums.map(user => {
       return (
-        <Link key={liker.user_id} to={`/user/${liker.user_id}`}>
-          {liker.avatar ? (
-            <LikerImage style={{ backgroundImage: `url(${liker.avatar})` }} />
+        <Link key={user.user_id} to={`/user/${user.user_id}`}>
+          {user.avatar ? (
+            <YumsImage style={{ backgroundImage: `url(${user.avatar})` }} />
           ) : (
-            <LikerImage>
-              <FontAwesomeIcon icon={faUser} style={LikerIcon} />
-            </LikerImage>
+            <YumsImage>
+              <FontAwesomeIcon icon={faUser} style={YumsIcon} />
+            </YumsImage>
           )}
         </Link>
       );
     });
-    if (this.props.postItem.liked > 5) {
-      likerList.push(
+    if (this.props.slurpItem.yum_count > 5) {
+      yums.push(
         <Link
           key={'more'}
-          to={`/post/${this.props.postItem.id}/liker`}
+          to={`/slurp/${this.props.slurpItem.id}/yums`}
           className="c-link__black"
         >
           ...
         </Link>
       );
     }
-    return likerList;
+    return yums;
   };
 
   showImage = image => {
@@ -144,11 +144,11 @@ export class Post extends Component {
       <div>
         <div className="d-flex justify-content-between align-items-center py-2 px-3">
           <Link
-            to={`/user/${this.props.postItem.user.user_id}`}
+            to={`/user/${this.props.slurpItem.user.user_id}`}
             className="d-flex align-items-center c-link__black"
           >
             {this.setUserImage()}
-            <div>{this.props.postItem.user.screen_name}</div>
+            <div>{this.props.slurpItem.user.user_name}</div>
           </Link>
           <div onClick={() => this.openModal()}>
             <FontAwesomeIcon icon={faEllipsisH} style={EllipsisH} />
@@ -157,11 +157,11 @@ export class Post extends Component {
 
         <div>
           <ImageArea className="mb-3">
-            {this.props.postItem.images.length === 1
-              ? this.showImage(this.props.postItem.images[0])
-              : this.showImageSlick(this.props.postItem.images)}
+            {this.props.slurpItem.images.length === 1
+              ? this.showImage(this.props.slurpItem.images[0])
+              : this.showImageSlick(this.props.slurpItem.images)}
           </ImageArea>
-          {this.postDetails()}
+          {this.slurpDetails()}
         </div>
         {this.state.showModal && (
           <DetailModal number={1} closeModal={this.closeModal} />
@@ -171,8 +171,8 @@ export class Post extends Component {
   }
 }
 
-Post.propTypes = {
-  postItem: PropTypes.object,
-  likePost: PropTypes.func,
-  notLikePost: PropTypes.func
+SlurpComponent.propTypes = {
+  slurpItem: PropTypes.object,
+  yum: PropTypes.func,
+  unyum: PropTypes.func
 };

@@ -4,7 +4,7 @@ import { connectRouter } from 'connected-react-router';
 import { auth } from './auth';
 import { loading } from './loading';
 import { slurp } from './slurp';
-import { postDetail } from './postDetail';
+import { slurpDetail } from './slurpDetail';
 import { error } from './error';
 import { privateTimeline } from './timeline/private';
 import { globalTimeline } from './timeline/global';
@@ -22,7 +22,7 @@ const combineReducer = combineReducers({
   auth,
   loading,
   slurp,
-  postDetail,
+  slurpDetail,
   yums,
   profile,
   profilePosts,
