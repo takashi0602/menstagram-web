@@ -17,9 +17,9 @@ export class TimelineContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notGlobalTimelineMessage: '投稿がありません。',
+      notGlobalTimelineMessage: 'スラープはありません。',
       notPrivateTimelineMessage:
-        'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
+        'グローバルタイムラインからユーザーをフォローして、あなただけのタイムラインを作りましょう！',
       showBackToTop: false,
       scrollValue: 0
     };
