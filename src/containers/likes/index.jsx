@@ -52,7 +52,7 @@ class LikeContainer extends Component {
       return (
         <div>
           <Reload onClick={this.getUpdateLikes}>更新する</Reload>
-          <p className="pt-3 px-3">{this.state.notLikesMessage}</p>
+          <p className="pt-3 px-3 text-center">{this.state.notLikesMessage}</p>
         </div>
       );
     return this.props.likes.map((item, idx) => this.getLikePostItem(item, idx));

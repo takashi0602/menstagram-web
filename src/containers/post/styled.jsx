@@ -32,6 +32,11 @@ export const PostLabel = styled.label`
   }
 `;
 
+export const PostLabelDisabled = styled.label`
+  color: #c6c6c6;
+  cursor: pointer;
+`;
+
 export const RenderImage = styled.div`
   width: auth;
   height: 150px;

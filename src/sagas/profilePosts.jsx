@@ -22,6 +22,7 @@ function* profilePosts(action) {
     yield put(errorHandle.error(error.response));
   }
   if (postsResponse) {
+    postsResponse.data.reverse();
     yield put(successProfilePosts(postsResponse));
   } else {
     yield put(failProfilePosts(postsError.response.status));

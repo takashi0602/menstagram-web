@@ -19,6 +19,7 @@ import { Profile } from './containers/profile';
 import { ProfileEdit } from './containers/profile/edit';
 import { Menu } from './components/menu';
 import { Like } from './containers/likes';
+import { InitError } from './components/error/init';
 
 export const Routes = () => {
   return (
@@ -26,6 +27,7 @@ export const Routes = () => {
       <PersistGate loading={null} persistor={persistor}>
         <ConnectedRouter history={history}>
           <div className="c-container mb-5">
+            <Route component={InitError} />
             <Switch>
               <Route exact path={'/'} component={Top} />
               <Route exact path={'/register'} component={Register} />

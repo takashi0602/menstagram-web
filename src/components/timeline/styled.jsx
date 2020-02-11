@@ -26,12 +26,12 @@ export const faUserIcon = {
   transform: 'translate(-50%, -50%)'
 };
 
-export const RamenImage = styled.div`
-  width: auto;
+export const RamenImage = styled.img`
+  width: 100%;
   height: 100vw;
-  max-height: 768px;
-  background: no-repeat center;
-  background-size: contain;
+  max-height: 950px;
+  object-fit: contain;
+  margin: 0 auto;
 `;
 
 export const ImageArea = styled.div`

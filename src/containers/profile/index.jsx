@@ -29,6 +29,8 @@ import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { follow, unfollow } from '../../actions/follow';
+import { clearFollowing } from '../../actions/follow/following';
+import { clearFollowed } from '../../actions/follow/followed';
 
 class ProfileContainer extends Component {
   constructor(prop) {
@@ -51,9 +53,17 @@ class ProfileContainer extends Component {
     );
   };
   HamMenuButton = () => {
-    if (this.props.profile.is_me) {
-      return <HamMenu menuItems={[]} logout={() => this.openLogoutModal()} />;
-    }
+    if (!this.props.profile.is_me) return;
+    const menuItems = [
+      {
+        label: '問題の報告',
+        path: 'https://forms.gle/FeK1F9dinHAS6LoB8',
+        targetBlank: true
+      }
+    ];
+    return (
+      <HamMenu menuItems={menuItems} logout={() => this.openLogoutModal()} />
+    );
   };
 
   ControlButton = () => {
@@ -209,6 +219,15 @@ class ProfileContainer extends Component {
     this.setState({ showUnfollowModal: false });
   };
 
+  initFollowingOrFollowed = () => {
+    if (this.props.followingStatus !== -1) {
+      this.props.clearFollowing();
+    }
+    if (this.props.followedStatus !== -1) {
+      this.props.clearFollowed();
+    }
+  };
+
   render() {
     return (
       <div>
@@ -216,6 +235,7 @@ class ProfileContainer extends Component {
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
         {!this.props.loading && this.initGetProfilePosts()}
+        {this.initFollowingOrFollowed()}
         {this.TopHeader()}
         {this.props.status && <Error status={this.props.status} />}
         <div className="text-center">
@@ -290,7 +310,9 @@ function mapStateToProps(state) {
     profileStatus: state.profile.profileStatus,
     profile: state.profile.profile,
     postsStatus: state.profilePosts.status,
-    posts: state.profilePosts.posts
+    posts: state.profilePosts.posts,
+    followingStatus: state.following.followingStatus,
+    followedStatus: state.followed.followedStatus
   };
 }
 
@@ -307,6 +329,12 @@ function mapDispatchToProps(dispatch) {
     },
     unfollow(payload) {
       dispatch(unfollow(payload));
+    },
+    clearFollowing() {
+      dispatch(clearFollowing());
+    },
+    clearFollowed() {
+      dispatch(clearFollowed());
     }
   };
 }
@@ -330,5 +358,9 @@ ProfileContainer.propTypes = {
   getProfilePosts: PropTypes.func,
   loading: PropTypes.bool,
   follow: PropTypes.func,
-  unfollow: PropTypes.func
+  unfollow: PropTypes.func,
+  followingStatus: PropTypes.number,
+  followedStatus: PropTypes.number,
+  clearFollowing: PropTypes.func,
+  clearFollowed: PropTypes.func
 };

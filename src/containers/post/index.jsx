@@ -7,7 +7,8 @@ import {
   PostLabel,
   RenderImage,
   Times,
-  TimesIcon
+  TimesIcon,
+  PostLabelDisabled
 } from './styled';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -26,20 +27,41 @@ export class PostConatiner extends Component {
       text: '',
       errorFile: false,
       errorText: false,
-      errorFileFormat: false
+      errorFileFormat: false,
+      errorFileCount: false,
+      errorFileSize: false
     };
   }
 
   uploadImages = e => {
     this.setState({ errorFile: false });
     this.setState({ errorFileFormat: false });
-    if (e.target.files && !e.target.files[0].type.startsWith('image')) {
-      this.setState({ errorFileFormat: true });
+    this.setState({ errorFileCount: false });
+    this.setState({ errorFileSize: false });
+
+    const total = this.state.files.length + e.target.files.length;
+    if (total > 4) {
+      this.setState({ errorFileCount: true });
       return;
     }
-    const files = this.state.files;
-    files.push(e.target.files[0]);
-    this.setState({ files: files });
+
+    const files = [];
+    let errorFileFormat = false;
+    let errorFileSize = false;
+    for (let file of e.target.files) {
+      if (!file.type.startsWith('image')) {
+        errorFileFormat = true;
+        this.setState({ errorFileFormat: true });
+      } else if (file.size > 5120000) {
+        errorFileSize = true;
+        this.setState({ errorFileSize: true });
+      } else {
+        files.push(file);
+      }
+    }
+
+    if (errorFileFormat || errorFileSize) return;
+    this.setState({ files: this.state.files.concat(files) });
   };
 
   // TODO: 再レンダリングの際に画像も再レンダリングされる現象を解消
@@ -113,6 +135,11 @@ export class PostConatiner extends Component {
   };
 
   deleteFile = index => {
+    this.setState({ errorFile: false });
+    this.setState({ errorFileFormat: false });
+    this.setState({ errorFileCount: false });
+    this.setState({ errorFileSize: false });
+
     const files = this.state.files;
     files.splice(index, 1);
     this.setState({ files: files });
@@ -169,6 +196,55 @@ export class PostConatiner extends Component {
     return <DisabledPostButton type="button">投稿する</DisabledPostButton>;
   };
 
+  showInputFile = () => {
+    if (this.state.files.length >= 4) {
+      return <PostLabelDisabled>画像を追加する</PostLabelDisabled>;
+    }
+    return (
+      <div>
+        <PostLabel htmlFor="postImage">画像を追加する</PostLabel>
+        <input
+          id="postImage"
+          type="file"
+          className="d-none"
+          accept="image/*"
+          multiple
+          onChange={e => {
+            this.uploadImages(e);
+          }}
+          onClick={e => {
+            e.target.value = '';
+          }}
+        />
+      </div>
+    );
+  };
+
+  showErrorMessage = () => {
+    let errorMessages = [];
+    if (this.state.errorText)
+      errorMessages.push(
+        <p className="text-danger">256文字以下で入力してください。</p>
+      );
+    if (this.state.errorFile)
+      errorMessages.push(<p className="text-danger">画像は必須です。</p>);
+    if (this.state.errorFileFormat)
+      errorMessages.push(<p className="text-danger">画像のみ選択できます。</p>);
+    if (this.state.errorFileCount)
+      errorMessages.push(
+        <p className="text-danger">画像は4枚まで選択可能です。</p>
+      );
+    if (this.state.errorFileSize)
+      errorMessages.push(
+        <p className="text-danger">画像1枚のサイズは5MBが上限です。</p>
+      );
+
+    if (errorMessages.length !== 0) {
+      return <div>{errorMessages.map(errorMessage => errorMessage)}</div>;
+    }
+    return null;
+  };
+
   render() {
     return (
       <div>
@@ -183,41 +259,16 @@ export class PostConatiner extends Component {
         </div>
         <div className="c-container__padding">
           {this.props.status && <Error status={this.props.status} />}
+          {this.showErrorMessage()}
           <textarea
             className="c-form__textArea mb-3"
             rows="4"
-            placeholder="文章を記入してください"
+            placeholder="ラーメンをシェアしよう！"
             onChange={e => {
               this.changeText(e);
             }}
           />
-          {this.state.errorText && (
-            <p className="text-danger">256文字以下で入力してください。</p>
-          )}
-          {this.state.files.length <= 3 && (
-            <div>
-              <PostLabel htmlFor="postImage">画像を追加する</PostLabel>
-              <input
-                id="postImage"
-                type="file"
-                className="d-none"
-                accept="image/*"
-                multiple
-                onChange={e => {
-                  this.uploadImages(e);
-                }}
-                onClick={e => {
-                  e.target.value = '';
-                }}
-              />
-            </div>
-          )}
-          {this.state.errorFile && (
-            <p className="text-danger">画像は必須です。</p>
-          )}
-          {this.state.errorFileFormat && (
-            <p className="text-danger">画像のみ選択できます。</p>
-          )}
+          {this.showInputFile()}
           {this.state.files.length !== 0 && this.readerImages()}
         </div>
       </div>

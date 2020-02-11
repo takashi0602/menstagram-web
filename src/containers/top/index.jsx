@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { SubTitle, Logo } from './styled';
 import { noAuth } from '../../middleware/auth';
 import { connect } from 'react-redux';
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/logo.png';
 
 export class TopContainer extends Component {
   render() {
@@ -14,9 +14,7 @@ export class TopContainer extends Component {
         <div className="text-center pt-5 mb-3">
           <div className="mb-3 c-image__title" />
           <div className="mb-3">
-            <Logo
-              style={{ backgroundImage: `url(${logo})` }}
-            />
+            <Logo style={{ backgroundImage: `url(${logo})` }} />
           </div>
           <SubTitle>
             SUSURU FOREVER,
@@ -35,6 +33,11 @@ export class TopContainer extends Component {
           <p className="mb-0">アカウントをお持ちですか？</p>
           <Link to="/login">ログインする</Link>
         </div>
+        <img
+          src="./hoge.png"
+          alt="hoge"
+          onError={e => (e.target.src = 'http://placehold.it/500x200')}
+        />
       </div>
     );
   }
