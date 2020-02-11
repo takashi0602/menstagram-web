@@ -107,7 +107,7 @@ export class LoginContainer extends Component {
           </div>
           <div className="mb-5">
             <button className="c-button__orange w-100" onClick={this.login}>
-              ログイン
+              ログインする
             </button>
           </div>
           <div className="mb-3">
