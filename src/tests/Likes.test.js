@@ -1,6 +1,6 @@
 import { getLikes } from '../api/likes';
 import { requestRegister } from '../api/auth';
-import { postLikePost, postNotLikePost } from '../api/likePost';
+import { postLikePost, postNotLikePost } from '../api/yum';
 
 jest.setTimeout(10000);
 

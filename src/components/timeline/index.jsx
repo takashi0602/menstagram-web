@@ -30,7 +30,7 @@ const sliderSettings = {
   slidesToScroll: 1
 };
 
-export class TimelinePostItem extends Component {
+export class TimelineSlurpItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,12 +68,12 @@ export class TimelinePostItem extends Component {
     );
   };
 
-  showLikePost = number => {
+  showYumItem = number => {
     return (
       <div>
         <span
           onClick={() =>
-            this.props.notLikePost(this.props.postItem.id, this.props.index)
+            this.props.unyum(this.props.slurpItem.id, this.props.index)
           }
         >
           <FontAwesomeIcon icon={solidHeart} style={LikedHeartIcon} />
@@ -83,12 +83,12 @@ export class TimelinePostItem extends Component {
     );
   };
 
-  showNotLikedPost = number => {
+  showUnyumItem = number => {
     return (
       <div>
         <span
           onClick={() =>
-            this.props.likePost(this.props.postItem.id, this.props.index)
+            this.props.yum(this.props.slurpItem.id, this.props.index)
           }
         >
           <FontAwesomeIcon icon={regularHeart} style={NotLikedIcon} />
@@ -107,10 +107,10 @@ export class TimelinePostItem extends Component {
   };
 
   setUserImage = () => {
-    return this.props.postItem.user.avatar ? (
+    return this.props.slurpItem.user.avatar ? (
       <UserImage
         style={{
-          backgroundImage: `url(${this.props.postItem.user.avatar})`
+          backgroundImage: `url(${this.props.slurpItem.user.avatar})`
         }}
       />
     ) : (
@@ -129,35 +129,35 @@ export class TimelinePostItem extends Component {
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center py-2 px-3">
           <Link
-            to={`/user/${this.props.postItem.user.user_id}`}
+            to={`/user/${this.props.slurpItem.user.user_id}`}
             className="d-flex align-items-center c-link__black"
           >
             {this.setUserImage()}
-            <div>{this.props.postItem.user.screen_name}</div>
+            <div>{this.props.slurpItem.user.user_name}</div>
           </Link>
           <div onClick={() => this.openModal()}>
             <FontAwesomeIcon icon={faEllipsisH} style={EllipsisH} />
           </div>
         </div>
         <ImageArea className="mb-3">
-          {this.props.postItem.images.length === 1
-            ? this.showImage(this.props.postItem.images[0])
-            : this.showImageSlick(this.props.postItem.images)}
+          {this.props.slurpItem.images.length === 1
+            ? this.showImage(this.props.slurpItem.images[0])
+            : this.showImageSlick(this.props.slurpItem.images)}
         </ImageArea>
         <div className="px-3">
           <div className="d-flex justify-content-between mb-2">
-            {this.props.postItem.is_liked
-              ? this.showLikePost(this.props.postItem.liked)
-              : this.showNotLikedPost(this.props.postItem.liked)}
-            <div>{this.props.postItem.created_at}</div>
+            {this.props.slurpItem.is_yum
+              ? this.showYumItem(this.props.slurpItem.yum_count)
+              : this.showUnyumItem(this.props.slurpItem.yum_count)}
+            <div>{this.props.slurpItem.created_at}</div>
           </div>
-          <p>{this.props.postItem.text}</p>
+          <p>{this.props.slurpItem.text}</p>
         </div>
         {this.state.showModal && (
           <DetailModal
             number={2}
             closeModal={this.closeModal}
-            postId={this.props.postItem.id}
+            slurpId={this.props.slurpItem.id}
           />
         )}
       </div>
@@ -165,9 +165,9 @@ export class TimelinePostItem extends Component {
   }
 }
 
-TimelinePostItem.propTypes = {
-  postItem: PropTypes.object,
-  likePost: PropTypes.func,
-  notLikePost: PropTypes.func,
+TimelineSlurpItem.propTypes = {
+  slurpItem: PropTypes.object,
+  yum: PropTypes.func,
+  unyum: PropTypes.func,
   index: PropTypes.number
 };

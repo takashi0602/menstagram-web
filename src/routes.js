@@ -37,8 +37,8 @@ export const Routes = () => {
               <Route exact path={'/user/:id/following'} component={Follow} />
               <Route exact path={'/user/:id/followed'} component={Follow} />
               <Route exact path={'/slurp'} component={Slurp} />
-              <Route exact path={'/post/:id'} component={PostDetail} />
-              <Route exact path={'/post/:id/liker'} component={Liker} />
+              <Route exact path={'/slurp/:id'} component={PostDetail} />
+              <Route exact path={'/slurp/:id/liker'} component={Liker} />
               <Route exact path={'/timeline/private'} component={Timeline} />
               <Route exact path={'/timeline/global'} component={Timeline} />
               <Route exact path={'/likes'} component={Like} />

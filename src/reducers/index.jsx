@@ -11,7 +11,7 @@ import { globalTimeline } from './timeline/global';
 import { likes } from './likes';
 import { profile } from './profile';
 import { profilePosts } from './profilePosts';
-import { likePost } from './likePost';
+import { yum } from './yum';
 import { likers } from './likers';
 import { following } from './following';
 import { followed } from './followed';
@@ -29,7 +29,7 @@ const combineReducer = combineReducers({
   profileEdit,
   privateTimeline,
   globalTimeline,
-  likePost,
+  yum,
   follow,
   likers,
   following,

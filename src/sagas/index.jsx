@@ -6,7 +6,7 @@ import { timelineSaga } from './timeline';
 import { likesSaga } from './likes';
 import { profileSaga } from './profile';
 import { profilePostsSaga } from './profilePosts';
-import { likePostSaga } from './likePost';
+import { yumSaga } from './yum';
 import { likersSaga } from './likers';
 import { followingSaga } from './following';
 import { followedSaga } from './followed';
@@ -20,7 +20,7 @@ export default function* rootSaga() {
     ...postDetailSaga,
     ...timelineSaga,
     ...likesSaga,
-    ...likePostSaga,
+    ...yumSaga,
     ...likersSaga,
     ...profileSaga,
     ...profilePostsSaga,

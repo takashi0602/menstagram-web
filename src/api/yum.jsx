@@ -2,30 +2,30 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
-export const postLikePost = request => {
+export const yum = request => {
   return axios({
     method: 'POST',
-    url: `${baseUrl}/v1/post/like`,
+    url: `${baseUrl}/v1/slurp/yum`,
     headers: {
       Authorization: `Bearer ${request.accessToken}`
     },
     data: {
-      post_id: request.postId
+      slurp_id: request.slurpId
     }
   })
     .then(response => ({ response }))
     .catch(error => ({ error }));
 };
 
-export const postNotLikePost = request => {
+export const unyum = request => {
   return axios({
     method: 'POST',
-    url: `${baseUrl}/v1/post/unlike`,
+    url: `${baseUrl}/v1/slurp/unyum`,
     headers: {
       Authorization: `Bearer ${request.accessToken}`
     },
     data: {
-      post_id: request.postId
+      slurp_id: request.slurpId
     }
   })
     .then(response => ({ response }))

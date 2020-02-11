@@ -1,32 +1,32 @@
 const initialState = {
-  postId: -1,
+  slurpId: -1,
   success: false
 };
 
-export function likePost(state = initialState, action) {
+export function yum(state = initialState, action) {
   switch (action.type) {
-    case 'LIKE_POST':
+    case 'YUM':
       return state;
-    case 'SUCCESS_LIKE_POST':
+    case 'SUCCESS_YUM':
       return {
-        postId: action.postId,
+        slurpId: action.slurpId,
         success: action.success
       };
-    case 'FAIL_LIKE_POST':
+    case 'FAIL_YUM':
       return {
-        postId: action.postId,
+        slurpId: action.slurpId,
         success: action.success
       };
-    case 'NOT_LIKE_POST':
+    case 'UNYUM':
       return state;
-    case 'SUCCESS_NOT_LIKE_POST':
+    case 'SUCCESS_UNYUM':
       return {
-        postId: action.postId,
+        slurpId: action.slurpId,
         success: action.success
       };
-    case 'FAIL_NOT_LIKE_POST':
+    case 'FAIL_UNYUM':
       return {
-        postId: action.postId,
+        slurpId: action.slurpId,
         success: action.success
       };
     default:

@@ -9,7 +9,7 @@ import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
-import { likePost, notLikePost } from '../../actions/likePost';
+import { yum, unyum } from '../../actions/yum';
 
 class LikeContainer extends Component {
   constructor(props) {
@@ -167,10 +167,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(likes(payload));
     },
     likePost(payload) {
-      dispatch(likePost(payload));
+      dispatch(yum(payload));
     },
     notLikePost(payload) {
-      dispatch(notLikePost(payload));
+      dispatch(unyum(payload));
     }
   };
 }

@@ -9,7 +9,7 @@ export const globalTimeline = payload => {
     accessToken: payload.accessToken,
     params: payload.params,
     pathName: payload.pathName,
-    postList: payload.postList,
+    slurpList: payload.slurpList,
     status: 200
   };
 };
@@ -17,7 +17,7 @@ export const globalTimeline = payload => {
 export const successGlobalTimeline = response => {
   return {
     type: SUCCESS_GLOBAL_TIMELINE,
-    postList: response.data,
+    slurpList: response.data,
     status: response.status
   };
 };
@@ -25,7 +25,7 @@ export const successGlobalTimeline = response => {
 export const failGlobalTimeline = status => {
   return {
     type: FAIL_GLOBAL_TIMELINE,
-    postList: [],
+    slurpList: [],
     status: status
   };
 };
@@ -33,7 +33,7 @@ export const failGlobalTimeline = status => {
 export const clearGlobalTimeline = () => {
   return {
     type: CLEAR_GLOBAL_TIMELINE,
-    postList: [],
+    slurpList: [],
     status: -1
   };
 };

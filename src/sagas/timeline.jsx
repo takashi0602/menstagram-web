@@ -21,10 +21,10 @@ function* privateTimeline(action) {
     response.data.reverse();
     if (action.params.type === 'new') {
       response.data.pop();
-      response.data = response.data.concat(action.postList);
+      response.data = response.data.concat(action.slurpList);
     } else if (action.params.type === 'old') {
       response.data.shift();
-      response.data = action.postList.concat(response.data);
+      response.data = action.slurpList.concat(response.data);
     }
     yield put(successPrivateTimeline(response));
   } else {
@@ -42,10 +42,10 @@ function* globalTimeline(action) {
     response.data.reverse();
     if (action.params.type === 'new') {
       response.data.pop();
-      response.data = response.data.concat(action.postList);
+      response.data = response.data.concat(action.slurpList);
     } else if (action.params.type === 'old') {
       response.data.shift();
-      response.data = action.postList.concat(response.data);
+      response.data = action.slurpList.concat(response.data);
     }
     yield put(successGlobalTimeline(response));
   } else {

@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { postDetail } from '../../actions/postDetail';
 import { Loading } from '../../components/loading';
-import { likePost, notLikePost } from '../../actions/likePost';
+import { yum, unyum } from '../../actions/yum';
 
 export class PostDetailContainer extends Component {
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
@@ -107,10 +107,10 @@ function mapDispatchToProps(dispatch) {
       dispatch(postDetail(payload));
     },
     likePost(payload) {
-      dispatch(likePost(payload));
+      dispatch(yum(payload));
     },
     notLikePost(payload) {
-      dispatch(notLikePost(payload));
+      dispatch(unyum(payload));
     }
   };
 }
