@@ -1,6 +1,7 @@
 export const GLOBAL_TIMELINE = 'GLOBAL_TIMELINE';
 export const SUCCESS_GLOBAL_TIMELINE = 'SUCCESS_GLOBAL_TIMELINE';
 export const FAIL_GLOBAL_TIMELINE = 'FAIL_GLOBAL_TIMELINE';
+export const CLEAR_GLOBAL_TIMELINE = 'CLEAR_GLOBAL_TIMELINE';
 
 export const globalTimeline = payload => {
   return {
@@ -27,4 +28,12 @@ export const failGlobalTimeline = status => {
     postList: [],
     status: status
   };
+};
+
+export const clearGlobalTimeline = () => {
+  return {
+    type: CLEAR_GLOBAL_TIMELINE,
+    postList: [],
+    status: -1
+  }
 };
