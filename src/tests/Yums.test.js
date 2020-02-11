@@ -1,6 +1,6 @@
-import { getLikes } from '../api/yums';
+import { getYums } from '../api/yums';
 import { requestRegister } from '../api/auth';
-import { postLikePost, postNotLikePost } from '../api/yum';
+import { yum, unyum } from '../api/yum';
 
 jest.setTimeout(10000);
 
@@ -11,7 +11,7 @@ const random = Math.random()
 const registerData = {
   payload: {
     user_id: random,
-    screen_name: random,
+    user_name: random,
     email: `${random}@gmail.com`,
     password: random
   }
@@ -25,7 +25,7 @@ const typeNull = {
 const typeNew = {
   accessToken: '',
   params: {
-    post_id: '1',
+    slurp_id: '1',
     type: 'new'
   }
 };
@@ -33,14 +33,14 @@ const typeNew = {
 const typeOld = {
   accessToken: '',
   params: {
-    post_id: '1',
+    slurp_id: '1',
     type: 'old'
   }
 };
 
-const likedPost = {
+const yumSlurp = {
   accessToken: '',
-  postId: '1'
+  slurpId: '1'
 };
 
 it('request likes api, request likePost api', async () => {
@@ -48,25 +48,25 @@ it('request likes api, request likePost api', async () => {
   typeNull.accessToken = registerRes.response.data.access_token;
   typeNew.accessToken = registerRes.response.data.access_token;
   typeOld.accessToken = registerRes.response.data.access_token;
-  likedPost.accessToken = registerRes.response.data.access_token;
+  yumSlurp.accessToken = registerRes.response.data.access_token;
   expect(registerRes.response.statusText).toEqual('OK');
 
-  const likedPostRes = await postLikePost(likedPost);
+  const likedPostRes = await yum(yumSlurp);
   expect(likedPostRes.response.statusText).toEqual('OK');
 
-  const likesRes = await getLikes(typeNull);
+  const likesRes = await getYums(typeNull);
   expect(likesRes.response.statusText).toEqual('OK');
 });
 
 it('request likes api type new', async () => {
-  const likesRes = await getLikes(typeNew);
+  const likesRes = await getYums(typeNew);
   expect(likesRes.response.statusText).toEqual('OK');
 });
 
 it('request likes api type old, request notLikePost api', async () => {
-  const likesRes = await getLikes(typeOld);
+  const likesRes = await getYums(typeOld);
   expect(likesRes.response.statusText).toEqual('OK');
 
-  const likedPostRes = await postNotLikePost(likedPost);
+  const likedPostRes = await unyum(yumSlurp);
   expect(likedPostRes.response.statusText).toEqual('OK');
 });
