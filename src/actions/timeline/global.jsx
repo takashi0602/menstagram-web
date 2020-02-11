@@ -35,5 +35,5 @@ export const clearGlobalTimeline = () => {
     type: CLEAR_GLOBAL_TIMELINE,
     postList: [],
     status: -1
-  }
+  };
 };

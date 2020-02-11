@@ -13,13 +13,13 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
-import { post, failPost } from '../../actions/post';
+import { slurp, failSlurp } from '../../actions/slurp';
 import { notError } from '../../actions/error';
 import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
 
-export class PostConatiner extends Component {
+export class SlurpConatiner extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -161,7 +161,7 @@ export class PostConatiner extends Component {
       formData,
       text: this.state.text
     };
-    this.props.postImages(payload, this.props.accessToken);
+    this.props.slurpImages(payload, this.props.accessToken);
   };
 
   validation = () => {
@@ -179,7 +179,7 @@ export class PostConatiner extends Component {
     return validation;
   };
 
-  postSuccess = () => {
+  slurpSuccess = () => {
     this.props.changeSuccessValue();
     return <Redirect to={'/timeline/private'} />;
   };
@@ -187,13 +187,13 @@ export class PostConatiner extends Component {
   showActiveButton = () => {
     return (
       <PostButton type="button" onClick={() => this.sendImages()}>
-        投稿する
+        スラープする
       </PostButton>
     );
   };
 
   showNotActiveButton = () => {
-    return <DisabledPostButton type="button">投稿する</DisabledPostButton>;
+    return <DisabledPostButton type="button">スラープする</DisabledPostButton>;
   };
 
   showInputFile = () => {
@@ -202,9 +202,9 @@ export class PostConatiner extends Component {
     }
     return (
       <div>
-        <PostLabel htmlFor="postImage">画像を追加する</PostLabel>
+        <PostLabel htmlFor="slurpImage">画像を追加する</PostLabel>
         <input
-          id="postImage"
+          id="slurpImage"
           type="file"
           className="d-none"
           accept="image/*"
@@ -250,9 +250,9 @@ export class PostConatiner extends Component {
       <div>
         {auth(this.props.accessToken)}
         {this.props.loading && <Loading />}
-        {this.props.success && this.postSuccess()}
+        {this.props.success && this.slurpSuccess()}
         <div className="position-relative py-3 border-bottom mb-3">
-          <div className="text-center">投稿</div>
+          <div className="text-center">新規スラープ</div>
           {this.state.files.length === 0 || this.props.status
             ? this.showNotActiveButton()
             : this.showActiveButton()}
@@ -281,18 +281,18 @@ function mapStateToProps(state) {
     accessToken: state.auth.accessToken,
     status: state.error.status,
     loading: state.loading.loading,
-    success: state.post.success,
-    isRamens: state.post.isRamens
+    success: state.slurp.success,
+    isRamens: state.slurp.isRamens
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    postImages(payload, accessToken) {
-      dispatch(post(payload, accessToken));
+    slurpImages(payload, accessToken) {
+      dispatch(slurp(payload, accessToken));
     },
     changeSuccessValue() {
-      dispatch(failPost());
+      dispatch(failSlurp());
     },
     initErrorStatus() {
       dispatch(notError());
@@ -300,16 +300,16 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const Post = connect(
+export const Slurp = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostConatiner);
+)(SlurpConatiner);
 
-PostConatiner.propTypes = {
+SlurpConatiner.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
   loading: PropTypes.bool,
-  postImages: PropTypes.func,
+  slurpImages: PropTypes.func,
   success: PropTypes.bool,
   changeSuccessValue: PropTypes.func,
   isRamens: PropTypes.array,

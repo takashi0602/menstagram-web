@@ -3,14 +3,14 @@ const initialState = {
   isRamens: []
 };
 
-export function post(state = initialState, action) {
+export function slurp(state = initialState, action) {
   switch (action.type) {
-    case 'SUCCESS_POST':
+    case 'SUCCESS_SLURP':
       return {
         success: action.success,
         isRamens: action.isRamens
       };
-    case 'FAIL_POST':
+    case 'FAIL_SLURP':
       return {
         success: action.success,
         isRamens: action.isRamens

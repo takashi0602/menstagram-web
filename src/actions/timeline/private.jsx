@@ -35,5 +35,5 @@ export const clearPrivateTimeline = () => {
     type: CLEAR_PRIVATE_TIMELINE,
     postList: [],
     status: -1
-  }
+  };
 };

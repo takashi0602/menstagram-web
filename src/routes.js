@@ -9,8 +9,8 @@ import { Top } from './containers/top';
 import { Register } from './containers/register';
 import { Login } from './containers/login';
 import { Follow } from './containers/follow';
-import { PostDetail } from './containers/post/_id';
-import { Post } from './containers/post';
+import { PostDetail } from './containers/slurp/_id';
+import { Slurp } from './containers/slurp';
 import { Timeline } from './containers/timeline';
 import { Liker } from './containers/liker';
 import { Notification } from './containers/notification';
@@ -36,7 +36,7 @@ export const Routes = () => {
               <Route exact path={'/user/:id/edit'} component={ProfileEdit} />
               <Route exact path={'/user/:id/following'} component={Follow} />
               <Route exact path={'/user/:id/followed'} component={Follow} />
-              <Route exact path={'/post'} component={Post} />
+              <Route exact path={'/slurp'} component={Slurp} />
               <Route exact path={'/post/:id'} component={PostDetail} />
               <Route exact path={'/post/:id/liker'} component={Liker} />
               <Route exact path={'/timeline/private'} component={Timeline} />

@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { store } from '../store';
 import { history } from '../history';
 import { act } from 'react-dom/test-utils';
-import { Post } from '../containers/post';
+import { Slurp } from '../containers/slurp';
 
 let container;
 
@@ -21,22 +21,18 @@ afterEach(() => {
 
 jest.setTimeout(10000);
 
-it('can render post', () => {
+it('can render slurp', () => {
   act(() => {
     ReactDOM.render(
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <Post />
+          <Slurp />
         </ConnectedRouter>
       </Provider>,
       container
     );
   });
 
-  const button = container.querySelector('button');
-  act(() => {
-    button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-  });
-  const errorMsg = container.querySelectorAll('.text-danger');
-  expect(errorMsg.length).toEqual(1);
+  const title = container.getElementsByClassName('text-center');
+  expect(title[0].textContent).toBe('新規スラープ');
 });

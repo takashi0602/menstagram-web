@@ -46,11 +46,11 @@ class MenuComponent extends Component {
             style={path === 'likes' ? NavIconActive : NavIconInactive}
           />
         </Link>
-        <Link to="/post" className="d-inline-block p-2" style={NavIcon}>
+        <Link to="/slurp" className="d-inline-block p-2" style={NavIcon}>
           <FontAwesomeIcon
             icon={faImage}
             style={
-              path === 'post' && query === undefined
+              path === 'slurp' && query === undefined
                 ? NavIconActive
                 : NavIconInactive
             }

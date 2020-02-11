@@ -3,7 +3,7 @@ import { history } from '../history';
 import { connectRouter } from 'connected-react-router';
 import { auth } from './auth';
 import { loading } from './loading';
-import { post } from './post';
+import { slurp } from './slurp';
 import { postDetail } from './postDetail';
 import { error } from './error';
 import { privateTimeline } from './timeline/private';
@@ -21,7 +21,7 @@ import { profileEdit } from './profileEdit';
 const combineReducer = combineReducers({
   auth,
   loading,
-  post,
+  slurp,
   postDetail,
   likes,
   profile,

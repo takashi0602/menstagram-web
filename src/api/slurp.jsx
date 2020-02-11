@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
-export const requestPostImages = request => {
+export const requestSlurpImages = request => {
   return axios({
     method: 'POST',
-    url: `${baseUrl}/v1/post`,
+    url: `${baseUrl}/v1/slurp`,
     headers: {
       'Content-Type': 'multipart/form-data',
       Authorization: `Bearer ${request.accessToken}`
@@ -18,26 +18,26 @@ export const requestPostImages = request => {
       }
       return request.payload.text === ''
         ? { response }
-        : requestPostText(request, response.data.post_id, response.data);
+        : requestSlurpText(request, response.data.slurp_id, response.data);
     })
     .catch(error => ({ error }));
 };
 
-const requestPostText = (request, postId, postImageResponse) => {
+const requestSlurpText = (request, slurpId, slurpImageResponse) => {
   return axios({
     method: 'POST',
-    url: `${baseUrl}/v1/post/text`,
+    url: `${baseUrl}/v1/slurp/text`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${request.accessToken}`
     },
     data: {
-      post_id: postId,
+      slurp_id: slurpId,
       text: request.payload.text
     }
   })
     .then(response => {
-      response.data.is_ramens = postImageResponse.is_ramens;
+      response.data.is_ramens = slurpImageResponse.is_ramens;
       return { response };
     })
     .catch(error => ({ error }));

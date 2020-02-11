@@ -41,7 +41,11 @@ export class TimelinePostItem extends Component {
   showImage = image => {
     return (
       <div className="text-center">
-        <RamenImage src={image} alt="ラーメン" onError={e => this.imageError(e)} />
+        <RamenImage
+          src={image}
+          alt="ラーメン"
+          onError={e => this.imageError(e)}
+        />
       </div>
     );
   };
