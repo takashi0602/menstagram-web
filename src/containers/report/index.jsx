@@ -15,9 +15,7 @@ export class Report extends Component {
           <HeaderTitle>ラーメンじゃないよ報告</HeaderTitle>
         </header>
         <div className="c-container__padding">
-          <p className="py-3 mb-4">
-            ラーメン以外の画像が含まれていましたか？
-          </p>
+          <p className="py-3 mb-4">ラーメン以外の画像が含まれていましたか？</p>
           <div className="d-flex justify-content-around">
             <div>
               <button
