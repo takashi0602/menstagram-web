@@ -8,14 +8,21 @@ import {
   ModalItem,
   ModalCancel
 } from './styled';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWrench } from '@fortawesome/free-solid-svg-icons';
 
 export class DetailModal extends Component {
   showItem = () => {
     return (
       <ModalItem className="py-3">
-        <Link to="/report" className="c-link__black">
+        {/* TODO: 実装後、リンク追加 */}
+        {/*<Link to="/report" className="c-link__black">*/}
+        {/*ラーメンじゃないよ報告*/}
+        {/*</Link>*/}
+        <div className="c-text__lightgray">
           ラーメンじゃないよ報告
-        </Link>
+          <FontAwesomeIcon icon={faWrench} style={{ marginLeft: '10px' }} />
+        </div>
       </ModalItem>
     );
   };
@@ -32,9 +39,14 @@ export class DetailModal extends Component {
           </Link>
         </ModalItem>
         <ModalItem>
-          <Link to="/report" className="c-link__black d-block py-3">
+          {/* TODO: 実装後、リンク追加 */}
+          {/*<Link to="/report" className="c-link__black d-block py-3">*/}
+          {/*ラーメンじゃないよ報告*/}
+          {/*</Link>*/}
+          <div className="c-text__lightgray py-3">
             ラーメンじゃないよ報告
-          </Link>
+            <FontAwesomeIcon icon={faWrench} style={{ marginLeft: '10px' }} />
+          </div>
         </ModalItem>
       </div>
     );
