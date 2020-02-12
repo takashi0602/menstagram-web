@@ -249,7 +249,7 @@ class ProfileContainer extends Component {
               <div className="text-center mb-0">
                 {this.props.profile.slurp_count}
               </div>
-              <div className="text-center">投稿</div>
+              <div className="text-center">スラープ</div>
             </Item>
             <Item>
               <Link

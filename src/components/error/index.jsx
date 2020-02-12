@@ -16,7 +16,7 @@ export class ComponentError extends Component {
       case 406:
         return (
           <p className="text-danger">
-            投稿された画像はラーメンではありません。
+            選択された画像はラーメンではありません。
           </p>
         );
       default:

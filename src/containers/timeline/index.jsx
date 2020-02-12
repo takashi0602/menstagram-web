@@ -71,7 +71,7 @@ export class TimelineContainer extends Component {
       if (this.props.privateTimeline.length === 0)
         return (
           <div>
-            <Reload onClick={this.getTimeline}>投稿を読み込む</Reload>
+            <Reload onClick={this.getTimeline}>スラープを読み込む</Reload>
             <p className="pt-3 px-3">{this.state.notPrivateTimelineMessage}</p>
           </div>
         );
@@ -82,7 +82,7 @@ export class TimelineContainer extends Component {
       if (this.props.globalTimeline.length === 0)
         return (
           <div>
-            <Reload onClick={this.getTimeline}>投稿を読み込む</Reload>
+            <Reload onClick={this.getTimeline}>スラープを読み込む</Reload>
             <p className="pt-3 px-3 text-center">
               {this.state.notGlobalTimelineMessage}
             </p>
@@ -212,14 +212,14 @@ export class TimelineContainer extends Component {
           : this.initGetGlobalTimeline()}
         <Scroll handleScroll={this.handleScroll} />
         <TimelineHeader isPrivate={this.isPathPrivate()} />
-        {this.showReloadBar('新しい投稿を表示', this.getNewTimeline)}
+        {this.showReloadBar('新しいスラープを表示', this.getNewTimeline)}
         {this.state.showBackToTop && (
           <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>
         )}
         {this.props.status && <Error status={this.props.status} />}
         {this.showSlurpItems()}
         {this.props.status && <Error status={this.props.status} />}
-        {this.showReloadBar('投稿をさらに表示', this.getOldTimeline)}
+        {this.showReloadBar('スラープをさらに表示', this.getOldTimeline)}
       </div>
     );
   }
