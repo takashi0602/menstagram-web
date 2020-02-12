@@ -13,7 +13,7 @@ import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { yum, unyum } from '../../actions/yum';
 
-export class TimelineContainer extends Component {
+class TimelineContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,9 +21,14 @@ export class TimelineContainer extends Component {
       notPrivateTimelineMessage:
         'グローバルタイムラインからユーザーをフォローして、あなただけのタイムラインを作りましょう！',
       showBackToTop: false,
-      scrollValue: 0
+      scrollValue: 0,
+      errorSlurps: []
     };
   }
+
+  // forceUpdate = () => {
+  //   super.forceUpdate();
+  // };
 
   initSetTimeline = () => {
     const params = {};
@@ -32,7 +37,8 @@ export class TimelineContainer extends Component {
       params,
       pathName,
       accessToken: this.props.accessToken,
-      slurpList: []
+      slurpList: [],
+      errorSlurps: this.state.errorSlurps
     };
   };
 
@@ -42,7 +48,8 @@ export class TimelineContainer extends Component {
       params,
       pathName,
       accessToken: this.props.accessToken,
-      slurpList
+      slurpList,
+      errorSlurps: this.state.errorSlurps
     };
   };
 
@@ -197,8 +204,15 @@ export class TimelineContainer extends Component {
         slurpItem={item}
         yum={(slurpId, idx) => this.yum(slurpId, idx)}
         unyum={(slurpId, idx) => this.unyum(slurpId, idx)}
+        errorSlurps={(idx) => this.errorSlurps(idx)}
       />
     );
+  };
+
+  errorSlurps = idx => {
+    const errorSlurps = this.state.errorSlurps;
+    errorSlurps.push(idx);
+    this.setState({errorSlurps: errorSlurps});
   };
 
   render() {

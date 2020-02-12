@@ -9,7 +9,6 @@ import { clearGlobalTimeline } from '../actions/timeline/global';
 function* slurp(action) {
   yield put(loading());
   yield put(errorHandle.notError());
-  console.log(action);
   const { response, error } = yield call(requestSlurpImages, action);
   if (response) {
     let isRamen = true;

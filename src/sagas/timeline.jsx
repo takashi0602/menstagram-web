@@ -16,6 +16,24 @@ import { getTimeline } from '../api/timeline';
 function* privateTimeline(action) {
   yield put(loading());
   yield put(errorHandle.notError());
+
+  if (action.errorSlurps.length > 0) {
+    const newSlurpList = action.slurpList.concat();
+    for (let errorSlurp of action.errorSlurps) {
+      newSlurpList[errorSlurp] = {
+        id: newSlurpList[errorSlurp].id,
+        text: newSlurpList[errorSlurp].text,
+        images: [],
+        yum_count: newSlurpList[errorSlurp].yum_count,
+        created_at: newSlurpList[errorSlurp].created_at,
+        updated_at: newSlurpList[errorSlurp].updated_at,
+        user: newSlurpList[errorSlurp].user,
+        is_yum: newSlurpList[errorSlurp].is_yum,
+      };
+    }
+    yield put(successPrivateTimeline({data: newSlurpList, status: 200}));
+  }
+
   const { response, error } = yield call(getTimeline, action);
   if (response) {
     response.data.reverse();
