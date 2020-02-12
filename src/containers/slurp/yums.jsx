@@ -112,8 +112,8 @@ class SlurpYumsContainer extends Component {
         </div>
         {this.state.showModal && (
           <TwoChoiceModal
-            text={'フォローをはずしますか？'}
-            buttonName={'はずす'}
+            text={'フォローを解除しますか？'}
+            buttonName={'解除する'}
             closeModal={() => this.closeModal()}
             submit={() => this.unfollow()}
           />

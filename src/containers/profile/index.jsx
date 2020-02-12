@@ -282,8 +282,8 @@ class ProfileContainer extends Component {
         {this.showSlurps()}
         {this.state.showUnfollowModal && (
           <TwoChoiceModal
-            text={'フォローをはずしますか？'}
-            buttonName={'はずす'}
+            text={'フォローを解除しますか？'}
+            buttonName={'解除する'}
             closeModal={() => this.closeUnfollowModal()}
             submit={() => this.unfollow()}
           />

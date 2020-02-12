@@ -47,7 +47,7 @@ export default class FollowNotices extends Component {
                     className="c-button__white c-button__commonWidth"
                     onClick={this.props.openModal}
                   >
-                    フォロー中
+                    フォロー解除
                   </NowrapButton>
                 </div>
               );

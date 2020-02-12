@@ -169,8 +169,8 @@ export class FollowContainer extends Component {
         {this.showToggleList()}
         {this.state.showModal && (
           <TwoChoiceModal
-            text={'フォローをはずしますか？'}
-            buttonName={'はずす'}
+            text={'フォローを解除しますか？'}
+            buttonName={'解除する'}
             closeModal={() => this.closeModal()}
             submit={userId => this.unfollow(userId)}
           />
