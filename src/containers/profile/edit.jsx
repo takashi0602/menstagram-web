@@ -26,7 +26,7 @@ class ProfileEditContainer extends Component {
     this.state = {
       newImage: [],
       errorFileFormat: false,
-      screenName: '',
+      userName: '',
       biography: '',
       errorUserName: false,
       errorBiography: false,
@@ -100,8 +100,8 @@ class ProfileEditContainer extends Component {
       accessToken: this.props.accessToken,
       profile: {
         userName: this.state.changeUserName
-          ? this.state.screenName
-          : this.props.profile.screen_name,
+          ? this.state.userName
+          : this.props.profile.user_name,
         biography: this.state.changeBiography
           ? this.state.biography
           : this.props.profile.biography
@@ -145,7 +145,7 @@ class ProfileEditContainer extends Component {
       errorUserName: false,
       changeUserName: true
     });
-    this.setState({ screenName: e.target.value });
+    this.setState({ userName: e.target.value });
     this.validationMaxLength('UserName', e.target.value.length, 16);
   };
 
@@ -163,7 +163,7 @@ class ProfileEditContainer extends Component {
       this.setState({ [`error${name}`]: true });
     }
     if (name === 'UserName' && targetLength === 0) {
-      this.setState({ screenName: true });
+      this.setState({ userName: true });
     }
   };
 

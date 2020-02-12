@@ -193,7 +193,9 @@ export class SlurpConatiner extends Component {
   };
 
   showNotActiveButton = () => {
-    return <DisabledSlurpButton type="button">スラープする</DisabledSlurpButton>;
+    return (
+      <DisabledSlurpButton type="button">スラープする</DisabledSlurpButton>
+    );
   };
 
   showInputFile = () => {

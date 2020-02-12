@@ -29,7 +29,7 @@ export class FollowHeader extends Component {
           }/follow`}
           className="col text-center c-link__lightgray"
         >
-          フォロー中
+          フォロー
         </Link>
       </div>
     );
@@ -46,7 +46,7 @@ export class FollowHeader extends Component {
         >
           フォロワー
         </Link>
-        <div className="col text-center">フォロー中</div>
+        <div className="col text-center">フォロー</div>
       </div>
     );
   };
