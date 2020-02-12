@@ -12,7 +12,7 @@ import { Follow } from './containers/follow';
 import { SlurpDetail } from './containers/slurp/_id';
 import { Slurp } from './containers/slurp';
 import { Timeline } from './containers/timeline';
-import { Liker } from './containers/liker';
+import { SlurpYums } from './containers/slurp/yums';
 import { Notification } from './containers/notification';
 import { Report } from './containers/report';
 import { Profile } from './containers/profile';
@@ -38,7 +38,7 @@ export const Routes = () => {
               <Route exact path={'/user/:id/followed'} component={Follow} />
               <Route exact path={'/slurp'} component={Slurp} />
               <Route exact path={'/slurp/:id'} component={SlurpDetail} />
-              <Route exact path={'/slurp/:id/liker'} component={Liker} />
+              <Route exact path={'/slurp/:id/yums'} component={SlurpYums} />
               <Route exact path={'/timeline/private'} component={Timeline} />
               <Route exact path={'/timeline/global'} component={Timeline} />
               <Route exact path={'/yums'} component={Yums} />

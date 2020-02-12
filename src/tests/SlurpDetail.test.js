@@ -1,4 +1,4 @@
-import { getSlurpDetail } from '../api/slurpDetail';
+import { getSlurpDetail } from '../api/slurp/detail';
 import { requestRegister } from '../api/auth';
 
 jest.setTimeout(10000);

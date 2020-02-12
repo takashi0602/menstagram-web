@@ -1,4 +1,4 @@
-import { getLikers } from '../api/likers';
+import { getLikers } from '../api/slurp/yums';
 import { requestRegister } from '../api/auth';
 
 jest.setTimeout(10000);

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { LinkStyle, UserAvatar, UserLink, FollowButton } from './styled';
 
-export default class LikerListItem extends Component {
+export default class SlurpYumsItem extends Component {
   showButton = () => {
     if (this.props.user.is_me) return;
-    if (this.props.user.is_following) {
+    if (this.props.user.is_follow) {
       return (
         <FollowButton
           type="button"
@@ -50,7 +50,7 @@ export default class LikerListItem extends Component {
             style={UserAvatar}
           />
           <UserLink>
-            {this.props.user.screen_name}
+            {this.props.user.user_name}
             <br />
             {this.props.user.user_id}
           </UserLink>
@@ -61,7 +61,7 @@ export default class LikerListItem extends Component {
   }
 }
 
-LikerListItem.propTypes = {
+SlurpYumsItem.propTypes = {
   user: PropTypes.object,
   index: PropTypes.number,
   openModal: PropTypes.func,

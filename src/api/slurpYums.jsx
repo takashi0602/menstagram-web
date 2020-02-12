@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
-export const getLikers = request => {
+export const getslurpYums = request => {
   return axios({
     method: 'GET',
-    url: `${baseUrl}/v1/post/liker`,
+    url: `${baseUrl}/v1/slurp/yums`,
     headers: {
       Authorization: `Bearer ${request.accessToken}`
     },

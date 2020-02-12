@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { SlurpComponent } from '../../components/slurpDetail';
+import { SlurpComponent } from '../../components/slurp/detail';
 import { BackButton, Title, ChevronLeftIcons } from './styled';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { connect } from 'react-redux';

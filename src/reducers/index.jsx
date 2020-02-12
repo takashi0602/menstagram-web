@@ -12,7 +12,7 @@ import { yums } from './yums';
 import { profile } from './profile';
 import { profilePosts } from './profilePosts';
 import { yum } from './yum';
-import { likers } from './likers';
+import { slurpYums } from './slurpYums';
 import { following } from './following';
 import { followed } from './followed';
 import { follow } from './follow';
@@ -31,7 +31,7 @@ const combineReducer = combineReducers({
   globalTimeline,
   yum,
   follow,
-  likers,
+  slurpYums,
   following,
   followed,
   error,

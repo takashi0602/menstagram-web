@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
-import { likers } from '../../actions/likers';
+import { slurpYums } from '../../actions/slurpYums';
 import { Loading } from '../../components/loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -11,11 +11,11 @@ import {
   FaChevronLeftStyle,
   HeaderTitle
 } from './styled';
-import LikerListItem from '../../components/liker';
+import SlurpYumsItem from '../../components/slurp/yums';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { follow, unfollow } from '../../actions/follow';
 
-export class LikerContainer extends Component {
+class SlurpYumsContainer extends Component {
   constructor(prop) {
     super(prop);
     this.state = {
@@ -26,7 +26,7 @@ export class LikerContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.getLikers(this.initSetLikersData());
+    this.props.getSlurpYums(this.initSetSlurpYumsData());
   }
 
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
@@ -50,7 +50,7 @@ export class LikerContainer extends Component {
       targetUserId: userId
     };
     this.props.follow(payload);
-    this.props.likerList[idx].is_following = true;
+    this.props.slurpYums[idx].is_follow = true;
   };
 
   // TODO: フォローはずす
@@ -60,12 +60,13 @@ export class LikerContainer extends Component {
       targetUserId: this.state.userId
     };
     this.props.unfollow(payload);
-    this.props.likerList[this.state.targetIndex].is_following = false;
+    this.props.slurpYums[this.state.targetIndex].is_follow = false;
+    this.closeModal();
   };
 
-  initSetLikersData = () => {
+  initSetSlurpYumsData = () => {
     const params = {
-      post_id: this.props.match.params.id
+      slurp_id: this.props.match.params.id
     };
     return {
       params,
@@ -91,9 +92,9 @@ export class LikerContainer extends Component {
         </header>
         <div className="c-container__padding">
           <ul className="pl-0">
-            {this.props.likerList.map((user, idx) => {
+            {this.props.slurpYums.map((user, idx) => {
               return (
-                <LikerListItem
+                <SlurpYumsItem
                   key={idx}
                   user={user}
                   index={idx}
@@ -122,13 +123,13 @@ function mapStateToProps(state) {
     accessToken: state.auth.accessToken,
     status: state.error.status,
     loading: state.loading.loading,
-    likerList: state.likers.likerList
+    slurpYums: state.slurpYums.slurpYums
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    getLikers(payload) {
-      dispatch(likers(payload));
+    getSlurpYums(payload) {
+      dispatch(slurpYums(payload));
     },
     follow(payload) {
       dispatch(follow(payload));
@@ -139,19 +140,19 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export const Liker = connect(
+export const SlurpYums = connect(
   mapStateToProps,
   mapDispatchToProps
-)(LikerContainer);
+)(SlurpYumsContainer);
 
-LikerContainer.propTypes = {
+SlurpYumsContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
   loading: PropTypes.bool,
   history: PropTypes.object,
   match: PropTypes.object,
-  getLikers: PropTypes.func,
-  likerList: PropTypes.array,
+  getSlurpYums: PropTypes.func,
+  slurpYums: PropTypes.array,
   follow: PropTypes.func,
   unfollow: PropTypes.func
 };

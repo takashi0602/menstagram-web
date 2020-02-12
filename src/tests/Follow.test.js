@@ -1,6 +1,6 @@
 import { getFollowed } from '../api/follow/followed';
 import { getFollowing } from '../api/follow/following';
-import { requestPostDetail } from '../api/slurpDetail';
+import { requestPostDetail } from '../api/slurp/detail';
 import { requestRegister } from '../api/auth';
 import { postFollow, postUnfollow } from '../api/follow';
 
