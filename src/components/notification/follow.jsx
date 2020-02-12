@@ -32,7 +32,7 @@ export default class FollowNotices extends Component {
               />
               <NoticeSize>
                 <p className="mb-0">
-                  {notice.src_user.screen_name}さんにフォローされました
+                  {notice.src_user.user_name}さんにフォローされました。
                 </p>
                 <LikeSize>{notice.follow.created_at.substr(0, 10)}</LikeSize>
               </NoticeSize>

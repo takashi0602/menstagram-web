@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Calc, under, NoticeSize, LikeSize } from './styled';
 
-export default class LikeNotices extends Component {
+export default class YumsNotices extends Component {
   ListOrEmpty = () => {
     if (this.props.notices.length === 0) {
       return <div className="text-center pt-3">通知はありません。</div>;
@@ -26,7 +26,7 @@ export default class LikeNotices extends Component {
               />
               <NoticeSize>
                 <p className="mb-0">
-                  {notice.src_user.screen_name}さんにいいねされました
+                  {notice.src_user.user_name}さんがヤムしました。
                 </p>
                 <LikeSize>{notice.like.created_at.substr(0, 10)}</LikeSize>
               </NoticeSize>
@@ -51,6 +51,6 @@ export default class LikeNotices extends Component {
   }
 }
 
-LikeNotices.propTypes = {
+YumsNotices.propTypes = {
   notices: PropTypes.array
 };

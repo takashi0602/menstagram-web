@@ -56,7 +56,11 @@ class MenuComponent extends Component {
             }
           />
         </Link>
-        <Link to="/notice/liked" className="d-inline-block p-2" style={NavIcon}>
+        <Link
+          to="/notice/yummed"
+          className="d-inline-block p-2"
+          style={NavIcon}
+        >
           <FontAwesomeIcon
             icon={path === 'notice' ? faBell : regularBell}
             style={path === 'notice' ? NavIconActive : NavIconInactive}

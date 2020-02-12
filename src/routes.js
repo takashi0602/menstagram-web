@@ -42,7 +42,7 @@ export const Routes = () => {
               <Route exact path={'/timeline/private'} component={Timeline} />
               <Route exact path={'/timeline/global'} component={Timeline} />
               <Route exact path={'/yums'} component={Yums} />
-              <Route exact path={'/notice/liked'} component={Notification} />
+              <Route exact path={'/notice/yummed'} component={Notification} />
               <Route exact path={'/notice/followed'} component={Notification} />
               <Route exact path={'/notice/system'} component={Notification} />
               <Route exact path={'/report'} component={Report} />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { under, NoticeSize, LikeSize } from './styled';
 
-export default class ManageNotices extends Component {
+export default class SystemNotices extends Component {
   ListOrEmpty = () => {
     if (this.props.notices.length === 0) {
       return <div className="text-center pt-3">通知はありません。</div>;
@@ -39,6 +39,6 @@ export default class ManageNotices extends Component {
   }
 }
 
-ManageNotices.propTypes = {
+SystemNotices.propTypes = {
   notices: PropTypes.array
 };
