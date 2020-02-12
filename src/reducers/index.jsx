@@ -10,7 +10,7 @@ import { privateTimeline } from './timeline/private';
 import { globalTimeline } from './timeline/global';
 import { yums } from './yums';
 import { profile } from './profile';
-import { profilePosts } from './profilePosts';
+import { profileSlurps } from './profileSlurps';
 import { yum } from './yum';
 import { slurpYums } from './slurpYums';
 import { following } from './following';
@@ -25,7 +25,7 @@ const combineReducer = combineReducers({
   slurpDetail,
   yums,
   profile,
-  profilePosts,
+  profileSlurps,
   profileEdit,
   privateTimeline,
   globalTimeline,

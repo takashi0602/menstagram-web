@@ -1,6 +1,6 @@
 import { requestLogin, requestRegister } from '../api/auth';
 import { getProfile } from '../api/profile';
-import { getUserPosts } from '../api/profilePosts';
+import { getProfileSlurps } from '../api/profileSlurps';
 
 jest.setTimeout(10000);
 
@@ -11,7 +11,7 @@ const random = Math.random()
 const registerData = {
   payload: {
     user_id: random,
-    screen_name: random,
+    user_name: random,
     email: `${random}@gmail.com`,
     password: random
   }
@@ -32,7 +32,7 @@ const typeNull = {
 const requestData = {
   accessToken: '',
   params: {
-    user_id: 'menstagram'
+    user_id: random
   }
 };
 
@@ -46,12 +46,12 @@ it('request profile api', () => {
   });
 });
 
-it('request userPosts api', () => {
+it('request profileSlurps api', () => {
   return requestLogin(loginData).then(loginRes => {
     requestData.accessToken = loginRes.response.data.access_token;
     expect(loginRes.response.statusText).toEqual('OK');
-    return getUserPosts(requestData).then(userPostsRes => {
-      expect(userPostsRes.response.status).toEqual(200);
+    return getProfileSlurps(requestData).then(profileSlurpsRes => {
+      expect(profileSlurpsRes.slurpsResponse.status).toEqual(200);
     });
   });
 });
