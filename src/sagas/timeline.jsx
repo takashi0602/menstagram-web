@@ -18,20 +18,8 @@ function* privateTimeline(action) {
   yield put(errorHandle.notError());
 
   if (action.errorSlurps.length > 0) {
-    const newSlurpList = action.slurpList.concat();
-    for (let errorSlurp of action.errorSlurps) {
-      newSlurpList[errorSlurp] = {
-        id: newSlurpList[errorSlurp].id,
-        text: newSlurpList[errorSlurp].text,
-        images: [],
-        yum_count: newSlurpList[errorSlurp].yum_count,
-        created_at: newSlurpList[errorSlurp].created_at,
-        updated_at: newSlurpList[errorSlurp].updated_at,
-        user: newSlurpList[errorSlurp].user,
-        is_yum: newSlurpList[errorSlurp].is_yum,
-      };
-    }
-    yield put(successPrivateTimeline({data: newSlurpList, status: 200}));
+    const newSlurpList = errorHandling(action);
+    yield put(successPrivateTimeline({ data: newSlurpList, status: 200 }));
   }
 
   const { response, error } = yield call(getTimeline, action);
@@ -55,6 +43,12 @@ function* privateTimeline(action) {
 function* globalTimeline(action) {
   yield put(loading());
   yield put(errorHandle.notError());
+
+  if (action.errorSlurps.length > 0) {
+    const newSlurpList = errorHandling(action);
+    yield put(successGlobalTimeline({ data: newSlurpList, status: 200 }));
+  }
+
   const { response, error } = yield call(getTimeline, action);
   if (response) {
     response.data.reverse();
@@ -77,3 +71,11 @@ export const timelineSaga = [
   takeEvery(PRIVATE_TIMELINE, privateTimeline),
   takeEvery(GLOBAL_TIMELINE, globalTimeline)
 ];
+
+const errorHandling = action => {
+  const newSlurpList = JSON.parse(JSON.stringify(action.slurpList));
+  for (let errorSlurp of action.errorSlurps) {
+    newSlurpList[errorSlurp].images = [];
+  }
+  return newSlurpList;
+};

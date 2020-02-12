@@ -42,7 +42,7 @@ export const RamenImage = styled.img`
 
 export const ErrorRamenImage = styled.img`
   color: #666666;
-  background-color: #C6C6C6;
+  background-color: #c6c6c6;
   padding: 42.5% !important;
   width: 100%;
   height: 100vw;

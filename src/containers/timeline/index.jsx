@@ -22,7 +22,8 @@ class TimelineContainer extends Component {
         'グローバルタイムラインからユーザーをフォローして、あなただけのタイムラインを作りましょう！',
       showBackToTop: false,
       scrollValue: 0,
-      errorSlurps: []
+      errorSlurpsGlobalTimeline: [],
+      errorSlurpsPrivateTimeline: []
     };
   }
 
@@ -38,7 +39,9 @@ class TimelineContainer extends Component {
       pathName,
       accessToken: this.props.accessToken,
       slurpList: [],
-      errorSlurps: this.state.errorSlurps
+      errorSlurps: this.isPathPrivate()
+        ? this.state.errorSlurpsPrivateTimeline
+        : this.state.errorSlurpsGlobalTimeline
     };
   };
 
@@ -49,7 +52,9 @@ class TimelineContainer extends Component {
       pathName,
       accessToken: this.props.accessToken,
       slurpList,
-      errorSlurps: this.state.errorSlurps
+      errorSlurps: this.isPathPrivate()
+        ? this.state.errorSlurpsPrivateTimeline
+        : this.state.errorSlurpsGlobalTimeline
     };
   };
 
@@ -204,15 +209,21 @@ class TimelineContainer extends Component {
         slurpItem={item}
         yum={(slurpId, idx) => this.yum(slurpId, idx)}
         unyum={(slurpId, idx) => this.unyum(slurpId, idx)}
-        errorSlurps={(idx) => this.errorSlurps(idx)}
+        errorSlurps={idx => this.errorSlurps(idx)}
       />
     );
   };
 
   errorSlurps = idx => {
-    const errorSlurps = this.state.errorSlurps;
-    errorSlurps.push(idx);
-    this.setState({errorSlurps: errorSlurps});
+    if (this.isPathPrivate()) {
+      const errorSlurpsPrivateTimeline = this.state.errorSlurpsPrivateTimeline;
+      errorSlurpsPrivateTimeline.push(idx);
+      this.setState({ errorSlurpsPrivateTimeline: errorSlurpsPrivateTimeline });
+    } else {
+      const errorSlurpsGlobalTimeline = this.state.errorSlurpsGlobalTimeline;
+      errorSlurpsGlobalTimeline.push(idx);
+      this.setState({ errorSlurpsGlobalTimeline: errorSlurpsGlobalTimeline });
+    }
   };
 
   render() {

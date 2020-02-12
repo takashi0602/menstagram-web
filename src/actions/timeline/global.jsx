@@ -10,6 +10,7 @@ export const globalTimeline = payload => {
     params: payload.params,
     pathName: payload.pathName,
     slurpList: payload.slurpList,
+    errorSlurps: payload.errorSlurps,
     status: 200
   };
 };
