@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
-export const getslurpYums = request => {
+export const getSlurpYums = request => {
   return axios({
     method: 'GET',
     url: `${baseUrl}/v1/slurp/yums`,

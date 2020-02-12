@@ -6,12 +6,12 @@ import {
 } from '../actions/slurpYums';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
-import { getslurpYums } from '../api/slurpYums';
+import { getSlurpYums } from '../api/slurpYums';
 
 function* slurpYums(action) {
   yield put(loading());
   yield put(errorHandle.notError());
-  const { response, error } = yield call(getslurpYums, action);
+  const { response, error } = yield call(getSlurpYums, action);
   if (response) {
     yield put(successSlurpYums(response, action.slurpId));
   } else {

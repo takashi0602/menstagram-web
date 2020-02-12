@@ -1,4 +1,4 @@
-import { getLikers } from '../api/slurp/yums';
+import { getSlurpYums } from '../api/slurpYums';
 import { requestRegister } from '../api/auth';
 
 jest.setTimeout(10000);
@@ -10,7 +10,7 @@ const random = Math.random()
 const registerData = {
   payload: {
     user_id: random,
-    screen_name: random,
+    user_name: random,
     email: `${random}@gmail.com`,
     password: random
   }
@@ -19,7 +19,7 @@ const registerData = {
 const typeNull = {
   accessToken: '',
   params: {
-    post_id: '1'
+    slurp_id: '1'
   }
 };
 
@@ -28,6 +28,6 @@ it('request liker api', async () => {
   typeNull.accessToken = registerRes.response.data.access_token;
   expect(registerRes.response.statusText).toEqual('OK');
 
-  const likersRes = await getLikers(typeNull);
-  expect(likersRes.response.status).toEqual(200);
+  const slurpYumsRes = await getSlurpYums(typeNull);
+  expect(slurpYumsRes.response.status).toEqual(200);
 });
