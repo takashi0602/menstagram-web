@@ -13,8 +13,8 @@ import { SlurpDetail } from './containers/slurp/_id';
 import { Slurp } from './containers/slurp';
 import { Timeline } from './containers/timeline';
 import { SlurpYums } from './containers/slurp/yums';
-import { Notification } from './containers/notification';
-import { Report } from './containers/report';
+// import { Notification } from './containers/notification';
+// import { Report } from './containers/report';
 import { Profile } from './containers/profile';
 import { ProfileEdit } from './containers/profile/edit';
 import { Menu } from './components/menu';
@@ -42,10 +42,18 @@ export const Routes = () => {
               <Route exact path={'/timeline/private'} component={Timeline} />
               <Route exact path={'/timeline/global'} component={Timeline} />
               <Route exact path={'/yums'} component={Yums} />
-              <Route exact path={'/notice/yummed'} component={Notification} />
-              <Route exact path={'/notice/followed'} component={Notification} />
-              <Route exact path={'/notice/system'} component={Notification} />
-              <Route exact path={'/report'} component={Report} />
+              {/*<Route exact path={'/notice/yummed'} component={Notification} />*/}
+              {/*<Route exact path={'/notice/followed'} component={Notification} />*/}
+              {/*<Route exact path={'/notice/system'} component={Notification} />*/}
+              {/*<Route exact path={'/report'} component={Report} />*/}
+              <Route exact path="*">
+                <h1 className="text-center">
+                  みないで
+                  <span role="img" aria-label="ぴえん">
+                    🥺
+                  </span>
+                </h1>
+              </Route>
             </Switch>
             <Route component={Menu} />
           </div>

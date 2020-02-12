@@ -6,12 +6,13 @@ import {
   faHome,
   faHeart,
   faImage,
-  faBell,
+  // faBell,
   faUser
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faHeart as regularHeart,
-  faBell as regularBell
+  // faBell as regularBell
+  faBellSlash
 } from '@fortawesome/free-regular-svg-icons';
 import { NavBar, NavIcon, NavIconInactive, NavIconActive } from './styled';
 import connect from 'react-redux/es/connect/connect';
@@ -56,16 +57,20 @@ class MenuComponent extends Component {
             }
           />
         </Link>
-        <Link
-          to="/notice/yummed"
-          className="d-inline-block p-2"
-          style={NavIcon}
-        >
-          <FontAwesomeIcon
-            icon={path === 'notice' ? faBell : regularBell}
-            style={path === 'notice' ? NavIconActive : NavIconInactive}
-          />
-        </Link>
+        {/* TODO: 実装後、リンク追加 */}
+        {/*<Link*/}
+        {/*to="/notice/yummed"*/}
+        {/*className="d-inline-block p-2"*/}
+        {/*style={NavIcon}*/}
+        {/*>*/}
+        {/*<FontAwesomeIcon*/}
+        {/*icon={path === 'notice' ? faBell : regularBell}*/}
+        {/*style={path === 'notice' ? NavIconActive : NavIconInactive}*/}
+        {/*/>*/}
+        {/*</Link>*/}
+        <div className="d-inline-block p-2" style={NavIcon}>
+          <FontAwesomeIcon icon={faBellSlash} style={{ color: '#C6C6C6' }} />
+        </div>
         <Link
           to={`/user/${this.props.userId}`}
           className="d-inline-block p-2"
