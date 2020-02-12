@@ -49,7 +49,7 @@ export class RegisterContainer extends Component {
       password: this.state.password
     };
     if (this.validate(payload)) return;
-    this.props.post(payload);
+    this.props.register(payload);
   };
 
   validate = payload => {
@@ -177,7 +177,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    post(payload) {
+    register(payload) {
       dispatch(register(payload));
     }
   };
@@ -191,6 +191,6 @@ export const Register = connect(
 RegisterContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
-  post: PropTypes.func,
+  register: PropTypes.func,
   loading: PropTypes.bool
 };

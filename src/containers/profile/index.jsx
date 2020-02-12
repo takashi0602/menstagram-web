@@ -219,7 +219,7 @@ class ProfileContainer extends Component {
     this.setState({ showUnfollowModal: false });
   };
 
-  initFollowingOrFollowed = () => {
+  initFollowsOrFollowers = () => {
     if (this.props.followsStatus !== -1) {
       this.props.clearFollows();
     }
@@ -235,7 +235,7 @@ class ProfileContainer extends Component {
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
         {!this.props.loading && this.initGetProfileSlurps()}
-        {this.initFollowingOrFollowed()}
+        {this.initFollowsOrFollowers()}
         {this.TopHeader()}
         {this.props.status && <Error status={this.props.status} />}
         <div className="text-center">

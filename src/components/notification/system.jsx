@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { under, NoticeSize, LikeSize } from './styled';
+import { under, NoticeSize, YumSize } from './styled';
 
 export default class SystemNotices extends Component {
   ListOrEmpty = () => {
@@ -22,7 +22,7 @@ export default class SystemNotices extends Component {
                 />
                 <NoticeSize>
                   {notice.text}
-                  <LikeSize>{notice.created_at.substr(0, 10)}</LikeSize>
+                  <YumSize>{notice.created_at.substr(0, 10)}</YumSize>
                 </NoticeSize>
               </span>
             </div>

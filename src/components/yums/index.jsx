@@ -16,8 +16,8 @@ import {
   EllipsisH,
   RamenImage,
   ImageArea,
-  LikedHeartIcon,
-  NotLikedIcon,
+  YumIcon,
+  NotYumIcon,
   faUserIcon
 } from './styled';
 import { DetailModal } from '../../components/modal/detail';
@@ -60,7 +60,7 @@ export class YumsItem extends Component {
     return (
       <div>
         <span onClick={this.unyum}>
-          <FontAwesomeIcon icon={solidHeart} style={LikedHeartIcon} />
+          <FontAwesomeIcon icon={solidHeart} style={YumIcon} />
         </span>
         <span className="align-top">{number}</span>
       </div>
@@ -71,7 +71,7 @@ export class YumsItem extends Component {
     return (
       <div>
         <span onClick={this.yum}>
-          <FontAwesomeIcon icon={regularHeart} style={NotLikedIcon} />
+          <FontAwesomeIcon icon={regularHeart} style={NotYumIcon} />
         </span>
         <span className="align-top">{number}</span>
       </div>

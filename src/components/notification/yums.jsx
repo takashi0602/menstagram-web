@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Calc, under, NoticeSize, LikeSize } from './styled';
+import { Calc, under, NoticeSize, YumSize } from './styled';
 
 export default class YumsNotices extends Component {
   ListOrEmpty = () => {
@@ -28,16 +28,16 @@ export default class YumsNotices extends Component {
                 <p className="mb-0">
                   {notice.src_user.user_name}さんがヤムしました。
                 </p>
-                <LikeSize>{notice.like.created_at.substr(0, 10)}</LikeSize>
+                <YumSize>{notice.yum.created_at.substr(0, 10)}</YumSize>
               </NoticeSize>
             </Link>
           </Calc>
           <img
             className="d-inline-block"
-            src={notice.post.image}
+            src={notice.slurp.image}
             height="50px"
             width="50px"
-            alt=""
+            alt="ラーメン"
           />
         </div>
       );

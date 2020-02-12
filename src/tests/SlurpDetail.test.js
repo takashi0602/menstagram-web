@@ -1,4 +1,4 @@
-import { getSlurpDetail } from '../api/slurp/detail';
+import { getSlurpDetail } from '../api/slurpDetail';
 import { requestRegister } from '../api/auth';
 
 jest.setTimeout(10000);
@@ -23,12 +23,12 @@ const typeNull = {
   }
 };
 
-it('request likes api', () => {
+it('request slurpDetail api', () => {
   return requestRegister(registerData).then(registerRes => {
     typeNull.accessToken = registerRes.response.data.access_token;
     expect(registerRes.response.statusText).toEqual('OK');
-    return getSlurpDetail(typeNull).then(postDetailRes => {
-      expect(postDetailRes.response.statusText).toEqual('OK');
+    return getSlurpDetail(typeNull).then(slurpDetailRes => {
+      expect(slurpDetailRes.response.statusText).toEqual('OK');
     });
   });
 });

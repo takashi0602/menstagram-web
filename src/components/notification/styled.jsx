@@ -14,7 +14,7 @@ export const NoticeSize = styled.div`
   color: #3c3c3c;
 `;
 
-export const LikeSize = styled.p`
+export const YumSize = styled.p`
   font-size: 5px;
   color: #6c757d;
   margin-bottom: 0;

@@ -158,7 +158,7 @@ export class TimelineContainer extends Component {
       this.setState({ showBackToTop: false });
   };
 
-  // TODO: いいね機能の改善
+  // TODO: ヤム機能の改善
   yum = (slurpId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import {
-  PostButton,
-  DisabledPostButton,
-  PostLabel,
+  SlurpButton,
+  DisabledSlurpButton,
+  SlurpLabel,
   RenderImage,
   Times,
   TimesIcon,
-  PostLabelDisabled
+  SlurpLabelDisabled
 } from './styled';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -186,23 +186,23 @@ export class SlurpConatiner extends Component {
 
   showActiveButton = () => {
     return (
-      <PostButton type="button" onClick={() => this.sendImages()}>
+      <SlurpButton type="button" onClick={() => this.sendImages()}>
         スラープする
-      </PostButton>
+      </SlurpButton>
     );
   };
 
   showNotActiveButton = () => {
-    return <DisabledPostButton type="button">スラープする</DisabledPostButton>;
+    return <DisabledSlurpButton type="button">スラープする</DisabledSlurpButton>;
   };
 
   showInputFile = () => {
     if (this.state.files.length >= 4) {
-      return <PostLabelDisabled>画像を追加する</PostLabelDisabled>;
+      return <SlurpLabelDisabled>画像を追加する</SlurpLabelDisabled>;
     }
     return (
       <div>
-        <PostLabel htmlFor="slurpImage">画像を追加する</PostLabel>
+        <SlurpLabel htmlFor="slurpImage">画像を追加する</SlurpLabel>
         <input
           id="slurpImage"
           type="file"

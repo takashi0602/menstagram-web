@@ -44,11 +44,11 @@ const yums = [
       user_name: 'メンスタグラム公式',
       avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
-    post: {
+    slurp: {
       id: 1,
       image: 'https://placehold.jp/150x150.png?text=image'
     },
-    like: {
+    yum: {
       created_at: '2019/11/29 22:56:15'
     }
   },
@@ -59,11 +59,11 @@ const yums = [
       user_name: 'メンスタグラム非公式',
       avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
-    post: {
+    slurp: {
       id: 1,
       image: 'https://placehold.jp/150x150.png?text=image'
     },
-    like: {
+    yum: {
       created_at: '2019/11/29 22:56:15'
     }
   }

@@ -9,12 +9,12 @@ import {
 } from '../actions/follow';
 import * as errorHandle from '../actions/error';
 import { loading, notLoading } from '../actions/loading';
-import { postFollow, postUnfollow } from '../api/follow';
+import { follow as requestFollow, unfollow as requestUnfollow } from '../api/follow';
 
 function* follow(action) {
   yield put(loading());
   yield put(errorHandle.notError());
-  const { response, error } = yield call(postFollow, action);
+  const { response, error } = yield call(requestFollow, action);
   if (response) {
     yield put(successFollow(action.userId));
   } else {
@@ -27,7 +27,7 @@ function* follow(action) {
 function* unfollow(action) {
   yield put(loading());
   yield put(errorHandle.notError());
-  const { response, error } = yield call(postUnfollow, action);
+  const { response, error } = yield call(requestUnfollow, action);
   if (response) {
     yield put(successUnfollow(action.userId));
   } else {
