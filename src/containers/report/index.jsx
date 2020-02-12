@@ -16,7 +16,7 @@ export class Report extends Component {
         </header>
         <div className="c-container__padding">
           <p className="py-3 mb-4">
-            投稿にラーメン以外の画像が含まれていましたか？
+            ラーメン以外の画像が含まれていましたか？
           </p>
           <div className="d-flex justify-content-around">
             <div>

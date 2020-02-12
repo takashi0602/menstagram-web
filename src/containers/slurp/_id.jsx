@@ -86,7 +86,7 @@ class SlurpDetailContainer extends Component {
           <BackButton onClick={this.goBack}>
             <FontAwesomeIcon icon={faChevronLeft} style={ChevronLeftIcons} />
           </BackButton>
-          <Title>投稿</Title>
+          <Title>スラープ</Title>
         </header>
         {this.showSlurp()}
       </div>
