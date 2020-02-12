@@ -29,8 +29,8 @@ import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { follow, unfollow } from '../../actions/follow';
-import { clearFollowing } from '../../actions/follow/following';
-import { clearFollowed } from '../../actions/follow/followed';
+import { clearFollows } from '../../actions/follow/follows';
+import { clearFollowers } from '../../actions/follow/followers';
 
 class ProfileContainer extends Component {
   constructor(prop) {
@@ -220,11 +220,11 @@ class ProfileContainer extends Component {
   };
 
   initFollowingOrFollowed = () => {
-    if (this.props.followingStatus !== -1) {
-      this.props.clearFollowing();
+    if (this.props.followsStatus !== -1) {
+      this.props.clearFollows();
     }
-    if (this.props.followedStatus !== -1) {
-      this.props.clearFollowed();
+    if (this.props.followersStatus !== -1) {
+      this.props.clearFollowers();
     }
   };
 
@@ -311,8 +311,8 @@ function mapStateToProps(state) {
     profile: state.profile.profile,
     slurpsStatus: state.profileSlurps.status,
     slurps: state.profileSlurps.slurps,
-    followingStatus: state.following.followingStatus,
-    followedStatus: state.followed.followedStatus
+    followsStatus: state.follows.status,
+    followersStatus: state.followers.status
   };
 }
 
@@ -330,11 +330,11 @@ function mapDispatchToProps(dispatch) {
     unfollow(payload) {
       dispatch(unfollow(payload));
     },
-    clearFollowing() {
-      dispatch(clearFollowing());
+    clearFollows() {
+      dispatch(clearFollows());
     },
-    clearFollowed() {
-      dispatch(clearFollowed());
+    clearFollowers() {
+      dispatch(clearFollowers());
     }
   };
 }
@@ -359,8 +359,8 @@ ProfileContainer.propTypes = {
   loading: PropTypes.bool,
   follow: PropTypes.func,
   unfollow: PropTypes.func,
-  followingStatus: PropTypes.number,
-  followedStatus: PropTypes.number,
-  clearFollowing: PropTypes.func,
-  clearFollowed: PropTypes.func
+  followsStatus: PropTypes.number,
+  followersStatus: PropTypes.number,
+  clearFollows: PropTypes.func,
+  clearFollowers: PropTypes.func
 };

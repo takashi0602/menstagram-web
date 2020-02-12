@@ -7,8 +7,8 @@ import FollowListItem from '../../components/follow';
 import { FollowHeader } from '../../components/follow/header';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
-import { following } from '../../actions/follow/following';
-import { followed } from '../../actions/follow/followed';
+import { follows } from '../../actions/follow/follows';
+import { followers } from '../../actions/follow/followers';
 import { follow, unfollow } from '../../actions/follow';
 
 export class FollowContainer extends Component {
@@ -23,25 +23,19 @@ export class FollowContainer extends Component {
   }
 
   ToggleList = () => {
-    if (this.isPathFollowing()) {
-      return this.showFollowingList();
+    if (this.isPathFollow()) {
+      return this.showFollows();
     }
-    return this.showFollowedList();
+    return this.showFollowers();
   };
 
-  showFollowingList = () => {
-    if (this.props.followingList.length === 0) {
-      return (
-        <p className="text-center">
-          ユーザーをフォローしていません。
-          <br />
-          フォローしてみましょう。
-        </p>
-      );
+  showFollows = () => {
+    if (this.props.follows.length === 0) {
+      return <p className="text-center">ユーザーをフォローしていません。</p>;
     }
     return (
       <ul className="pl-0">
-        {this.props.followingList.map((user, idx) => {
+        {this.props.follows.map((user, idx) => {
           return (
             <FollowListItem
               key={idx}
@@ -56,13 +50,13 @@ export class FollowContainer extends Component {
     );
   };
 
-  showFollowedList = () => {
-    if (this.props.followedList.length === 0) {
+  showFollowers = () => {
+    if (this.props.followers.length === 0) {
       return <p className="text-center">フォロワーはいません。</p>;
     }
     return (
       <ul className="pl-0">
-        {this.props.followedList.map((user, idx) => {
+        {this.props.followers.map((user, idx) => {
           return (
             <FollowListItem
               key={idx}
@@ -93,10 +87,10 @@ export class FollowContainer extends Component {
       targetUserId: userId
     };
     this.props.follow(payload);
-    if (this.isPathFollowing()) {
-      this.props.followingList[idx].is_following = true;
+    if (this.isPathFollow()) {
+      this.props.follows[idx].is_follow = true;
     } else {
-      this.props.followedList[idx].is_following = true;
+      this.props.followers[idx].is_follow = true;
     }
   };
 
@@ -107,15 +101,15 @@ export class FollowContainer extends Component {
     };
     this.props.unfollow(payload);
     this.closeModal();
-    if (this.isPathFollowing()) {
-      this.props.followingList[this.state.targetIndex].is_following = false;
+    if (this.isPathFollow()) {
+      this.props.follows[this.state.targetIndex].is_follow = false;
     } else {
-      this.props.followedList[this.state.targetIndex].is_following = false;
+      this.props.followers[this.state.targetIndex].is_follow = false;
     }
   };
 
-  isPathFollowing = () => {
-    return this.props.history.location.pathname.split('/')[3] === 'following';
+  isPathFollow = () => {
+    return this.props.history.location.pathname.split('/')[3] === 'follow';
   };
 
   targetUserId = () => {
@@ -132,23 +126,35 @@ export class FollowContainer extends Component {
     };
   };
 
-  initGetFollowing = () => {
+  initGetFollows = () => {
     if (this.props.loading) return;
     if (
-      this.props.followingStatus === -1 ||
-      this.props.followingTargetUserId !== this.targetUserId()
+      this.props.followsStatus === -1 ||
+      this.props.followsTargetUserId !== this.targetUserId()
     ) {
-      this.props.getFollowing(this.initSetPayload());
+      this.props.getFollows(this.initSetPayload());
     }
   };
 
-  initGetFollowed = () => {
+  initGetFollowers = () => {
     if (this.props.loading) return;
     if (
-      this.props.followedStatus === -1 ||
-      this.props.followedTargetUserId !== this.targetUserId()
+      this.props.followersStatus === -1 ||
+      this.props.followersTargetUserId !== this.targetUserId()
     ) {
-      this.props.getFollowed(this.initSetPayload());
+      this.props.getFollowers(this.initSetPayload());
+    }
+  };
+
+  showToggleList = () => {
+    if (
+      !this.props.loading ||
+      !!this.props.follows.length ||
+      !!this.props.followers.length
+    ) {
+      return (
+        <div className="c-container__padding pt-3">{this.ToggleList()}</div>
+      );
     }
   };
 
@@ -158,13 +164,9 @@ export class FollowContainer extends Component {
         {auth(this.props.accessToken)}
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
-        {this.isPathFollowing()
-          ? this.initGetFollowing()
-          : this.initGetFollowed()}
+        {this.isPathFollow() ? this.initGetFollows() : this.initGetFollowers()}
         {<FollowHeader history={this.props.history} />}
-        {!this.props.loading && (
-          <div className="c-container__padding pt-3">{this.ToggleList()}</div>
-        )}
+        {this.showToggleList()}
         {this.state.showModal && (
           <TwoChoiceModal
             text={'フォローをはずしますか？'}
@@ -183,22 +185,22 @@ function mapStateToProps(state) {
     accessToken: state.auth.accessToken,
     status: state.error.status,
     loading: state.loading.loading,
-    followingList: state.following.followingList,
-    followingStatus: state.following.followingStatus,
-    followingTargetUserId: state.following.followingTargetUserId,
-    followedList: state.followed.followedList,
-    followedStatus: state.followed.followedStatus,
-    followedTargetUserId: state.followed.followedTargetUserId
+    follows: state.follows.follows,
+    followsStatus: state.follows.status,
+    followsTargetUserId: state.follows.targetUserId,
+    followers: state.followers.followers,
+    followersStatus: state.followers.status,
+    followersTargetUserId: state.followers.targetUserId
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getFollowing(payload) {
-      dispatch(following(payload));
+    getFollows(payload) {
+      dispatch(follows(payload));
     },
-    getFollowed(payload) {
-      dispatch(followed(payload));
+    getFollowers(payload) {
+      dispatch(followers(payload));
     },
     follow(payload) {
       dispatch(follow(payload));
@@ -219,14 +221,14 @@ FollowContainer.propTypes = {
   history: PropTypes.object,
   match: PropTypes.object,
   loading: PropTypes.bool,
-  getFollowing: PropTypes.func,
-  followingList: PropTypes.array,
-  followingStatus: PropTypes.number,
-  followingTargetUserId: PropTypes.string,
-  getFollowed: PropTypes.func,
-  followedList: PropTypes.array,
-  followedStatus: PropTypes.number,
-  followedTargetUserId: PropTypes.string,
+  getFollows: PropTypes.func,
+  follows: PropTypes.array,
+  followsStatus: PropTypes.number,
+  followsTargetUserId: PropTypes.string,
+  getFollowers: PropTypes.func,
+  followers: PropTypes.array,
+  followersStatus: PropTypes.number,
+  followersTargetUserId: PropTypes.string,
   follow: PropTypes.func,
   unfollow: PropTypes.func
 };

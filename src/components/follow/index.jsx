@@ -6,7 +6,7 @@ import { LinkStyle, UserAvatar, UserLink, FollowButton } from './styled';
 export default class FollowListItem extends Component {
   actionButton = () => {
     if (this.props.user.is_me) return;
-    if (this.props.user.is_following) {
+    if (this.props.user.is_follow) {
       return (
         <FollowButton
           type="button"
@@ -50,7 +50,7 @@ export default class FollowListItem extends Component {
             style={UserAvatar}
           />
           <UserLink>
-            {this.props.user.screen_name}
+            {this.props.user.user_name}
             <br />
             {this.props.user.user_id}
           </UserLink>

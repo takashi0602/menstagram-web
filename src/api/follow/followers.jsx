@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
-export const getFollowed = request => {
+export const getFollowers = request => {
   return axios({
     method: 'GET',
-    url: `${baseUrl}/v1/user/followed`,
+    url: `${baseUrl}/v1/user/follower`,
     headers: {
       Authorization: `Bearer ${request.accessToken}`
     },

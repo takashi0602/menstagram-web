@@ -8,8 +8,8 @@ import { profileSaga } from './profile';
 import { profileSlurpsSaga } from './profileSlurps';
 import { yumSaga } from './yum';
 import { slurpYumsSaga } from './slurpYums';
-import { followingSaga } from './following';
-import { followedSaga } from './followed';
+import { followsSaga } from './follows';
+import { followersSaga } from './followers';
 import { profileEditSaga } from './profileEdit';
 import { followSaga } from './follow';
 
@@ -18,14 +18,14 @@ export default function* rootSaga() {
     ...authSaga,
     ...slurpSaga,
     ...slurpDetailSaga,
+    ...slurpYumsSaga,
     ...timelineSaga,
     ...yumsSaga,
     ...yumSaga,
-    ...slurpYumsSaga,
     ...profileSaga,
     ...profileSlurpsSaga,
-    ...followingSaga,
-    ...followedSaga,
+    ...followsSaga,
+    ...followersSaga,
     ...followSaga,
     ...profileEditSaga
   ]);

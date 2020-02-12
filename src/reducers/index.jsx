@@ -13,8 +13,8 @@ import { profile } from './profile';
 import { profileSlurps } from './profileSlurps';
 import { yum } from './yum';
 import { slurpYums } from './slurpYums';
-import { following } from './following';
-import { followed } from './followed';
+import { follows } from './follows';
+import { followers } from './followers';
 import { follow } from './follow';
 import { profileEdit } from './profileEdit';
 
@@ -23,17 +23,17 @@ const combineReducer = combineReducers({
   loading,
   slurp,
   slurpDetail,
-  yums,
+  slurpYums,
   profile,
   profileSlurps,
   profileEdit,
   privateTimeline,
   globalTimeline,
+  yums,
   yum,
   follow,
-  slurpYums,
-  following,
-  followed,
+  follows,
+  followers,
   error,
   router: connectRouter(history)
 });
