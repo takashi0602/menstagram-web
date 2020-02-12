@@ -76,7 +76,7 @@ class SlurpYumsContainer extends Component {
   showSlurpYums = () => {
     if (this.props.loading && !this.props.slurpYums.length) return;
     if (!this.props.slurpYums.length) {
-      return <p className="text-center">ヤムしたユーザーはいません。</p>
+      return <p className="text-center">ヤムしたユーザーはいません。</p>;
     }
     return this.props.slurpYums.map((user, idx) => {
       return (
@@ -88,7 +88,7 @@ class SlurpYumsContainer extends Component {
           follow={(userId, idx) => this.follow(userId, idx)}
         />
       );
-    })
+    });
   };
 
   render() {
@@ -108,9 +108,7 @@ class SlurpYumsContainer extends Component {
           </div>
         </header>
         <div className="c-container__padding">
-          <ul className="pl-0">
-            {this.showSlurpYums()}
-          </ul>
+          <ul className="pl-0">{this.showSlurpYums()}</ul>
         </div>
         {this.state.showModal && (
           <TwoChoiceModal
