@@ -15,7 +15,7 @@ export default class SlurpYumsItem extends Component {
             this.props.openModal(this.props.user.user_id, this.props.index)
           }
         >
-          フォロー中
+          フォロー解除
         </FollowButton>
       );
     } else {

@@ -29,9 +29,8 @@ class SlurpYumsContainer extends Component {
     this.props.getSlurpYums(this.initSetSlurpYumsData());
   }
 
-  // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
   goBack = () => {
-    this.props.history.goBack();
+    this.props.history.push(`/slurp/${this.props.match.params.id}`);
   };
 
   openModal = (userId, idx) => {
@@ -74,6 +73,24 @@ class SlurpYumsContainer extends Component {
     };
   };
 
+  showSlurpYums = () => {
+    if (this.props.loading && !this.props.slurpYums.length) return;
+    if (!this.props.slurpYums.length) {
+      return <p className="text-center">ヤムしたユーザーはいません。</p>
+    }
+    return this.props.slurpYums.map((user, idx) => {
+      return (
+        <SlurpYumsItem
+          key={idx}
+          user={user}
+          index={idx}
+          openModal={(userId, idx) => this.openModal(userId, idx)}
+          follow={(userId, idx) => this.follow(userId, idx)}
+        />
+      );
+    })
+  };
+
   render() {
     return (
       <div>
@@ -87,22 +104,12 @@ class SlurpYumsContainer extends Component {
                 style={faChevronLeftIconStyle}
               />
             </FaChevronLeftStyle>
-            <HeaderTitle>いいねした人</HeaderTitle>
+            <HeaderTitle>ヤムしたユーザー</HeaderTitle>
           </div>
         </header>
         <div className="c-container__padding">
           <ul className="pl-0">
-            {this.props.slurpYums.map((user, idx) => {
-              return (
-                <SlurpYumsItem
-                  key={idx}
-                  user={user}
-                  index={idx}
-                  openModal={(userId, idx) => this.openModal(userId, idx)}
-                  follow={(userId, idx) => this.follow(userId, idx)}
-                />
-              );
-            })}
+            {this.showSlurpYums()}
           </ul>
         </div>
         {this.state.showModal && (
