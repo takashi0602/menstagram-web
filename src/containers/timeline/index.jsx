@@ -13,7 +13,7 @@ import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { yum, unyum } from '../../actions/yum';
 
-export class TimelineContainer extends Component {
+class TimelineContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,9 +21,15 @@ export class TimelineContainer extends Component {
       notPrivateTimelineMessage:
         'グローバルタイムラインからユーザーをフォローして、あなただけのタイムラインを作りましょう！',
       showBackToTop: false,
-      scrollValue: 0
+      scrollValue: 0,
+      errorSlurpsGlobalTimeline: [],
+      errorSlurpsPrivateTimeline: []
     };
   }
+
+  // forceUpdate = () => {
+  //   super.forceUpdate();
+  // };
 
   initSetTimeline = () => {
     const params = {};
@@ -32,7 +38,10 @@ export class TimelineContainer extends Component {
       params,
       pathName,
       accessToken: this.props.accessToken,
-      slurpList: []
+      slurpList: [],
+      errorSlurps: this.isPathPrivate()
+        ? this.state.errorSlurpsPrivateTimeline
+        : this.state.errorSlurpsGlobalTimeline
     };
   };
 
@@ -42,7 +51,10 @@ export class TimelineContainer extends Component {
       params,
       pathName,
       accessToken: this.props.accessToken,
-      slurpList
+      slurpList,
+      errorSlurps: this.isPathPrivate()
+        ? this.state.errorSlurpsPrivateTimeline
+        : this.state.errorSlurpsGlobalTimeline
     };
   };
 
@@ -197,8 +209,21 @@ export class TimelineContainer extends Component {
         slurpItem={item}
         yum={(slurpId, idx) => this.yum(slurpId, idx)}
         unyum={(slurpId, idx) => this.unyum(slurpId, idx)}
+        errorSlurps={idx => this.errorSlurps(idx)}
       />
     );
+  };
+
+  errorSlurps = idx => {
+    if (this.isPathPrivate()) {
+      const errorSlurpsPrivateTimeline = this.state.errorSlurpsPrivateTimeline;
+      errorSlurpsPrivateTimeline.push(idx);
+      this.setState({ errorSlurpsPrivateTimeline: errorSlurpsPrivateTimeline });
+    } else {
+      const errorSlurpsGlobalTimeline = this.state.errorSlurpsGlobalTimeline;
+      errorSlurpsGlobalTimeline.push(idx);
+      this.setState({ errorSlurpsGlobalTimeline: errorSlurpsGlobalTimeline });
+    }
   };
 
   render() {

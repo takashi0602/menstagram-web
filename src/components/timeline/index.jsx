@@ -14,13 +14,16 @@ import 'slick-carousel/slick/slick-theme.css';
 import {
   UserImage,
   EllipsisH,
+  RamenArea,
   RamenImage,
+  ErrorRamenImage,
   ImageArea,
   YumIcon,
   NotYumIcon,
   faUserIcon
 } from './styled';
 import { DetailModal } from '../../components/modal/detail';
+import sadIcon from '../../assets/images/sad-tear-regular.svg';
 
 const sliderSettings = {
   dots: true,
@@ -40,13 +43,13 @@ export class TimelineSlurpItem extends Component {
 
   showImage = image => {
     return (
-      <div className="text-center">
+      <RamenArea className="text-center">
         <RamenImage
           src={image}
           alt="ラーメン"
           onError={e => this.imageError(e)}
         />
-      </div>
+      </RamenArea>
     );
   };
 
@@ -55,13 +58,13 @@ export class TimelineSlurpItem extends Component {
       <Slider {...sliderSettings}>
         {images.map((image, index) => {
           return (
-            <div key={index} className="text-center">
+            <RamenArea key={index} className="text-center">
               <RamenImage
                 src={image}
                 alt="ラーメン"
                 onError={e => this.imageError(e)}
               />
-            </div>
+            </RamenArea>
           );
         })}
       </Slider>
@@ -120,8 +123,25 @@ export class TimelineSlurpItem extends Component {
     );
   };
 
+  showImageOrImageSlick = () => {
+    if (this.props.slurpItem.images.length === 0) {
+      return (
+        <RamenArea className="text-center">
+          <ErrorRamenImage src={sadIcon} alt="読み込み失敗" />
+        </RamenArea>
+      );
+    }
+    return this.props.slurpItem.images.length === 1
+      ? this.showImage(this.props.slurpItem.images[0])
+      : this.showImageSlick(this.props.slurpItem.images);
+  };
+
   imageError = e => {
-    return (e.target.src = 'http://placehold.it/500/?text=NotFound');
+    this.props.errorSlurps(this.props.index);
+    e.target.src = sadIcon;
+    e.target.style.cssText =
+      'color: #666666; background-color: #C6C6C6; padding: 42.5% !important;';
+    return e;
   };
 
   render() {
@@ -139,11 +159,7 @@ export class TimelineSlurpItem extends Component {
             <FontAwesomeIcon icon={faEllipsisH} style={EllipsisH} />
           </div>
         </div>
-        <ImageArea className="mb-3">
-          {this.props.slurpItem.images.length === 1
-            ? this.showImage(this.props.slurpItem.images[0])
-            : this.showImageSlick(this.props.slurpItem.images)}
-        </ImageArea>
+        <ImageArea className="mb-3">{this.showImageOrImageSlick()}</ImageArea>
         <div className="px-3">
           <div className="d-flex justify-content-between mb-2">
             {this.props.slurpItem.is_yum
@@ -169,5 +185,6 @@ TimelineSlurpItem.propTypes = {
   slurpItem: PropTypes.object,
   yum: PropTypes.func,
   unyum: PropTypes.func,
-  index: PropTypes.number
+  index: PropTypes.number,
+  errorSlurps: PropTypes.func
 };

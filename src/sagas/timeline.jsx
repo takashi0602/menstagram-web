@@ -16,6 +16,12 @@ import { getTimeline } from '../api/timeline';
 function* privateTimeline(action) {
   yield put(loading());
   yield put(errorHandle.notError());
+
+  if (action.errorSlurps.length > 0) {
+    const newSlurpList = errorHandling(action);
+    yield put(successPrivateTimeline({ data: newSlurpList, status: 200 }));
+  }
+
   const { response, error } = yield call(getTimeline, action);
   if (response) {
     response.data.reverse();
@@ -37,6 +43,12 @@ function* privateTimeline(action) {
 function* globalTimeline(action) {
   yield put(loading());
   yield put(errorHandle.notError());
+
+  if (action.errorSlurps.length > 0) {
+    const newSlurpList = errorHandling(action);
+    yield put(successGlobalTimeline({ data: newSlurpList, status: 200 }));
+  }
+
   const { response, error } = yield call(getTimeline, action);
   if (response) {
     response.data.reverse();
@@ -59,3 +71,11 @@ export const timelineSaga = [
   takeEvery(PRIVATE_TIMELINE, privateTimeline),
   takeEvery(GLOBAL_TIMELINE, globalTimeline)
 ];
+
+const errorHandling = action => {
+  const newSlurpList = JSON.parse(JSON.stringify(action.slurpList));
+  for (let errorSlurp of action.errorSlurps) {
+    newSlurpList[errorSlurp].images = [];
+  }
+  return newSlurpList;
+};
