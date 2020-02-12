@@ -44,7 +44,7 @@ export class RegisterContainer extends Component {
   register = () => {
     const payload = {
       user_id: this.state.userId,
-      screen_name: this.state.userName,
+      user_name: this.state.userName,
       email: this.state.email,
       password: this.state.password
     };
@@ -59,8 +59,8 @@ export class RegisterContainer extends Component {
     this.setState({ errorEmail: false });
     this.setState({ errorPassword: false });
 
-    if (payload && this.hasProperty(payload, 'screen_name')) {
-      if (payload.screen_name.length === 0 || payload.screen_name.length > 16) {
+    if (payload && this.hasProperty(payload, 'user_name')) {
+      if (payload.user_name.length === 0 || payload.user_name.length > 16) {
         this.setState({ errorUserName: true });
         errorCheck = true;
       }
@@ -153,7 +153,7 @@ export class RegisterContainer extends Component {
           </div>
           <div className="mb-5">
             <button className="c-button__orange w-100" onClick={this.register}>
-              登録
+              登録する
             </button>
           </div>
           <div className="mb-3">

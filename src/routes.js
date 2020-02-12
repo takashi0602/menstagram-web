@@ -9,16 +9,16 @@ import { Top } from './containers/top';
 import { Register } from './containers/register';
 import { Login } from './containers/login';
 import { Follow } from './containers/follow';
-import { PostDetail } from './containers/post/_id';
-import { Post } from './containers/post';
+import { SlurpDetail } from './containers/slurp/_id';
+import { Slurp } from './containers/slurp';
 import { Timeline } from './containers/timeline';
-import { Liker } from './containers/liker';
+import { SlurpYums } from './containers/slurp/yums';
 import { Notification } from './containers/notification';
 import { Report } from './containers/report';
 import { Profile } from './containers/profile';
 import { ProfileEdit } from './containers/profile/edit';
 import { Menu } from './components/menu';
-import { Like } from './containers/likes';
+import { Yums } from './containers/yums';
 import { InitError } from './components/error/init';
 
 export const Routes = () => {
@@ -34,15 +34,15 @@ export const Routes = () => {
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/user/:id'} component={Profile} />
               <Route exact path={'/user/:id/edit'} component={ProfileEdit} />
-              <Route exact path={'/user/:id/following'} component={Follow} />
-              <Route exact path={'/user/:id/followed'} component={Follow} />
-              <Route exact path={'/post'} component={Post} />
-              <Route exact path={'/post/:id'} component={PostDetail} />
-              <Route exact path={'/post/:id/liker'} component={Liker} />
+              <Route exact path={'/user/:id/follow'} component={Follow} />
+              <Route exact path={'/user/:id/follower'} component={Follow} />
+              <Route exact path={'/slurp'} component={Slurp} />
+              <Route exact path={'/slurp/:id'} component={SlurpDetail} />
+              <Route exact path={'/slurp/:id/yums'} component={SlurpYums} />
               <Route exact path={'/timeline/private'} component={Timeline} />
               <Route exact path={'/timeline/global'} component={Timeline} />
-              <Route exact path={'/likes'} component={Like} />
-              <Route exact path={'/notice/liked'} component={Notification} />
+              <Route exact path={'/yums'} component={Yums} />
+              <Route exact path={'/notice/yummed'} component={Notification} />
               <Route exact path={'/notice/followed'} component={Notification} />
               <Route exact path={'/notice/system'} component={Notification} />
               <Route exact path={'/report'} component={Report} />

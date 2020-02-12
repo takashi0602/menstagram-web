@@ -33,11 +33,6 @@ export class TopContainer extends Component {
           <p className="mb-0">アカウントをお持ちですか？</p>
           <Link to="/login">ログインする</Link>
         </div>
-        <img
-          src="./hoge.png"
-          alt="hoge"
-          onError={e => (e.target.src = 'http://placehold.it/500x200')}
-        />
       </div>
     );
   }

@@ -1,6 +1,6 @@
-import { getFollowed } from '../api/follow/followed';
-import { getFollowing } from '../api/follow/following';
-import { requestPostDetail } from '../api/postDetail';
+import { getFollowers } from '../api/follow/followers';
+import { getFollows } from '../api/follow/follows';
+import { getSlurpDetail } from '../api/slurpdetail';
 import { requestRegister } from '../api/auth';
 import { postFollow, postUnfollow } from '../api/follow';
 
@@ -17,7 +17,7 @@ const random2 = Math.random()
 const registerData1 = {
   payload: {
     user_id: random1,
-    screen_name: random1,
+    user_name: random1,
     email: `${random1}@gmail.com`,
     password: random1
   }
@@ -26,7 +26,7 @@ const registerData1 = {
 const registerData2 = {
   payload: {
     user_id: random2,
-    screen_name: random2,
+    user_name: random2,
     email: `${random2}@gmail.com`,
     password: random2
   }
@@ -35,7 +35,7 @@ const registerData2 = {
 const postData = {
   accessToken: '',
   params: {
-    post_id: 1
+    slurp_id: 1
   }
 };
 
@@ -51,22 +51,22 @@ const followUnfollowData = {
   targetUserId: random1
 };
 
-it('request following api', async () => {
+it('request follows api', async () => {
   const registerRes = await requestRegister(registerData1);
   postData.accessToken = registerRes.response.data.access_token;
   followData.accessToken = registerRes.response.data.access_token;
   expect(registerRes.response.statusText).toEqual('OK');
 
-  const postDetailRes = await requestPostDetail(postData);
+  const postDetailRes = await getSlurpDetail(postData);
   followData.payload.user_id = postDetailRes.response.data.user.user_id;
   expect(postDetailRes.response.status).toEqual(200);
 
-  const followingRes = await getFollowing(followData);
+  const followingRes = await getFollows(followData);
   expect(followingRes.response.status).toEqual(200);
 });
 
-it('request followed api', async () => {
-  const followedRes = await getFollowed(followData);
+it('request followers api', async () => {
+  const followedRes = await getFollowers(followData);
   expect(followedRes.response.status).toEqual(200);
 });
 

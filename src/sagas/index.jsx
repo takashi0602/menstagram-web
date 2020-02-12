@@ -1,31 +1,31 @@
 import { all } from 'redux-saga/effects';
 import { authSaga } from './auth';
-import { postSaga } from './post';
-import { postDetailSaga } from './postDetail';
+import { slurpSaga } from './slurp';
+import { slurpDetailSaga } from './slurpDetail';
 import { timelineSaga } from './timeline';
-import { likesSaga } from './likes';
+import { yumsSaga } from './yums';
 import { profileSaga } from './profile';
-import { profilePostsSaga } from './profilePosts';
-import { likePostSaga } from './likePost';
-import { likersSaga } from './likers';
-import { followingSaga } from './following';
-import { followedSaga } from './followed';
+import { profileSlurpsSaga } from './profileSlurps';
+import { yumSaga } from './yum';
+import { slurpYumsSaga } from './slurpYums';
+import { followsSaga } from './follows';
+import { followersSaga } from './followers';
 import { profileEditSaga } from './profileEdit';
 import { followSaga } from './follow';
 
 export default function* rootSaga() {
   yield all([
     ...authSaga,
-    ...postSaga,
-    ...postDetailSaga,
+    ...slurpSaga,
+    ...slurpDetailSaga,
+    ...slurpYumsSaga,
     ...timelineSaga,
-    ...likesSaga,
-    ...likePostSaga,
-    ...likersSaga,
+    ...yumsSaga,
+    ...yumSaga,
     ...profileSaga,
-    ...profilePostsSaga,
-    ...followingSaga,
-    ...followedSaga,
+    ...profileSlurpsSaga,
+    ...followsSaga,
+    ...followersSaga,
     ...followSaga,
     ...profileEditSaga
   ]);

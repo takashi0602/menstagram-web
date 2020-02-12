@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Title } from './styled';
-import LikeNotices from '../../components/notification/like';
+import YumsNotices from '../../components/notification/yums';
 import FollowNotices from '../../components/notification/follow';
-import ManageNotices from '../../components/notification/manage';
+import SystemNotices from '../../components/notification/system';
 import { NotificationHeader } from '../../components/notification/header';
 import PropTypes from 'prop-types';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
@@ -14,7 +14,7 @@ const follows = [
     id: 1,
     src_user: {
       user_id: 'menstagram',
-      screen_name: 'メンスタグラム公式',
+      user_name: 'メンスタグラム公式',
       avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
     follow: {
@@ -23,10 +23,10 @@ const follows = [
     }
   },
   {
-    id: 1,
+    id: 2,
     src_user: {
       user_id: 'menstagraaaaam',
-      screen_name: 'メンスタグラム非公式',
+      user_name: 'メンスタグラム非公式',
       avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
     follow: {
@@ -36,12 +36,12 @@ const follows = [
   }
 ];
 
-const likes = [
+const yums = [
   {
     id: 1,
     src_user: {
       user_id: 'menstagram',
-      screen_name: 'メンスタグラム公式',
+      user_name: 'メンスタグラム公式',
       avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
     post: {
@@ -53,10 +53,10 @@ const likes = [
     }
   },
   {
-    id: 1,
+    id: 2,
     src_user: {
       user_id: 'menstagram',
-      screen_name: 'メンスタグラム非公式',
+      user_name: 'メンスタグラム非公式',
       avatar: 'https://placehold.jp/150x150.png?text=icon'
     },
     post: {
@@ -69,17 +69,17 @@ const likes = [
   }
 ];
 
-const manages = [
+const systems = [
   {
     id: 1,
     text:
-      'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
+      'あなたのスラープにラーメンではない画像が含まれていたため、削除致しました。',
     created_at: '2019/11/29 22:56:15'
   },
   {
     id: 2,
     text:
-      'あなたの投稿にラーメンではないラーメンではない画像が投稿されていたため,削除いたしました。',
+      'あなたのスラープにラーメンではない画像が含まれていたため、削除致しました。',
     created_at: '2019/11/29 22:56:15'
   }
 ];
@@ -94,14 +94,14 @@ export class Notification extends Component {
 
   DataView = () => {
     const path = this.props.history.location.pathname.split('/')[2];
-    if (path === 'liked') {
-      return <LikeNotices notices={likes} />;
+    if (path === 'yummed') {
+      return <YumsNotices notices={yums} />;
     } else if (path === 'followed') {
       return (
         <FollowNotices notices={follows} openModal={() => this.openModal()} />
       );
     } else if (path === 'system') {
-      return <ManageNotices notices={manages} />;
+      return <SystemNotices notices={systems} />;
     }
   };
 
@@ -130,8 +130,8 @@ export class Notification extends Component {
         {this.DataView()}
         {this.state.showModal && (
           <TwoChoiceModal
-            text={'フォローをはずしますか？'}
-            buttonName={'はずす'}
+            text={'フォローを解除しますか？'}
+            buttonName={'解除する'}
             closeModal={() => this.closeModal()}
             submit={() => this.unfollow()}
           />

@@ -46,7 +46,7 @@ export const Biography = styled.p`
   word-break: break-all;
 `;
 
-export const PostImage = styled.img`
+export const SlurpImage = styled.img`
   width: 100%;
   height: 125px;
   object-fit: contain;

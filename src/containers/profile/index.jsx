@@ -14,14 +14,14 @@ import {
   UserName,
   UserId,
   Biography,
-  PostImage,
+  SlurpImage,
   imagesIcon,
   UserImage,
   userIcon,
   Item
 } from './styled';
 import { logout } from '../../actions/auth/logout';
-import { profilePosts } from '../../actions/profilePosts';
+import { profileSlurps } from '../../actions/profileSlurps';
 import { connect } from 'react-redux';
 import { auth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
@@ -29,8 +29,8 @@ import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { follow, unfollow } from '../../actions/follow';
-import { clearFollowing } from '../../actions/follow/following';
-import { clearFollowed } from '../../actions/follow/followed';
+import { clearFollows } from '../../actions/follow/follows';
+import { clearFollowers } from '../../actions/follow/followers';
 
 class ProfileContainer extends Component {
   constructor(prop) {
@@ -78,14 +78,14 @@ class ProfileContainer extends Component {
           </Link>
         </button>
       );
-    } else if (this.props.profile.is_followed) {
+    } else if (this.props.profile.is_follow) {
       return (
         <button
           type="button"
           className="c-button__white w-100"
           onClick={this.openUnfollowModal}
         >
-          フォロー中
+          フォロー解除
         </button>
       );
     } else {
@@ -101,19 +101,19 @@ class ProfileContainer extends Component {
     }
   };
 
-  PostsTileView = () => {
-    if (this.props.posts.length > 0) {
+  showSlurps = () => {
+    if (this.props.slurps.length > 0) {
       return (
         <div className="row m-0">
-          {this.props.posts.map((post, idx) => {
+          {this.props.slurps.map((slurp, idx) => {
             return (
               <Link
                 key={idx}
-                to={`/post/${post.id}`}
+                to={`/slurp/${slurp.id}`}
                 className="col-4 p-1 position-relative"
               >
-                <PostImage src={post.images[0]} alt="post" />
-                {post.images.length !== 1 && (
+                <SlurpImage src={slurp.images[0]} alt="slurp" />
+                {slurp.images.length !== 1 && (
                   <FontAwesomeIcon icon={faImages} style={imagesIcon} />
                 )}
               </Link>
@@ -124,15 +124,15 @@ class ProfileContainer extends Component {
     } else if (this.props.profile.is_me) {
       return (
         <div className="c-container__padding pt-2">
-          <p className="m-0">まだ投稿していません。</p>
-          <p>ラーメンを投稿してみましょう。</p>
-          <Link to="/post">ラーメンを投稿する</Link>
+          <p className="m-0">まだスラープしていません。</p>
+          <p>ラーメンをスラープしてみましょう。</p>
+          <Link to="/slurp">ラーメンをスラープする</Link>
         </div>
       );
     } else {
       return (
         <div className="c-container__padding pt-2">
-          <p className="m-0">投稿はありません。</p>
+          <p className="m-0">スラープはありません。</p>
         </div>
       );
     }
@@ -173,7 +173,7 @@ class ProfileContainer extends Component {
     this.setState({ showLogoutModal: false });
   };
 
-  initSetUserPosts = () => {
+  initSetProfileSlurps = () => {
     const params = { user_id: this.props.match.params.id };
     return {
       params,
@@ -181,12 +181,12 @@ class ProfileContainer extends Component {
     };
   };
 
-  initGetProfilePosts = () => {
+  initGetProfileSlurps = () => {
     if (
       this.props.match.params.id !== this.props.profile.user_id ||
-      this.props.postsStatus === -1
+      this.props.slurpsStatus === -1
     ) {
-      this.props.getProfilePosts(this.initSetUserPosts());
+      this.props.getProfileSlurps(this.initSetProfileSlurps());
     }
   };
 
@@ -197,7 +197,7 @@ class ProfileContainer extends Component {
     };
     this.props.follow(payload);
     // TODO: api通信後にプロフィール取得 or 200が返ってきた段階でtrueにする
-    this.props.profile.is_followed = true;
+    this.props.profile.is_follow = true;
   };
 
   unfollow = () => {
@@ -208,7 +208,7 @@ class ProfileContainer extends Component {
     this.props.unfollow(payload);
     this.closeUnfollowModal();
     // TODO: api通信後にプロフィール取得 or 200が返ってきた段階でfalseにする
-    this.props.profile.is_followed = false;
+    this.props.profile.is_follow = false;
   };
 
   openUnfollowModal = () => {
@@ -220,11 +220,11 @@ class ProfileContainer extends Component {
   };
 
   initFollowingOrFollowed = () => {
-    if (this.props.followingStatus !== -1) {
-      this.props.clearFollowing();
+    if (this.props.followsStatus !== -1) {
+      this.props.clearFollows();
     }
-    if (this.props.followedStatus !== -1) {
-      this.props.clearFollowed();
+    if (this.props.followersStatus !== -1) {
+      this.props.clearFollowers();
     }
   };
 
@@ -234,41 +234,41 @@ class ProfileContainer extends Component {
         {auth(this.props.accessToken)}
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
-        {!this.props.loading && this.initGetProfilePosts()}
+        {!this.props.loading && this.initGetProfileSlurps()}
         {this.initFollowingOrFollowed()}
         {this.TopHeader()}
         {this.props.status && <Error status={this.props.status} />}
         <div className="text-center">
           {this.showUserImage()}
-          <UserName>{this.props.profile.screen_name}</UserName>
+          <UserName>{this.props.profile.user_name}</UserName>
           <UserId>{this.props.profile.user_id}</UserId>
         </div>
         <div className="mb-2 border-bottom">
           <div className="d-flex justify-content-around mb-2">
             <Item>
               <div className="text-center mb-0">
-                {this.props.profile.posted}
+                {this.props.profile.slurp_count}
               </div>
               <div className="text-center">投稿</div>
             </Item>
             <Item>
               <Link
-                to={`/user/${this.props.profile.user_id}/followed`}
+                to={`/user/${this.props.profile.user_id}/follower`}
                 className="c-link__black"
               >
                 <div className="text-center mb-0">
-                  {this.props.profile.followed}
+                  {this.props.profile.follower_count}
                 </div>
                 <div className="text-center">フォロワー</div>
               </Link>
             </Item>
             <Item>
               <Link
-                to={`/user/${this.props.profile.user_id}/following`}
+                to={`/user/${this.props.profile.user_id}/follow`}
                 className="c-link__black"
               >
                 <div className="text-center mb-0">
-                  {this.props.profile.following}
+                  {this.props.profile.follow_count}
                 </div>
                 <div className="text-center">フォロー</div>
               </Link>
@@ -279,11 +279,11 @@ class ProfileContainer extends Component {
             {this.ControlButton()}
           </div>
         </div>
-        {this.PostsTileView()}
+        {this.showSlurps()}
         {this.state.showUnfollowModal && (
           <TwoChoiceModal
-            text={'フォローをはずしますか？'}
-            buttonName={'はずす'}
+            text={'フォローを解除しますか？'}
+            buttonName={'解除する'}
             closeModal={() => this.closeUnfollowModal()}
             submit={() => this.unfollow()}
           />
@@ -309,10 +309,10 @@ function mapStateToProps(state) {
     loading: state.loading.loading,
     profileStatus: state.profile.profileStatus,
     profile: state.profile.profile,
-    postsStatus: state.profilePosts.status,
-    posts: state.profilePosts.posts,
-    followingStatus: state.following.followingStatus,
-    followedStatus: state.followed.followedStatus
+    slurpsStatus: state.profileSlurps.status,
+    slurps: state.profileSlurps.slurps,
+    followsStatus: state.follows.status,
+    followersStatus: state.followers.status
   };
 }
 
@@ -321,8 +321,8 @@ function mapDispatchToProps(dispatch) {
     logout(payload) {
       dispatch(logout(payload));
     },
-    getProfilePosts(payload) {
-      dispatch(profilePosts(payload));
+    getProfileSlurps(payload) {
+      dispatch(profileSlurps(payload));
     },
     follow(payload) {
       dispatch(follow(payload));
@@ -330,11 +330,11 @@ function mapDispatchToProps(dispatch) {
     unfollow(payload) {
       dispatch(unfollow(payload));
     },
-    clearFollowing() {
-      dispatch(clearFollowing());
+    clearFollows() {
+      dispatch(clearFollows());
     },
-    clearFollowed() {
-      dispatch(clearFollowed());
+    clearFollowers() {
+      dispatch(clearFollowers());
     }
   };
 }
@@ -351,16 +351,16 @@ ProfileContainer.propTypes = {
   history: PropTypes.object,
   status: PropTypes.number,
   profileStatus: PropTypes.number,
-  postsStatus: PropTypes.number,
+  slurpsStatus: PropTypes.number,
   profile: PropTypes.object,
-  posts: PropTypes.array,
+  slurps: PropTypes.array,
   logout: PropTypes.func,
-  getProfilePosts: PropTypes.func,
+  getProfileSlurps: PropTypes.func,
   loading: PropTypes.bool,
   follow: PropTypes.func,
   unfollow: PropTypes.func,
-  followingStatus: PropTypes.number,
-  followedStatus: PropTypes.number,
-  clearFollowing: PropTypes.func,
-  clearFollowed: PropTypes.func
+  followsStatus: PropTypes.number,
+  followersStatus: PropTypes.number,
+  clearFollows: PropTypes.func,
+  clearFollowers: PropTypes.func
 };

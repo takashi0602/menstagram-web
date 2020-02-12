@@ -12,21 +12,21 @@ import {
 export class FollowHeader extends Component {
   showHeader = () => {
     const pathName = this.props.history.location.pathname.split('/')[3];
-    if (pathName === 'followed') {
-      return this.followedHeader();
-    } else if (pathName === 'following') {
-      return this.followingHeader();
+    if (pathName === 'follower') {
+      return this.followerHeader();
+    } else if (pathName === 'follow') {
+      return this.followHeader();
     }
   };
 
-  followedHeader = () => {
+  followerHeader = () => {
     return (
       <div className="row justify-content-around mx-0 mb-3">
         <div className="col text-center">フォロワー</div>
         <Link
           to={`/user/${
             this.props.history.location.pathname.split('/')[2]
-          }/following`}
+          }/follow`}
           className="col text-center c-link__lightgray"
         >
           フォロー中
@@ -35,13 +35,13 @@ export class FollowHeader extends Component {
     );
   };
 
-  followingHeader = () => {
+  followHeader = () => {
     return (
       <div className="row justify-content-around mx-0 mb-3">
         <Link
           to={`/user/${
             this.props.history.location.pathname.split('/')[2]
-          }/followed`}
+          }/follower`}
           className="col text-center c-link__lightgray"
         >
           フォロワー

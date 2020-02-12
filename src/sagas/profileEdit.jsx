@@ -6,7 +6,7 @@ import {
   failProfileEdit,
   clearProfileEdit
 } from '../actions/profileEdit';
-import { clearProfilePosts } from '../actions/profilePosts';
+import { clearProfileSlurps } from '../actions/profileSlurps';
 import { loading, notLoading } from '../actions/loading';
 import * as errorHandle from '../actions/error';
 import { history } from '../history';
@@ -17,7 +17,7 @@ function* profileEdit(action) {
   const { response, error } = yield call(patchProfileEdit, action);
   if (response) {
     yield put(successProfileEdit());
-    yield put(clearProfilePosts());
+    yield put(clearProfileSlurps());
     yield put(clearProfileEdit());
     const url = `/user/${action.userId}`;
     yield call(history.push, url);

@@ -9,7 +9,7 @@ export const privateTimeline = payload => {
     accessToken: payload.accessToken,
     params: payload.params,
     pathName: payload.pathName,
-    postList: payload.postList,
+    slurpList: payload.slurpList,
     status: 200
   };
 };
@@ -17,7 +17,7 @@ export const privateTimeline = payload => {
 export const successPrivateTimeline = response => {
   return {
     type: SUCCESS_PRIVATE_TIMELINE,
-    postList: response.data,
+    slurpList: response.data,
     status: response.status
   };
 };
@@ -25,7 +25,7 @@ export const successPrivateTimeline = response => {
 export const failPrivateTimeline = status => {
   return {
     type: FAIL_PRIVATE_TIMELINE,
-    postList: [],
+    slurpList: [],
     status: status
   };
 };
@@ -33,7 +33,7 @@ export const failPrivateTimeline = status => {
 export const clearPrivateTimeline = () => {
   return {
     type: CLEAR_PRIVATE_TIMELINE,
-    postList: [],
+    slurpList: [],
     status: -1
-  }
+  };
 };
