@@ -43,7 +43,7 @@ const yumSlurp = {
   slurpId: '1'
 };
 
-it('request likes api, request likePost api', async () => {
+it('request yum api, request yums api', async () => {
   const registerRes = await requestRegister(registerData);
   typeNull.accessToken = registerRes.response.data.access_token;
   typeNew.accessToken = registerRes.response.data.access_token;
@@ -51,22 +51,22 @@ it('request likes api, request likePost api', async () => {
   yumSlurp.accessToken = registerRes.response.data.access_token;
   expect(registerRes.response.statusText).toEqual('OK');
 
-  const likedPostRes = await yum(yumSlurp);
-  expect(likedPostRes.response.statusText).toEqual('OK');
+  const yumRes = await yum(yumSlurp);
+  expect(yumRes.response.statusText).toEqual('OK');
 
-  const likesRes = await getYums(typeNull);
-  expect(likesRes.response.statusText).toEqual('OK');
+  const yumsRes = await getYums(typeNull);
+  expect(yumsRes.response.statusText).toEqual('OK');
 });
 
-it('request likes api type new', async () => {
-  const likesRes = await getYums(typeNew);
-  expect(likesRes.response.statusText).toEqual('OK');
+it('request yums api type new', async () => {
+  const yumsRes = await getYums(typeNew);
+  expect(yumsRes.response.statusText).toEqual('OK');
 });
 
-it('request likes api type old, request notLikePost api', async () => {
-  const likesRes = await getYums(typeOld);
-  expect(likesRes.response.statusText).toEqual('OK');
+it('request yums api type old, request unyum api', async () => {
+  const yumsRes = await getYums(typeOld);
+  expect(yumsRes.response.statusText).toEqual('OK');
 
-  const likedPostRes = await unyum(yumSlurp);
-  expect(likedPostRes.response.statusText).toEqual('OK');
+  const unyumRes = await unyum(yumSlurp);
+  expect(unyumRes.response.statusText).toEqual('OK');
 });

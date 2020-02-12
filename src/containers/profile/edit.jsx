@@ -108,7 +108,7 @@ class ProfileEditContainer extends Component {
       },
       userId: this.props.match.params.id
     };
-    this.props.postProfileEdit(payload);
+    this.props.profileEdit(payload);
   };
 
   initGetProfile = () => {
@@ -254,7 +254,7 @@ function mapDispatchToProps(dispatch) {
     getProfile(payload) {
       dispatch(profile(payload));
     },
-    postProfileEdit(payload) {
+    profileEdit(payload) {
       dispatch(profileEdit(payload));
     },
     clearProfile() {
@@ -279,7 +279,7 @@ ProfileEditContainer.propTypes = {
   profileStatus: PropTypes.number,
   profile: PropTypes.object,
   getProfile: PropTypes.func,
-  postProfileEdit: PropTypes.func,
+  profileEdit: PropTypes.func,
   loading: PropTypes.bool,
   profileEditSuccess: PropTypes.bool,
   clearProfile: PropTypes.func,

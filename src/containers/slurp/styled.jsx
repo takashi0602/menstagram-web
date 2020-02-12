@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PostButton = styled.button`
+export const SlurpButton = styled.button`
   position: absolute;
   top: 50%;
   right: 20px;
@@ -12,7 +12,7 @@ export const PostButton = styled.button`
   background-color: transparent;
 `;
 
-export const DisabledPostButton = styled.button`
+export const DisabledSlurpButton = styled.button`
   position: absolute;
   top: 50%;
   right: 20px;
@@ -24,7 +24,7 @@ export const DisabledPostButton = styled.button`
   background-color: transparent;
 `;
 
-export const PostLabel = styled.label`
+export const SlurpLabel = styled.label`
   color: #eb6101;
   cursor: pointer;
   &:hover {
@@ -32,7 +32,7 @@ export const PostLabel = styled.label`
   }
 `;
 
-export const PostLabelDisabled = styled.label`
+export const SlurpLabelDisabled = styled.label`
   color: #c6c6c6;
   cursor: pointer;
 `;

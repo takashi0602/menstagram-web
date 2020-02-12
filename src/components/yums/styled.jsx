@@ -41,14 +41,14 @@ export const ImageArea = styled.div`
   }
 `;
 
-export const LikedHeartIcon = {
+export const YumIcon = {
   width: '20px',
   height: '20px',
   marginRight: '10px',
   color: '#EB6101'
 };
 
-export const NotLikedIcon = {
+export const NotYumIcon = {
   width: '20px',
   height: '20px',
   marginRight: '10px',

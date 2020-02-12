@@ -95,7 +95,7 @@ class YumsContainer extends Component {
       this.setState({ showBackToTop: false });
   };
 
-  // TODO: いいね機能の改善
+  // TODO: ヤム機能の改善
   yum = (slurpId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
@@ -136,7 +136,7 @@ class YumsContainer extends Component {
         {this.props.loading && <Loading />}
         {this.initGetYums()}
         <Scroll handleScroll={this.handleScroll} />
-        <div className="p-3 text-center border-bottom">いいね</div>
+        <div className="p-3 text-center border-bottom">ヤム</div>
         {this.showReloadBar('更新する', this.getUpdateYums)}
         {this.state.showBackToTop && (
           <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>

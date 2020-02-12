@@ -16,8 +16,8 @@ import {
   EllipsisH,
   RamenImage,
   ImageArea,
-  LikedHeartIcon,
-  NotLikedIcon,
+  YumIcon,
+  NotYumIcon,
   faUserIcon
 } from './styled';
 import { DetailModal } from '../../components/modal/detail';
@@ -76,7 +76,7 @@ export class TimelineSlurpItem extends Component {
             this.props.unyum(this.props.slurpItem.id, this.props.index)
           }
         >
-          <FontAwesomeIcon icon={solidHeart} style={LikedHeartIcon} />
+          <FontAwesomeIcon icon={solidHeart} style={YumIcon} />
         </span>
         <span className="align-top">{number}</span>
       </div>
@@ -91,7 +91,7 @@ export class TimelineSlurpItem extends Component {
             this.props.yum(this.props.slurpItem.id, this.props.index)
           }
         >
-          <FontAwesomeIcon icon={regularHeart} style={NotLikedIcon} />
+          <FontAwesomeIcon icon={regularHeart} style={NotYumIcon} />
         </span>
         <span className="align-top">{number}</span>
       </div>

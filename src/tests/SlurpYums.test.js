@@ -23,7 +23,7 @@ const typeNull = {
   }
 };
 
-it('request liker api', async () => {
+it('request slurpYums api', async () => {
   const registerRes = await requestRegister(registerData);
   typeNull.accessToken = registerRes.response.data.access_token;
   expect(registerRes.response.statusText).toEqual('OK');

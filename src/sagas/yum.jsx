@@ -16,7 +16,7 @@ function* yum(action) {
   yield put(errorHandle.notError());
   const { response, error } = yield call(yumRequest, action);
   if (response) {
-    yield put(successYum(action.postId));
+    yield put(successYum(action.slurpId));
   } else {
     yield put(failYum());
     yield put(errorHandle.error(error.response));
@@ -29,7 +29,7 @@ function* unyum(action) {
   yield put(errorHandle.notError());
   const { response, error } = yield call(unyumRequest, action);
   if (response) {
-    yield put(successUnyum(action.postId));
+    yield put(successUnyum(action.slurpId));
   } else {
     yield put(failUnyum());
     yield put(errorHandle.error(error.response));
