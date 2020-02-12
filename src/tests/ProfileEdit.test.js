@@ -11,7 +11,7 @@ const random = Math.random()
 const registerData = {
   payload: {
     user_id: random,
-    screen_name: random,
+    user_name: random,
     email: `${random}@gmail.com`,
     password: random
   }
@@ -20,7 +20,7 @@ const registerData = {
 const data = {
   accessToken: '',
   profile: {
-    screenName: `new${random}`,
+    userName: `new${random}`,
     biography: `edit profile`
   },
   params: {
