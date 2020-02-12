@@ -43,7 +43,7 @@ export class LoginContainer extends Component {
       password: this.state.password
     };
     if (this.validate(payload)) return;
-    this.props.post(payload);
+    this.props.login(payload);
   };
 
   validate = payload => {
@@ -107,7 +107,7 @@ export class LoginContainer extends Component {
           </div>
           <div className="mb-5">
             <button className="c-button__orange w-100" onClick={this.login}>
-              ログイン
+              ログインする
             </button>
           </div>
           <div className="mb-3">
@@ -131,7 +131,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    post(payload) {
+    login(payload) {
       dispatch(login(payload));
     }
   };
@@ -145,6 +145,6 @@ export const Login = connect(
 LoginContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
-  post: PropTypes.func,
+  login: PropTypes.func,
   loading: PropTypes.bool
 };

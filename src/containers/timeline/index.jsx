@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../../middleware/auth';
 import { TimelineHeader } from '../../components/timeline/header';
-import { TimelinePostItem } from '../../components/timeline/post';
+import { TimelineSlurpItem } from '../../components/timeline';
 import { privateTimeline } from '../../actions/timeline/private';
 import { globalTimeline } from '../../actions/timeline/global';
 import { Loading } from '../../components/loading';
@@ -11,15 +11,15 @@ import { Reload, BackToTop } from './styled';
 import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
-import { likePost, notLikePost } from '../../actions/likePost';
+import { yum, unyum } from '../../actions/yum';
 
 export class TimelineContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notGlobalTimelineMessage: '投稿がありません。',
+      notGlobalTimelineMessage: 'スラープはありません。',
       notPrivateTimelineMessage:
-        'グローバルタイムラインからお気に入りのユーザーをみつけフォローして、あなただけのタイムラインを作りましょう！',
+        'グローバルタイムラインからユーザーをフォローして、あなただけのタイムラインを作りましょう！',
       showBackToTop: false,
       scrollValue: 0
     };
@@ -32,17 +32,17 @@ export class TimelineContainer extends Component {
       params,
       pathName,
       accessToken: this.props.accessToken,
-      postList: []
+      slurpList: []
     };
   };
 
-  setTimeline = (params, postList) => {
+  setTimeline = (params, slurpList) => {
     const pathName = this.isPathPrivate() ? 'private' : 'global';
     return {
       params,
       pathName,
       accessToken: this.props.accessToken,
-      postList
+      slurpList
     };
   };
 
@@ -66,37 +66,37 @@ export class TimelineContainer extends Component {
       : this.props.getGlobalTimeline(this.initSetTimeline());
   };
 
-  showPostItems = () => {
+  showSlurpItems = () => {
     if (this.isPathPrivate()) {
       if (this.props.privateTimeline.length === 0)
         return (
           <div>
-            <Reload onClick={this.getTimeline}>投稿を読み込む</Reload>
+            <Reload onClick={this.getTimeline}>スラープを読み込む</Reload>
             <p className="pt-3 px-3">{this.state.notPrivateTimelineMessage}</p>
           </div>
         );
       return this.props.privateTimeline.map((item, idx) =>
-        this.getTimelinePostItem(item, idx)
+        this.getTimelineSlurpItem(item, idx)
       );
     } else {
       if (this.props.globalTimeline.length === 0)
         return (
           <div>
-            <Reload onClick={this.getTimeline}>投稿を読み込む</Reload>
+            <Reload onClick={this.getTimeline}>スラープを読み込む</Reload>
             <p className="pt-3 px-3 text-center">
               {this.state.notGlobalTimelineMessage}
             </p>
           </div>
         );
       return this.props.globalTimeline.map((item, idx) =>
-        this.getTimelinePostItem(item, idx)
+        this.getTimelineSlurpItem(item, idx)
       );
     }
   };
 
   getOldTimeline = () => {
     const params = {
-      post_id: this.isPathPrivate()
+      slurp_id: this.isPathPrivate()
         ? this.props.privateTimeline[this.props.privateTimeline.length - 1].id
         : this.props.globalTimeline[this.props.globalTimeline.length - 1].id,
       type: 'old'
@@ -108,7 +108,7 @@ export class TimelineContainer extends Component {
 
   getNewTimeline = () => {
     const params = {
-      post_id: this.isPathPrivate()
+      slurp_id: this.isPathPrivate()
         ? this.props.privateTimeline[0].id
         : this.props.globalTimeline[0].id,
       type: 'new'
@@ -131,10 +131,10 @@ export class TimelineContainer extends Component {
   };
 
   showReloadBar = (text, getTimeline) => {
-    const postList = this.isPathPrivate()
+    const slurpList = this.isPathPrivate()
       ? this.props.privateTimeline
       : this.props.globalTimeline;
-    if (postList.length === 0) return;
+    if (slurpList.length === 0) return;
     return <Reload onClick={getTimeline}>{text}</Reload>;
   };
 
@@ -158,45 +158,45 @@ export class TimelineContainer extends Component {
       this.setState({ showBackToTop: false });
   };
 
-  // TODO: いいね機能の改善
-  likePost = (postId, idx) => {
+  // TODO: ヤム機能の改善
+  yum = (slurpId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
-      postId: postId
+      slurpId: slurpId
     };
-    this.props.likePost(payload);
+    this.props.yum(payload);
     if (this.isPathPrivate()) {
-      this.props.privateTimeline[idx].liked += 1;
-      this.props.privateTimeline[idx].is_liked = true;
+      this.props.privateTimeline[idx].yum_count += 1;
+      this.props.privateTimeline[idx].is_yum = true;
     } else {
-      this.props.globalTimeline[idx].liked += 1;
-      this.props.globalTimeline[idx].is_liked = true;
+      this.props.globalTimeline[idx].yum_count += 1;
+      this.props.globalTimeline[idx].is_yum = true;
     }
   };
 
-  notLikePost = (postId, idx) => {
+  unyum = (slurpId, idx) => {
     const payload = {
       accessToken: this.props.accessToken,
-      postId: postId
+      slurpId: slurpId
     };
-    this.props.notLikePost(payload);
+    this.props.unyum(payload);
     if (this.isPathPrivate()) {
-      this.props.privateTimeline[idx].liked -= 1;
-      this.props.privateTimeline[idx].is_liked = false;
+      this.props.privateTimeline[idx].yum_count -= 1;
+      this.props.privateTimeline[idx].is_yum = false;
     } else {
-      this.props.globalTimeline[idx].liked -= 1;
-      this.props.globalTimeline[idx].is_liked = false;
+      this.props.globalTimeline[idx].yum_count -= 1;
+      this.props.globalTimeline[idx].is_yum = false;
     }
   };
 
-  getTimelinePostItem = (item, idx) => {
+  getTimelineSlurpItem = (item, idx) => {
     return (
-      <TimelinePostItem
+      <TimelineSlurpItem
         key={item.id}
         index={idx}
-        postItem={item}
-        likePost={(postId, idx) => this.likePost(postId, idx)}
-        notLikePost={(postId, idx) => this.notLikePost(postId, idx)}
+        slurpItem={item}
+        yum={(slurpId, idx) => this.yum(slurpId, idx)}
+        unyum={(slurpId, idx) => this.unyum(slurpId, idx)}
       />
     );
   };
@@ -212,14 +212,14 @@ export class TimelineContainer extends Component {
           : this.initGetGlobalTimeline()}
         <Scroll handleScroll={this.handleScroll} />
         <TimelineHeader isPrivate={this.isPathPrivate()} />
-        {this.showReloadBar('新しい投稿を表示', this.getNewTimeline)}
+        {this.showReloadBar('新しいスラープを表示', this.getNewTimeline)}
         {this.state.showBackToTop && (
           <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>
         )}
         {this.props.status && <Error status={this.props.status} />}
-        {this.showPostItems()}
+        {this.showSlurpItems()}
         {this.props.status && <Error status={this.props.status} />}
-        {this.showReloadBar('投稿をさらに表示', this.getOldTimeline)}
+        {this.showReloadBar('スラープをさらに表示', this.getOldTimeline)}
       </div>
     );
   }
@@ -230,9 +230,9 @@ function mapStateToProps(state) {
     accessToken: state.auth.accessToken,
     status: state.error.status,
     loading: state.loading.loading,
-    privateTimeline: state.privateTimeline.postList,
+    privateTimeline: state.privateTimeline.slurpList,
     privateStatus: state.privateTimeline.status,
-    globalTimeline: state.globalTimeline.postList,
+    globalTimeline: state.globalTimeline.slurpList,
     globalStatus: state.globalTimeline.status
   };
 }
@@ -245,11 +245,11 @@ function mapDispatchToProps(dispatch) {
     getGlobalTimeline(payload) {
       dispatch(globalTimeline(payload));
     },
-    likePost(payload) {
-      dispatch(likePost(payload));
+    yum(payload) {
+      dispatch(yum(payload));
     },
-    notLikePost(payload) {
-      dispatch(notLikePost(payload));
+    unyum(payload) {
+      dispatch(unyum(payload));
     }
   };
 }
@@ -270,6 +270,6 @@ TimelineContainer.propTypes = {
   globalStatus: PropTypes.number,
   getPrivateTimeline: PropTypes.func,
   getGlobalTimeline: PropTypes.func,
-  likePost: PropTypes.func,
-  notLikePost: PropTypes.func
+  yum: PropTypes.func,
+  unyum: PropTypes.func
 };

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   FollowNoticeRow,
   NoticeSize,
-  LikeSize,
+  YumSize,
   under,
   NowrapButton
 } from './styled';
@@ -32,9 +32,9 @@ export default class FollowNotices extends Component {
               />
               <NoticeSize>
                 <p className="mb-0">
-                  {notice.src_user.screen_name}さんにフォローされました
+                  {notice.src_user.user_name}さんにフォローされました。
                 </p>
-                <LikeSize>{notice.follow.created_at.substr(0, 10)}</LikeSize>
+                <YumSize>{notice.follow.created_at.substr(0, 10)}</YumSize>
               </NoticeSize>
             </Link>
           </FollowNoticeRow>
@@ -47,7 +47,7 @@ export default class FollowNotices extends Component {
                     className="c-button__white c-button__commonWidth"
                     onClick={this.props.openModal}
                   >
-                    フォロー中
+                    フォロー解除
                   </NowrapButton>
                 </div>
               );

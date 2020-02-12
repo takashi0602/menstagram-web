@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 
 export class NotificationHeader extends Component {
   showHeader = () => {
-    if (this.props.pathName === 'liked') {
-      return this.choiceLikedHeader();
+    if (this.props.pathName === 'yummed') {
+      return this.choiceYummedHeader();
     } else if (this.props.pathName === 'followed') {
       return this.choiceFollowedHeader();
     } else if (this.props.pathName === 'system') {
-      return this.choiceManagementHeader();
+      return this.choiceSystemHeader();
     }
   };
 
-  choiceLikedHeader = () => {
+  choiceYummedHeader = () => {
     return (
       <div className="row justify-content-around mx-0 mb-3">
-        <div className="col text-center">いいね</div>
+        <div className="col text-center">ヤム</div>
         <Link
           to="/notice/followed"
           className="col text-center c-link__lightgray"
@@ -33,8 +33,8 @@ export class NotificationHeader extends Component {
   choiceFollowedHeader = () => {
     return (
       <div className="row justify-content-around mx-0 mb-3">
-        <Link to="/notice/liked" className="col text-center c-link__lightgray">
-          いいね
+        <Link to="/notice/yummed" className="col text-center c-link__lightgray">
+          ヤム
         </Link>
         <div className="col text-center">フォロー</div>
         <Link to="/notice/system" className="col text-center c-link__lightgray">
@@ -44,11 +44,11 @@ export class NotificationHeader extends Component {
     );
   };
 
-  choiceManagementHeader = () => {
+  choiceSystemHeader = () => {
     return (
       <div className="row justify-content-around mx-0 mb-3">
-        <Link to="/notice/liked" className="col text-center c-link__lightgray">
-          いいね
+        <Link to="/notice/yummed" className="col text-center c-link__lightgray">
+          ヤム
         </Link>
         <Link
           to="/notice/followed"

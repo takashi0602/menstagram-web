@@ -25,10 +25,10 @@ export class DetailModal extends Component {
       <div>
         <ModalItem>
           <Link
-            to={`/post/${this.props.postId}`}
+            to={`/slurp/${this.props.slurpId}`}
             className="c-link__black d-block py-3"
           >
-            投稿詳細
+            詳細へ移動
           </Link>
         </ModalItem>
         <ModalItem>
@@ -60,5 +60,5 @@ export class DetailModal extends Component {
 DetailModal.propTypes = {
   number: PropTypes.number,
   closeModal: PropTypes.func,
-  postId: PropTypes.number
+  slurpId: PropTypes.number
 };

@@ -15,19 +15,8 @@ export class Report extends Component {
           <HeaderTitle>ラーメンじゃないよ報告</HeaderTitle>
         </header>
         <div className="c-container__padding">
-          <p className="py-3 mb-4">
-            投稿にラーメン以外の画像が含まれていましたか？
-          </p>
+          <p className="py-3 mb-4">ラーメン以外の画像が含まれていましたか？</p>
           <div className="d-flex justify-content-around">
-            <div>
-              <button
-                type="button"
-                className="c-button__orange c-button__commonWidth"
-                onClick={this.goBack}
-              >
-                はい
-              </button>
-            </div>
             <div>
               <button
                 type="button"
@@ -35,6 +24,15 @@ export class Report extends Component {
                 onClick={this.goBack}
               >
                 いいえ
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                className="c-button__orange c-button__commonWidth"
+                onClick={this.goBack}
+              >
+                はい
               </button>
             </div>
           </div>

@@ -10,7 +10,7 @@ export const patchProfileEdit = request => {
       Authorization: `Bearer ${request.accessToken}`
     },
     data: {
-      screen_name: request.profile.screenName,
+      user_name: request.profile.userName,
       biography: request.profile.biography
     }
   })
