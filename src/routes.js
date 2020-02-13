@@ -20,6 +20,7 @@ import { ProfileEdit } from './containers/profile/edit';
 import { Menu } from './components/menu';
 import { Yums } from './containers/yums';
 import { InitError } from './components/error/init';
+import { NotFound } from './containers/404';
 
 export const Routes = () => {
   return (
@@ -46,14 +47,7 @@ export const Routes = () => {
               {/*<Route exact path={'/notice/followed'} component={Notification} />*/}
               {/*<Route exact path={'/notice/system'} component={Notification} />*/}
               {/*<Route exact path={'/report'} component={Report} />*/}
-              <Route exact path="*">
-                <h1 className="text-center">
-                  みないで
-                  <span role="img" aria-label="ぴえん">
-                    🥺
-                  </span>
-                </h1>
-              </Route>
+              <Route exact path="*" component={NotFound} />
             </Switch>
             <Route component={Menu} />
           </div>
