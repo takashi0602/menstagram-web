@@ -23,7 +23,8 @@ class MenuComponent extends Component {
     if (
       ['', 'register', 'login', 'logout'].indexOf(
         this.props.history.location.pathname.split('/')[1]
-      ) > -1
+      ) > -1 ||
+      !this.props.location.key
     )
       return;
 
@@ -103,5 +104,6 @@ export const Menu = connect(
 
 MenuComponent.propTypes = {
   history: PropTypes.object,
+  location: PropTypes.object,
   userId: PropTypes.string
 };
