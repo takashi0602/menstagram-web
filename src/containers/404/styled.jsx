@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const BackToTopLink = styled.div`
+export const BackLink = styled.div`
   cursor: pointer;
   display: inline-block;
   text-decoration: underline;

@@ -2,11 +2,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSadTear } from '@fortawesome/free-regular-svg-icons';
-import { BackToTopLink, AbsoluteContainer, Title, sadIcon } from './styled';
+import { BackLink, AbsoluteContainer, Title, sadIcon } from './styled';
+import { connect } from 'react-redux';
 
-export class NotFound extends Component {
+class NotFoundContainer extends Component {
   backToTop = () => {
     this.props.history.push('/');
+  };
+
+  backToTimeline = () => {
+    this.props.history.push('/timeline/private');
+  };
+
+  showBackLink = () => {
+    if (this.props.accessToken) {
+      return (
+        <BackLink onClick={this.backToTimeline}>タイムラインへ戻る</BackLink>
+      );
+    }
+    return <BackLink onClick={this.backToTop}>トップへ戻る</BackLink>;
   };
 
   render() {
@@ -19,15 +33,25 @@ export class NotFound extends Component {
             <br />
             Not Found
           </Title>
-          <div className="text-center">
-            <BackToTopLink onClick={this.backToTop}>トップへ戻る</BackToTopLink>
-          </div>
+          <div className="text-center">{this.showBackLink()}</div>
         </AbsoluteContainer>
       </div>
     );
   }
 }
 
-NotFound.propTypes = {
-  history: PropTypes.object
+function mapStateToProps(state) {
+  return {
+    accessToken: state.auth.accessToken
+  };
+}
+
+export const NotFound = connect(
+  mapStateToProps,
+  null
+)(NotFoundContainer);
+
+NotFoundContainer.propTypes = {
+  history: PropTypes.object,
+  accessToken: PropTypes.string
 };
