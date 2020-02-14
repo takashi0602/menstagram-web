@@ -21,6 +21,7 @@ import {
   faUserIcon
 } from './styled';
 import { DetailModal } from '../../components/modal/detail';
+import { trim } from '../../helpers';
 
 const sliderSettings = {
   dots: true,
@@ -135,7 +136,7 @@ export class YumsItem extends Component {
               : this.showUnyum(this.props.slurpItem.yum_count)}
             <div>{this.props.slurpItem.created_at}</div>
           </div>
-          <p>{this.props.slurpItem.text}</p>
+          <p>{trim(this.props.slurpItem.text)}</p>
         </div>
         {this.state.showModal && (
           <DetailModal

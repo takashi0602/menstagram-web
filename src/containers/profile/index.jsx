@@ -31,6 +31,7 @@ import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { follow, unfollow } from '../../actions/follow';
 import { clearFollows } from '../../actions/follow/follows';
 import { clearFollowers } from '../../actions/follow/followers';
+import { trim } from '../../helpers';
 
 class ProfileContainer extends Component {
   constructor(prop) {
@@ -275,7 +276,10 @@ class ProfileContainer extends Component {
             </Item>
           </div>
           <div className="c-container__padding mb-3">
-            <Biography>{this.props.profile.biography}</Biography>
+            <Biography>
+              {this.props.profile.biography &&
+                trim(this.props.profile.biography)}
+            </Biography>
             {this.ControlButton()}
           </div>
         </div>

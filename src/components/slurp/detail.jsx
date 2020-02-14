@@ -24,6 +24,7 @@ import { DetailModal } from '../modal/detail';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { trim } from '../../helpers';
 
 const sliderSettings = {
   dots: true,
@@ -64,7 +65,7 @@ export class SlurpComponent extends Component {
           {this.showYums()}
         </div>
         <div className="mb-3">{this.props.slurpItem.created_at}</div>
-        <SlurpText>{this.props.slurpItem.text}</SlurpText>
+        <SlurpText>{trim(this.props.slurpItem.text)}</SlurpText>
       </div>
     );
   };
