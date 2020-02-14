@@ -19,7 +19,7 @@ import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
 
-export class SlurpConatiner extends Component {
+export class SlurpContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -115,13 +115,7 @@ export class SlurpConatiner extends Component {
     const createObjectURL =
       (window.URL || window.webkitURL).createObjectURL ||
       window.createObjectURL;
-    if (this.props.isRamens[idx]) {
-      return (
-        <RenderImage
-          style={{ backgroundImage: `url('${createObjectURL(file)}')` }}
-        />
-      );
-    } else {
+    if (this.props.isRamens[idx] === false) {
       return (
         <RenderImage
           style={{
@@ -129,6 +123,12 @@ export class SlurpConatiner extends Component {
             border: 'solid 5px red',
             borderRadius: '5px'
           }}
+        />
+      );
+    } else {
+      return (
+        <RenderImage
+          style={{ backgroundImage: `url('${createObjectURL(file)}')` }}
         />
       );
     }
@@ -143,7 +143,7 @@ export class SlurpConatiner extends Component {
     const files = this.state.files;
     files.splice(index, 1);
     this.setState({ files: files });
-    if (this.props.isRamens.length !== 0) {
+    if (this.props.isRamens && this.props.isRamens.length > 0) {
       this.props.isRamens.splice(index, 1);
       const isRamen = this.props.isRamens.filter(isRamen => isRamen === false);
       if (isRamen.length === 0) this.props.initErrorStatus();
@@ -225,26 +225,23 @@ export class SlurpConatiner extends Component {
   showErrorMessage = () => {
     let errorMessages = [];
     if (this.state.errorText)
-      errorMessages.push(
-        <p className="text-danger">256文字以下で入力してください。</p>
-      );
-    if (this.state.errorFile)
-      errorMessages.push(<p className="text-danger">画像は必須です。</p>);
+      errorMessages.push('256文字以下で入力してください。');
+    if (this.state.errorFile) errorMessages.push('画像は必須です。');
     if (this.state.errorFileFormat)
-      errorMessages.push(<p className="text-danger">画像のみ選択できます。</p>);
+      errorMessages.push('画像のみ選択できます。');
     if (this.state.errorFileCount)
-      errorMessages.push(
-        <p className="text-danger">画像は4枚まで選択可能です。</p>
-      );
+      errorMessages.push('画像は4枚まで選択可能です。');
     if (this.state.errorFileSize)
-      errorMessages.push(
-        <p className="text-danger">画像1枚のサイズは5MBが上限です。</p>
-      );
+      errorMessages.push('画像1枚のサイズは5MBが上限です。');
 
-    if (errorMessages.length !== 0) {
-      return <div>{errorMessages.map(errorMessage => errorMessage)}</div>;
-    }
-    return null;
+    if (errorMessages.length === 0) return null;
+    return errorMessages.map((errorMessage, index) => {
+      return (
+        <p key={index} className="text-danger">
+          {errorMessage}
+        </p>
+      );
+    });
   };
 
   render() {
@@ -305,9 +302,9 @@ function mapDispatchToProps(dispatch) {
 export const Slurp = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SlurpConatiner);
+)(SlurpContainer);
 
-SlurpConatiner.propTypes = {
+SlurpContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
   loading: PropTypes.bool,
