@@ -18,7 +18,7 @@ export const AbsoluteContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 150%);
+  transform: translate(-50%, 70%);
   text-align: center;
 `;
 
@@ -29,9 +29,6 @@ export const Title = styled.h3`
 `;
 
 export const sadIcon = {
-  fontSize: '40px',
-  position: 'absolute',
-  top: '-30px',
-  right: '-20px',
-  transform: 'rotate(30deg)'
+  fontSize: '70px',
+  margin: '0 0 10px 0'
 };

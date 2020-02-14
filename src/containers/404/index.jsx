@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSadTear } from '@fortawesome/free-regular-svg-icons';
+import { faDizzy } from '@fortawesome/free-regular-svg-icons';
 import { BackLink, AbsoluteContainer, Title, sadIcon } from './styled';
 import { connect } from 'react-redux';
 
@@ -27,7 +27,7 @@ class NotFoundContainer extends Component {
     return (
       <div className="position-relative w-100">
         <AbsoluteContainer>
-          <FontAwesomeIcon icon={faSadTear} style={sadIcon} />
+          <FontAwesomeIcon icon={faDizzy} style={sadIcon} />
           <Title>
             404
             <br />
