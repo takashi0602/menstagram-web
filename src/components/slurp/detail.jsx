@@ -65,7 +65,7 @@ export class SlurpComponent extends Component {
           {this.showYums()}
         </div>
         <div className="mb-3">{this.props.slurpItem.created_at}</div>
-        <SlurpText>{trim(this.props.slurpItem.text)}</SlurpText>
+        <SlurpText>{trim(this.props.slurpItem.text, false)}</SlurpText>
       </div>
     );
   };
