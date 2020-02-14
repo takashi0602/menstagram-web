@@ -31,7 +31,7 @@ import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { follow, unfollow } from '../../actions/follow';
 import { clearFollows } from '../../actions/follow/follows';
 import { clearFollowers } from '../../actions/follow/followers';
-import { trim } from '../../helpers';
+import { express } from '../../helpers';
 
 class ProfileContainer extends Component {
   constructor(prop) {
@@ -41,6 +41,7 @@ class ProfileContainer extends Component {
       showLogoutModal: false,
       showUnfollowModal: false
     };
+    console.log(express('  aaa\nhttp://hogehoge/hoge.com aaa     '));
   }
 
   TopHeader = () => {
@@ -276,10 +277,13 @@ class ProfileContainer extends Component {
             </Item>
           </div>
           <div className="c-container__padding mb-3">
-            <Biography>
-              {this.props.profile.biography &&
-                trim(this.props.profile.biography)}
-            </Biography>
+            {this.props.profile.biography && (
+              <Biography
+                dangerouslySetInnerHTML={{
+                  __html: express(this.props.profile.biography)
+                }}
+              />
+            )}
             {this.ControlButton()}
           </div>
         </div>

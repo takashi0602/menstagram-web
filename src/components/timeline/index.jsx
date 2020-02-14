@@ -24,7 +24,7 @@ import {
 } from './styled';
 import { DetailModal } from '../../components/modal/detail';
 import sadIcon from '../../assets/images/sad-tear-regular.svg';
-import { trim } from '../../helpers';
+import { express } from '../../helpers';
 
 const sliderSettings = {
   dots: true,
@@ -168,7 +168,12 @@ export class TimelineSlurpItem extends Component {
               : this.showUnyumItem(this.props.slurpItem.yum_count)}
             <div>{this.props.slurpItem.created_at}</div>
           </div>
-          <p className="text-break">{trim(this.props.slurpItem.text, false)}</p>
+          <p
+            className="text-break"
+            dangerouslySetInnerHTML={{
+              __html: express(this.props.slurpItem.text, false)
+            }}
+          />
         </div>
         {this.state.showModal && (
           <DetailModal
