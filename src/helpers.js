@@ -33,8 +33,9 @@ export const mnl2nl = text => {
  *
  * @param text
  * @param multipleNewLine
- * @returns {any[]}
+ * @returns {*}
  */
 export const trim = (text, multipleNewLine = true) => {
+  if (!text) return '';
   return multipleNewLine ? nl2br(mnl2nl(text.trim())) : nl2br(text.trim());
 };
