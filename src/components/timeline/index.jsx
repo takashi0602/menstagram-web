@@ -168,7 +168,7 @@ export class TimelineSlurpItem extends Component {
               : this.showUnyumItem(this.props.slurpItem.yum_count)}
             <div>{this.props.slurpItem.created_at}</div>
           </div>
-          <p>{trim(this.props.slurpItem.text, false)}</p>
+          <p className="text-break">{trim(this.props.slurpItem.text, false)}</p>
         </div>
         {this.state.showModal && (
           <DetailModal

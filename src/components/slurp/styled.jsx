@@ -78,6 +78,7 @@ export const YumsIcon = {
 
 export const SlurpText = styled.p`
   margin-bottom: 64px;
+  word-break: break-all;
 `;
 
 export const HeaderTitle = styled.div`
