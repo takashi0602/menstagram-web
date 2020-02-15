@@ -31,7 +31,7 @@ import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { follow, unfollow } from '../../actions/follow';
 import { clearFollows } from '../../actions/follow/follows';
 import { clearFollowers } from '../../actions/follow/followers';
-import { express } from '../../helpers';
+import { appearance } from '../../helpers';
 
 class ProfileContainer extends Component {
   constructor(prop) {
@@ -41,7 +41,6 @@ class ProfileContainer extends Component {
       showLogoutModal: false,
       showUnfollowModal: false
     };
-    console.log(express('  aaa\nhttp://hogehoge/hoge.com aaa     '));
   }
 
   TopHeader = () => {
@@ -280,7 +279,7 @@ class ProfileContainer extends Component {
             {this.props.profile.biography && (
               <Biography
                 dangerouslySetInnerHTML={{
-                  __html: express(this.props.profile.biography)
+                  __html: appearance(this.props.profile.biography)
                 }}
               />
             )}
