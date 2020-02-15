@@ -20,7 +20,8 @@ import {
   ImageArea,
   YumIcon,
   NotYumIcon,
-  faUserIcon
+  faUserIcon,
+  HiddenButton
 } from './styled';
 import { DetailModal } from '../../components/modal/detail';
 import sadIcon from '../../assets/images/sad-tear-regular.svg';
@@ -38,7 +39,8 @@ export class TimelineSlurpItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      readMore: false
     };
   }
 
@@ -145,6 +147,58 @@ export class TimelineSlurpItem extends Component {
     return e;
   };
 
+  toggleReadMore = () => {
+    this.setState({readMore: !this.state.readMore});
+  };
+
+  showText = text => {
+    if (this.state.readMore) {
+      return (
+        <p className="text-break">
+          <p
+            dangerouslySetInnerHTML={{
+              __html: text
+            }} />
+          <HiddenButton type="button" onClick={this.toggleReadMore}>非表示にする</HiddenButton>
+        </p>
+      );
+    }
+
+    const regex = /(<br>|<a)/;
+    if (text.search(regex) !== -1 && text.search(regex) < 30) {
+      return (
+        <p className="text-break">
+          <span
+            dangerouslySetInnerHTML={{
+              __html: text.slice(0, text.search(regex))
+            }} />
+          <span>...&nbsp;</span>
+          <HiddenButton type="button" onClick={this.toggleReadMore}>続きを読む</HiddenButton>
+        </p>
+      );
+    } else if (text.length > 30) {
+      return (
+        <p className="text-break">
+          <span
+            dangerouslySetInnerHTML={{
+              __html: text.slice(0, 30)
+            }} />
+          <span>...&nbsp;</span>
+          <HiddenButton type="button" onClick={this.toggleReadMore}>続きを読む</HiddenButton>
+        </p>
+      );
+    } else {
+      return (
+        <p className="text-break">
+          <span
+            dangerouslySetInnerHTML={{
+              __html: text
+            }} />
+        </p>
+      );
+    }
+  };
+
   render() {
     return (
       <div className="mb-5">
@@ -168,12 +222,7 @@ export class TimelineSlurpItem extends Component {
               : this.showUnyumItem(this.props.slurpItem.yum_count)}
             <div>{this.props.slurpItem.created_at}</div>
           </div>
-          <p
-            className="text-break"
-            dangerouslySetInnerHTML={{
-              __html: appearance(this.props.slurpItem.text, false)
-            }}
-          />
+          {this.showText(appearance(this.props.slurpItem.text, false))}
         </div>
         {this.state.showModal && (
           <DetailModal

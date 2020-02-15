@@ -71,3 +71,11 @@ export const NotYumIcon = {
   marginRight: '10px',
   color: '#666666'
 };
+
+export const HiddenButton = styled.button`
+  padding: 0;
+  color: #C6C6C6;
+  font-weight: normal;
+  cursor: pointer;
+  background-color: transparent;
+`;
