@@ -21,7 +21,7 @@ import {
   faUserIcon
 } from './styled';
 import { DetailModal } from '../../components/modal/detail';
-import { express } from '../../helpers';
+import { appearance } from '../../helpers';
 
 const sliderSettings = {
   dots: true,
@@ -139,7 +139,7 @@ export class YumsItem extends Component {
           <p
             className="text-break"
             dangerouslySetInnerHTML={{
-              __html: express(this.props.slurpItem.text, false)
+              __html: appearance(this.props.slurpItem.text, false)
             }}
           />
         </div>

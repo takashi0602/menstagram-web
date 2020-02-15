@@ -43,7 +43,7 @@ export const nl2br = text => {
  * @param url
  * @returns {String}
  */
-export const puny_trans = url => {
+export const puny2uni = url => {
   return punycode.toUnicode(url.replace(/(https?:\/\/)/, ''));
 };
 
@@ -59,7 +59,7 @@ export const url2a = text => {
     .split(regex)
     .map(line => {
       if (line.match(regex)) {
-        return `<a href="${line}" target="_blank" rel="noreferrer noopener" >${puny_trans(
+        return `<a href="${line}" target="_blank" rel="noreferrer noopener" >${puny2uni(
           line
         )}</a>`;
       }
@@ -69,14 +69,15 @@ export const url2a = text => {
 };
 
 /**
- * multipleNewLine = true：文字列をトリミングし、連続する\nを1つにまとめ、\nを<br>に変換する
- * multipleNewLine = false：文字列をトリミングし、\nを<br>に変換する
+ * スラープや自己紹介の内容をSNSに適した形式で表示する
+ *
+ * multipleNewLine = true: 複数の改行を１つの改行にまとめる
  *
  * @param text
  * @param multipleNewLine
  * @returns {*}
  */
-export const express = (text, multipleNewLine = true) => {
+export const appearance = (text, multipleNewLine = true) => {
   if (!text) return '';
   return multipleNewLine
     ? url2a(nl2br(mnl2nl(sanitize(text.trim()))))

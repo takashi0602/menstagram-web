@@ -24,7 +24,7 @@ import { DetailModal } from '../modal/detail';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { express } from '../../helpers';
+import { appearance } from '../../helpers';
 
 const sliderSettings = {
   dots: true,
@@ -67,7 +67,7 @@ export class SlurpComponent extends Component {
         <div className="mb-3">{this.props.slurpItem.created_at}</div>
         <SlurpText
           dangerouslySetInnerHTML={{
-            __html: express(this.props.slurpItem.text, false)
+            __html: appearance(this.props.slurpItem.text, false)
           }}
         />
       </div>
