@@ -154,47 +154,47 @@ export class TimelineSlurpItem extends Component {
   showText = text => {
     if (this.state.readMore) {
       return (
-        <p className="text-break">
+        <div className="text-break">
           <p
             dangerouslySetInnerHTML={{
               __html: text
             }} />
           <HiddenButton type="button" onClick={this.toggleReadMore}>非表示にする</HiddenButton>
-        </p>
+        </div>
       );
     }
 
     const regex = /(<br>|<a)/;
     if (text.search(regex) !== -1 && text.search(regex) < 30) {
       return (
-        <p className="text-break">
+        <div className="text-break">
           <span
             dangerouslySetInnerHTML={{
               __html: text.slice(0, text.search(regex))
             }} />
           <span>...&nbsp;</span>
           <HiddenButton type="button" onClick={this.toggleReadMore}>続きを読む</HiddenButton>
-        </p>
+        </div>
       );
     } else if (text.length > 30) {
       return (
-        <p className="text-break">
+        <div className="text-break">
           <span
             dangerouslySetInnerHTML={{
               __html: text.slice(0, 30)
             }} />
           <span>...&nbsp;</span>
           <HiddenButton type="button" onClick={this.toggleReadMore}>続きを読む</HiddenButton>
-        </p>
+        </div>
       );
     } else {
       return (
-        <p className="text-break">
+        <div className="text-break">
           <span
             dangerouslySetInnerHTML={{
               __html: text
             }} />
-        </p>
+        </div>
       );
     }
   };
