@@ -7,6 +7,8 @@ import { login } from '../../actions/auth/login';
 import { noAuth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
+import { ErrorMessage } from '../../components/error/badRequest';
+import { hasProp } from '../../helpers';
 
 export class LoginContainer extends Component {
   constructor(props) {
@@ -42,7 +44,7 @@ export class LoginContainer extends Component {
       user_id: this.state.userId,
       password: this.state.password
     };
-    if (this.validate(payload)) return;
+    // if (this.validate(payload)) return;
     this.props.login(payload);
   };
 
@@ -51,7 +53,7 @@ export class LoginContainer extends Component {
     this.setState({ errorUserId: false });
     this.setState({ errorPassword: false });
 
-    if (payload && this.hasProperty(payload, 'user_id')) {
+    if (payload && hasProp(payload, 'user_id')) {
       if (
         payload.user_id.match(/^[a-zA-Z0-9_]+$/) === null ||
         payload.user_id.length === 0 ||
@@ -61,7 +63,7 @@ export class LoginContainer extends Component {
         errorCheck = true;
       }
     }
-    if (payload && this.hasProperty(payload, 'password')) {
+    if (payload && hasProp(payload, 'password')) {
       if (payload.password.length < 8) {
         this.setState({ errorPassword: true });
         errorCheck = true;
@@ -70,8 +72,21 @@ export class LoginContainer extends Component {
     return errorCheck;
   };
 
-  hasProperty = (obj, key) => {
-    return !!obj && Object.prototype.hasOwnProperty.call(obj, key);
+  showValidateMassage = key => {
+    if (key === 'userId' && this.state.errorUserId) {
+      return (
+        <p className="text-danger">16文字以下の英数字で入力してください。</p>
+      );
+    }
+    if (key === 'password' && this.state.errorPassword) {
+      return <p className="text-danger">8文字以上で入力してください。</p>;
+    }
+    return null;
+  };
+
+  showErrorMassage = keyName => {
+    if (this.props.status === null) return null;
+    return <ErrorMessage errors={this.props.errors} keyName={keyName} />;
   };
 
   render() {
@@ -84,26 +99,27 @@ export class LoginContainer extends Component {
             <div className="c-image__title" />
           </div>
           {this.props.status && <Error status={this.props.status} />}
+          {this.showErrorMassage('message')}
           <div className="mb-4">
-            <input
-              type="text"
-              className="c-form mb-3"
-              placeholder="ユーザーID"
-              value={this.state.userId}
-              onChange={e => this.changeForm('userId', e)}
-            />
-            {this.state.errorUserId && (
-              <p className="text-danger">
-                16文字以下の英数字で入力してください。
-              </p>
-            )}
-            <Form
-              password={this.state.password}
-              changeForm={(stateName, e) => this.changeForm(stateName, e)}
-            />
-            {this.state.errorPassword && (
-              <p className="text-danger">8文字以上で入力してください。</p>
-            )}
+            <div className="mb-3">
+              <input
+                type="text"
+                className="c-form"
+                placeholder="ユーザーID"
+                value={this.state.userId}
+                onChange={e => this.changeForm('userId', e)}
+              />
+              {this.showValidateMassage('userId')}
+              {this.showErrorMassage('user_id')}
+            </div>
+            <div>
+              <Form
+                password={this.state.password}
+                changeForm={(stateName, e) => this.changeForm(stateName, e)}
+              />
+              {this.showValidateMassage('password')}
+              {this.showErrorMassage('password')}
+            </div>
           </div>
           <div className="mb-5">
             <button className="c-button__orange w-100" onClick={this.login}>
@@ -125,6 +141,7 @@ function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
     status: state.error.status,
+    errors: state.error.errors,
     loading: state.loading.loading
   };
 }
@@ -145,6 +162,7 @@ export const Login = connect(
 LoginContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
+  errors: PropTypes.object,
   login: PropTypes.func,
   loading: PropTypes.bool
 };

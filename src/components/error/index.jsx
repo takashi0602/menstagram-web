@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { failLogin } from '../../actions/auth/login';
 import { persistor } from '../../store/index';
 
@@ -8,11 +9,13 @@ export class ComponentError extends Component {
   handle = status => {
     switch (status) {
       case 400:
-        return <p className="text-danger">入力データに誤りがあります。</p>;
+        return null;
       case 401:
         persistor.purge();
         this.props.delete();
         return;
+      case 404:
+        return <Redirect to={'/404'} />;
       case 406:
         return (
           <p className="text-danger">
@@ -25,7 +28,7 @@ export class ComponentError extends Component {
   };
 
   render() {
-    return <div>{this.handle(this.props.status)}</div>;
+    return this.handle(this.props.status);
   }
 }
 
