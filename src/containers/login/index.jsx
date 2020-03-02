@@ -8,7 +8,7 @@ import { noAuth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
 import { ErrorMessage } from '../../components/error/badRequest';
-import { hasProp } from '../../helpers';
+import { has_prop } from '../../helpers';
 
 export class LoginContainer extends Component {
   constructor(props) {
@@ -53,7 +53,7 @@ export class LoginContainer extends Component {
     this.setState({ errorUserId: false });
     this.setState({ errorPassword: false });
 
-    if (payload && hasProp(payload, 'user_id')) {
+    if (payload && has_prop(payload, 'user_id')) {
       if (
         payload.user_id.match(/^[a-zA-Z0-9_]+$/) === null ||
         payload.user_id.length === 0 ||
@@ -63,7 +63,7 @@ export class LoginContainer extends Component {
         errorCheck = true;
       }
     }
-    if (payload && hasProp(payload, 'password')) {
+    if (payload && has_prop(payload, 'password')) {
       if (payload.password.length < 8) {
         this.setState({ errorPassword: true });
         errorCheck = true;

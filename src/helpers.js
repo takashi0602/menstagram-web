@@ -91,6 +91,6 @@ export const appearance = (text, multipleNewLine = true) => {
  * @param key
  * @returns {boolean}
  */
-export const hasProp = (obj, key) => {
+export const has_prop = (obj, key) => {
   return !!obj && Object.prototype.hasOwnProperty.call(obj, key);
 };
