@@ -18,6 +18,7 @@ import { notError } from '../../actions/error';
 import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
+import { ErrorMessage } from '../../components/error/badRequest';
 
 export class SlurpContainer extends Component {
   constructor(props) {
@@ -222,10 +223,8 @@ export class SlurpContainer extends Component {
     );
   };
 
-  showErrorMessage = () => {
+  showErrorMessageFiles = () => {
     let errorMessages = [];
-    if (this.state.errorText)
-      errorMessages.push('256文字以下で入力してください。');
     if (this.state.errorFile) errorMessages.push('画像は必須です。');
     if (this.state.errorFileFormat)
       errorMessages.push('画像のみ選択できます。');
@@ -244,6 +243,11 @@ export class SlurpContainer extends Component {
     });
   };
 
+  showErrorMessageText = () => {
+    if (!this.state.errorText) return;
+    return <p className="text-danger">256文字以下で入力してください。</p>
+  };
+
   render() {
     return (
       <div>
@@ -257,8 +261,6 @@ export class SlurpContainer extends Component {
             : this.showActiveButton()}
         </div>
         <div className="c-container__padding">
-          {this.props.status && <Error status={this.props.status} />}
-          {this.showErrorMessage()}
           <textarea
             className="c-form__textArea mb-3"
             rows="4"
@@ -267,7 +269,11 @@ export class SlurpContainer extends Component {
               this.changeText(e);
             }}
           />
+          {this.showErrorMessageText()}
+          <ErrorMessage errors={this.props.errors} keyName="text" />
           {this.showInputFile()}
+          {this.showErrorMessageFiles()}
+          {this.props.status && <Error status={this.props.status} />}
           {this.state.files.length !== 0 && this.readerImages()}
         </div>
       </div>
@@ -279,6 +285,7 @@ function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
     status: state.error.status,
+    errors: state.error.errors,
     loading: state.loading.loading,
     success: state.slurp.success,
     isRamens: state.slurp.isRamens
@@ -307,6 +314,7 @@ export const Slurp = connect(
 SlurpContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
+  errors: PropTypes.object,
   loading: PropTypes.bool,
   slurpImages: PropTypes.func,
   success: PropTypes.bool,
