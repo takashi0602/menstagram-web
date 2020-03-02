@@ -44,7 +44,7 @@ export class LoginContainer extends Component {
       user_id: this.state.userId,
       password: this.state.password
     };
-    // if (this.validate(payload)) return;
+    if (this.validate(payload)) return;
     this.props.login(payload);
   };
 
@@ -75,18 +75,13 @@ export class LoginContainer extends Component {
   showValidateMassage = key => {
     if (key === 'userId' && this.state.errorUserId) {
       return (
-        <p className="text-danger">16文字以下の英数字で入力してください。</p>
+        <p className="text-danger">ユーザーIDは1〜16文字の範囲で指定してください。</p>
       );
     }
     if (key === 'password' && this.state.errorPassword) {
-      return <p className="text-danger">8文字以上で入力してください。</p>;
+      return <p className="text-danger">パスワードは8文字以上で指定してください。</p>;
     }
     return null;
-  };
-
-  showErrorMassage = keyName => {
-    if (this.props.status === null) return null;
-    return <ErrorMessage errors={this.props.errors} keyName={keyName} />;
   };
 
   render() {
@@ -99,7 +94,7 @@ export class LoginContainer extends Component {
             <div className="c-image__title" />
           </div>
           {this.props.status && <Error status={this.props.status} />}
-          {this.showErrorMassage('message')}
+          <ErrorMessage errors={this.props.errors} keyName="message" />
           <div className="mb-4">
             <div className="mb-3">
               <input
@@ -110,7 +105,7 @@ export class LoginContainer extends Component {
                 onChange={e => this.changeForm('userId', e)}
               />
               {this.showValidateMassage('userId')}
-              {this.showErrorMassage('user_id')}
+              <ErrorMessage errors={this.props.errors} keyName="user_id" />
             </div>
             <div>
               <Form
@@ -118,7 +113,7 @@ export class LoginContainer extends Component {
                 changeForm={(stateName, e) => this.changeForm(stateName, e)}
               />
               {this.showValidateMassage('password')}
-              {this.showErrorMassage('password')}
+              <ErrorMessage errors={this.props.errors} keyName="password" />
             </div>
           </div>
           <div className="mb-5">
