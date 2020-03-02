@@ -19,6 +19,8 @@ import { connect } from 'react-redux';
 import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
+import { ErrorMessage } from '../../components/error/badRequest';
+import { has_prop } from '../../helpers';
 
 class ProfileEditContainer extends Component {
   constructor(props) {
@@ -129,12 +131,6 @@ class ProfileEditContainer extends Component {
       return <Redirect to={`/user/${this.props.match.params.id}`} />;
   };
 
-  // redirectMyProfile = () => {
-  //   this.props.clearProfile();
-  //   this.props.clearProfileEdit();
-  //   return <Redirect to={`/user/${this.props.match.params.id}`} />;
-  // };
-
   getDefaultValue = name => {
     if (!this.props.profile) return '';
     return this.props.profile[name];
@@ -167,14 +163,24 @@ class ProfileEditContainer extends Component {
     }
   };
 
-  getErrorMessageMaxLength = message => {
-    return <p className="text-danger">{message}</p>;
+  getErrorMessage = key => {
+    if (this.state.errorUserName && key === 'userName') {
+      return <p className="text-danger">ユーザーネームは1〜16文字の範囲で指定してください。</p>;
+    }
+    if (this.state.errorBiography && key === 'biography') {
+      return <p className="text-danger">自己紹介は128文字以下で指定してください。</p>;
+    }
+  };
+
+  checkErrorStatus = () => {
+    if (!this.props.status) return;
+    if (has_prop(this.props.errors, 'user_id')) return <Redirect to={'/404'} />;
+    return <Error status={this.props.status} />
   };
 
   render() {
     return (
       <div>
-        {/*{this.props.profileEditSuccess && this.redirectMyProfile()}*/}
         {this.isMe()}
         {this.props.loading && <Loading />}
         {!this.props.loading && this.initGetProfile()}
@@ -202,7 +208,7 @@ class ProfileEditContainer extends Component {
           </div>
         </div>
         <div className="c-container__padding">
-          {this.props.status && <Error status={this.props.status} />}
+          {this.checkErrorStatus()}
           <div className="mb-3">
             <div className="d-flex align-items-center">
               <ItemLabel>ユーザーネーム</ItemLabel>
@@ -215,10 +221,8 @@ class ProfileEditContainer extends Component {
                 }}
               />
             </div>
-            {this.state.errorUserName &&
-              this.getErrorMessageMaxLength(
-                '1文字以上、16文字以下で入力してください。'
-              )}
+            {this.getErrorMessage('userName')}
+            <ErrorMessage errors={this.props.errors} keyName="user_name" />
           </div>
           <div>
             <label>自己紹介</label>
@@ -230,8 +234,8 @@ class ProfileEditContainer extends Component {
               }}
             />
           </div>
-          {this.state.errorBiography &&
-            this.getErrorMessageMaxLength('128文字以下で入力してください。')}
+          {this.getErrorMessage('biography')}
+          <ErrorMessage errors={this.props.errors} keyName="biography" />
         </div>
       </div>
     );
@@ -242,6 +246,7 @@ function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
     status: state.error.status,
+    errors: state.error.errors,
     loading: state.loading.loading,
     profileStatus: state.profile.profileStatus,
     profile: state.profile.profile,
@@ -276,6 +281,7 @@ ProfileEditContainer.propTypes = {
   accessToken: PropTypes.string,
   history: PropTypes.object,
   status: PropTypes.number,
+  errors: PropTypes.object,
   profileStatus: PropTypes.number,
   profile: PropTypes.object,
   getProfile: PropTypes.func,
