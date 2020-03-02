@@ -7,6 +7,8 @@ import { register } from '../../actions/auth/register';
 import { noAuth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
+import { has_prop } from "../../helpers";
+import { ErrorMessage } from "../../components/error/badRequest";
 
 export class RegisterContainer extends Component {
   constructor(props) {
@@ -59,13 +61,13 @@ export class RegisterContainer extends Component {
     this.setState({ errorEmail: false });
     this.setState({ errorPassword: false });
 
-    if (payload && this.hasProperty(payload, 'user_name')) {
+    if (payload && has_prop(payload, 'user_name')) {
       if (payload.user_name.length === 0 || payload.user_name.length > 16) {
         this.setState({ errorUserName: true });
         errorCheck = true;
       }
     }
-    if (payload && this.hasProperty(payload, 'user_id')) {
+    if (payload && has_prop(payload, 'user_id')) {
       if (
         payload.user_id.match(/^[a-zA-Z0-9_]+$/) === null ||
         payload.user_id.length === 0 ||
@@ -75,7 +77,7 @@ export class RegisterContainer extends Component {
         errorCheck = true;
       }
     }
-    if (payload && this.hasProperty(payload, 'email')) {
+    if (payload && has_prop(payload, 'email')) {
       if (
         payload.email.match(
           /^[a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -85,7 +87,7 @@ export class RegisterContainer extends Component {
         errorCheck = true;
       }
     }
-    if (payload && this.hasProperty(payload, 'password')) {
+    if (payload && has_prop(payload, 'password')) {
       if (payload.password.length < 8) {
         this.setState({ errorPassword: true });
         errorCheck = true;
@@ -94,8 +96,26 @@ export class RegisterContainer extends Component {
     return errorCheck;
   };
 
-  hasProperty = (obj, key) => {
-    return !!obj && Object.prototype.hasOwnProperty.call(obj, key);
+  showValidateMassage = key => {
+    if (key === 'userId' && this.state.errorUserId) {
+      return (
+        <p className="text-danger">ユーザーネームは1〜16文字の範囲で指定してください。</p>
+      );
+    }
+    if (key === 'userName' && this.state.errorUserName) {
+      return (
+        <p className="text-danger">ユーザーIDは1〜16文字の範囲で指定してください。</p>
+      );
+    }
+    if (key === 'email' && this.state.errorEmail) {
+      return (
+        <p className="text-danger">正しいメールアドレスを入力してください。</p>
+      );
+    }
+    if (key === 'password' && this.state.errorPassword) {
+      return <p className="text-danger">パスワードは8文字以上で指定してください。</p>;
+    }
+    return null;
   };
 
   render() {
@@ -108,6 +128,7 @@ export class RegisterContainer extends Component {
             <div className="c-image__title" />
           </div>
           {this.props.status && <Error status={this.props.status} />}
+          <ErrorMessage errors={this.props.errors} keyName="message" />
           <div className="mb-4">
             <input
               type="text"
@@ -116,9 +137,8 @@ export class RegisterContainer extends Component {
               value={this.state.userName}
               onChange={e => this.changeForm('userName', e)}
             />
-            {this.state.errorUserName && (
-              <p className="text-danger">16文字以下で入力してください。</p>
-            )}
+            {this.showValidateMassage('userName')}
+            <ErrorMessage errors={this.props.errors} keyName="user_name" />
             <input
               type="text"
               className="c-form mb-3"
@@ -126,11 +146,8 @@ export class RegisterContainer extends Component {
               value={this.state.userId}
               onChange={e => this.changeForm('userId', e)}
             />
-            {this.state.errorUserId && (
-              <p className="text-danger">
-                16文字以下の英数字で入力してください。
-              </p>
-            )}
+            {this.showValidateMassage('userId')}
+            <ErrorMessage errors={this.props.errors} keyName="user_id" />
             <input
               type="email"
               className="c-form mb-3"
@@ -138,18 +155,14 @@ export class RegisterContainer extends Component {
               value={this.state.email}
               onChange={e => this.changeForm('email', e)}
             />
-            {this.state.errorEmail && (
-              <p className="text-danger">
-                正しいメールアドレスを入力してください。
-              </p>
-            )}
+            {this.showValidateMassage('email')}
+            <ErrorMessage errors={this.props.errors} keyName="email" />
             <Form
               password={this.state.password}
               changeForm={(stateName, e) => this.changeForm(stateName, e)}
             />
-            {this.state.errorPassword && (
-              <p className="text-danger">8文字以上で入力してください。</p>
-            )}
+            {this.showValidateMassage('password')}
+            <ErrorMessage errors={this.props.errors} keyName="password" />
           </div>
           <div className="mb-5">
             <button className="c-button__orange w-100" onClick={this.register}>
@@ -171,6 +184,7 @@ function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
     status: state.error.status,
+    errors: state.error.errors,
     loading: state.loading.loading
   };
 }
@@ -191,6 +205,7 @@ export const Register = connect(
 RegisterContainer.propTypes = {
   accessToken: PropTypes.string,
   status: PropTypes.number,
+  errors: PropTypes.object,
   register: PropTypes.func,
   loading: PropTypes.bool
 };

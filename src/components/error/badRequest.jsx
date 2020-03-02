@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { nl2br, hasProp } from '../../helpers';
+import { nl2br, has_prop } from '../../helpers';
 
 export class ErrorMessage extends Component {
   getErrorMassage = () => {
     if (
       !Object.keys(this.props.errors).length ||
-      !hasProp(this.props.errors, this.props.keyName)
+      !has_prop(this.props.errors, this.props.keyName)
     )
       return null;
     if (typeof this.props.errors[this.props.keyName] === 'string') {
