@@ -32,6 +32,7 @@ import { follow, unfollow } from '../../actions/follow';
 import { clearFollows } from '../../actions/follow/follows';
 import { clearFollowers } from '../../actions/follow/followers';
 import { appearance } from '../../helpers';
+import { Redirect } from 'react-router-dom';
 
 class ProfileContainer extends Component {
   constructor(prop) {
@@ -229,6 +230,12 @@ class ProfileContainer extends Component {
     }
   };
 
+  checkErrorStatus = () => {
+    if (!this.props.status) return;
+    if (this.props.status === 400) return <Redirect to={'/404'} />;
+    return <Error status={this.props.status} />
+  };
+
   render() {
     return (
       <div>
@@ -238,7 +245,7 @@ class ProfileContainer extends Component {
         {!this.props.loading && this.initGetProfileSlurps()}
         {this.initFollowsOrFollowers()}
         {this.TopHeader()}
-        {this.props.status && <Error status={this.props.status} />}
+        {this.checkErrorStatus()}
         <div className="text-center">
           {this.showUserImage()}
           <UserName>{this.props.profile.user_name}</UserName>
