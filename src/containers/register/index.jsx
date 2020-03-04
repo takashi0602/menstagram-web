@@ -97,14 +97,14 @@ export class RegisterContainer extends Component {
   };
 
   showValidateMassage = key => {
-    if (key === 'userId' && this.state.errorUserId) {
+    if (key === 'userName' && this.state.errorUserName) {
       return (
         <p className="text-danger">ユーザーネームは1〜16文字の範囲で指定してください。</p>
       );
     }
-    if (key === 'userName' && this.state.errorUserName) {
+    if (key === 'userId' && this.state.errorUserId) {
       return (
-        <p className="text-danger">ユーザーIDは1〜16文字の範囲で指定してください。</p>
+        <p className="text-danger">ユーザーIDは1〜16文字の英数字のみで指定してください。</p>
       );
     }
     if (key === 'email' && this.state.errorEmail) {
