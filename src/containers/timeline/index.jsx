@@ -12,6 +12,7 @@ import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { yum, unyum } from '../../actions/yum';
+import { Redirect } from 'react-router-dom';
 
 class TimelineContainer extends Component {
   constructor(props) {
@@ -26,10 +27,6 @@ class TimelineContainer extends Component {
       errorSlurpsPrivateTimeline: []
     };
   }
-
-  // forceUpdate = () => {
-  //   super.forceUpdate();
-  // };
 
   initSetTimeline = () => {
     const params = {};
@@ -226,6 +223,12 @@ class TimelineContainer extends Component {
     }
   };
 
+  checkErrorStatus = () => {
+    if (!this.props.status) return;
+    if (this.props.status === 400) return <Redirect to={'/404'} />;
+    return <Error status={this.props.status} />
+  };
+
   render() {
     return (
       <div>
@@ -241,9 +244,8 @@ class TimelineContainer extends Component {
         {this.state.showBackToTop && (
           <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>
         )}
-        {this.props.status && <Error status={this.props.status} />}
+        {this.checkErrorStatus()}
         {this.showSlurpItems()}
-        {this.props.status && <Error status={this.props.status} />}
         {this.showReloadBar('スラープをさらに表示', this.getOldTimeline)}
       </div>
     );
