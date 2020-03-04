@@ -19,6 +19,7 @@ import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
 import { ErrorMessage } from '../../components/error/badRequest';
+import { has_prop } from "../../helpers";
 
 export class SlurpContainer extends Component {
   constructor(props) {
@@ -144,6 +145,9 @@ export class SlurpContainer extends Component {
     const files = this.state.files;
     files.splice(index, 1);
     this.setState({ files: files });
+    if (files.length === 0) {
+      this.props.initErrorStatus();
+    }
     if (this.props.isRamens && this.props.isRamens.length > 0) {
       this.props.isRamens.splice(index, 1);
       const isRamen = this.props.isRamens.filter(isRamen => isRamen === false);
@@ -248,6 +252,17 @@ export class SlurpContainer extends Component {
     return <p className="text-danger">256文字以下で入力してください。</p>
   };
 
+  showErrorMessageImage = () => {
+    let error = false;
+    for (let i = 1; i < 5; i++) {
+      if (has_prop(this.props.errors, `image${i}`)) {
+        error = true;
+      }
+    }
+    if (error) return <p className="text-danger">画像でないファイルは選択できません。</p>;
+    return null;
+  };
+
   render() {
     return (
       <div>
@@ -273,6 +288,7 @@ export class SlurpContainer extends Component {
           <ErrorMessage errors={this.props.errors} keyName="text" />
           {this.showInputFile()}
           {this.showErrorMessageFiles()}
+          {this.showErrorMessageImage()}
           {this.props.status && <Error status={this.props.status} />}
           {this.state.files.length !== 0 && this.readerImages()}
         </div>
