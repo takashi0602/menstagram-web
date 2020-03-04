@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Submit,
@@ -17,7 +17,6 @@ import { profile, clearProfile } from '../../actions/profile';
 import { profileEdit, failProfileEdit } from '../../actions/profileEdit';
 import { connect } from 'react-redux';
 import { Loading } from '../../components/loading';
-import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
 import { ErrorMessage } from '../../components/error/badRequest';
 import { has_prop } from '../../helpers';

@@ -10,6 +10,7 @@ import { Error } from '../../components/error';
 import { Scroll } from '../../components/scroll';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { yum, unyum } from '../../actions/yum';
+import { Redirect } from 'react-router-dom';
 
 class YumsContainer extends Component {
   constructor(props) {
@@ -128,6 +129,12 @@ class YumsContainer extends Component {
     );
   };
 
+  checkErrorStatus = () => {
+    if (!this.props.status) return;
+    if (this.props.status === 400) return <Redirect to={'/404'} />;
+    return <Error status={this.props.status} />
+  };
+
   render() {
     return (
       <div>
@@ -141,9 +148,8 @@ class YumsContainer extends Component {
         {this.state.showBackToTop && (
           <BackToTop onClick={this.setScrollTop}>トップへ戻る</BackToTop>
         )}
-        {this.props.status && <Error status={this.props.status} />}
+        {this.checkErrorStatus()}
         {this.showSlurpItems()}
-        {this.props.status && <Error status={this.props.status} />}
         {this.props.yums.length > 9 &&
           this.showReloadBar('ヤムをさらに表示', this.getOldYums)}
       </div>

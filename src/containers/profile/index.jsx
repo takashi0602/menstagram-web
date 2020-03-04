@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -32,7 +32,6 @@ import { follow, unfollow } from '../../actions/follow';
 import { clearFollows } from '../../actions/follow/follows';
 import { clearFollowers } from '../../actions/follow/followers';
 import { appearance } from '../../helpers';
-import { Redirect } from 'react-router-dom';
 
 class ProfileContainer extends Component {
   constructor(prop) {
