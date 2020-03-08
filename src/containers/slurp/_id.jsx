@@ -10,6 +10,9 @@ import { auth } from '../../middleware/auth';
 import { slurpDetail } from '../../actions/slurpDetail';
 import { Loading } from '../../components/loading';
 import { yum, unyum } from '../../actions/yum';
+import { Error } from '../../components/error';
+import { Redirect } from 'react-router-dom';
+import { has_prop } from '../../helpers';
 
 class SlurpDetailContainer extends Component {
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある
@@ -62,7 +65,7 @@ class SlurpDetailContainer extends Component {
 
   showSlurp = () => {
     if (
-      !this.props.slurpDetail.images.length ||
+      !has_prop(this.props.slurpDetail, 'images') ||
       Number(this.props.match.params.id) !== this.props.slurpDetail.id
     )
       return;
@@ -72,6 +75,16 @@ class SlurpDetailContainer extends Component {
         yum={this.yum}
         unyum={this.unyum}
       />
+    );
+  };
+
+  checkErrorStatus = () => {
+    if (!this.props.status) return;
+    if (this.props.status === 400) return <Redirect to={'/404'} />;
+    return (
+      <div className="c-container__padding">
+        <Error status={this.props.status} />
+      </div>
     );
   };
 
@@ -88,6 +101,7 @@ class SlurpDetailContainer extends Component {
           </BackButton>
           <Title>スラープ</Title>
         </header>
+        {this.checkErrorStatus()}
         {this.showSlurp()}
       </div>
     );
@@ -97,7 +111,7 @@ class SlurpDetailContainer extends Component {
 function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
-    status: state.slurpDetail.status,
+    status: state.error.status,
     loading: state.loading.loading,
     success: state.slurp.success,
     slurpDetail: state.slurpDetail.slurpDetail,

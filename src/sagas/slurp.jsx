@@ -21,7 +21,10 @@ function* slurp(action) {
       yield put(successSlurp());
     } else {
       const ramenJudgeError = {
-        status: 406
+        status: 406,
+        data: {
+          errors: {}
+        }
       };
       yield put(failSlurp(response.data.is_ramens));
       yield put(errorHandle.error(ramenJudgeError));
