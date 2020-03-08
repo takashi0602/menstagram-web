@@ -276,6 +276,7 @@ export class SlurpContainer extends Component {
             : this.showActiveButton()}
         </div>
         <div className="c-container__padding">
+          <ErrorMessage errors={this.props.errors} keyName="message" />
           <textarea
             className="c-form__textArea mb-3"
             rows="4"

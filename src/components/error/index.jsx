@@ -14,6 +14,8 @@ export class ComponentError extends Component {
         persistor.purge();
         this.props.delete();
         return;
+      case 403:
+        return null;
       case 404:
         return <Redirect to={'/404'} />;
       case 406:
