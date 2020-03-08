@@ -75,11 +75,15 @@ export class LoginContainer extends Component {
   showValidateMassage = key => {
     if (key === 'userId' && this.state.errorUserId) {
       return (
-        <p className="text-danger">ユーザーIDは1〜16文字の英数字のみで指定してください。</p>
+        <p className="text-danger">
+          ユーザーIDは1〜16文字の英数字のみで指定してください。
+        </p>
       );
     }
     if (key === 'password' && this.state.errorPassword) {
-      return <p className="text-danger">パスワードは8文字以上で指定してください。</p>;
+      return (
+        <p className="text-danger">パスワードは8文字以上で指定してください。</p>
+      );
     }
     return null;
   };

@@ -14,7 +14,7 @@ import {
 import SlurpYumsItem from '../../components/slurp/yums';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { follow, unfollow } from '../../actions/follow';
-import { Error } from "../../components/error";
+import { Error } from '../../components/error';
 import { Redirect } from 'react-router-dom';
 
 class SlurpYumsContainer extends Component {

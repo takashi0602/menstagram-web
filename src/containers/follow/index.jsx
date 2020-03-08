@@ -10,8 +10,8 @@ import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { follows } from '../../actions/follow/follows';
 import { followers } from '../../actions/follow/followers';
 import { follow, unfollow } from '../../actions/follow';
-import { Error } from "../../components/error";
-import { has_prop } from "../../helpers";
+import { Error } from '../../components/error';
+import { has_prop } from '../../helpers';
 import { Redirect } from 'react-router-dom';
 
 export class FollowContainer extends Component {

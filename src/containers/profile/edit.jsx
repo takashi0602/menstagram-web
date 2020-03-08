@@ -164,17 +164,23 @@ class ProfileEditContainer extends Component {
 
   getErrorMessage = key => {
     if (this.state.errorUserName && key === 'userName') {
-      return <p className="text-danger">ユーザーネームは1〜16文字の範囲で指定してください。</p>;
+      return (
+        <p className="text-danger">
+          ユーザーネームは1〜16文字の範囲で指定してください。
+        </p>
+      );
     }
     if (this.state.errorBiography && key === 'biography') {
-      return <p className="text-danger">自己紹介は128文字以下で指定してください。</p>;
+      return (
+        <p className="text-danger">自己紹介は128文字以下で指定してください。</p>
+      );
     }
   };
 
   checkErrorStatus = () => {
     if (!this.props.status) return;
     if (has_prop(this.props.errors, 'user_id')) return <Redirect to={'/404'} />;
-    return <Error status={this.props.status} />
+    return <Error status={this.props.status} />;
   };
 
   render() {

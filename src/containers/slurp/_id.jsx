@@ -12,7 +12,7 @@ import { Loading } from '../../components/loading';
 import { yum, unyum } from '../../actions/yum';
 import { Error } from '../../components/error';
 import { Redirect } from 'react-router-dom';
-import { has_prop } from "../../helpers";
+import { has_prop } from '../../helpers';
 
 class SlurpDetailContainer extends Component {
   // TODO: history.goBack()はブラウザバックなので共有した際などは押しても遷移しない場合がある

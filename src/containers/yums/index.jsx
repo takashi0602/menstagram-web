@@ -132,7 +132,7 @@ class YumsContainer extends Component {
   checkErrorStatus = () => {
     if (!this.props.status) return;
     if (this.props.status === 400) return <Redirect to={'/404'} />;
-    return <Error status={this.props.status} />
+    return <Error status={this.props.status} />;
   };
 
   render() {

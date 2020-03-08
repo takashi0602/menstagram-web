@@ -19,7 +19,7 @@ import { Loading } from '../../components/loading';
 import { Redirect } from 'react-router-dom';
 import { Error } from '../../components/error';
 import { ErrorMessage } from '../../components/error/badRequest';
-import { has_prop } from "../../helpers";
+import { has_prop } from '../../helpers';
 
 export class SlurpContainer extends Component {
   constructor(props) {
@@ -249,7 +249,7 @@ export class SlurpContainer extends Component {
 
   showErrorMessageText = () => {
     if (!this.state.errorText) return;
-    return <p className="text-danger">256文字以下で入力してください。</p>
+    return <p className="text-danger">256文字以下で入力してください。</p>;
   };
 
   showErrorMessageImage = () => {
@@ -259,7 +259,10 @@ export class SlurpContainer extends Component {
         error = true;
       }
     }
-    if (error) return <p className="text-danger">画像でないファイルは選択できません。</p>;
+    if (error)
+      return (
+        <p className="text-danger">画像でないファイルは選択できません。</p>
+      );
     return null;
   };
 

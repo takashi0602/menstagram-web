@@ -7,8 +7,8 @@ import { register } from '../../actions/auth/register';
 import { noAuth } from '../../middleware/auth';
 import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
-import { has_prop } from "../../helpers";
-import { ErrorMessage } from "../../components/error/badRequest";
+import { has_prop } from '../../helpers';
+import { ErrorMessage } from '../../components/error/badRequest';
 
 export class RegisterContainer extends Component {
   constructor(props) {
@@ -99,12 +99,16 @@ export class RegisterContainer extends Component {
   showValidateMassage = key => {
     if (key === 'userName' && this.state.errorUserName) {
       return (
-        <p className="text-danger">ユーザーネームは1〜16文字の範囲で指定してください。</p>
+        <p className="text-danger">
+          ユーザーネームは1〜16文字の範囲で指定してください。
+        </p>
       );
     }
     if (key === 'userId' && this.state.errorUserId) {
       return (
-        <p className="text-danger">ユーザーIDは1〜16文字の英数字のみで指定してください。</p>
+        <p className="text-danger">
+          ユーザーIDは1〜16文字の英数字のみで指定してください。
+        </p>
       );
     }
     if (key === 'email' && this.state.errorEmail) {
@@ -113,7 +117,9 @@ export class RegisterContainer extends Component {
       );
     }
     if (key === 'password' && this.state.errorPassword) {
-      return <p className="text-danger">パスワードは8文字以上で指定してください。</p>;
+      return (
+        <p className="text-danger">パスワードは8文字以上で指定してください。</p>
+      );
     }
     return null;
   };
