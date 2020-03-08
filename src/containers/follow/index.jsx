@@ -10,6 +10,9 @@ import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { follows } from '../../actions/follow/follows';
 import { followers } from '../../actions/follow/followers';
 import { follow, unfollow } from '../../actions/follow';
+import { Error } from '../../components/error';
+import { has_prop } from '../../helpers';
+import { Redirect } from 'react-router-dom';
 
 export class FollowContainer extends Component {
   constructor(props) {
@@ -158,6 +161,16 @@ export class FollowContainer extends Component {
     }
   };
 
+  checkErrorStatus = () => {
+    if (!this.props.status) return;
+    if (has_prop(this.props.errors, 'user_id')) return <Redirect to={'/404'} />;
+    return (
+      <div className="c-container__padding">
+        <Error status={this.props.status} />
+      </div>
+    );
+  };
+
   render() {
     return (
       <div>
@@ -165,7 +178,8 @@ export class FollowContainer extends Component {
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
         {this.isPathFollow() ? this.initGetFollows() : this.initGetFollowers()}
-        {<FollowHeader history={this.props.history} />}
+        <FollowHeader history={this.props.history} />
+        {this.checkErrorStatus()}
         {this.showToggleList()}
         {this.state.showModal && (
           <TwoChoiceModal
@@ -184,6 +198,7 @@ function mapStateToProps(state) {
   return {
     accessToken: state.auth.accessToken,
     status: state.error.status,
+    errors: state.error.errors,
     loading: state.loading.loading,
     follows: state.follows.follows,
     followsStatus: state.follows.status,
@@ -221,6 +236,8 @@ FollowContainer.propTypes = {
   history: PropTypes.object,
   match: PropTypes.object,
   loading: PropTypes.bool,
+  status: PropTypes.number,
+  errors: PropTypes.object,
   getFollows: PropTypes.func,
   follows: PropTypes.array,
   followsStatus: PropTypes.number,

@@ -148,7 +148,7 @@ export class TimelineSlurpItem extends Component {
   };
 
   toggleReadMore = () => {
-    this.setState({readMore: !this.state.readMore});
+    this.setState({ readMore: !this.state.readMore });
   };
 
   showText = text => {
@@ -158,8 +158,11 @@ export class TimelineSlurpItem extends Component {
           <p
             dangerouslySetInnerHTML={{
               __html: text
-            }} />
-          <HiddenButton type="button" onClick={this.toggleReadMore}>非表示にする</HiddenButton>
+            }}
+          />
+          <HiddenButton type="button" onClick={this.toggleReadMore}>
+            非表示にする
+          </HiddenButton>
         </div>
       );
     }
@@ -171,9 +174,12 @@ export class TimelineSlurpItem extends Component {
           <span
             dangerouslySetInnerHTML={{
               __html: text.slice(0, text.search(regex))
-            }} />
+            }}
+          />
           <span>...&nbsp;</span>
-          <HiddenButton type="button" onClick={this.toggleReadMore}>続きを読む</HiddenButton>
+          <HiddenButton type="button" onClick={this.toggleReadMore}>
+            続きを読む
+          </HiddenButton>
         </div>
       );
     } else if (text.length > 30) {
@@ -182,9 +188,12 @@ export class TimelineSlurpItem extends Component {
           <span
             dangerouslySetInnerHTML={{
               __html: text.slice(0, 30)
-            }} />
+            }}
+          />
           <span>...&nbsp;</span>
-          <HiddenButton type="button" onClick={this.toggleReadMore}>続きを読む</HiddenButton>
+          <HiddenButton type="button" onClick={this.toggleReadMore}>
+            続きを読む
+          </HiddenButton>
         </div>
       );
     } else {
@@ -193,7 +202,8 @@ export class TimelineSlurpItem extends Component {
           <span
             dangerouslySetInnerHTML={{
               __html: text
-            }} />
+            }}
+          />
         </div>
       );
     }

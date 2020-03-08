@@ -83,3 +83,14 @@ export const appearance = (text, multipleNewLine = true) => {
     ? url2a(nl2br(mnl2nl(sanitize(text.trim()))))
     : url2a(nl2br(sanitize(text.trim())));
 };
+
+/**
+ * オブジェクトにkeyが存在するかどうかを返す
+ *
+ * @param obj
+ * @param key
+ * @returns {boolean}
+ */
+export const has_prop = (obj, key) => {
+  return !!obj && Object.prototype.hasOwnProperty.call(obj, key);
+};

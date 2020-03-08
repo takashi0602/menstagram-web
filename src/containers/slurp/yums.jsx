@@ -14,6 +14,8 @@ import {
 import SlurpYumsItem from '../../components/slurp/yums';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { follow, unfollow } from '../../actions/follow';
+import { Error } from '../../components/error';
+import { Redirect } from 'react-router-dom';
 
 class SlurpYumsContainer extends Component {
   constructor(prop) {
@@ -91,6 +93,12 @@ class SlurpYumsContainer extends Component {
     });
   };
 
+  checkErrorStatus = () => {
+    if (!this.props.status) return;
+    if (this.props.status === 400) return <Redirect to={'/404'} />;
+    return <Error status={this.props.status} />;
+  };
+
   render() {
     return (
       <div>
@@ -108,6 +116,7 @@ class SlurpYumsContainer extends Component {
           </div>
         </header>
         <div className="c-container__padding">
+          {this.checkErrorStatus()}
           <ul className="pl-0">{this.showSlurpYums()}</ul>
         </div>
         {this.state.showModal && (

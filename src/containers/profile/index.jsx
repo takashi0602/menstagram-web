@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -229,6 +229,12 @@ class ProfileContainer extends Component {
     }
   };
 
+  checkErrorStatus = () => {
+    if (!this.props.status) return;
+    if (this.props.status === 400) return <Redirect to={'/404'} />;
+    return <Error status={this.props.status} />;
+  };
+
   render() {
     return (
       <div>
@@ -238,7 +244,7 @@ class ProfileContainer extends Component {
         {!this.props.loading && this.initGetProfileSlurps()}
         {this.initFollowsOrFollowers()}
         {this.TopHeader()}
-        {this.props.status && <Error status={this.props.status} />}
+        {this.checkErrorStatus()}
         <div className="text-center">
           {this.showUserImage()}
           <UserName>{this.props.profile.user_name}</UserName>
