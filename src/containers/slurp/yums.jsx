@@ -96,7 +96,7 @@ class SlurpYumsContainer extends Component {
   checkErrorStatus = () => {
     if (!this.props.status) return;
     if (this.props.status === 400) return <Redirect to={'/404'} />;
-    return <Error status={this.props.status} />
+    return <Error status={this.props.status} />;
   };
 
   render() {
@@ -115,8 +115,8 @@ class SlurpYumsContainer extends Component {
             <HeaderTitle>ヤムしたユーザー</HeaderTitle>
           </div>
         </header>
-        {this.checkErrorStatus()}
         <div className="c-container__padding">
+          {this.checkErrorStatus()}
           <ul className="pl-0">{this.showSlurpYums()}</ul>
         </div>
         {this.state.showModal && (

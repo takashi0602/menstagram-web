@@ -81,7 +81,11 @@ class SlurpDetailContainer extends Component {
   checkErrorStatus = () => {
     if (!this.props.status) return;
     if (this.props.status === 400) return <Redirect to={'/404'} />;
-    return <Error status={this.props.status} />
+    return (
+      <div className="c-container__padding">
+        <Error status={this.props.status} />
+      </div>
+    );
   };
 
   render() {
