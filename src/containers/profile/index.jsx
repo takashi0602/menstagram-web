@@ -29,7 +29,7 @@ import { Error } from '../../components/error';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { follow, unfollow } from '../../actions/follow';
-import { clearFollows } from '../../actions/follow/follows';
+import { clearFollowees } from '../../actions/follow/followees';
 import { clearFollowers } from '../../actions/follow/followers';
 import { appearance } from '../../helpers';
 
@@ -220,9 +220,9 @@ class ProfileContainer extends Component {
     this.setState({ showUnfollowModal: false });
   };
 
-  initFollowsOrFollowers = () => {
-    if (this.props.followsStatus !== -1) {
-      this.props.clearFollows();
+  initFolloweesOrFollowers = () => {
+    if (this.props.followeesStatus !== -1) {
+      this.props.clearFollowees();
     }
     if (this.props.followersStatus !== -1) {
       this.props.clearFollowers();
@@ -242,7 +242,7 @@ class ProfileContainer extends Component {
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
         {!this.props.loading && this.initGetProfileSlurps()}
-        {this.initFollowsOrFollowers()}
+        {this.initFolloweesOrFollowers()}
         {this.TopHeader()}
         {this.checkErrorStatus()}
         <div className="text-center">
@@ -271,13 +271,13 @@ class ProfileContainer extends Component {
             </Item>
             <Item>
               <Link
-                to={`/user/${this.props.profile.user_id}/follow`}
+                to={`/user/${this.props.profile.user_id}/followee`}
                 className="c-link__black"
               >
                 <div className="text-center mb-0">
                   {this.props.profile.follow_count}
                 </div>
-                <div className="text-center">フォロー</div>
+                <div className="text-center">フォロイー</div>
               </Link>
             </Item>
           </div>
@@ -324,7 +324,7 @@ function mapStateToProps(state) {
     profile: state.profile.profile,
     slurpsStatus: state.profileSlurps.status,
     slurps: state.profileSlurps.slurps,
-    followsStatus: state.follows.status,
+    followeesStatus: state.followees.status,
     followersStatus: state.followers.status
   };
 }
@@ -343,8 +343,8 @@ function mapDispatchToProps(dispatch) {
     unfollow(payload) {
       dispatch(unfollow(payload));
     },
-    clearFollows() {
-      dispatch(clearFollows());
+    clearFollowees() {
+      dispatch(clearFollowees());
     },
     clearFollowers() {
       dispatch(clearFollowers());
@@ -372,8 +372,8 @@ ProfileContainer.propTypes = {
   loading: PropTypes.bool,
   follow: PropTypes.func,
   unfollow: PropTypes.func,
-  followsStatus: PropTypes.number,
+  followeesStatus: PropTypes.number,
   followersStatus: PropTypes.number,
-  clearFollows: PropTypes.func,
+  clearFollowees: PropTypes.func,
   clearFollowers: PropTypes.func
 };
