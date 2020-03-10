@@ -7,7 +7,7 @@ import FollowListItem from '../../components/follow';
 import { FollowHeader } from '../../components/follow/header';
 import { ScrollToTopOnMount } from '../../components/scroll/scrollToTopOnMount';
 import { TwoChoiceModal } from '../../components/modal/twoChoiceModal';
-import { follows } from '../../actions/follow/follows';
+import { followees } from '../../actions/follow/followees';
 import { followers } from '../../actions/follow/followers';
 import { follow, unfollow } from '../../actions/follow';
 import { Error } from '../../components/error';
@@ -27,18 +27,18 @@ export class FollowContainer extends Component {
 
   ToggleList = () => {
     if (this.isPathFollow()) {
-      return this.showFollows();
+      return this.showFollowees();
     }
     return this.showFollowers();
   };
 
-  showFollows = () => {
-    if (this.props.follows.length === 0) {
+  showFollowees = () => {
+    if (this.props.followees.length === 0) {
       return <p className="text-center">ユーザーをフォローしていません。</p>;
     }
     return (
       <ul className="pl-0">
-        {this.props.follows.map((user, idx) => {
+        {this.props.followees.map((user, idx) => {
           return (
             <FollowListItem
               key={idx}
@@ -91,7 +91,7 @@ export class FollowContainer extends Component {
     };
     this.props.follow(payload);
     if (this.isPathFollow()) {
-      this.props.follows[idx].is_follow = true;
+      this.props.followees[idx].is_follow = true;
     } else {
       this.props.followers[idx].is_follow = true;
     }
@@ -105,14 +105,14 @@ export class FollowContainer extends Component {
     this.props.unfollow(payload);
     this.closeModal();
     if (this.isPathFollow()) {
-      this.props.follows[this.state.targetIndex].is_follow = false;
+      this.props.followees[this.state.targetIndex].is_follow = false;
     } else {
       this.props.followers[this.state.targetIndex].is_follow = false;
     }
   };
 
   isPathFollow = () => {
-    return this.props.history.location.pathname.split('/')[3] === 'follow';
+    return this.props.history.location.pathname.split('/')[3] === 'followee';
   };
 
   targetUserId = () => {
@@ -129,13 +129,13 @@ export class FollowContainer extends Component {
     };
   };
 
-  initGetFollows = () => {
+  initGetFollowees = () => {
     if (this.props.loading) return;
     if (
-      this.props.followsStatus === -1 ||
-      this.props.followsTargetUserId !== this.targetUserId()
+      this.props.followeesStatus === -1 ||
+      this.props.followeesTargetUserId !== this.targetUserId()
     ) {
-      this.props.getFollows(this.initSetPayload());
+      this.props.getFollowees(this.initSetPayload());
     }
   };
 
@@ -152,7 +152,7 @@ export class FollowContainer extends Component {
   showToggleList = () => {
     if (
       !this.props.loading ||
-      !!this.props.follows.length ||
+      !!this.props.followees.length ||
       !!this.props.followers.length
     ) {
       return (
@@ -177,7 +177,9 @@ export class FollowContainer extends Component {
         {auth(this.props.accessToken)}
         <ScrollToTopOnMount />
         {this.props.loading && <Loading />}
-        {this.isPathFollow() ? this.initGetFollows() : this.initGetFollowers()}
+        {this.isPathFollow()
+          ? this.initGetFollowees()
+          : this.initGetFollowers()}
         <FollowHeader history={this.props.history} />
         {this.checkErrorStatus()}
         {this.showToggleList()}
@@ -200,9 +202,9 @@ function mapStateToProps(state) {
     status: state.error.status,
     errors: state.error.errors,
     loading: state.loading.loading,
-    follows: state.follows.follows,
-    followsStatus: state.follows.status,
-    followsTargetUserId: state.follows.targetUserId,
+    followees: state.followees.followees,
+    followeesStatus: state.followees.status,
+    followeesTargetUserId: state.followees.targetUserId,
     followers: state.followers.followers,
     followersStatus: state.followers.status,
     followersTargetUserId: state.followers.targetUserId
@@ -211,8 +213,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getFollows(payload) {
-      dispatch(follows(payload));
+    getFollowees(payload) {
+      dispatch(followees(payload));
     },
     getFollowers(payload) {
       dispatch(followers(payload));
@@ -238,10 +240,10 @@ FollowContainer.propTypes = {
   loading: PropTypes.bool,
   status: PropTypes.number,
   errors: PropTypes.object,
-  getFollows: PropTypes.func,
-  follows: PropTypes.array,
-  followsStatus: PropTypes.number,
-  followsTargetUserId: PropTypes.string,
+  getFollowees: PropTypes.func,
+  followees: PropTypes.array,
+  followeesStatus: PropTypes.number,
+  followeesTargetUserId: PropTypes.string,
   getFollowers: PropTypes.func,
   followers: PropTypes.array,
   followersStatus: PropTypes.number,

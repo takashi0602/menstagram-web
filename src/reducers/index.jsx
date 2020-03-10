@@ -13,7 +13,7 @@ import { profile } from './profile';
 import { profileSlurps } from './profileSlurps';
 import { yum } from './yum';
 import { slurpYums } from './slurpYums';
-import { follows } from './follows';
+import { followees } from './followees';
 import { followers } from './followers';
 import { follow } from './follow';
 import { profileEdit } from './profileEdit';
@@ -32,7 +32,7 @@ const combineReducer = combineReducers({
   yums,
   yum,
   follow,
-  follows,
+  followees,
   followers,
   error,
   router: connectRouter(history)

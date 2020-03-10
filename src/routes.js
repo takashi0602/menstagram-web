@@ -35,7 +35,7 @@ export const Routes = () => {
               <Route exact path={'/login'} component={Login} />
               <Route exact path={'/user/:id'} component={Profile} />
               <Route exact path={'/user/:id/edit'} component={ProfileEdit} />
-              <Route exact path={'/user/:id/follow'} component={Follow} />
+              <Route exact path={'/user/:id/followee'} component={Follow} />
               <Route exact path={'/user/:id/follower'} component={Follow} />
               <Route exact path={'/slurp'} component={Slurp} />
               <Route exact path={'/slurp/:id'} component={SlurpDetail} />

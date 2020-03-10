@@ -1,28 +1,28 @@
 const initialState = {
-  follows: [],
+  followees: [],
   status: -1,
   targetUserId: ''
 };
 
-export function follows(state = initialState, action) {
+export function followees(state = initialState, action) {
   switch (action.type) {
-    case 'FOLLOWS':
+    case 'FOLLOWEES':
       return state;
-    case 'SUCCESS_FOLLOWS':
+    case 'SUCCESS_FOLLOWEES':
       return {
-        follows: action.follows,
+        followees: action.followees,
         status: action.status,
         targetUserId: action.targetUserId
       };
-    case 'FAIL_FOLLOWS':
+    case 'FAIL_FOLLOWEES':
       return {
-        follows: action.follows,
+        followees: action.followees,
         status: action.status,
         targetUserId: action.targetUserId
       };
-    case 'CLEAR_FOLLOWS':
+    case 'CLEAR_FOLLOWEES':
       return {
-        follows: action.follows,
+        followees: action.followees,
         status: action.status,
         targetUserId: action.targetUserId
       };

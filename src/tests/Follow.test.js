@@ -1,5 +1,5 @@
 import { getFollowers } from '../api/follow/followers';
-import { getFollows } from '../api/follow/follows';
+import { getFollows } from '../api/follow/followees';
 import { getSlurpDetail } from '../api/slurpdetail';
 import { requestRegister } from '../api/auth';
 import { follow, unfollow } from '../api/follow';
