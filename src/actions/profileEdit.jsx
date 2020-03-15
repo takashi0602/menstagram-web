@@ -1,3 +1,5 @@
+import { has_prop } from '../helpers';
+
 export const PROFILE_EDIT = 'PROFILE_EDIT';
 export const SUCCESS_PROFILE_EDIT = 'SUCCESS_PROFILE_EDIT';
 export const FAIL_PROFILE_EDIT = 'FAIL_PROFILE_EDIT';
@@ -9,6 +11,7 @@ export const profileEdit = payload => {
     accessToken: payload.accessToken,
     profile: payload.profile,
     userId: payload.userId,
+    formData: has_prop(payload, 'formData') ? payload.formData : false,
     success: false
   };
 };

@@ -25,7 +25,8 @@ class ProfileEditContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newImage: [],
+      newAvatar: undefined,
+      changeAvatar: false,
       errorFileFormat: false,
       userName: '',
       biography: '',
@@ -52,14 +53,17 @@ class ProfileEditContainer extends Component {
     if (
       this.state.errorUserName ||
       this.state.errorBiography ||
-      (!this.state.changeUserName && !this.state.changeBiography)
+      this.state.errorFileFormat ||
+      (!this.state.changeUserName &&
+        !this.state.changeBiography &&
+        !this.state.changeAvatar)
     )
       return <Submit className="c-link__lightgray">完了</Submit>;
     return <Submit onClick={this.requestEditProfile}>完了</Submit>;
   };
 
   showUserImage = () => {
-    if (this.state.newImage.length !== 0) return this.returnNewImage();
+    if (this.state.newAvatar) return this.returnNewImage();
     if (!!this.props.profile && this.props.profile.avatar)
       return (
         <UserImage
@@ -80,22 +84,27 @@ class ProfileEditContainer extends Component {
     return (
       <UserImage
         style={{
-          backgroundImage: `url('${createObjectURL(this.state.newImage)}')`
+          backgroundImage: `url('${createObjectURL(this.state.newAvatar)}')`
         }}
       />
     );
   };
 
-  setNewImage = e => {
-    this.setState({ errorFileFormat: false });
+  setNewAvatar = e => {
+    this.setState({
+      errorFileFormat: false,
+      changeAvatar: true
+    });
     if (e.target.files && !e.target.files[0].type.startsWith('image')) {
-      this.setState({ errorFileFormat: true });
+      this.setState({
+        errorFileFormat: true,
+        changeAvatar: false
+      });
       return;
     }
-    this.setState({ newImage: e.target.files[0] });
+    this.setState({ newAvatar: e.target.files[0] });
   };
 
-  // TODO: プロフィール画像も編集可能にする
   requestEditProfile = () => {
     const payload = {
       accessToken: this.props.accessToken,
@@ -109,6 +118,12 @@ class ProfileEditContainer extends Component {
       },
       userId: this.props.match.params.id
     };
+    if (this.state.changeAvatar) {
+      const formData = new FormData();
+      const avatar = this.state.newAvatar;
+      formData.append('avatar', avatar);
+      payload.formData = formData;
+    }
     this.props.profileEdit(payload);
   };
 
@@ -191,25 +206,27 @@ class ProfileEditContainer extends Component {
         {!this.props.loading && this.initGetProfile()}
         {this.TopHeader()}
         <div className="pt-3 mb-3 text-center border-bottom">
+          <ErrorMessage errors={this.props.errors} keyName="message" />
           {this.showUserImage()}
           <div className="text-center">
             {/*TODO: プロフィール画像変更APIが完成次第に実装*/}
-            <OrangeText htmlFor="profileImage" className="c-link__lightgray">
+            <OrangeText htmlFor="profileImage">
               プロフィール写真の変更
             </OrangeText>
-            {/*<input*/}
-            {/*id="profileImage"*/}
-            {/*type="file"*/}
-            {/*className="d-none"*/}
-            {/*accept="image/*"*/}
-            {/*multiple*/}
-            {/*onChange={e => {*/}
-            {/*this.setNewImage(e);*/}
-            {/*}}*/}
-            {/*/>*/}
+            <input
+              id="profileImage"
+              type="file"
+              className="d-none"
+              accept="image/*"
+              multiple
+              onChange={e => {
+                this.setNewAvatar(e);
+              }}
+            />
             {this.state.errorFileFormat && (
               <p className="text-danger">画像を選択してください。</p>
             )}
+            <ErrorMessage errors={this.props.errors} keyName="avatar" />
           </div>
         </div>
         <div className="c-container__padding">
